@@ -1,9 +1,9 @@
 // 頁籤顏色切換
-$("button").css({ "color": "black" })
+$(".needs-validation button").css({ "color": "black" })
 $("li .active").css({ "background-color": "#047c51", "color": "white" });
 
-$("button").click(function () {
-    $("button").css({ "background-color": "", "color": "black" })
+$(".needs-validation button").click(function () {
+    $(".needs-validation button").css({ "background-color": "", "color": "black" })
     if ($(this).hasClass("active")) {
         $(this).css({ "background-color": "#047c51", "color": "white" });
     }
