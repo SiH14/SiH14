@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+    <input id="search" type="text" placeholder="Enter your name…">
+
+
+    <script>
+        document.getElementById("search")
+            .addEventListener("keyup", function(e) {
+                if (e.code === 'Enter') {
+                    document.getElementById("search").value;
+                    alert(document.getElementById("search").value);
+                }
+            });
+        </script>
+</body>
+
+</html>
