@@ -1,0 +1,35 @@
+a{
+    color: #495057;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+    color: #047c51;
+    
+}
+.item-style {
+    border-radius: 10px;
+    box-shadow: 0 3px 5px #00000005, 0 0 2px #0000000d, 0 1px 4px #00000014;
+    border: 1px solid #dfe7ef;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-theme {
+    /* background-color: #eff3f8; */
+    background-color: #f8f4ea;
+}
+
+.sidebar a {
+    color: #495057;
+
+
+}
+
+.sidebar a.active {
+    color: #047c51;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
