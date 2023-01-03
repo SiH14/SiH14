@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.StaticFiles;
 using System.Threading.Tasks;
 
 namespace Fundraising
@@ -45,8 +46,11 @@ namespace Fundraising
 			}
 
 			app.UseHttpsRedirection();
+			//ÀRºA
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
-			app.UseRouting();
+            app.UseRouting();
 
 			app.UseAuthorization();
 
