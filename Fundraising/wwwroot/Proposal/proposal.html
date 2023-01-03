@@ -19,21 +19,21 @@
         <div>
             <!-- 頁籤 -->
             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist"
-                style="padding-top: 100px; margin: 0px 400px; border-color: #047c51;">
-                <li class="nav-item" role="presentation">
+                style="position: relative; padding: 100px 0px 0px 0px; margin: 0px 400px; border-color: #047c51;">
+                <li style="padding: 0px;" class="nav-item" role="presentation">
                     <button class="nav-link active boldfont" id="outline-tab" data-bs-toggle="tab"
                         data-bs-target="#outline" type="button" role="tab" aria-controls="outline"
                         aria-selected="true">專案大綱</button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <li style="padding: 0px;" class="nav-item" role="presentation">
                     <button class="nav-link boldfont" id="content-tab" data-bs-toggle="tab" data-bs-target="#content"
                         type="button" role="tab" aria-controls="content" aria-selected="false">專案內容</button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <li style="padding: 0px;" class="nav-item" role="presentation">
                     <button class="nav-link boldfont" id="setting-tab" data-bs-toggle="tab" data-bs-target="#setting"
                         type="button" role="tab" aria-controls="setting" aria-selected="false">方案設定</button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <li style="padding: 0px;" class="nav-item" role="presentation">
                     <button class="nav-link boldfont" id="infor-tab" data-bs-toggle="tab" data-bs-target="#infor"
                         type="button" role="tab" aria-controls="infor" aria-selected="false">提案資料</button>
                 </li>
@@ -44,30 +44,30 @@
                 <div class="tab-pane fade show active lidivborder" id="outline" role="tabpanel"
                     aria-labelledby="outline-tab">
                     <div class="boldfont">讓人輕鬆了解你的專案</div>
-                    <div style="position: relative; left: 50px;">
-                        <ul class="list-group list-group-horizontal" style="text-align: left; padding-top: 20px; ">
-                            <li class="list-group-item" style="padding-right: 50px;">
-                                <div>
+                    <div style="position: relative;">
+                        <ul class="list-group list-group-horizontal" style="padding-top: 20px; ">
+                            <li class="list-group-item" >
+                                <div style="text-align: left;">
                                     <span class="dot">●</span>
                                     <label class="boldfont" for="titletext">專案標題</label>
                                     <br>
                                     <textarea style="border-radius: 5px; resize: none;" placeholder="40個字以內的專案標題"
-                                        maxlength="40" name="titletext" id="titletext" cols="80" rows="2"
+                                        maxlength="40" name="titletext" id="titletext" cols="60" rows="4"
                                         class="form-control" required></textarea>
                                     <span id="textlimit"
-                                        style="position: relative; float: right; bottom: 2.5vh; right: 4vh; color: gray;">40</span>
+                                        style="position: relative; float: right; bottom: 4.5vh; right: 4vh; color: gray;">40</span>
                                     <div class="invalid-feedback">
                                         請輸入專案標題！
                                     </div>
                                     <p style="width: 100%; font-size: 14px;">撰寫清晰、簡短的標題，幫助人們迅速了解你的專案。</p>
                                 </div>
-                                <div>
+                                <div style="text-align: left;">
                                     <span class="dot">●</span>
                                     <label class="boldfont" for="goal">募款目標</label>
                                     <br>
                                     <input type="number" min="5000" style="border-radius: 5px;" name="goal" id="goal"
                                         class="form-control" value="5000" required>
-                                    <span style="position: relative; float: right; bottom: 3vh; right: 4vh;">元</span>
+                                    <span style="position: relative; float: right; bottom: 4.5vh; right: 4vh;">元</span>
                                     <div class="invalid-feedback">
                                         請輸入至少5000元的目標金額！
                                     </div>
@@ -75,10 +75,10 @@
                                 </div>
                             </li>
 
-                            <li class="list-group-item" style="padding-right: 100px;">
+                            <li class="list-group-item" style="text-align: left;">
                                 <span class="dot">●</span>
                                 <span class="boldfont">專案卡預覽</span>
-                                <div style="background-color: white !important; width: 100%; height: 280px;">
+                                <div style="background-color: white !important; width: 250px; height: 280px;">
                                     <!-- 專案卡預覽 -->
                                     <img id="preview_progressbarTW_img" style="width: 250px; height: 150px;"
                                         class="selectedimg" src="../img/coverimg.png" alt="">
@@ -125,7 +125,7 @@
                                     <br>
                                     <div style="text-align: left;">
                                         <input placeholder="請輸入影片網址"
-                                            style=" width: 94%; height: 40px; border-radius: 5px;" type="text"
+                                            style=" width: 575px; height: 40px; border-radius: 5px;" type="text"
                                             id="videourl" name="videourl" class="form-control" required>
                                         <div class="invalid-feedback">
                                             請輸入影片網址！
@@ -140,7 +140,7 @@
                         </ul>
 
                         <ul class="list-group list-group-horizontal" style="text-align: left; padding-top: 20px; ">
-                            <li class="list-group-item" style="padding-right: 50px;">
+                            <li class="list-group-item">
                                 <div>
                                     <span class="dot">●</span>
                                     <label class="boldfont" for="startdate">募資開始日期</label>
@@ -165,12 +165,12 @@
                                 </div>
                             </li>
                         </ul>
-                        <p style="width: 90%; font-size: 14px; text-align: left; padding-left: 15px;">
+                        <p style="width: 575px; font-size: 14px; text-align: left; padding-left: 15px;">
                             專案提交後需要七個工作天進行內容檢視，所以開始時間至少為 7 天後。募資天數最短為 7 天，最長為 60 天。系統預設募資開始時間為 12:00，結束時間為
                             23:59:59，如需調整請於提交後與您的專案經理討論。
                         </p>
                         <br><br>
-                        <div class="pagebtndiv" style="padding-right: 90px;">
+                        <div class="pagebtndiv">
                             <input id="nextpage1" class="pagebtn btn btn-primary" type="button" value="下一頁">
                             <span>&nbsp</span>
                             <input class="pagebtn btn btn-primary" type="submit" value="提交專案">
@@ -249,7 +249,7 @@
                             </div>
 
                             <!-- 方案預覽卡 -->
-                            <div id="plandiv" style="width: 100%;">
+                            <div id="plandiv" style="width: 110%;">
                                 <div>
                                     <!-- 預覽 -->
                                     <div
@@ -275,7 +275,7 @@
                                             </div>
                                             <div style="padding-top: 3px; text-align: left; height: 30px;">
                                                 <form action="/somewhere/to/upload" enctype="multipart/form-data">
-                                                    <a style="text-align: center;" href="javascript:;"
+                                                    <a style="text-align: center; font-size: 14px;" href="javascript:;"
                                                         class="file2">上傳封面圖片
                                                         <input style="cursor: pointer;" type="file"
                                                             onchange="readURL(this)" targetID="preview_plan_img"
@@ -297,7 +297,7 @@
                             <div style="position: relative; float: left;">
                                 <input id="addplan" class="pagebtn btn btn-primary" type="button" value="新增方案">
                             </div>
-                            <div class="pagebtndiv">
+                            <div class="pagebtndiv" style="position: relative; left: 60px;">
                                 <input id="prepage2" class="pagebtn btn btn-primary" type="button" value="上一頁">
                                 <span>&nbsp</span>
                                 <input id="nextpage3" class="pagebtn btn btn-primary" type="button" value="下一頁">
@@ -309,7 +309,7 @@
                 </div>
 
                 <!-- 提案資料 -->
-                <div style="padding: 50px 650px;" class="tab-pane fade lidivborder" id="infor" role="tabpanel"
+                <div style="padding: 50px 450px;" class="tab-pane fade lidivborder" id="infor" role="tabpanel"
                     aria-labelledby="infor-tab">
                     <div class="boldfont">在這個區塊您將撰寫提案者需要提供的個人資料及身份驗證。</div>
                     <div style="text-align: left; padding-top: 50px;">
