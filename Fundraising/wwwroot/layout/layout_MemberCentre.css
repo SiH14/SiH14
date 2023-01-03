@@ -1,0 +1,111 @@
+/* header */
+
+#header {
+    font-family: "Noto Noto Sans TC" !important;
+    height: 80px;
+    /* box-shadow: 0 5px 40px rgba(159, 162, 177, .4); */
+}
+
+#header-items a:hover {
+    color: #047c51 !important;
+}
+
+/* .navbar {
+    position: relative;
+} */
+
+#header-brand {
+    position: absolute;
+    left: 50%;
+    /* margin-left: -100px !important; */
+    transform: translateX(-50%);
+    display: block;
+}
+
+#header-container {
+    position: relative;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#header-search {
+    text-decoration: none;
+    margin-right: 35px;
+    color: rgb(79, 79, 79);
+}
+
+#header-login {
+    text-decoration: none;
+    margin-right: 35px;
+    color: rgb(79, 79, 79);
+}
+
+    #header-login:hover {
+        color: #047c51 !important;
+    }
+
+#header-home {
+    color: black;
+}
+
+.nav-item {
+    padding: 10px;
+}
+
+/* footer */
+footer {
+    font-family: "Montserrat", "Noto Sans TC", sans-serif !important;
+    margin-top: 100px;
+}
+
+#footer-container h4 {
+    font-size: 16px !important;
+}
+
+#footer-container p {
+    font-size: 12px !important;
+    cursor: pointer;
+}
+
+    #footer-container p:hover {
+        color: #047c51;
+    }
+
+#footer-text {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.copyright {
+    margin-left: 20%;
+}
+
+#connect-list {
+    margin-right: 65%;
+}
+
+/* Nick */
+.memberlink:focus {
+    box-shadow: none;
+}
+
+.memberlink:hover {
+    color: #047c51;
+}
+
+body {
+    background-color: #f8f4ea;
+}
+
+#MemberCentre {
+    background-color: #f1f1f1;
+}
+
+.card {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    width: 80%;
+    transition: 0.5s;
+    border: 0;
+    border-radius: 0.55rem;
+    position: relative;
+}
