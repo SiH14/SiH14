@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./proposal.css">
+
+</head>
+
+<body>
+    <div>
+        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist"
+            style="padding-top: 100px; margin: 0px 500px;">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active boldfont" id="outline-tab" data-bs-toggle="tab" data-bs-target="#outline"
+                    type="button" role="tab" aria-controls="outline" aria-selected="true">專案大綱</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link boldfont" id="content-tab" data-bs-toggle="tab" data-bs-target="#content"
+                    type="button" role="tab" aria-controls="content" aria-selected="false">專案內容</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link boldfont" id="setting-tab" data-bs-toggle="tab" data-bs-target="#setting"
+                    type="button" role="tab" aria-controls="setting" aria-selected="false">方案設定</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link boldfont" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment"
+                    type="button" role="tab" aria-controls="payment" aria-selected="false">付款</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link boldfont" id="infor-tab" data-bs-toggle="tab" data-bs-target="#infor"
+                    type="button" role="tab" aria-controls="infor" aria-selected="false">提案資料</button>
+            </li>
+        </ul>
+
+        <!-- 專案標題 -->
+        <div class="tab-content">
+            <div class="tab-pane fade show active lidivborder" id="outline" role="tabpanel"
+                aria-labelledby="outline-tab">
+                <div class="boldfont">讓人輕鬆了解你的專案</div>
+                <div style="position: relative; left: 50px;">
+                    <ul class="list-group list-group-horizontal" style="text-align: left; padding-top: 20px; ">
+                        <li class="list-group-item" style="padding-right: 50px;">
+                            <div>
+                                <span class="dot boldfont">●</span>
+                                <label class="boldfont" for="titletext">專案標題</label>
+                                <br>
+                                <textarea style="border-radius: 5px; resize: none;" placeholder="20個字以內的專案標題"
+                                    maxlength="40" name="titletext" id="titletext" cols="30" rows="2"></textarea>
+                                <span id="textlimit"
+                                    style="position: relative; right: 30px; bottom: 5px; color: gray;">40</span>
+                                <p style="width: 85%; font-size: 14px;">撰寫清晰、簡短的標題，幫助人們迅速了解你的專案。</p>
+                            </div>
+                            <div>
+                                <span class="dot boldfont">●</span>
+                                <label class="boldfont" for="goal">募款目標</label>
+                                <br>
+                                <textarea style="border-radius: 5px; resize: none;" maxlength="40" name="goal" id="goal"
+                                    cols="30" rows="1">5000</textarea>
+                                <span style="position: relative; right: 30px; bottom: 10px;">元</span>
+                                <p style="width: 85%; font-size: 14px;">募資目標金額最低為 $ 5,000
+                                    元。設定目標金額時，除了考量專案執行的成本支出外，也必須考慮回饋項目的成本，總體而言必須滿足「最低計畫可執行資金」的門檻，才是合理的募資目標。</p>
+                            </div>
+
+                        </li>
+                        <li class="list-group-item" style="padding-right: 100px;">
+                            <span class="dot boldfont">●</span>
+                            <span class="boldfont">專案卡預覽</span>
+                            <div
+                                style="border: solid 2px; border-radius: 5px; border-color: rgb(206, 202, 202); width: 100%; height: 280px;">
+
+                                <!-- 專案卡預覽 -->
+                                <img id="preview_progressbarTW_img" style="width: 262px; height: 150px;"
+                                    class="selectedimg" src="../img/coverimg.png" alt="">
+                                <textarea disabled="true" style="border: none; background-color: white; resize: none;"
+                                    name="cardtitle" id="cardtitle" cols="30" rows="2"
+                                    placeholder="例：20個字以內的專案標題"></textarea>
+                                <p style="font-size: 14px; padding: 40px 0px 0px 5px;">設計by XXX</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="list-group list-group-horizontal" style="text-align: left; padding-top: 20px; ">
+                        <li class="list-group-item " style="padding-right: 50px;">
+                            <div>
+                                <span class="dot boldfont">●</span>
+                                <label class="boldfont" for="coverimg">專案封面</label>
+                                <br>
+                                <div style="text-align: center;">
+                                    <form action="/somewhere/to/upload" enctype="multipart/form-data">
+                                        <a href="javascript:;" class="file">上傳封面圖片
+                                            <input style="cursor: pointer;" type="file" onchange="readURL(this)"
+                                                targetID="preview_progressbarTW_img"
+                                                accept="image/gif, image/jpeg, image/png" name="coverimg" id="coverimg">
+                                        </a>
+                                        <p style="font-size: 14px; text-align: left;">請提供 JPEG、PNG 或 BMP 檔，圖片尺寸至少 1024 x
+                                            768
+                                            px(4:3)； 2MB 以內。</p>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="list-group list-group-horizontal" style="text-align: left; padding-top: 20px; ">
+                        <li class="list-group-item " style="padding-right: 50px;">
+                            <div>
+                                <span class="dot boldfont">●</span>
+                                <label class="boldfont" for="videourl">專案影片</label>
+                                <br>
+                                <div style="text-align: left;">
+                                    <input placeholder="請輸入影片網址" style=" width: 94%; height: 40px; border-radius: 5px;"
+                                        type="text" id="videourl" name="videourl">
+                                    <p style="width:95%; font-size: 14px; text-align: left;">生動影音更能抓住目光，在短時間傳達訊息。 用 2
+                                        分鐘左右的影片，試著說明你計劃中的強項：計劃目標、計劃或產品的特色、如何達成計劃、團隊介紹、過往事跡、產品使用展示…等。讓一定要被看到的、贊助者會想看到的部分儘量放在前段。
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="list-group list-group-horizontal" style="text-align: left; padding-top: 20px; ">
+                        <li class="list-group-item " style="padding-right: 50px;">
+                            <div>
+                                <span class="dot boldfont">●</span>
+                                <label class="boldfont" for="videocover">影片封面</label>
+                                <br>
+                                <div style="text-align: left;">
+                                    <form action="/somewhere/to/upload" enctype="multipart/form-data">
+                                        <div>
+                                            <img style="width: 94%; border: solid 2px; border-radius: 5px; border-color: rgb(206, 202, 202);"
+                                                id="preview_progressbarTW_videoimg" src="../img/videocover.png" alt="">
+                                        </div>
+                                        <br>
+                                        <a style="text-align: center;" href="javascript:;" class="file">上傳影片封面
+                                            <input style="cursor: pointer;" type="file" onchange="readURL(this)"
+                                                targetID="preview_progressbarTW_videoimg"
+                                                accept="image/gif, image/jpeg, image/png" name="videocover"
+                                                id="videocover">
+                                        </a>
+                                        <p style="font-size: 14px; width: 94%; text-align: left;">請提供 JPEG、PNG 或 BMP
+                                            檔，圖片尺寸至少 1280 x 720px (16:9)； 2MB 以內。此封面也將成為您的專案分享連結預覽圖片。</p>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="list-group list-group-horizontal" style="text-align: left; padding-top: 20px; ">
+                        <li class="list-group-item" style="padding-right: 50px;">
+                            <div>
+                                <span class="dot boldfont">●</span>
+                                <label class="boldfont" for="startdate">募資開始日期</label>
+                                <br>
+                                <input class="dateline" type="date" name="startdate" id="startdate">
+                            </div>
+                        </li>
+                        <li class="list-group-item" style="padding-right: 50px;">
+                            <div>
+                                <span class="dot boldfont">●</span>
+                                <label class="boldfont" for="enddate">募資結束日期</label>
+                                <br>
+                                <input class="dateline" type="date" name="enddate" id="enddate">
+                            </div>
+                        </li>
+                    </ul>
+                    <p style="width: 90%; font-size: 14px; text-align: left; padding-left: 15px;">
+                        專案提交後需要七個工作天進行內容檢視，所以開始時間至少為 7 天後。募資天數最短為 7 天，最長為 60 天。系統預設募資開始時間為 12:00，結束時間為
+                        23:59:59，如需調整請於提交後與您的專案經理討論。
+                    </p>
+                    <br><br>
+                    <input id="nextpage1" class="pagebtn btn btn-primary" type="button" value="下一頁">
+                    <br><br>
+                </div>
+            </div>
+
+            <!-- 專案內容 -->
+            <div class="tab-pane fade lidivborder" id="content" role="tabpanel" aria-labelledby="content-tab">
+                <div class="boldfont">介紹你的專案，告訴人們為什麼他們應該對你的專案感到興奮。</div>
+
+                <div style="text-align: left;" id="container">
+                    <span class="dot boldfont">●</span>
+                    <label class="boldfont" for="editor">專案內容</label>
+                    <div id="editor" name="editor"></div>
+                </div>
+                <br>
+                <div id="QAdiv" style="text-align: left;">
+                    <span class="dot boldfont">●</span>
+                    <label class="boldfont" for="questiontext">常見問題</label>
+                    
+                </div>
+                <div style="text-align: left;">
+                    <input onclick="add()" class="QAaddbtn btn btn-primary" type="button" value="+ 增加常見問題">
+                </div>
+                <div class="pagebtndiv">
+                    <input id="prepage1" class="pagebtn2 btn btn-primary" type="button" value="上一頁">
+                    <span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                    <input id="nextpage2" class="pagebtn2 btn btn-primary" type="button" value="下一頁">
+                </div>
+            </div>
+
+            <!-- 方案設定 -->
+            <div class="tab-pane fade lidivborder" id="setting" role="tabpanel" aria-labelledby="setting-tab">方案設定</div>
+
+            <!-- 付款 -->
+            <div class="tab-pane fade lidivborder" id="payment" role="tabpanel" aria-labelledby="payment-tab">付款</div>
+
+            <!-- 提案資料 -->
+            <div class="tab-pane fade lidivborder" id="infor" role="tabpanel" aria-labelledby="infor-tab">提案資料</div>
+
+        </div>
+    </div>
+
+
+    <!-- 文字編輯器 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/super-build/ckeditor.js"></script>
+    <script src="./proposal.js"></script>
+
+    <!-- 頁籤切換 -->
+    <script>
+
+        var firstTabEl = document.querySelector('#myTab li:last-child a')
+        var firstTab = new bootstrap.Tab(firstTabEl)
+
+        firstTab.show()
+    </script>
+
+
+
+</body>
+
+</html>

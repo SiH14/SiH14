@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
+    <title>個人頁面</title>
+    <style>
+      #ProfileImg {
+        object-fit: cover;
+        width: 200px;
+        height: 200px;
+      }
+      #intro {
+        width: 60%;
+      }
+      .donebtn {
+        border-bottom: 4px solid #dee2e6;
+        border-radius: 3px;
+      }
+      .donebtn:focus {
+        box-shadow: none;
+      }
+
+      .selectedbtn {
+        border-bottom: 4px solid #047c51;
+      }
+      a > img {
+        width: 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="mx-auto" style="width: 80%">
+        <h5 class="ms-4 mt-3">個人頁面</h5>
+      </div>
+      <div class="card mx-auto mt-3">
+        <div class="row mt-5">
+          <!-- 個人頭像 -->
+          <div
+            class="col-sm-6 d-flex justify-content-sm-end justify-content-center"
+          >
+            <img
+              src="../img/PersonalPhoto.jpg"
+              alt="Nick"
+              class="rounded-circle"
+              id="ProfileImg"
+            />
+          </div>
+
+          <!-- 姓名＆項目數 -->
+          <div
+            class="col-sm-6 mt-3 d-flex justify-content-sm-start justify-content-center"
+          >
+            <div class="text-center text-sm-start">
+              <h2>Nick</h2>
+              <p class="mt-4">已贊助計畫：2</p>
+              <p>已發起計畫：0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 個人介紹 -->
+        <div id="intro" class="mx-auto mb-4">
+          <h5 class="mt-3 pb-2 text-center">個人介紹</h5>
+          <p>
+            我叫小明，我來自台灣。我是一名大學生，專攻資訊工程。我喜歡運動，特別是跑步和游泳。我也很喜歡音樂，常常會花時間在吉他和鋼琴上練習。在大學期間，我曾參加過幾個志願者團體，包括幫助貧困家庭的社區服務和環保活動。我希望能在未來的工作中繼續幫助社會，做出貢獻。
+          </p>
+        </div>
+
+        <div>
+          <!-- 切換已贊助/已發起 -->
+          <div class="row justify-content-center">
+            <button
+              type="button"
+              class="btn col-6 me-3 mb-3 donebtn selectedbtn"
+              style="width: 25%"
+            >
+              已贊助計畫
+            </button>
+            <button
+              type="button"
+              class="btn col-6 ms-3 mb-3 donebtn"
+              style="width: 25%"
+            >
+              已發起計畫
+            </button>
+          </div>
+
+          <!-- 贊助/發起項目 -->
+          <div class="row" id="ProductsRow">
+            <div class="col-8 mx-auto">
+              <a
+                href="#"
+                class="bg-body rounded btn btn-default shadow p-2 mb-3"
+              >
+                <div class="row pe-3">
+                  <div class="col-md-3">
+                    <img
+                      src="../img/product.png"
+                      alt=".."
+                      class="img-thumbnail"
+                    />
+                  </div>
+                  <div class="col-md-9 my-auto">
+                    <h5 class="text-md-start">
+                      家長必備! 圈圈的《祕密派對》-
+                      台灣原創專為2-6歲設計的身體保護翻翻書
+                    </h5>
+                    <p class="text-muted fs-6 text-md-end">
+                      提案者 勵馨基金會彰化分事務所
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../layout/layout_MemberCentre.js"></script>
+  </body>
+</html>
