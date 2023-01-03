@@ -1,0 +1,136 @@
+* {
+    box-sizing: border-box
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0px;
+    font-family: sans-serif;
+    /* background-color: lightgray; */
+}
+
+
+.lidivborder {
+    padding: 40px 30%;
+    text-align: center;
+}
+
+.dot {
+    color: gray;
+}
+
+.list-group-item {
+    border: none;
+}
+
+.boldfont {
+    font-weight: bold;
+    color: black;
+}
+
+.file {
+    position: relative;
+    display: inline-block;
+    background: rgb(209, 203, 203);
+    border: 1px solid black;
+    padding: 10px 12px;
+    overflow: hidden;
+    color: black;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    width: 650px;
+}
+
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.file:hover {
+    background: gray;
+    border-color: black;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.dateline {
+    width: 292px;
+    height: 40px;
+    text-align: center;
+}
+
+.pagebtndiv {
+    position: relative;
+    float: right;
+}
+
+.pagebtn {
+    position: relative;
+    float: right;
+    margin-right: 90px;
+    background-color: gray;
+    border-radius: 0%;
+    border-color: black;
+}
+
+.pagebtn2 {
+    background-color: gray;
+    border-radius: 0%;
+    border-color: black;
+}
+
+.pagebtn:hover,
+.pagebtn2:hover {
+    background-color: black;
+    color: white;
+}
+
+/* 文字編輯器 */
+#container {
+    width: 100%;
+    margin: 20px auto;
+}
+
+.ck-editor__editable[role="textbox"] {
+    /* editing area */
+    min-height: 200px;
+}
+
+.ck-content .image {
+    /* block images */
+    max-width: 80%;
+    margin: 20px auto;
+}
+
+.QAtext {
+    width: 100%;
+    resize: none;
+}
+
+.QAaddbtn,
+.QAdelbtn {
+
+    border-radius: 0;
+    border-color: gray;
+    background-color: white;
+    color: black
+}
+
+.QAaddbtn:hover {
+    background-color: #c92a2a;
+}
+
+.QAdelbtn:hover {
+    border-color: black;
+    background-color: white;
+    color: #c92a2a;
+}
