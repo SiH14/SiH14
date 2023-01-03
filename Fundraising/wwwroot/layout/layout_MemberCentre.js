@@ -1,19 +1,15 @@
 let header =
-  `<nav class="navbar navbar-expand-lg navbar-light bg-white" id="header">
+  `<nav class="navbar navbar-expand-lg navbar-light border-bottom" id="header" style="background-color: #e1d7c6;">
 
 <div class="container-fluid" id="header-container">
     <!--LOGO -->
-    <a class="navbar-brand" id="header-brand" href="#" style="font-size: 35px;">咱的募資平台</a>
-    <!-- MOBLE -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#linkbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <a class="navbar-brand fs-2" id="header-brand" href="#">咱的募資平台</a>
 
-    <!-- PC -->
+    <!-- Bar -->
 
     <div class="collapse navbar-collapse ms-5" id="linkbar">
         <!-- LEFT -->
-        <ul class="navbar-nav me-auto" style="font-size: 18px;">
+        <ul class="navbar-nav me-auto fs-5">
             <li class="nav-item">
                 <a class="nav-link" href="#" id="header-home">首頁</a>
             </li>
@@ -26,27 +22,30 @@ let header =
 
         </ul>
 
-        <!-- RIGHT -->
-        <div>
-            <ul class="navbar-nav">
-                <li style="padding-top: 11px;">
-                    <a href="#" id="header-search"><i class="fa-solid fa-magnifying-glass"></i></a>
-                </li>
-                <li style="padding-top: 8px;">
-                    <a href="#" id="header-login" style="font-size: 18px;">登入</a>
-                </li>
-                <li>
-                    <button class="btn btn-outline-success me-5" type="button"
-                        style="font-size: 18px;">註冊</button>
-                </li>
-            </ul>
+    </div>
 
-        </div>
+    <div>
+        <ul class="navbar-nav me-5">
+            <li style="padding-right: 30px;">
+                <div class="search">
+                    <div class="icon"></div>
+                    <div class="input">
+                        <input type="text" placeholder="搜尋" id="mysearch">
+                    </div>
+                    <span class="clear" onclick="document.getElementById('mysearch').value=''"></span>
+                </div>
+            </li>
+            <li>
 
+                <div>
+                    <button class="btn btn-success">登入</button>
+                </div>
+
+            </li>
+        </ul>
     </div>
 
 </div>
-
 </nav>` +
   `<div id="MemberCentre" class="row py-3 mx-auto">
   <a
