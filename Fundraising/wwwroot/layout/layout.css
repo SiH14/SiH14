@@ -6,7 +6,6 @@ body {
 #header {
     font-family: 'Noto Noto Sans TC' !important;
     height: 65px;
-    margin-bottom: 15px;
 }
 
 
@@ -206,18 +205,33 @@ footer {
 /* membercentre */
 .memberlink {
     font-size: 16px;
+    position: relative;
 }
 
-.memberlink:focus {
-    box-shadow: none;
-}
+    .memberlink::before {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        width: 65px;
+        height: 3px;
+        background: #047c51;
+        transform: scaleX(0);
+        transition: transform 0.5s ease-in-out;
+        transform-origin: right;
+    }
 
-.memberlink:hover {
-    color: #047c51;
-}
+    .memberlink:hover::before {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
 
-body {
-    background-color: #f1f1f1;
+    .memberlink:focus {
+        box-shadow: none;
+    }
+
+#MemberCentre {
+    list-style: none;
+    background-color: #e6e5e5;
 }
 
 /* Member Dropdown */
