@@ -10,21 +10,21 @@ body {
     margin: 0;
     padding: 0px;
     font-family: sans-serif;
-    background-color: #f8f4ea;
 }
 
 body ul,
 body li {
-    background-color: #f8f4ea !important;
+    background-color: transparent !important;
+}
+
+form span,
+form p{
+    color: black;
 }
 
 .lidivborder {
     padding: 40px 30%;
     text-align: center;
-}
-
-.nav-item {
-    padding: 0px 30px;
 }
 
 .nav-link:hover {
@@ -67,7 +67,7 @@ input::-webkit-inner-spin-button {
     text-decoration: none;
     text-indent: 0;
     line-height: 20px;
-    width: 650px;
+    width: 575px;
 }
 
 .file input {
@@ -114,7 +114,7 @@ input::-webkit-inner-spin-button {
 }
 
 .dateline {
-    width: 292px;
+    width: 275px;
     height: 40px;
     text-align: center;
 }
@@ -131,7 +131,7 @@ input::-webkit-inner-spin-button {
 }
 
 .pagebtn {
-    width: 10vh;
+    width: 12vh;
 }
 
 .pagebtn:hover,

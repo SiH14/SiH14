@@ -24,10 +24,27 @@
             font-family: sans-serif;
         }
 
+        .abtn {
+            background-color: transparent;
+            border: solid 2px #198754;
+            color: #198754;
+            font-weight: bold;
+            padding: 10px 30px;
+        }
+
+        .abtn:hover {
+            background-color: #047c51;
+            color: white;
+            border: solid 2px #198754;
+        }
+
         .propaltitle {
             background-color: gainsboro;
             padding: 150px;
+            margin-top: -15px;
             position: relative;
+            background-image: url("../img/proposal.jpg");
+            background-size: cover;
         }
 
         .propaltitle2,
@@ -53,15 +70,48 @@
 
         .p2 p {
             text-align: left;
+            color: black;
         }
 
         .propalcontent3 {
-            background-color: gainsboro;
-            padding: 50px;
+            background-color: #dae2b6;
+            padding: 50px 0px 30px 0px;
         }
 
         .propalcontent4 {
             padding: 50px;
+        }
+
+        .propalfoot {
+            background-color: gainsboro;
+            padding: 150px;
+            position: relative;
+            background-image: url("../img/proposal.jpg");
+            background-size: cover;
+            margin-bottom: -100px;
+        }
+
+        .intro {
+            padding: 0px 250px 0px 250px;
+            width: 100%;
+        }
+
+        .qAbtn {
+            background-color: #198754;
+            border: solid 2px #198754;
+            color: white;
+            font-weight: bold;
+            padding: 10px 30px;
+        }
+
+        .qAbtn:hover {
+            background-color: #198754;
+            border: solid 2px #198754;
+        }
+
+        .good{
+            padding: 0px 42px; 
+            text-align:center;
         }
     </style>
 </head>
@@ -72,26 +122,16 @@
         <div class="propaltitle2">
             <h2 class="fs-2">我要的被實現</h2>
             <p>用群眾的力量，讓有價值的事物獲得更好的機會</p>
-            <!-- <button type="button" class="btn btn-info" style="padding: 10px 50px;">開始提案</button> -->
-            <a href="./proposal.html" class="btn btn-info" role="button" style="padding: 10px 50px;">開始提案</a>
-        </div>
-    </div>
-
-    <div class="propalcontent1" style="padding: 80px 0px 60px 0px;">
-        <div>
-            <p>在一定期限內募集完成計畫所需的資金，來一場為夢想狂奔的全力衝刺吧！</p>
-            <p style="padding: 0px 500px;">
-                適合一次需要一筆資金來完成創作成果的提案人，不論你是想要開發產品、出版專輯、拍攝電影、舉辦活動、開立小店或是有任何充滿熱情的理想，來到本平台設定好你所需要的資金目標、集資時程和夢想的實踐計畫，就有機會得到大家的資金支持，助你實現你的夢想。
-            </p>
+            <a href="./proposal.html" class="abtn btn btn-info" role="button">開始提案</a>
         </div>
     </div>
 
     <div class="propalcontent2">
-        <div style="padding-bottom: 50px;">
-            <h2>為什麼需要群眾集資？</h2>
-            <div class="row row-cols-2" style="padding: 30px 450px 50px 450px; width: 100%;">
+        <div style="padding: 50px;">
+            <h2 style="padding-bottom: 50px;">為什麼需要群眾集資？</h2>
+            <div class="row row-cols-2 intro">
                 <div>
-                    <img src="../img/播放.png" alt="">
+                    <img src="../img/proposalbrand.png" alt="">
                 </div>
                 <div class="p2">
                     <h4>品牌擴散</h4>
@@ -99,19 +139,19 @@
                 </div>
             </div>
 
-            <div class="row row-cols-2" style="padding: 30px 450px 50px 450px; width: 100%;">
+            <div class="row row-cols-2 intro">
                 <div class="p2">
                     <h4>取得資源</h4>
                     <P>想要做的事很多，但缺少資源？透過群眾力量成功解鎖階段目標，除了資金、物資，都能透過平台使計畫逐步落地實現！</P>
                 </div>
                 <div>
-                    <img src="../img/播放.png" alt="">
+                    <img src="../img/proposalresource.png" alt="">
                 </div>
             </div>
 
-            <div class="row row-cols-2" style="padding: 30px 450px 50px 450px; width: 100%;">
+            <div class="row row-cols-2 intro">
                 <div>
-                    <img src="../img/播放.png" alt="">
+                    <img src="../img/proposalmarket.png" alt="">
                 </div>
                 <div class="p2">
                     <h4>測試市場</h4>
@@ -125,21 +165,39 @@
     <div class="propalcontent3">
         <div>
             <h2>為何選擇XX提案上架</h2>
-            <div class="row row-cols-3" style="padding: 30px 450px 0px 450px;">
-                <div>
-                    <a class="btn" href='https://www.zeczec.com/'><img src="../img/播放.png" alt="">
-                        <h4>優點一</h4>
-                    </a>
+            <div class="row row-cols-3" style="padding: 30px 250px 0px 250px;">
+                <div class="good">
+                    <div style="padding-bottom: 20px;">
+                        <img src="../img/proposaldiscount.png" alt="">
+                    </div>
+                    <div>
+                        <h4>手續費優惠門檻低</h4>
+                    </div>
+                    <div>
+                        <h6>適合新品牌，或是想要改變消費者心中的傳統品牌形象，都可以透過群眾集資來實現。</h6>
+                    </div>
                 </div>
-                <div>
-                    <a class="btn" href='https://www.zeczec.com/'><img src="../img/播放.png" alt="">
-                        <h4>優點二</h4>
-                    </a>
+                <div class="good">
+                    <div style="padding-bottom: 20px;">
+                        <img src="../img/proposalproposal.png" alt="">
+                    </div>
+                    <div>
+                        <h4>提案行銷操作彈性大</h4>
+                    </div>
+                    <div>
+                        <h6>多種行銷模組，提供團隊靈活運用。</h6>
+                    </div>
                 </div>
-                <div>
-                    <a class="btn" href='https://www.zeczec.com/'><img src="../img/播放.png" alt="">
-                        <h4>優點三</h4>
-                    </a>
+                <div class="good">
+                    <div style="padding-bottom: 20px;">
+                        <img src="../img/proposalglobal.png" alt="">
+                    </div>
+                    <div>
+                        <h4>延伸服務效益高</h4>
+                    </div>
+                    <div>
+                        <h6>高品質的實體與網路的長賣服務提供。</h6>
+                    </div>
                 </div>
             </div>
         </div>
@@ -149,21 +207,20 @@
         <div>
             <h2>對集資流程仍有疑問</h2>
             <h4>歡迎先看看常見問題集，或是直接聯繫我們唷！</h4>
-            <div style="border-radius: 50px; border: 1px solid black; padding: 100px; margin: 60px 580px 0px 580px;">
+            <div style="border-radius: 50px; border: 2px solid #047c51; padding: 50px; margin: 40px 370px 0px 370px;">
                 <h4>提案有什麼限制？計畫失敗還會收費嗎？</h4>
                 <h4>上架平台會有集資顧問協助嗎？</h4>
-                <h4>可以先參考：</h4>
-                <button type="button" class="btn btn-outline-primary"
-                    style="padding: 10px 30px; margin-top: 20px;">提案常見問題</button>
+                <h4 style="padding-bottom: 20px;">可以先參考：</h4>
+                <button type="button" class="qAbtn btn btn-outline-primary">提案常見問題</button>
             </div>
         </div>
     </div>
 
-    <div class="propaltitle">
+    <div class="propalfoot">
         <div class="propaltitle2">
             <h2>我要的被實現</h2>
             <p>用群眾的力量，讓有價值的事物獲得更好的機會</p>
-            <a href="./proposal.html" class="btn btn-info" role="button" style="padding: 10px 50px;">開始提案</a>
+            <a href="./proposal.html" class="abtn btn btn-info" role="button" style="padding: 10px 50px;">開始提案</a>
         </div>
     </div>
     <script src="../layout/layout.js"></script>
