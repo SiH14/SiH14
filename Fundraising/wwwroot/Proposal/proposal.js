@@ -46,9 +46,9 @@ $("#nextpage3").click(function () {
 })
 
 // 標題內容字數倒數
-$("#titletext").keyup(function () {
-    $("#textlimit").text(40 - $("#titletext").val().length);
-    $("#cardtitle").val($("#titletext").val());
+$("#ProductTitle").keyup(function () {
+    $("#textlimit").text(40 - $("#ProductTitle").val().length);
+    $("#cardtitle").val($("#ProductTitle").val());
 })
 
 
@@ -153,7 +153,7 @@ function del(obj) {
 
 // This sample still does not showcase all CKEditor 5 features (!)
 // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
-CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
+CKEDITOR.ClassicEditor.create(document.getElementById("ProductContent"), {
     // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
     toolbar: {
         items: [
