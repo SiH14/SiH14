@@ -10,12 +10,16 @@ body {
     margin: 0;
     padding: 0px;
     font-family: sans-serif;
-    background-color: #f8f4ea;
 }
 
 body ul,
 body li {
     background-color: transparent !important;
+}
+
+form span,
+form p{
+    color: black;
 }
 
 .lidivborder {

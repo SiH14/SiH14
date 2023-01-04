@@ -1,4 +1,4 @@
-let header = `<nav class="navbar navbar-expand-lg navbar-light border-bottom" id="header" style="background-color: #e1d7c6;">
+let header = `<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom" id="header">
 
 <div class="container-fluid" id="header-container">
     <!--LOGO -->
@@ -6,7 +6,7 @@ let header = `<nav class="navbar navbar-expand-lg navbar-light border-bottom" id
 
     <!-- Bar -->
 
-    <div class="collapse navbar-collapse ms-5" id="linkbar">
+    <div class="collapse navbar-collapse ms-5" id="headerlinkbar">
         <!-- LEFT -->
         <ul class="navbar-nav me-auto fs-5">
             <li class="nav-item">
@@ -47,7 +47,7 @@ let header = `<nav class="navbar navbar-expand-lg navbar-light border-bottom" id
 </div>
 </nav>`
 
-let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #dae2b6;">
+let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a2647">
 
 <div class="container text-center text-md-left">
 
@@ -63,7 +63,7 @@ let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #dae2
 
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
             <h4 class="text-uppercase mb-4 font-weight-bold">條款</h4>
-            <p>網站使用條款</p>
+            <p>使用條款</p>
             <p>提案者合約</p>
 
         </div>
@@ -84,34 +84,12 @@ let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #dae2
 
     </div>
 
-    <hr class="mb-4">
+    <hr class="mb-4" style="color: #fff;">
 
     <div class="row align-items-center">
 
-        <div class="col-md-6 col-lg-8 justify-content-center">
-            <h6>Copyright ©2022 Backer-Founder All rights reserved.</h6>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-            <div class="text-center text-md-right">
-
-                <ul class="list-unstyled list-inline" id="connect-list">
-                    <li class="list-inline-item">
-                        <a href="#" class="btn-floating btn-sm text-white"><img src="/pic/facebook.png"
-                                alt=""></a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#" class="btn-floating btn-sm text-white"><img src="/pic/instagram.png"
-                                alt=""></a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#" class="btn-floating btn-sm text-white"><img src="/pic/youtube.png"
-                                alt=""></a>
-                    </li>
-                </ul>
-
-            </div>
-
+        <div class="justify-content-center">
+            <h6 style="color: #fff;">Copyright ©2022 Backer-Founder All rights reserved.</h6>
         </div>
 
     </div>
