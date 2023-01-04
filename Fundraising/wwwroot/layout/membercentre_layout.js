@@ -126,3 +126,11 @@ let queryheader = document.querySelector("body");
 querybody.innerHTML = header + querybody.innerHTML;
 querybody.innerHTML += footer;
 queryheader.innerHTML += `<link rel="stylesheet" href="../layout/layout.css" />`;
+
+// searchbar
+const icon = document.querySelector('.icon');
+const search = document.querySelector('.search');
+icon.onclick = function () {
+    search.classList.toggle('active');
+    icon.classList.toggle('active');
+}
