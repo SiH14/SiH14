@@ -6,7 +6,7 @@ let header = `<nav class="navbar navbar-expand-lg navbar-light bg-white border-b
 
     <!-- Bar -->
 
-    <div class="collapse navbar-collapse ms-5" id="linkbar">
+    <div class="collapse navbar-collapse ms-5" id="headerlinkbar">
         <!-- LEFT -->
         <ul class="navbar-nav me-auto fs-5">
             <li class="nav-item">

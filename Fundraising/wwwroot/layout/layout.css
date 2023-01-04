@@ -14,11 +14,11 @@ body {
     color: #047c51 !important;
 } */
 
-#linkbar ul li {
+#headerlinkbar ul li {
     list-style: none;
 }
 
-#linkbar ul li a {
+#headerlinkbar ul li a {
     position: relative;
     text-decoration: none;
     font-size: 20px;
@@ -27,7 +27,7 @@ body {
     font-weight: 500;
 }
 
-#linkbar ul li a::before {
+#headerlinkbar ul li a::before {
     content: '';
     position: absolute;
     bottom: 5px;
@@ -39,7 +39,7 @@ body {
     transform-origin: right;
 }
 
-#linkbar ul li a:hover::before {
+#headerlinkbar ul li a:hover::before {
     transform: scaleX(1);
     transform-origin: left;
 }
