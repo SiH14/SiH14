@@ -1,5 +1,4 @@
-let header =
-  `<nav class="navbar navbar-expand-lg navbar-light border-bottom" id="header" style="background-color: #e1d7c6;">
+let header = `<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom" id="header">
 
 <div class="container-fluid" id="header-container">
     <!--LOGO -->
@@ -7,7 +6,7 @@ let header =
 
     <!-- Bar -->
 
-    <div class="collapse navbar-collapse ms-5" id="linkbar">
+    <div class="collapse navbar-collapse ms-5" id="headerlinkbar">
         <!-- LEFT -->
         <ul class="navbar-nav me-auto fs-5">
             <li class="nav-item">
@@ -46,43 +45,35 @@ let header =
     </div>
 
 </div>
-</nav>` +
-  `<div id="MemberCentre" class="row py-3 mx-auto">
-  <a
-    href="./UserInfo.html"
-    class="memberlink col-4 col-lg-1 col-md-3 offset-0 offset-lg-3 btn btn-default"
-    >個人頁面</a
-  >
-  <a
-    href="./UserFollowing.html"
-    class="memberlink col-4 col-lg-1 col-md-3 btn btn-default"
-    >追蹤專案</a
-  >
-  <a
-    href="./UserOrder.html"
-    class="memberlink col-4 col-lg-1 col-md-3 btn btn-default"
-    >贊助紀錄</a
-  >
-  <a
-    href="./UserProject.html"
-    class="memberlink col-4 col-lg-1 col-md-3 btn btn-default"
-    >提案紀錄</a
-  >
-  <a
-    href="./UserMessage.html"
-    class="memberlink col-4 col-lg-1 col-md-3 btn btn-default"
-    >聯絡訊息</a
-  >
-  <a
-    href="./UserSetting.html"
-    class="memberlink col-4 col-lg-1 col-md-3 btn btn-default"
-    >帳戶設定</a
-  >
-</div>`;
+</nav>`+`<div id="MemberCentre" class="row text-dark py-3 fs-5">
+<a
+  href="#"
+  class="memberlink col-4 col-xl-1 col-md-3 offset-0 offset-xl-2 btn btn-default"
+  >個人頁面</a
+>
+<a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
+  >追蹤專案</a
+>
+<a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
+  >贊助紀錄</a
+>
+<a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
+  >提案紀錄</a
+>
+<a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
+  >聯絡訊息</a
+>
+<a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
+  >最新通知</a
+>
+<a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
+  >帳戶設定</a
+>
+</div>`
 
-let footer = `<footer class="bg-dark text-white pt-5 pb-4">
+let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a2647">
 
-<div class="container text-center text-md-left" id="footer-container">
+<div class="container text-center text-md-left">
 
     <div class="row text-center text-md-left" id="footer-text">
 
@@ -96,7 +87,7 @@ let footer = `<footer class="bg-dark text-white pt-5 pb-4">
 
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
             <h4 class="text-uppercase mb-4 font-weight-bold">條款</h4>
-            <p>網站使用條款</p>
+            <p>使用條款</p>
             <p>提案者合約</p>
 
         </div>
@@ -117,34 +108,12 @@ let footer = `<footer class="bg-dark text-white pt-5 pb-4">
 
     </div>
 
-    <hr class="mb-4">
+    <hr class="mb-4" style="color: #fff;">
 
     <div class="row align-items-center">
 
-        <div class="col-md-6 col-lg-8 justify-content-center">
-            <h6 class="copyright">Copyright ©2022 Backer-Founder All rights reserved.</h6>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-            <div class="text-center text-md-right">
-
-                <ul class="list-unstyled list-inline" id="connect-list">
-                    <li class="list-inline-item">
-                        <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
-                                class="fab fa-facebook"></i></a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
-                                class="fab fa-youtube"></i></a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i
-                                class="fab fa-instagram"></i></a>
-                    </li>
-                </ul>
-
-            </div>
-
+        <div class="justify-content-center">
+            <h6 style="color: #fff;">Copyright ©2022 Backer-Founder All rights reserved.</h6>
         </div>
 
     </div>
@@ -156,4 +125,4 @@ let querybody = document.querySelector("body");
 let queryheader = document.querySelector("body");
 querybody.innerHTML = header + querybody.innerHTML;
 querybody.innerHTML += footer;
-queryheader.innerHTML += `<link rel="stylesheet" href="../layout/layout_MemberCentre.css" />`;
+queryheader.innerHTML += `<link rel="stylesheet" href="../layout/layout.css" />`;
