@@ -45,10 +45,10 @@ let header = `<nav class="navbar navbar-expand-lg navbar-light bg-white border-b
     </div>
 
 </div>
-</nav>`+`<div id="MemberCentre" class="row text-dark py-3 fs-5">
+</nav>`+`<div id="MemberCentre" class="row text-dark py-3 fs-5 justify-content-center">
 <a
   href="#"
-  class="memberlink col-4 col-xl-1 col-md-3 offset-0 offset-xl-2 btn btn-default"
+  class="memberlink col-4 col-xl-1 col-md-3 offset-0 btn btn-default"
   >個人頁面</a
 >
 <a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
@@ -64,14 +64,11 @@ let header = `<nav class="navbar navbar-expand-lg navbar-light bg-white border-b
   >聯絡訊息</a
 >
 <a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
-  >最新通知</a
->
-<a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
   >帳戶設定</a
 >
 </div>`
 
-let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a2647">
+let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #333">
 
 <div class="container text-center text-md-left">
 
