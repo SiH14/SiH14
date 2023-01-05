@@ -45,25 +45,25 @@ let header = `<nav class="navbar navbar-expand-lg navbar-light bg-white border-b
     </div>
 
 </div>
-</nav>`+`<div id="MemberCentre" class="row text-dark py-3 fs-5 justify-content-center">
+</nav>`+ `<div id="MemberCentre" class="row text-dark py-3 fs-5 justify-content-center">
 <a
-  href="#"
+  href="./UserInfo.html"
   class="memberlink col-4 col-xl-1 col-md-3 offset-0 btn btn-default"
   >個人頁面</a
 >
-<a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
+<a href="./UserFollowing.html" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
   >追蹤專案</a
 >
-<a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
+<a href="./UserOrder.html" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
   >贊助紀錄</a
 >
-<a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
+<a href="./UserProject.html" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
   >提案紀錄</a
 >
-<a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
+<a href="./UserMessage.html" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
   >聯絡訊息</a
 >
-<a href="#" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
+<a href="./UserSetting.html" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
   >帳戶設定</a
 >
 </div>`
