@@ -11,6 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./ckeditor/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="./proposal.css">
 
 </head>
@@ -139,37 +141,6 @@
                                 </div>
                             </li>
                         </ul>
-
-                        <ul class="list-group list-group-horizontal" style="text-align: left; padding-top: 20px; ">
-                            <li class="list-group-item">
-                                <div>
-                                    <span class="dot">●</span>
-                                    <label class="boldfont" for="Startime">募資開始日期</label>
-                                    <br>
-                                    <input class="dateline form-control" type="date" name="Startime" id="Startime"
-                                        required>
-                                    <div class="invalid-feedback">
-                                        請選擇開始日期！
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item" style="padding-right: 50px;">
-                                <div>
-                                    <span class="dot">●</span>
-                                    <label class="boldfont" for="Endtime">募資結束日期</label>
-                                    <br>
-                                    <input class="dateline form-control" type="date" name="Endtime" id="Endtime"
-                                        required>
-                                    <div class="invalid-feedback">
-                                        請選擇結束日期！
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <p style="width: 575px; font-size: 14px; text-align: left; padding-left: 15px;">
-                            專案提交後需要七個工作天進行內容檢視，所以開始時間至少為 7 天後。募資天數最短為 7 天，最長為 60 天。系統預設募資開始時間為 12:00，結束時間為
-                            23:59:59，如需調整請於提交後與您的專案經理討論。
-                        </p>
                         <br><br>
                         <div class="pagebtndiv">
                             <input id="nextpage1" class="pagebtn btn btn-primary" type="button" value="下一頁">
@@ -402,7 +373,7 @@
     </form>
 
     <!-- 文字編輯器 -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/super-build/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/super-build/ckeditor.js"></script> -->
 
 
     <!-- 頁籤切換 -->
