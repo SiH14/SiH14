@@ -173,32 +173,24 @@ footer {
     margin-top: 100px;
 }
 
-#footer-container h4 {
+.footer-item h4 {
     font-size: 16px !important;
 }
 
-#footer-container p {
+.footer-item p {
     font-size: 12px !important;
     cursor: pointer;
 }
 
 
 #footer-text {
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 30%;
+    margin-right: 30%;
 }
 
 #footer-text h4,p {
     color: #fff;
     cursor: pointer;
-}
-
-.copyright {
-    margin-left: 20%;
-}
-
-#connect-list {
-    margin-right: 55%;
 }
 
 

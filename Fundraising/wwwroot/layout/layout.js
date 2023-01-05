@@ -49,34 +49,34 @@ let header = `<nav class="navbar navbar-expand-lg navbar-light bg-white border-b
 
 let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a2647">
 
-<div class="container text-center text-md-left">
+<div class="footer-container text-center text-md-left">
 
     <div class="row text-center text-md-left" id="footer-text">
 
-        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h4 class="text-uppercase mb-4 font-weight-bold">關於</h4>
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 footer-item">
+            <h4 class=" mb-4 font-weight-bold">關於</h4>
             <p>關於我們</p>
             <p>人才招募</p>
             <p>商標使用規範</p>
 
         </div>
 
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-            <h4 class="text-uppercase mb-4 font-weight-bold">條款</h4>
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 footer-item">
+            <h4 class=" mb-4 font-weight-bold">條款</h4>
             <p>使用條款</p>
             <p>提案者合約</p>
 
         </div>
 
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-            <h4 class="text-uppercase mb-4 font-weight-bold">協助</h4>
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 footer-item"> 
+            <h4 class=" mb-4 font-weight-bold">協助</h4>
             <p>常見問題</p>
             <p>使用手冊</p>
             <p>提案百科</p>
         </div>
 
-        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h4 class="text-uppercase mb-4 font-weight-bold">更多</h4>
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 footer-item">
+            <h4 class=" mb-4 font-weight-bold">更多</h4>
             <p>品牌資源</p>
             <p>群眾觀點</p>
 
