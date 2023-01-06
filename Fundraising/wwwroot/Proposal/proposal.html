@@ -42,6 +42,10 @@
                 </li>
             </ul>
 
+            <input type="button" onclick="OK()" value="OK">
+            <input type="button" onclick="OK2()" value="OK2">
+
+
             <div class="tab-content">
                 <!-- 專案大綱 -->
                 <div class="tab-pane fade show active lidivborder" id="outline" role="tabpanel"
@@ -49,7 +53,7 @@
                     <div class="boldfont">讓人輕鬆了解你的專案</div>
                     <div style="position: relative;">
                         <ul class="list-group list-group-horizontal" style="padding-top: 20px; ">
-                            <li class="list-group-item" >
+                            <li class="list-group-item">
                                 <div style="text-align: left;">
                                     <span class="dot">●</span>
                                     <label class="boldfont" for="ProductTitle">專案標題</label>
@@ -68,8 +72,8 @@
                                     <span class="dot">●</span>
                                     <label class="boldfont" for="TargetAmount">募款目標</label>
                                     <br>
-                                    <input type="number" min="5000" style="border-radius: 5px;" name="TargetAmount" id="TargetAmount"
-                                        class="form-control" value="5000" required>
+                                    <input type="number" min="5000" style="border-radius: 5px;" name="TargetAmount"
+                                        id="TargetAmount" class="form-control" value="5000" required>
                                     <span style="position: relative; float: right; bottom: 4.5vh; right: 4vh;">元</span>
                                     <div class="invalid-feedback">
                                         請輸入至少5000元的目標金額！
@@ -100,21 +104,19 @@
                                     <label class="boldfont" for="Featured">專案封面</label>
                                     <br>
                                     <div style="text-align: center;">
-                                        <form action="/somewhere/to/upload" enctype="multipart/form-data">
-                                            <a href="javascript:;" class="file">上傳封面圖片
-                                                <input style="cursor: pointer;" type="file" onchange="readURL(this)"
-                                                    targetID="preview_progressbarTW_img"
-                                                    accept="image/gif, image/jpeg, image/png" name="Featured"
-                                                    id="Featured" class="form-control" required>
-                                                <div class="invalid-feedback coveralert">
-                                                    請上傳封面圖片！
-                                                </div>
-                                            </a>
-                                            <p style="font-size: 14px; text-align: left;">請提供 JPEG、PNG 或 BMP 檔，圖片尺寸至少
-                                                1280 x
-                                                768
-                                                px(5:3)； 2MB 以內。</p>
-                                        </form>
+                                        <a href="javascript:;" class="file">上傳封面圖片
+                                            <input style="cursor: pointer;" type="file" onchange="readURL(this)"
+                                                targetID="preview_progressbarTW_img"
+                                                accept="image/gif, image/jpeg, image/png" name="Featured" id="Featured"
+                                                class="form-control" required>
+                                            <div class="invalid-feedback coveralert">
+                                                請上傳封面圖片！
+                                            </div>
+                                        </a>
+                                        <p style="font-size: 14px; text-align: left;">請提供 JPEG、PNG 或 BMP 檔，圖片尺寸至少
+                                            1280 x
+                                            768
+                                            px(5:3)； 2MB 以內。</p>
                                     </div>
                                 </div>
                             </li>
@@ -220,46 +222,57 @@
                                 <span class="boldfont">方案內容</span>
                             </div>
 
-                            <!-- 方案預覽卡 -->
+                            <!-- 方案 -->
                             <div id="plandiv" style="width: 110%;">
                                 <div>
-                                    <!-- 預覽 -->
-                                    <div
+                                    <div class="palninputdiv"
                                         style="display: flex; width:100%; border:solid gray 1px; background-color: white;">
                                         <div>
-                                            <div>
-                                                <img id="preview_plan_img" style="width: 325px; height: 195px;"
+                                            <div >
+                                                <img id="preview_plan_img"
+                                                    style=" width: 330px; height: 110px; padding-left: 5px; padding-top: 5px;"
                                                     class="selectedimg" src="../img/coverimg.png" alt="">
+                                                <div
+                                                    style="display: flex; text-align: left; padding-left: 5px; padding: 5px;">
+                                                    <div style="height: 30px;">
+                                                        <span style="color: #047c51; font-size: 20px;">✎ $</span>
+                                                        <input
+                                                            style="width: 80px; color: #047c51; font-size: 20px; border: none;"
+                                                            name="PlanPrice" id="PlanPrice" type="number"
+                                                            value="100" class="inputplan">
+                                                    </div>
+                                                    <div style="text-align: left; height: 30px; padding-left: 5px;">
+                                                        <a style="text-align: center; font-size: 14px;"
+                                                            href="javascript:;" class="file2">上傳圖片
+                                                            <input style="cursor: pointer;" type="file"
+                                                                onchange="readPlanURL(this)" targetID="preview_plan_img"
+                                                                accept="image/gif, image/jpeg, image/png"
+                                                                name="PlanPhoto" id="PlanPhoto">
+                                                        </a>
+                                                        <p
+                                                            style="font-size: 12px; text-align: left; position: relative; bottom: 40px; left: 70px;">
+                                                            JPEG或PNG，<br>尺寸
+                                                            3:1； 10KB 以內。</p>
+                                                    </div>
+                                                </div>
+                                                <div style="text-align: left; padding-left: 5px; padding: 5px;">
+                                                    <textarea style="text-align: left; border: none; resize: none;"
+                                                        cols="30" rows="2" name="PlanTitle" id="PlanTitle"
+                                                        class="form-control inputplan" required
+                                                        placeholder="✎ 請提入方案標題"></textarea>
+                                                </div>
+
                                             </div>
                                         </div>
 
                                         <div style="padding: 5px 10px;">
-                                            <div style="text-align: left;">
-                                                <span style="color: #047c51; font-size: 28px;">✎ $</span>
-                                                <input
-                                                    style="width: 150px; color: #047c51; font-size: 28px; border: none;"
-                                                    name="feedbackmoney" id="feedbackmoney" type="number" value="100">
-                                            </div>
+
                                             <div style="padding: 5px;">
                                                 <textarea style="border: none; resize: none;" name="plantext"
-                                                    id="plantext" cols="48" rows="3" placeholder='請在此簡單介紹您的方案內容 ✎'
-                                                    class="form-control" required></textarea>
+                                                    id="plantext" cols="48" rows="8" placeholder='請在此簡單介紹您的方案內容 ✎'
+                                                    class="form-control inputplan" required></textarea>
                                             </div>
-                                            <div style="padding-top: 3px; text-align: left; height: 30px;">
-                                                <form action="/somewhere/to/upload" enctype="multipart/form-data">
-                                                    <a style="text-align: center; font-size: 14px;" href="javascript:;"
-                                                        class="file2">上傳封面圖片
-                                                        <input style="cursor: pointer;" type="file"
-                                                            onchange="readURL(this)" targetID="preview_plan_img"
-                                                            accept="image/gif, image/jpeg, image/png"
-                                                            name="plancoverimg" id="plancoverimg">
-                                                    </a>
-                                                    <p
-                                                        style="font-size: 12px; text-align: left; position: relative; bottom: 21px; left: 110px;">
-                                                        JPEG或PNG，尺寸
-                                                        5:3； 2MB 以內。</p>
-                                                </form>
-                                            </div>
+
                                         </div>
                                     </div>
                                     <hr>
@@ -323,8 +336,8 @@
                                     <span class="dot">●</span>
                                     <label class="boldfont" for="PrincipalEmail">電子郵件</label>
                                     <br>
-                                    <input style="border-radius: 5px;" name="PrincipalEmail" id="PrincipalEmail" class="form-control"
-                                        required>
+                                    <input style="border-radius: 5px;" name="PrincipalEmail" id="PrincipalEmail"
+                                        class="form-control" required>
                                     <div class="invalid-feedback">
                                         請輸入您的電子郵件！
                                     </div>
@@ -334,11 +347,10 @@
                             <li class="list-group-item" style="width: 100%;">
                                 <div>
                                     <span class="dot">●</span>
-                                    <label class="boldfont" for="phone">行動電話</label>
+                                    <label class="boldfont" for="PrincipalPhone">行動電話</label>
                                     <br>
-                                    <input placeholder="09xx-xxx-xxx" pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}" type="tel"
-                                        style="border-radius: 5px;" name="phone" id="phone" class="form-control"
-                                        required>
+                                    <input placeholder="09xx-xxx-xxx" type="tel" style="border-radius: 5px;"
+                                        name="PrincipalPhone" id="PrincipalPhone" class="form-control" required>
                                     <div class="invalid-feedback">
                                         請輸入正確格式的行動電話！
                                     </div>
@@ -352,7 +364,8 @@
                         <span class="dot">●</span>
                         <label class="boldfont" for="PrincipalBankAccount">銀行帳號</label>
                         <div>
-                            <input style="width: 100%;" type="text" id="PrincipalBankAccount" name="PrincipalBankAccount" class="form-control" required>
+                            <input style="width: 100%;" type="text" id="PrincipalBankAccount"
+                                name="PrincipalBankAccount" class="form-control" required>
                             <div class="invalid-feedback">
                                 請輸入銀行帳號！
                             </div>
@@ -372,9 +385,8 @@
         </div>
     </form>
 
-    <!-- 文字編輯器 -->
+    <!-- 文字編輯器 5 -->
     <!-- <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/super-build/ckeditor.js"></script> -->
-
 
     <!-- 頁籤切換 -->
     <script>

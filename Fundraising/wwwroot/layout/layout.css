@@ -188,10 +188,12 @@ footer {
     margin-right: 30%;
 }
 
-#footer-text h4,p {
-    color: #fff;
-    cursor: pointer;
-}
+    #footer-text h4,
+    #footer-text p {
+        color: #fff;
+        cursor: pointer;
+    }
+
 
 
 /* membercentre */
