@@ -18,8 +18,21 @@ body li {
 }
 
 form span,
-form p{
+form p {
     color: black;
+}
+
+.container{
+    padding: 0px 200px;
+}
+
+.card {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    transition: 0.5s;
+    border: 0;
+    border-radius: 0.55rem;
+    position: relative;
+    padding: 50px 190px !important;
 }
 
 .lidivborder {
@@ -67,7 +80,7 @@ input::-webkit-inner-spin-button {
     text-decoration: none;
     text-indent: 0;
     line-height: 20px;
-    width: 575px;
+    width: 550px;
 }
 
 .file input {

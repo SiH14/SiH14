@@ -22,7 +22,7 @@
         <div>
             <!-- 頁籤 -->
             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist"
-                style="position: relative; padding: 100px 0px 0px 0px; margin: 0px 400px; border-color: #047c51;">
+                style="position: relative; padding: 50px 0px 0px 0px; margin: 0px 400px; border-color: #047c51;">
                 <li style="padding: 0px;" class="nav-item" role="presentation">
                     <button class="nav-link active boldfont" id="outline-tab" data-bs-toggle="tab"
                         data-bs-target="#outline" type="button" role="tab" aria-controls="outline"
@@ -42,14 +42,14 @@
                 </li>
             </ul>
 
-            <input type="button" onclick="OK()" value="OK">
-            <input type="button" onclick="OK2()" value="OK2">
+            <!-- <input type="button" onclick="OK()" value="OK">
+            <input type="button" onclick="OK2()" value="OK2"> -->
 
 
-            <div class="tab-content">
+            <div class="tab-content container">
                 <!-- 專案大綱 -->
-                <div class="tab-pane fade show active lidivborder" id="outline" role="tabpanel"
-                    aria-labelledby="outline-tab">
+                <div style="width: 105%; position: relative; right: 30px;" class="card tab-pane fade show active lidivborder"
+                    id="outline" role="tabpanel" aria-labelledby="outline-tab">
                     <div class="boldfont">讓人輕鬆了解你的專案</div>
                     <div style="position: relative;">
                         <ul class="list-group list-group-horizontal" style="padding-top: 20px; ">
@@ -66,7 +66,7 @@
                                     <div class="invalid-feedback">
                                         請輸入專案標題！
                                     </div>
-                                    <p style="width: 100%; font-size: 14px;">撰寫清晰、簡短的標題，幫助人們迅速了解你的專案。</p>
+                                    <p style="width: 100%; font-size: 14px;">幫助人們迅速了解你的專案。</p>
                                 </div>
                                 <div style="text-align: left;">
                                     <span class="dot">●</span>
@@ -78,7 +78,7 @@
                                     <div class="invalid-feedback">
                                         請輸入至少5000元的目標金額！
                                     </div>
-                                    <p style="width: 100%; font-size: 14px;">募資目標金額最低為 $ 5,000元。</p>
+                                    <p style="width: 100%; font-size: 14px;">金額最低為 $ 5,000元。</p>
                                 </div>
                             </li>
 
@@ -88,8 +88,8 @@
                                 <div style="background-color: white !important; width: 250px; height: 280px;">
                                     <!-- 專案卡預覽 -->
                                     <img id="preview_progressbarTW_img" style="width: 250px; height: 150px;"
-                                        class="selectedimg" src="../img/coverimg.png" alt="">
-                                    <textarea disabled="true"
+                                        class="selectedimg" src="../img/coverphoto.png" alt="">
+                                    <textarea disabled
                                         style="border: none; background-color: white; resize: none;" name="cardtitle"
                                         id="cardtitle" cols="28" rows="2" placeholder="例：40個字以內的專案標題"></textarea>
                                     <p style="font-size: 14px; padding: 40px 0px 0px 5px;">設計by XXX</p>
@@ -107,16 +107,14 @@
                                         <a href="javascript:;" class="file">上傳封面圖片
                                             <input style="cursor: pointer;" type="file" onchange="readURL(this)"
                                                 targetID="preview_progressbarTW_img"
-                                                accept="image/gif, image/jpeg, image/png" name="Featured" id="Featured"
+                                                accept="image/jpeg, image/png" name="Featured" id="Featured"
                                                 class="form-control" required>
                                             <div class="invalid-feedback coveralert">
                                                 請上傳封面圖片！
                                             </div>
                                         </a>
-                                        <p style="font-size: 14px; text-align: left;">請提供 JPEG、PNG 或 BMP 檔，圖片尺寸至少
-                                            1280 x
-                                            768
-                                            px(5:3)； 2MB 以內。</p>
+                                        <p style="font-size: 14px; text-align: left;">請提供 JPEG、PNG 檔，圖片尺寸
+                                            5:3； 2MB 以內。</p>
                                     </div>
                                 </div>
                             </li>
@@ -130,12 +128,12 @@
                                     <br>
                                     <div style="text-align: left;">
                                         <input placeholder="請輸入影片網址"
-                                            style=" width: 575px; height: 40px; border-radius: 5px;" type="text"
+                                            style=" width: 550px; height: 40px; border-radius: 5px;" type="text"
                                             id="ProductVedio" name="ProductVedio" class="form-control" required>
                                         <div class="invalid-feedback">
                                             請輸入影片網址！
                                         </div>
-                                        <p style="width:95%; font-size: 14px; text-align: left;">生動影音更能抓住目光，在短時間傳達訊息。 用
+                                        <p style="font-size: 14px; text-align: left;">生動影音更能抓住目光，在短時間傳達訊息。 用
                                             2
                                             分鐘左右的影片，試著說明你計劃中的強項：計劃目標、計劃或產品的特色、如何達成計劃、團隊介紹、過往事跡、產品使用展示…等。讓一定要被看到的、贊助者會想看到的部分儘量放在前段。
                                         </p>
@@ -144,7 +142,7 @@
                             </li>
                         </ul>
                         <br><br>
-                        <div class="pagebtndiv">
+                        <div class="pagebtndiv" style="position:relative; right:15px;">
                             <input id="nextpage1" class="pagebtn btn btn-primary" type="button" value="下一頁">
                             <span>&nbsp</span>
                             <input class="pagebtn btn btn-primary" type="submit" value="提交專案">
@@ -154,7 +152,8 @@
                 </div>
 
                 <!-- 專案內容 -->
-                <div class="tab-pane fade lidivborder" id="content" role="tabpanel" aria-labelledby="content-tab">
+                <div style="width: 110%; position: relative; right: 60px;" class="tab-pane fade lidivborder"
+                    id="content" role="tabpanel" aria-labelledby="content-tab">
                     <div class="boldfont">介紹你的專案，告訴人們為什麼他們應該對你的專案感到興奮。</div>
 
                     <div style="text-align: left;" id="container">
@@ -215,7 +214,7 @@
                     </div>
                     <br><br>
                     <!-- 新增方案 -->
-                    <div style="width: 100%;">
+                    <div>
                         <div>
                             <div style="text-align: left;">
                                 <span class="dot">●</span>
@@ -223,25 +222,26 @@
                             </div>
 
                             <!-- 方案 -->
-                            <div id="plandiv" style="width: 110%;">
+                            <div id="plandiv">
                                 <div>
                                     <div class="palninputdiv"
                                         style="display: flex; width:100%; border:solid gray 1px; background-color: white;">
                                         <div>
-                                            <div >
+                                            <div>
                                                 <img id="preview_plan_img"
-                                                    style=" width: 330px; height: 110px; padding-left: 5px; padding-top: 5px;"
-                                                    class="selectedimg" src="../img/coverimg.png" alt="">
+                                                    style=" width: 270px; height: 90px; padding-left: 5px; padding-top: 5px;"
+                                                    class="selectedimg" src="../img/plancoverimg.png" alt="">
                                                 <div
                                                     style="display: flex; text-align: left; padding-left: 5px; padding: 5px;">
                                                     <div style="height: 30px;">
                                                         <span style="color: #047c51; font-size: 20px;">✎ $</span>
                                                         <input
                                                             style="width: 80px; color: #047c51; font-size: 20px; border: none;"
-                                                            name="PlanPrice" id="PlanPrice" type="number"
-                                                            value="100" class="inputplan">
+                                                            name="PlanPrice" id="PlanPrice" type="number" value="100"
+                                                            class="inputplan">
                                                     </div>
-                                                    <div style="text-align: left; height: 30px; padding-left: 5px;">
+                                                    <div
+                                                        style="text-align: left; height: 30px; position: relative; left: 75px;">
                                                         <a style="text-align: center; font-size: 14px;"
                                                             href="javascript:;" class="file2">上傳圖片
                                                             <input style="cursor: pointer;" type="file"
@@ -249,10 +249,10 @@
                                                                 accept="image/gif, image/jpeg, image/png"
                                                                 name="PlanPhoto" id="PlanPhoto">
                                                         </a>
-                                                        <p
+                                                        <!-- <p
                                                             style="font-size: 12px; text-align: left; position: relative; bottom: 40px; left: 70px;">
                                                             JPEG或PNG，<br>尺寸
-                                                            3:1； 10KB 以內。</p>
+                                                            3:1； 10KB 以內。</p> -->
                                                     </div>
                                                 </div>
                                                 <div style="text-align: left; padding-left: 5px; padding: 5px;">
@@ -269,7 +269,7 @@
 
                                             <div style="padding: 5px;">
                                                 <textarea style="border: none; resize: none;" name="plantext"
-                                                    id="plantext" cols="48" rows="8" placeholder='請在此簡單介紹您的方案內容 ✎'
+                                                    id="plantext" cols="48" rows="7" placeholder='請在此簡單介紹您的方案內容 ✎'
                                                     class="form-control inputplan" required></textarea>
                                             </div>
 
@@ -282,7 +282,7 @@
                             <div style="position: relative; float: left;">
                                 <input id="addplan" class="pagebtn btn btn-primary" type="button" value="新增方案">
                             </div>
-                            <div class="pagebtndiv" style="position: relative; left: 60px;">
+                            <div class="pagebtndiv">
                                 <input id="prepage2" class="pagebtn btn btn-primary" type="button" value="上一頁">
                                 <span>&nbsp</span>
                                 <input id="nextpage3" class="pagebtn btn btn-primary" type="button" value="下一頁">
@@ -294,8 +294,8 @@
                 </div>
 
                 <!-- 提案資料 -->
-                <div style="padding: 50px 450px;" class="tab-pane fade lidivborder" id="infor" role="tabpanel"
-                    aria-labelledby="infor-tab">
+                <div style="padding: 50px 350px;width: 105%; position: relative; right: 30px;"
+                    class="tab-pane fade lidivborder" id="infor" role="tabpanel" aria-labelledby="infor-tab">
                     <div class="boldfont">在這個區塊您將撰寫提案者需要提供的個人資料及身份驗證。</div>
                     <div style="text-align: left; padding-top: 50px;">
                         <ul class="list-group list-group-horizontal">
@@ -376,7 +376,7 @@
                     <div style="padding-top: 50px;" class="pagebtndiv">
                         <input id="prepage3" class="pagebtn btn btn-primary" type="button" value="上一頁">
                         <span>&nbsp</span>
-                        <input class="pagebtn btn btn-primary" type="submit" value="提交專案">
+                        <input class="pagebtn btn btn-primary" type="submit" onclick="OK()" value="提交專案">
                     </div>
 
                 </div>
