@@ -36,7 +36,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
             </li>
             <div class="dropdown headernav">
             <a class="dropdowntoggle btn dropdown-toggle headernav" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <img style="width:100%" class="headernav loginicon" src="../img/loginicon.png" alt="">
+            <img class="headernav loginicon" src="../img/loginicon.png" alt="">
             </a>
           
             <ul class="dropdownmenu dropdown-menu headernav" aria-labelledby="dropdownMenuLink">
@@ -109,7 +109,7 @@ let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a26
 
     <hr class="mb-4" style="color: black;">
 
-    <div style="width: 100%;" class="row align-items-center">
+    <div style="width:99%" class="row align-items-center">
 
         <div class="justify-content-center">
             <p style="color: black; font-size: 0.975rem;">Copyright ©2022 Backer-Founder All rights reserved.</p>
@@ -124,7 +124,12 @@ let querybody = document.querySelector("body");
 let queryheader = document.querySelector("head");
 querybody.innerHTML = header + querybody.innerHTML;
 querybody.innerHTML += footer;
-queryheader.innerHTML += `<link rel="stylesheet" href="../layout/layout.css" />`;
+queryheader.innerHTML += `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>`;
+let queryheader2 = document.querySelector("head");
+queryheader2.innerHTML += `<link rel="stylesheet" href="../layout/layout.css"/>`
+
+
+console.log(queryheader.innerHTML)
 
 // searchbar
 const icon = document.querySelector('.icon');
@@ -154,12 +159,11 @@ $("#mysearch").keydown(function (e) {
 //     }
 // })
 
-document.addEventListener('mousedown', (e) => {
+document.addEventListener('mouseup', (e) => {
     var apple = e.target.classList.value
     var bee = String(apple)
     if (bee.indexOf("headernav") == -1) {
         document.getElementById('mysearch').value = '';
         search.classList.remove('active');
-        icon.classList.remove('active');
     }
 })

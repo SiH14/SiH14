@@ -130,7 +130,7 @@ let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a26
 
     <hr class="mb-4" style="color: black;">
 
-    <div style="width: 100%;" class="row align-items-center">
+    <div class="row align-items-center">
 
         <div class="justify-content-center">
             <p style="color: black; font-size: 0.975rem;">Copyright ©2022 Backer-Founder All rights reserved.</p>
@@ -145,7 +145,7 @@ let querybody = document.querySelector("body");
 let queryheader = document.querySelector("head");
 querybody.innerHTML = header + querybody.innerHTML;
 querybody.innerHTML += footer;
-queryheader.innerHTML += `<link rel="stylesheet" href="../layout/layout.css" />`;
+queryheader.innerHTML += `<link rel="stylesheet" href="../layout/layout.css"/>`;
 
 // searchbar
 const icon = document.querySelector('.icon');
@@ -169,18 +169,12 @@ $("#mysearch").keydown(function (e) {
     }
 });
 
-// $(".dropdown-toggle").onclick(function () {
-//     if (dropdownmenu.classList.length==2) {
-//         dropdownmenu.classList.toggle('show');
-//     }
-// })
-
 document.addEventListener('mousedown', (e) => {
     var apple = e.target.classList.value
     var bee = String(apple)
     if (bee.indexOf("headernav") == -1) {
         document.getElementById('mysearch').value = '';
         search.classList.remove('active');
-        icon.classList.remove('active');
+        // icon.classList.remove('active');
     }
 })

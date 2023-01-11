@@ -147,15 +147,14 @@ input::-webkit-inner-spin-button {
 
 .pagebtn {
     background-color: transparent;
-    border-radius: 0%;
-    border: #047c51 2px solid;
+    border-radius: 0px;
+    border: none;
     color: black;
     width: 12vh;
 }
 
 .pagebtn:hover {
     background-color: #047c51;
-    border: #047c51 2px solid;
     color: white;
 }
 

@@ -246,7 +246,8 @@ footer {
 .footericon{
     position: relative;
     bottom: 150px;
-    left: 370px;
+    left: 870px;
+    width: 500px;
 }
 
 .footer-item h4 {
