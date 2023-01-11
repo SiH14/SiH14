@@ -1,11 +1,11 @@
 // 頁籤顏色切換
-$(".needs-validation button").css({ "color": "black" })
-$("li .active").css({ "background-color": "#047c51", "color": "white" });
+$(".needs-validation button").css({ "color": "black", "border-bottom": "none" })
+$("li .active").css({ "background-color": "#047c51", "color": "white", "border-bottom": "1px solid #047c51" });
 
 $(".needs-validation button").click(function () {
-    $(".needs-validation button").css({ "background-color": "", "color": "black" })
+    $(".needs-validation button").css({ "background-color": "", "color": "black", "border-bottom": "none" })
     if ($(this).hasClass("active")) {
-        $(this).css({ "background-color": "#047c51", "color": "white" });
+        $(this).css({ "background-color": "#047c51", "color": "white", "border-bottom": "1px solid #047c51" });
     }
 })
 
@@ -64,11 +64,14 @@ function readURL(input) {
         reader.onload = function (e) {
 
             coverimgdata = reader.result;
+
             var img = document.getElementById(imageTagID);
 
             img.setAttribute("src", e.target.result)
         }
         reader.readAsDataURL(input.files[0]);
+        // reader.readAsArrayBuffer(input.files[0]);
+        // reader.readAsBinaryString(input.files[0]);
     }
 }
 
@@ -98,9 +101,13 @@ var dataDB;
 var egg;
 var good;
 function OK() {
+    dataDB = CKEDITOR.instances.ProductContent.getData();
+
     // 提送表單大部分內容
     productsubmit = function (callback) {
-        axios.post("http://localhost:36827/api/Products", {
+        console.log(dataDB);
+        console.log(coverimgdata);
+        var proposaldata = {
             coverphoto: coverimgdata,
             ProductTitle: document.getElementById("ProductTitle").value,
             ProductContent: dataDB,
@@ -113,7 +120,8 @@ function OK() {
             PrincipalBankAccount: document.getElementById("PrincipalBankAccount").value,
             UserID: 2,
             ProductStateID: 1
-        })
+        }
+        axios.post("http://localhost:36827/api/Products", proposaldata)
             .then(res => {
                 callback(res.data.productId);
                 console.log(res.data.productId);
@@ -177,7 +185,7 @@ $(".QAaddbtn").click(function () {
     </div>
     <div class="QAQA">    
         <div class="question">
-            <textarea placeholder="請輸入此專案常見問題" class="QAtext form-control" name="questiontext${x += 1}" id="questiontext${x}" rows="3" required></textarea>            
+            <textarea placeholder="請輸入此專案常見問題" class="QAtext form-control " name="questiontext${x += 1}" id="questiontext${x}" rows="3" required></textarea>            
             <div class="invalid-feedback">請輸入常見問題！</div>
         </div>
         <br>
@@ -191,32 +199,6 @@ $(".QAaddbtn").click(function () {
 </div>`)
 })
 
-//測試用
-// var good;
-// function OK2() {
-//     good = document.querySelectorAll('div[class=palninputdiv] .inputplan')
-//     for (let w = 0, x = 1, y = 2, z = 0; w < good.length, x < good.length, y < good.length, z < good.length; w += 3, x += 3, y += 3, z++) {
-//         console.log(good[w].value)
-//         console.log(good[x].value)
-//         console.log(good[y].value)
-//         console.log(planinputarray[z])
-
-//         axios.post("http://localhost:36827/api/Plans", {
-//             ProductID: 7,
-//             PlanTitle: good[x].value,
-//             PlanContent: good[y].value,
-//             PlanPrice: good[w].value,
-//             PlanPhoto: planinputarray[z]
-//         })
-//             .then(res => {
-//                 console.log(res);
-//             })
-//             .catch(error => {
-//                 console.log(error.response);
-//             });
-//     }
-// }
-
 // 方案新增
 var y = 0;
 $("#addplan").click(function () {
@@ -226,57 +208,56 @@ $("#addplan").click(function () {
     <input style="border: none;" class="QAdelbtn btn btn-primary" type="button"
         value="✖" onclick="del(this)">
 </div>
-    <div class="palninputdiv"
-        style="display: flex; width:100%; border:solid gray 1px; background-color: white;">
-        <div>
-            <div>
-                <img id="preview_plan_img${y}"
-                    style=" width: 330px; height: 110px; padding-left: 5px; padding-top: 5px;"
-                    class="selectedimg" src="../img/coverimg.png" alt="">
-                <div style="display: flex; text-align: left; padding-left: 5px; padding: 5px;">
-                    <div style="height: 30px;">
-                        <span style="color: #047c51; font-size: 20px;">✎ $</span>
-                        <input
-                            style="width: 80px; color: #047c51; font-size: 20px; border: none;"
-                            name="PlanPrice${y}" id="PlanPrice${y}" type="number"
-                            value="100" class="inputplan">
-                    </div>
-                    <div style="text-align: left; height: 30px; padding-left: 5px;">
-                        <a style="text-align: center; font-size: 14px;"
-                            href="javascript:;" class="file2">上傳圖片
-                            <input style="cursor: pointer;" type="file"
-                                onchange="readPlanURL(this)" targetID="preview_plan_img${y}"
-                                accept="image/gif, image/jpeg, image/png"
-                                name="PlanPhoto${y}" id="PlanPhoto${y}">
-                        </a>
-                        <p
-                            style="font-size: 12px; text-align: left; position: relative; bottom: 40px; left: 70px;">
-                            JPEG或PNG，<br>尺寸
-                            3:1； 10KB 以內。</p>
-                    </div>
-                </div>
-                <div style="text-align: left; padding-left: 5px; padding: 5px;">
-                    <textarea style="text-align: left; border: none; resize: none;"
-                        cols="30" rows="2" name="PlanTitle${y}" id="PlanTitle${y}"
-                        class="form-control inputplan" required
-                        placeholder="✎ 請提入方案標題"></textarea>
-                </div>
-
+<div class="palninputdiv"
+style="display: flex; width:100%; border:solid gray 1px; background-color: white;">
+<div>
+    <div>
+        <img id="preview_plan_img${y}"
+            style=" width: 270px; height: 90px; padding-left: 5px; padding-top: 5px;"
+            class="selectedimg" src="../img/plancoverimg.png" alt="">
+        <div
+            style="position: relative; display: flex; text-align: left; left: 5px; padding: 5px; width: 100%;">
+            <div style="height: 30px;">
+                <span style="color: #047c51; font-size: 20px;">✎ $</span>
+                <span>
+                    <input
+                        style="width:120px; color: #047c51; font-size: 20px; border: none;"
+                        name="PlanPrice${y}" id="PlanPrice${y}" type="number"
+                        value="100">
+                </span>
+            </div>
+            <div
+                style="text-align: left; height: 30px; position: relative; left: 31px;">
+                <a style="text-align: center; font-size: 14px;"
+                    href="javascript:;" class="file2">上傳圖片
+                    <input style="cursor: pointer;" type="file"
+                        onchange="readPlanURL(this)" targetID="preview_plan_img${y}"
+                        accept="image/gif, image/jpeg, image/png"
+                        name="PlanPhoto${y}" id="PlanPhoto${y}">
+                </a>
             </div>
         </div>
-
-        <div style="padding: 5px 10px;">
-
-            <div style="padding: 5px;">
-                <textarea style="border: none; resize: none;" name="plantext${y}"
-                    id="plantext${y}" cols="48" rows="8" placeholder='請在此簡單介紹您的方案內容 ✎'
-                    class="form-control inputplan" required></textarea>
-            </div>
-
+        <div style="text-align: left; padding-left: 5px; padding: 5px;">
+            <textarea style="text-align: left; border: none; resize: none;"
+                cols="30" rows="2" name="PlanTitle${y}" id="PlanTitle${y}"
+                class="form-control inputplan" required
+                placeholder="✎ 請提入方案標題"></textarea>
         </div>
+
     </div>
-    <hr>
-</div>`)
+</div>
+
+<div style="padding: 5px 10px;">
+
+    <div style="padding: 5px;">
+        <textarea style="border: none; resize: none;" name="plantext${y}"
+            id="plantext${y}" cols="48" rows="7" placeholder='請在此簡單介紹您的方案內容 ✎'
+            class="form-control inputplan" required></textarea>
+    </div>
+
+</div>
+</div>
+<hr>`)
 })
 
 //常見問題刪除
@@ -430,11 +411,6 @@ function del(obj) {
 CKEDITOR.replace('ProductContent');
 var dataDB;
 
-// function OK() {
-//     dataDB = CKEDITOR.instances.ProductContent.getData();
-
-// }
-
 //表單驗證
 (function () {
     'use strict'
@@ -445,10 +421,28 @@ var dataDB;
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
         .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
+            form.querySelector("#proposalsubmit").addEventListener('click', function (event) {
                 if (!form.checkValidity()) {
+                    swal("提交失敗", "尚有必填欄位未輸入", "error", { button: "確定", dangerMode: true });
                     event.preventDefault()
                     event.stopPropagation()
+                } else if (form.checkValidity()) {
+                    swal("提交表單", "資料確認無誤?", "warning", {
+                        buttons: {
+                            確定: true,
+                            取消: true
+                        },
+                    })
+                        .then((value) => {
+                            switch (value) {
+                                case "確定":
+                                    OK();
+                                    swal("表單已送出!", "", "success");
+                                    break;
+                                case "取消":
+                                    break;
+                            }
+                        });
                 }
 
                 form.classList.add('was-validated')

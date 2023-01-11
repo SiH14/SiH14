@@ -32,7 +32,8 @@ form p {
     border: 0;
     border-radius: 0.55rem;
     position: relative;
-    padding: 50px 190px !important;
+    padding: 50px 190px 80px 190px !important;
+    border: solid 2px #047c51;
 }
 
 .lidivborder {
@@ -42,17 +43,16 @@ form p {
 
 .nav-link:hover {
     background-color: transparent;
-    border-color: #047c51 #047c51 #f8f4ea #047c51 !important;
+    border-color: #047c51 #047c51 #047c51 #047c51 !important;
 }
 
 .nav-item .active:hover {
-    border-color: #f8f4ea !important;
+    border-color: #047c51 !important;
 }
 
 .dot {
     color: #047c51;
     font-size: 22px;
-
 }
 
 .list-group-item {
@@ -126,6 +126,14 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
 }
 
+/* .ProductContenthiddeninput{
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+} */
+
 .dateline {
     width: 275px;
     height: 40px;
@@ -138,18 +146,16 @@ input::-webkit-inner-spin-button {
 }
 
 .pagebtn {
-    background-color: gray;
+    background-color: transparent;
     border-radius: 0%;
-    border-color: black;
-}
-
-.pagebtn {
+    border: #047c51 2px solid;
+    color: black;
     width: 12vh;
 }
 
-.pagebtn:hover,
-.pagebtn2:hover {
-    background-color: black;
+.pagebtn:hover {
+    background-color: #047c51;
+    border: #047c51 2px solid;
     color: white;
 }
 
@@ -199,8 +205,4 @@ input::-webkit-inner-spin-button {
 .QAdelbtn:hover {
     background-color: #047c51;
     color: white
-}
-
-.coveralert {
-    background-color: transparent !important;
 }

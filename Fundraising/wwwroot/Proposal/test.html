@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>点击其他地方div消失</title>
+    <style>
+        #b {
+            width: 300px;
+            height: 300px;
+            border: 1px solid black;
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <button id="a">aaa</button>
+
+    <div id="b">
+        <p>看什么看</p>
+        <p>看什么看</p>
+    </div>
+    <script>
+        function e(obj) {
+            return document.getElementById(obj)
+        }
+        e('a').onclick = function (event) {
+            e('b').style.display = 'block';
+            stopBubble(event);
+            document.onclick = function () {
+                e('b').style.display = 'none';
+                document.onclick = null;
+            }
+        }
+
+        e('b').onclick = function (event) {
+            stopBubble(event);
+        }
+
+        function stopBubble(e) {
+            if (e && e.stopPropagation) {
+                e.stopPropagation();
+            } else {
+                window.event.cancelBubble = true;
+            }
+        }
+    </script>
+</body>
+
+</html>
