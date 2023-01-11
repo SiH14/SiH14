@@ -36,7 +36,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
             </li>
             <div class="dropdown headernav">
             <a class="dropdowntoggle btn dropdown-toggle headernav" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="headernav loginicon" src="../img/loginicon.png" alt="">
+            <img style="width:100%" class="headernav loginicon" src="../img/loginicon.png" alt="">
             </a>
           
             <ul class="dropdownmenu dropdown-menu headernav" aria-labelledby="dropdownMenuLink">
