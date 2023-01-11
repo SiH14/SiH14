@@ -151,7 +151,7 @@ function OK() {
                 });
         }
 
-        good = document.querySelectorAll('div[class=palninputdiv] .inputplan')
+        good = document.querySelectorAll('div[class=planinputdiv] .inputplan')
         for (let w = 0, x = 1, y = 2, z = 0; w < good.length, x < good.length, y < good.length, z < good.length; w += 3, x += 3, y += 3, z++) {
             console.log(good[w].value)
             console.log(good[x].value)
@@ -185,12 +185,12 @@ $(".QAaddbtn").click(function () {
     </div>
     <div class="QAQA">    
         <div class="question">
-            <textarea placeholder="請輸入此專案常見問題" class="QAtext form-control " name="questiontext${x += 1}" id="questiontext${x}" rows="3" required></textarea>            
+            <textarea style="border-radius: 5px;border: black 1px solid" placeholder="請輸入此專案常見問題" class="QAtext form-control " name="questiontext${x += 1}" id="questiontext${x}" rows="3" required></textarea>            
             <div class="invalid-feedback">請輸入常見問題！</div>
         </div>
         <br>
         <div class="answer">        
-            <textarea placeholder="請輸入上述問題的正確答覆" class="QAtext form-control" name="answertext${x}" id="answertext${x}" rows="5" required></textarea>
+            <textarea style="border-radius: 5px;border: black 1px solid" placeholder="請輸入上述問題的正確答覆" class="QAtext form-control" name="answertext${x}" id="answertext${x}" rows="5" required></textarea>
             <div class="invalid-feedback">請輸入正確答覆！</div>
         </div>
         <hr>        
@@ -208,13 +208,13 @@ $("#addplan").click(function () {
     <input style="border: none;" class="QAdelbtn btn btn-primary" type="button"
         value="✖" onclick="del(this)">
 </div>
-<div class="palninputdiv"
+<div class="planinputdiv"
 style="display: flex; width:100%; border:solid gray 1px; background-color: white;">
 <div>
     <div>
         <img id="preview_plan_img${y}"
             style=" width: 270px; height: 90px; padding-left: 5px; padding-top: 5px;"
-            class="selectedimg" src="../img/plancoverimg.png" alt="">
+            class="selectedimg" src="../img/coverimg.png" alt="">
         <div
             style="position: relative; display: flex; text-align: left; left: 5px; padding: 5px; width: 100%;">
             <div style="height: 30px;">

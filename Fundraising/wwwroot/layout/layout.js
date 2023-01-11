@@ -29,25 +29,22 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
                 <div class="search headernav">                
                     <a class="icon headernav" href="#" role="button"></a>
                     <div class="input headernav">
-                        <input class="headernav" type="text" placeholder="請輸入關鍵字" id="mysearch">
+                        <input class="headernav" type="text" placeholder="搜尋專案" id="mysearch">
                     </div>
                     <span class="clear headernav"></span>
                 </div>
             </li>
-            <div class="dropdown headernav">
-            <a class="dropdowntoggle btn dropdown-toggle headernav" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="dropdown">
+        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+            data-bs-toggle="dropdown" aria-expanded="false">
             <img class="headernav loginicon" src="../img/loginicon.png" alt="">
-            </a>
-          
-            <ul class="dropdownmenu dropdown-menu headernav" aria-labelledby="dropdownMenuLink">
-            <div class="dropdown-div headernav">
-            <div>
-            <a style="border-bottom: solid 1px rgb(188, 185, 185);" class="dropdown-item headernav" href="#">註冊</a>
-            </div>
-            <div>
-            <a class="dropdown-item headernav" href="#">登入</a>
-            </div>
-            </div>              
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item" href="#">註冊</a></li>
+            <li><a class="dropdown-item" href="#">登入</a></li>
+        </ul>
+    </div>             
             </ul>
           </div>
             
@@ -135,8 +132,8 @@ console.log(queryheader.innerHTML)
 const icon = document.querySelector('.icon');
 const search = document.querySelector('.search');
 const clear = document.querySelector('.clear');
-const dropdowntoggle = document.querySelector('.dropdowntoggle');
-const dropdownmenu = document.querySelector('.dropdownmenu');
+// const dropdowntoggle = document.querySelector('#dropdowntoggle');
+// const dropdownmenu = document.querySelector('#dropdownmenu');
 icon.onclick = function () {
     search.classList.toggle('active');
     icon.classList.toggle('active');
@@ -159,11 +156,18 @@ $("#mysearch").keydown(function (e) {
 //     }
 // })
 
-document.addEventListener('mouseup', (e) => {
-    var apple = e.target.classList.value
-    var bee = String(apple)
-    if (bee.indexOf("headernav") == -1) {
+// document.addEventListener('mouseup', (e) => {
+//     var apple = e.target.classList.value
+//     var bee = String(apple)
+//     if (bee.indexOf("headernav") == -1) {
+//         document.getElementById('mysearch').value = '';
+//         search.classList.remove('active');
+//     }
+// })
+
+window.onclick = function (event) {
+    if (!event.target.matches('.headernav')) {
         document.getElementById('mysearch').value = '';
         search.classList.remove('active');
     }
-})
+}

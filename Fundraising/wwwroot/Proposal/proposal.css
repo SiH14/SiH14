@@ -22,7 +22,21 @@ form p {
     color: black;
 }
 
-.container{
+#pencil {
+    position: absolute;
+    left: -150px;
+    z-index: -1;
+}
+
+#eraser {
+    position: absolute;
+    right: 0px;
+    bottom: -100px;
+    z-index: -1;
+
+}
+
+.container {
     padding: 0px 200px;
 }
 
@@ -33,7 +47,7 @@ form p {
     border-radius: 0.55rem;
     position: relative;
     padding: 50px 190px 80px 190px !important;
-    border: solid 2px #047c51;
+    /* border: solid 2px #047c51; */
 }
 
 .lidivborder {
