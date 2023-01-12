@@ -78,13 +78,19 @@ body {
 
 .dropdown-menu{
     background-color: white !important;
-    min-width: 10vh;
+    border-radius: 0px;
+    min-width: 8vh;
     padding: 0px;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
 }
 
 .dropdown-menu a:hover{
     background-color: transparent !important;
     color: #047c51;
+}
+
+.btn:focus{
+    box-shadow: none !important;
 }
 
 /* searchbar */

@@ -119,8 +119,8 @@ let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a26
 </footer>`;
 let querybody = document.querySelector("body");
 let queryheader = document.querySelector("head");
-querybody.innerHTML = header + querybody.innerHTML;
-querybody.innerHTML += footer;
+var bootstrapjs = `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>`;
+querybody.innerHTML = header + querybody.innerHTML + footer;
 queryheader.innerHTML += `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>`;
 let queryheader2 = document.querySelector("head");
 queryheader2.innerHTML += `<link rel="stylesheet" href="../layout/layout.css"/>`
@@ -144,11 +144,14 @@ clear.onclick = function () {
 }
 
 
-$("#mysearch").keydown(function (e) {
-    if (e.keyCode == 13) {//触发键盘事件enter
+let mysearchkeydown = document.getElementById("mysearch");
+
+mysearchkeydown.onkeydown = function (e) {
+    if (e.keyCode == 13) {
+        //触发键盘事件enter
         window.location = "https://www.youtube.com/?themeRefresh=1";
     }
-});
+}
 
 // $(".dropdown-toggle").onclick(function () {
 //     if (dropdownmenu.classList.length==2) {

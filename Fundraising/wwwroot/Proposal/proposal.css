@@ -41,7 +41,7 @@ form p {
 }
 
 .card {
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
     transition: 0.5s;
     border: 0;
     border-radius: 0.55rem;
@@ -205,17 +205,14 @@ input::-webkit-inner-spin-button {
 .QAdelbtn {
 
     border-radius: 0;
-    border-color: gray;
-    background-color: #047c51;
-    color: white
+    border: #047c51 solid 2px;
+    background-color: transparent;
+    color: black
 }
 
-.QAaddbtn:hover {
-    background-color: #047c51;
-    color: white
-}
-
+.QAaddbtn:hover,
 .QAdelbtn:hover {
     background-color: #047c51;
+    border: #047c51 solid 2px;
     color: white
 }
