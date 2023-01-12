@@ -96,28 +96,19 @@
         </div>
         <!-- stepper -->
         <div class="stepper mb-md-3">
-          <div
-            class="step"
-            :class="{active:myorder.orderStateId==1 && new Date(myorder.endTime) > new Date(),completed:myorder.orderStateId>1 || new Date(myorder.endTime) < new Date()}"
-          >
+          <div class="step active">
             <div class="step-label"></div>
             <div class="step-description">募資中</div>
           </div>
-          <div
-            class="step"
-            :class="{active:myorder.orderStateId==1 && new Date(myorder.endTime) < new Date(),completed:myorder.orderStateId > 1}"
-          >
+          <div class="step">
             <div class="step-label"></div>
             <div class="step-description">募資成功</div>
           </div>
-          <div
-            class="step"
-            :class="{active:myorder.orderStateId==2,completed:myorder.orderStateId>2}"
-          >
+          <div class="step">
             <div class="step-label"></div>
             <div class="step-description">生產階段</div>
           </div>
-          <div class="step" :class="{active:myorder.orderStateId==3}">
+          <div class="step">
             <div class="step-label"></div>
             <div class="step-description">寄送產品</div>
           </div>
@@ -127,9 +118,9 @@
         <div class="m-3 mx-auto" style="width: 60%">
           <h4 class="h3">寄送資訊修改</h4>
           <!-- 修改表單 -->
-          <form>
+          <form class="row">
             <!-- 姓名 -->
-            <div class="my-3">
+            <div class="my-2 col-md-6">
               <label for="Name" class="form-label">收件人姓名：</label>
               <input
                 type="Text"
@@ -142,7 +133,7 @@
               />
             </div>
             <!-- 電話 -->
-            <div class="mb-3">
+            <div class="my-2 col-md-6">
               <label for="Phone" class="form-label">收件人電話：</label>
               <input
                 type="tel"
@@ -155,7 +146,7 @@
               />
             </div>
             <!-- 信箱 -->
-            <div class="mb-3">
+            <div class="my-2 col-md-12">
               <label for="Email" class="form-label">收件人信箱：</label>
               <input
                 type="Text"
@@ -168,7 +159,7 @@
               />
             </div>
             <!-- 住址 -->
-            <div class="mb-3">
+            <div class="my-2 col-md-12">
               <label for="Address" class="form-label">收件人住址：</label>
               <input
                 type="Text"
@@ -181,7 +172,7 @@
               />
             </div>
             <!-- 備注 -->
-            <div class="mb-3">
+            <div class="my-2 col-md-12">
               <label for="Note">備註：</label>
               <textarea
                 class="form-control"

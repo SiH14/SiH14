@@ -42,7 +42,7 @@
       </div>
       <div id="OrderCard">
         <div v-for="order in ordercard">
-          <div class="card mx-auto mt-3 shadow">
+          <div class="card mx-auto mt-3 shadow-sm">
             <div class="row g-0">
               <!-- 照片 -->
               <div class="col-md-3">
@@ -255,6 +255,9 @@
             </div>
           </div>
         </div>
+        <h2 v-if="ordercard.length==0" class="text-center mt-5">
+          尚未贊助任何專案。
+        </h2>
       </div>
     </div>
     <script
