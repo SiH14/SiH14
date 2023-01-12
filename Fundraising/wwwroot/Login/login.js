@@ -19,3 +19,27 @@ pwShowHide.forEach(
         })
     }
 )
+
+
+// post
+
+//var account;
+//var password;
+//function OK() {
+//    account = document.getElementById("UserEmail").value;
+//    password = document.getElementById("UserPassword").value;
+//    console.log(account, password)
+
+//    axios.post("https://localhost:44398/api/Login", {
+//        UserEmail: account,
+//        UserPassword: password
+//    })
+//        .then(res => {
+
+//            console.log(res);
+//        })
+//        .catch(error => {
+//            console.log(error.response);
+//        });
+//    window.location = "https://www.youtube.com/";
+//}

@@ -22,3 +22,29 @@ pwShowHide.forEach(
     }
 )
 
+// post
+
+var apple;
+var bee;
+var cat;
+function OK() {
+    apple = document.getElementById("UserEmail").value;
+    bee = document.getElementById("UserNickname").value;
+    cat = document.getElementById("UserPassword").value;
+
+    console.log(apple, bee, cat)
+    axios.post("https://localhost:44398/api/Register", {
+        UserEmail: apple,
+        UserNickname: bee,
+        UserPassword: cat
+    })
+        .then(res => {
+
+            console.log(res);
+        })
+        .catch(error => {
+            console.log(error.response);
+        });
+    window.location = "https://www.youtube.com/";
+
+}
