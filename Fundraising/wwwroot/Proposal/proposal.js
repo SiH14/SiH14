@@ -64,6 +64,7 @@ function readURL(input) {
         reader.onload = function (e) {
 
             coverimgdata = reader.result;
+            console.log(coverimgdata)
 
             var img = document.getElementById(imageTagID);
 

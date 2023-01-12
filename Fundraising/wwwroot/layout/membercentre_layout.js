@@ -29,25 +29,22 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
                 <div class="search headernav">                
                     <a class="icon headernav" href="#" role="button"></a>
                     <div class="input headernav">
-                        <input class="headernav" type="text" placeholder="請輸入關鍵字" id="mysearch">
+                        <input class="headernav" type="text" placeholder="搜尋專案" id="mysearch">
                     </div>
                     <span class="clear headernav"></span>
                 </div>
             </li>
-            <div class="dropdown headernav">
-            <a class="btn dropdown-toggle headernav" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <img style="width:55%" class="headernav loginicon" src="../img/loginicon.png" alt="">
-            </a>
-          
-            <ul class="dropdown-menu headernav" aria-labelledby="dropdownMenuLink">
-            <div class="dropdown-div headernav">
-            <div>
-            <a style="border-bottom: solid 1px rgb(188, 185, 185);" class="dropdown-item headernav" href="#">註冊</a>
-            </div>
-            <div>
-            <a class="dropdown-item headernav" href="#">登入</a>
-            </div>
-            </div>              
+            <div class="dropdown">
+        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img class="headernav loginicon" src="../img/loginicon.png" alt="">
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item" href="#">註冊</a></li>
+            <li><a class="dropdown-item" href="#">登入</a></li>
+        </ul>
+    </div>             
             </ul>
           </div>
             
@@ -163,11 +160,14 @@ clear.onclick = function () {
 }
 
 
-$("#mysearch").keydown(function (e) {
-    if (e.keyCode == 13) {//触发键盘事件enter
+let mysearchkeydown = document.getElementById("mysearch");
+
+mysearchkeydown.onkeydown = function (e) {
+    if (e.keyCode == 13) {
+        //触发键盘事件enter
         window.location = "https://www.youtube.com/?themeRefresh=1";
     }
-});
+}
 
 document.addEventListener('mousedown', (e) => {
     var apple = e.target.classList.value

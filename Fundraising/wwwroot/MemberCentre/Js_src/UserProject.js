@@ -14,11 +14,13 @@ const app = {
         } else if (new Date(element.endtime) > new Date()) {
           element.productStateId = "募資中";
         } else if (
+          element.productStateId == 3 &&
           new Date(element.endtime) < new Date() &&
           element.currentAmount > element.targetAmount
         ) {
           element.productStateId = "募資成功";
         } else if (
+          element.productStateId == 3 &&
           new Date(element.endtime) < new Date() &&
           element.currentAmount < element.targetAmount
         ) {
