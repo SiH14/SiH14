@@ -18,8 +18,36 @@ body li {
 }
 
 form span,
-form p{
+form p {
     color: black;
+}
+
+#pencil {
+    position: absolute;
+    left: -150px;
+    z-index: -1;
+}
+
+#eraser {
+    position: absolute;
+    right: 0px;
+    bottom: -100px;
+    z-index: -1;
+
+}
+
+.container {
+    padding: 0px 200px;
+}
+
+.card {
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+    transition: 0.5s;
+    border: 0;
+    border-radius: 0.55rem;
+    position: relative;
+    padding: 50px 190px 80px 190px !important;
+    /* border: solid 2px #047c51; */
 }
 
 .lidivborder {
@@ -29,17 +57,16 @@ form p{
 
 .nav-link:hover {
     background-color: transparent;
-    border-color: #047c51 #047c51 #f8f4ea #047c51 !important;
+    border-color: #047c51 #047c51 #047c51 #047c51 !important;
 }
 
 .nav-item .active:hover {
-    border-color: #f8f4ea !important;
+    border-color: #047c51 !important;
 }
 
 .dot {
     color: #047c51;
     font-size: 22px;
-
 }
 
 .list-group-item {
@@ -67,7 +94,7 @@ input::-webkit-inner-spin-button {
     text-decoration: none;
     text-indent: 0;
     line-height: 20px;
-    width: 575px;
+    width: 550px;
 }
 
 .file input {
@@ -113,6 +140,14 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
 }
 
+/* .ProductContenthiddeninput{
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+} */
+
 .dateline {
     width: 275px;
     height: 40px;
@@ -125,18 +160,15 @@ input::-webkit-inner-spin-button {
 }
 
 .pagebtn {
-    background-color: gray;
-    border-radius: 0%;
-    border-color: black;
-}
-
-.pagebtn {
+    background-color: transparent;
+    border-radius: 0px;
+    border: none;
+    color: black;
     width: 12vh;
 }
 
-.pagebtn:hover,
-.pagebtn2:hover {
-    background-color: black;
+.pagebtn:hover {
+    background-color: #047c51;
     color: white;
 }
 
@@ -173,21 +205,14 @@ input::-webkit-inner-spin-button {
 .QAdelbtn {
 
     border-radius: 0;
-    border-color: gray;
-    background-color: #047c51;
-    color: white
+    border: #047c51 solid 2px;
+    background-color: transparent;
+    color: black
 }
 
-.QAaddbtn:hover {
-    background-color: #047c51;
-    color: white
-}
-
+.QAaddbtn:hover,
 .QAdelbtn:hover {
     background-color: #047c51;
+    border: #047c51 solid 2px;
     color: white
-}
-
-.coveralert {
-    background-color: transparent !important;
 }

@@ -1,46 +1,53 @@
-let header = `<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom" id="header">
+let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-white border-bottom" id="header">
 
-<div class="container-fluid" id="header-container">
+<div class="container-fluid headernav" id="header-container">
     <!--LOGO -->
-    <a class="navbar-brand fs-2" id="header-brand" href="#">咱的募資平台</a>
+    <a class="navbar-brand fs-2 headernav" id="header-brand" href="#">咱的募資平台</a>
 
     <!-- Bar -->
 
-    <div class="collapse navbar-collapse ms-5" id="headerlinkbar">
+    <div class="collapse navbar-collapse ms-5 headernav" id="headerlinkbar">
         <!-- LEFT -->
-        <ul class="navbar-nav me-auto fs-5">
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="header-home">首頁</a>
+        <ul class="navbar-nav me-auto fs-5 headernav">
+            <li class="nav-item headernav">
+                <a class="nav-link headernav" href="#" id="header-home">首頁</a>
             </li>
-            <li class="nav-item" id="header-items">
-                <a class="nav-link" href="#">提案</a>
+            <li class="nav-item headernav" id="header-items">
+                <a class="nav-link headernav" href="./myproposal.html">提案</a>
             </li>
-            <li class="nav-item" id="header-items">
-                <a class="nav-link" href="#">探索</a>
+            <li class="nav-item headernav" id="header-items">
+                <a class="nav-link headernav" href="#">探索</a>
             </li>
 
         </ul>
 
     </div>
 
-    <div>
-        <ul class="navbar-nav me-5">
-            <li style="padding-right: 30px;">
-                <div class="search">
-                    <div class="icon"></div>
-                    <div class="input">
-                        <input type="text" placeholder="搜尋" id="mysearch">
+    <div class="headernav">
+        <ul class="navbar-nav me-5 headernav">
+            <li class="headernav" style="padding-right: 10px;">
+                <div class="search headernav">                
+                    <a class="icon headernav" href="#" role="button"></a>
+                    <div class="input headernav">
+                        <input class="headernav" type="text" placeholder="搜尋專案" id="mysearch">
                     </div>
-                    <span class="clear" onclick="document.getElementById('mysearch').value=''"></span>
+                    <span class="clear headernav"></span>
                 </div>
             </li>
-            <li>
+            <div class="dropdown">
+        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img class="headernav loginicon" src="../img/loginicon.png" alt="">
+        </a>
 
-                <div>
-                    <button class="btn btn-success">登入</button>
-                </div>
-
-            </li>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item" href="#">註冊</a></li>
+            <li><a class="dropdown-item" href="#">登入</a></li>
+        </ul>
+    </div>             
+            </ul>
+          </div>
+            
         </ul>
     </div>
 
@@ -61,14 +68,14 @@ let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a26
 
         </div>
 
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 footer-item">
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 footer-item">
             <h4 class=" mb-4 font-weight-bold">條款</h4>
             <p>使用條款</p>
             <p>提案者合約</p>
 
         </div>
 
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 footer-item"> 
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 footer-item"> 
             <h4 class=" mb-4 font-weight-bold">協助</h4>
             <p>常見問題</p>
             <p>使用手冊</p>
@@ -80,16 +87,29 @@ let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a26
             <p>品牌資源</p>
             <p>群眾觀點</p>
 
-        </div>
+        </div>      
 
     </div>
+    <div class="footericon">
+    <a href="" style="text-decoration:none;">
+            <img src="../img/fbicon.png" alt="">
+        </a>
+        <span>&nbsp</span>
+        <a href="" style="text-decoration:none;">
+            <img src="../img/igicon.png" alt="">
+        </a>
+        <span>&nbsp</span>
+        <a href="" style="text-decoration:none;">
+            <img src="../img/yticon.png" alt="">
+        </a>
+   </div>
 
-    <hr class="mb-4" style="color: #fff;">
+    <hr class="mb-4" style="color: black;">
 
-    <div class="row align-items-center">
+    <div style="width:99%" class="row align-items-center">
 
         <div class="justify-content-center">
-            <h6 style="color: #fff;">Copyright ©2022 Backer-Founder All rights reserved.</h6>
+            <p style="color: black; font-size: 0.975rem;">Copyright ©2022 Backer-Founder All rights reserved.</p>
         </div>
 
     </div>
@@ -98,16 +118,59 @@ let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a26
 
 </footer>`;
 let querybody = document.querySelector("body");
-let queryheader = document.querySelector("body");
-querybody.innerHTML = header + querybody.innerHTML;
-querybody.innerHTML += footer;
-queryheader.innerHTML += `<link rel="stylesheet" href="../layout/layout.css" />`;
+let queryheader = document.querySelector("head");
+var bootstrapjs = `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>`;
+querybody.innerHTML = header + querybody.innerHTML + footer;
+queryheader.innerHTML += `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>`;
+let queryheader2 = document.querySelector("head");
+queryheader2.innerHTML += `<link rel="stylesheet" href="../layout/layout.css"/>`
+
+
+console.log(queryheader.innerHTML)
 
 // searchbar
 const icon = document.querySelector('.icon');
 const search = document.querySelector('.search');
+const clear = document.querySelector('.clear');
+// const dropdowntoggle = document.querySelector('#dropdowntoggle');
+// const dropdownmenu = document.querySelector('#dropdownmenu');
 icon.onclick = function () {
     search.classList.toggle('active');
     icon.classList.toggle('active');
 }
 
+clear.onclick = function () {
+    document.getElementById('mysearch').value = ''
+}
+
+
+let mysearchkeydown = document.getElementById("mysearch");
+
+mysearchkeydown.onkeydown = function (e) {
+    if (e.keyCode == 13) {
+        //触发键盘事件enter
+        window.location = "https://www.youtube.com/?themeRefresh=1";
+    }
+}
+
+// $(".dropdown-toggle").onclick(function () {
+//     if (dropdownmenu.classList.length==2) {
+//         dropdownmenu.classList.toggle('show');
+//     }
+// })
+
+// document.addEventListener('mouseup', (e) => {
+//     var apple = e.target.classList.value
+//     var bee = String(apple)
+//     if (bee.indexOf("headernav") == -1) {
+//         document.getElementById('mysearch').value = '';
+//         search.classList.remove('active');
+//     }
+// })
+
+window.onclick = function (event) {
+    if (!event.target.matches('.headernav')) {
+        document.getElementById('mysearch').value = '';
+        search.classList.remove('active');
+    }
+}

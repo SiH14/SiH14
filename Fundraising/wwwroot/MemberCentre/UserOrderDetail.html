@@ -11,6 +11,13 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./stepper.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
+      integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
       .card {
         box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
@@ -30,68 +37,90 @@
           <a href="./UserOrder.html" class="text-dark text-decoration-none h5"
             >贊助紀錄</a
           >
-          / <span class="text-decoration-underline">修改回饋資料</span>
+          / <span class="text-decoration-underline">修改寄送資訊</span>
         </h5>
       </div>
-      <div class="card mt-3 mx-auto">
+      <div class="card mt-3 mx-auto" id="app">
+        <div class="row">
+          <!-- 照片 -->
+          <div class="col-md-3">
+            <a href="#"
+              ><img
+                :src="myorder.productPhoto"
+                class="img-fluid rounded-start"
+                alt="..."
+            /></a>
+          </div>
+
+          <!-- 資訊 -->
+          <div class="card-body pb-0 pt-2 col-md-9">
+            <div class="d-flex justify-content-between me-2">
+              <p class="text-muted mb-0">贊助日期: {{myorder.purchaseTime}}</p>
+              <p class="text-muted mb-0">
+                募資期間: {{myorder.startTime}} ~ {{myorder.endTime}}
+              </p>
+            </div>
+            <!-- 標題 -->
+            <a
+              href="#"
+              class="card-title h4"
+              style="text-decoration: none; color: #212529"
+            >
+              {{myorder.productTitle}}
+            </a>
+            <hr class="m-1" />
+            <div class="mt-2">
+              <!-- 選擇的方案 -->
+              <h5 class="mb-0">{{myorder.planTitle}}</h5>
+              <div class="my-1">
+                <div class="d-flex justify-content-between me-2">
+                  <p class="mb-1 my-auto" style="max-width: 75%">
+                    內含 : {{myorder.planContent}}
+                  </p>
+                  <p class="mb-1 my-auto" style="max-width: 25%">
+                    $ {{myorder.planPrice}}
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between me-2">
+                  <p class="mb-1 my-auto">---額外贊助</p>
+                  <p class="mb-1 my-auto border-bottom">
+                    $ {{myorder.addSponsorship}}
+                  </p>
+                </div>
+              </div>
+              <h5 class="text-end me-2 text-decoration-underline">
+                贊助金額: $ {{myorder.planPrice + myorder.addSponsorship}}
+              </h5>
+            </div>
+          </div>
+        </div>
         <!-- stepper -->
-        <div class="stepper mb-md-3 pt-4">
-          <div class="step completed">
+        <div class="stepper mb-md-3">
+          <div class="step active">
             <div class="step-label"></div>
             <div class="step-description">募資中</div>
           </div>
-          <div class="step active">
+          <div class="step">
             <div class="step-label"></div>
-            <div class="step-description">募資完成</div>
+            <div class="step-description">募資成功</div>
+          </div>
+          <div class="step">
+            <div class="step-label"></div>
+            <div class="step-description">生產階段</div>
           </div>
           <div class="step">
             <div class="step-label"></div>
             <div class="step-description">寄送產品</div>
           </div>
         </div>
-        <div class="row">
-          <!-- 卡片圖片 -->
-          <div class="col-md-3 mx-auto">
-            <img
-              src="../img/product.png"
-              class="img-fluid rounded-start"
-              alt="..."
-            />
-          </div>
-          <!-- 卡片內容 -->
-          <div class="col-md-9 mx-auto">
-            <div class="p-3">
-              <h3 class="mb-4">
-                家長必備! 圈圈的《祕密派對》-
-                台灣原創專為2-6歲設計的身體保護翻翻書
-              </h3>
-              <div class="row fs-5">
-                <div class="col-md-8">
-                  <!-- 選擇的方案 -->
-                  <p class="mb-0">選擇的贊助方案一 *2</p>
-                  <p class="mb-0">選擇的贊助方案二 *2</p>
-                </div>
-                <div class="col-md-4 text-md-end">
-                  <p class="text-muted mb-0">贊助編號: 99999</p>
-                  <p class="text-muted mb-0">贊助日期: 2022/12/29</p>
-                </div>
-                <h4
-                  class="col-md-12 py-2 text-md-end mt-2 text-decoration-underline"
-                >
-                  總贊助金額:NT$2,000,000
-                </h4>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <!-- 資料修改 -->
         <div class="m-3 mx-auto" style="width: 60%">
-          <h4 class="h3">回饋資料修改</h4>
+          <h4 class="h3">寄送資訊修改</h4>
           <!-- 修改表單 -->
-          <form action="#">
+          <form class="row">
             <!-- 姓名 -->
-            <div class="my-3">
+            <div class="my-2 col-md-6">
               <label for="Name" class="form-label">收件人姓名：</label>
               <input
                 type="Text"
@@ -100,10 +129,11 @@
                 id="Name"
                 name="Name"
                 required
+                v-model="myorder.recipientName"
               />
             </div>
             <!-- 電話 -->
-            <div class="mb-3">
+            <div class="my-2 col-md-6">
               <label for="Phone" class="form-label">收件人電話：</label>
               <input
                 type="tel"
@@ -112,10 +142,24 @@
                 id="Phone"
                 name="Phone"
                 required
+                v-model="myorder.recipientPhone"
+              />
+            </div>
+            <!-- 信箱 -->
+            <div class="my-2 col-md-12">
+              <label for="Email" class="form-label">收件人信箱：</label>
+              <input
+                type="Text"
+                class="form-control"
+                placeholder="請輸入收件人信箱"
+                id="Email"
+                name="Email"
+                required
+                v-model="myorder.recipientMail"
               />
             </div>
             <!-- 住址 -->
-            <div class="mb-3">
+            <div class="my-2 col-md-12">
               <label for="Address" class="form-label">收件人住址：</label>
               <input
                 type="Text"
@@ -124,41 +168,26 @@
                 id="Address"
                 name="Address"
                 required
+                v-model="myorder.recipientAddress"
               />
             </div>
             <!-- 備注 -->
-            <div class="mb-3">
+            <div class="my-2 col-md-12">
               <label for="Note">備註：</label>
               <textarea
                 class="form-control"
                 rows="2"
                 id="Note"
                 name="Note"
+                v-model="myorder.note"
               ></textarea>
             </div>
             <div class="text-end">
-              <button type="submit" class="btn btn-success">儲存</button>
+              <button type="button" class="btn btn-success" @click="reciSubmit">
+                儲存
+              </button>
             </div>
           </form>
-
-          <!-- 取消表單 -->
-          <!-- <h4 class="h3">取消贊助</h4>
-          <form action="#">
-            <div class="my-3">
-              <label for="Name" class="form-label">收件人姓名：</label>
-              <input
-                type="Text"
-                class="form-control"
-                placeholder="請輸入收件人姓名"
-                id="Name"
-                name="Name"
-                required
-              />
-            </div>
-            <button type="submit" class="btn btn-outline-success">
-              申請取消
-            </button>
-          </form> -->
         </div>
       </div>
     </div>
@@ -168,5 +197,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="../layout/membercentre_layout.js"></script>
+    <script src="./Js_src/UserOrderDetail.js"></script>
   </body>
 </html>

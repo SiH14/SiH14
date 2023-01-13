@@ -20,11 +20,8 @@
     <style>
       #ProfileImg {
         object-fit: cover;
-        width: 200px;
-        height: 200px;
-      }
-      #intro {
-        width: 60%;
+        width: 150px;
+        height: 150px;
       }
       .donebtn {
         border-bottom: 4px solid #dee2e6;
@@ -33,12 +30,8 @@
       .donebtn:focus {
         box-shadow: none;
       }
-
       .selectedbtn {
         border-bottom: 4px solid #047c51;
-      }
-      a > img {
-        width: 30%;
       }
       .card {
         box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
@@ -57,81 +50,86 @@
         <h5 class="ms-4 mt-3">個人頁面</h5>
       </div>
       <div class="card mx-auto mt-3" id="app">
-        <div class="row mt-5">
-          <!-- 個人頭像 -->
-          <div
-            class="col-sm-6 d-flex justify-content-sm-end justify-content-center"
-          >
-            <img
-              src="../img/PersonalPhoto.jpg"
-              alt="PersonalPhoto"
-              class="rounded-circle"
-              id="ProfileImg"
-            />
-          </div>
-
-          <!-- 姓名＆項目數 -->
-          <div
-            class="col-sm-6 mt-3 d-flex justify-content-sm-start justify-content-center"
-          >
-            <div class="text-center text-sm-start">
-              <h2>{{userdata.userNickname}}</h2>
-              <p class="mt-4">已贊助計畫：{{userdata.orderCNT}}</p>
-              <p>已發起計畫：{{userdata.productCNT}}</p>
-            </div>
+        <div class="mx-auto mt-4 d-flex" style="width: 75%">
+          <img
+            src="../img/PersonalPhoto.jpg"
+            alt="PersonalPhoto"
+            class="rounded-circle"
+            id="ProfileImg"
+          />
+          <div class="ms-4">
+            <h4>{{userdata.userName}}</h4>
+            <p>
+              已贊助計畫：{{userdata.orderCNT}} /
+              已發起計畫：{{userdata.productCNT}}
+            </p>
+            <p>{{userdata.userIntro}}</p>
           </div>
         </div>
 
-        <!-- 個人介紹 -->
-        <div id="intro" class="mx-auto mb-4">
-          <h5 class="mt-3 pb-2 text-center">個人介紹</h5>
-          <p>{{userdata.userIntro}}</p>
+        <!-- 切換已贊助/已發起 -->
+        <div class="row justify-content-center">
+          <button
+            type="button"
+            class="btn col-6 me-3 mb-3 donebtn selectedbtn"
+            style="width: 15%"
+            @click="ShowMyOrders"
+          >
+            已贊助計畫
+          </button>
+          <button
+            type="button"
+            class="btn col-6 ms-3 mb-3 donebtn"
+            style="width: 15%"
+            @click="ShowMyProducts"
+          >
+            已發起計畫
+          </button>
         </div>
 
-        <div>
-          <!-- 切換已贊助/已發起 -->
-          <div class="row justify-content-center">
-            <button
-              type="button"
-              class="btn col-6 me-3 mb-3 donebtn selectedbtn"
-              style="width: 25%"
-            >
-              已贊助計畫
-            </button>
-            <button
-              type="button"
-              class="btn col-6 ms-3 mb-3 donebtn"
-              style="width: 25%"
-            >
-              已發起計畫
-            </button>
-          </div>
-
-          <!-- 贊助/發起項目 -->
-          <div class="row" id="ProductsRow">
-            <div class="col-8 mx-auto" v-for="item in ProductsList">
-              <a
-                href="#"
-                class="bg-body rounded btn btn-default shadow p-2 mb-3"
-              >
-                <div class="row pe-3">
-                  <div class="col-md-3">
-                    <img
-                      src="../img/product.png"
-                      alt=".."
-                      class="img-thumbnail"
-                    />
-                  </div>
-                  <div class="col-md-9 my-auto">
-                    <h5 class="text-md-start">{{item.prod.productTitle}}</h5>
-                    <!-- <p class="text-md-start">{{item.prod.startime}}~{{item.prod.endtime}}</p> -->
-                    <p class="text-muted fs-6 text-md-end">
-                      提案者 {{item.userNickname}}
-                    </p>
-                  </div>
+        <!-- 贊助/發起項目 -->
+        <div class="row" id="OrdersRow">
+          <div class="col-8 mx-auto" v-for="item in ProductsList">
+            <a href="#" class="bg-body rounded btn btn-default shadow p-2 mb-3">
+              <div class="row pe-3">
+                <div class="col-md-3">
+                  <img
+                    src="../img/product.png"
+                    alt=".."
+                    class="img-thumbnail"
+                  />
                 </div>
-              </a>
-            </div>
+                <div class="col-md-9 my-auto">
+                  <h5 class="text-md-start">{{item.prod.productTitle}}</h5>
+                  <!-- <p class="text-md-start">{{item.prod.startime}}~{{item.prod.endtime}}</p> -->
+                  <p class="text-muted fs-6 text-md-end">
+                    提案者123 {{item.userNickname}}
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="row" id="ProductsRow" style="display: none">
+          <div class="col-8 mx-auto" v-for="item in ProductsList">
+            <a href="#" class="bg-body rounded btn btn-default shadow p-2 mb-3">
+              <div class="row pe-3">
+                <div class="col-md-3">
+                  <img
+                    src="../img/product.png"
+                    alt=".."
+                    class="img-thumbnail"
+                  />
+                </div>
+                <div class="col-md-9 my-auto">
+                  <h5 class="text-md-start">{{item.prod.productTitle}}</h5>
+                  <!-- <p class="text-md-start">{{item.prod.startime}}~{{item.prod.endtime}}</p> -->
+                  <p class="text-muted fs-6 text-md-end">
+                    提案者 {{item.userNickname}}
+                  </p>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
       </div>

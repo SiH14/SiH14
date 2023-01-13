@@ -1,50 +1,47 @@
-// 假設已登入
-sessionStorage.setItem("userName", "123");
+// // 假設已登入
+// sessionStorage.setItem("userName", "123");
 
 const order = {
   data() {
     return {
-      orderlist: [
-        {
-          orderId: 9,
-          orderDateId: "20230103001 ",
-          userId: 4,
-          recipientName: "陳媽媽",
-          recipientPhone: "0932143233",
-          recipientAddress: "台中市南屯區南京路11號",
-          note: "",
-          masterCardId: "1234567812345678",
-          orderStateId: 1,
-          purchaseTime: "2022-12-23T00:00:00",
-          orderState: null,
-          user: null,
-          orderDetails: [],
-          refunds: [],
-        },
-        {
-          orderId: 9,
-          orderDateId: "20230103002 ",
-          userId: 4,
-          recipientName: "王媽媽",
-          recipientPhone: "0932143233",
-          recipientAddress: "台中市南屯區南京路11號",
-          note: "",
-          masterCardId: "1234567812345678",
-          orderStateId: 1,
-          purchaseTime: "2022-12-23T00:00:00",
-          orderState: null,
-          user: null,
-          orderDetails: [],
-          refunds: [],
-        },
-      ],
+      cancelform: {
+        orderId: "",
+        RefundResult: "",
+      },
+      ordercard: [],
+      cancelput: {},
     };
   },
   mounted() {
-    // axios.get("/api/orders").then((res) => {
-    //   this.orderlist = res.data;
-    //   console.log(this.orderlist);
-    // });
+    // ordercard資料帶入
+    axios.get("/api/userorder/list/1").then((res) => {
+      this.ordercard = res.data;
+    });
+
+    // 取消id事件監聽資料帶入
+    this.$refs.box.addEventListener("show.bs.modal", (event) => {
+      let button = event.relatedTarget;
+      let oidforcancel = button.getAttribute("data-bs-whatever");
+      this.cancelform.orderId = oidforcancel;
+    });
+  },
+  methods: {
+    confirmCancel() {
+      axios.post("/api/Refunds", this.cancelform).then((res) => {
+        axios.get("/api/userorder/" + res.data.orderId).then((res) => {
+          let cancelput = res.data;
+          cancelput.orderStateId = 4;
+          axios
+            .put("/api/userorder/" + cancelput.orderId, cancelput)
+            .then(() => {
+              window.location.reload();
+            });
+        });
+      });
+    },
+    ordersession(e) {
+      sessionStorage.setItem("orderId", e);
+    },
   },
 };
 

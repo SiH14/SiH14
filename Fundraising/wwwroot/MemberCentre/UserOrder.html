@@ -33,448 +33,231 @@
   <body>
     <div class="container">
       <div class="mx-auto" style="width: 80%">
-        <h5 class="ms-4 mt-3">贊助紀錄</h5>
+        <div class="ms-4 mt-3">
+          <h5>贊助紀錄</h5>
+          <p style="font-size: 0.9rem">
+            在專案募資完成之前，您都可修改你的回饋寄送資訊。
+          </p>
+        </div>
       </div>
       <div id="OrderCard">
-        <div v-for="order in orderlist">
-          <!-- 募資中 -->
-          <div v-if="order.orderStateId==1" class="card mx-auto mt-3 shadow">
+        <div v-for="order in ordercard">
+          <div class="card mx-auto mt-3 shadow-sm">
             <div class="row g-0">
               <!-- 照片 -->
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <a href="#"
                   ><img
-                    src="../img/product.png"
+                    :src="order.coverphoto"
                     class="img-fluid rounded-start"
                     alt="..."
                 /></a>
               </div>
+
               <!-- 資訊 -->
-              <div class="col-md-8">
-                <div class="card-body pb-0">
-                  <!-- 標題 -->
-                  <a
-                    href="#"
-                    class="card-title h3"
-                    style="text-decoration: none; color: #212529"
-                  >
-                    家長必備! 圈圈的《祕密派對》-
-                    台灣原創專為2-6歲設計的身體保護翻翻書
-                  </a>
-                  <div class="row">
-                    <div class="col-md-8 mt-3">
-                      <!-- 選擇的方案 -->
-                      <p class="mb-0 h4">選擇的贊助方案標題</p>
-                      <p class="mb-0 fs-5">選擇的贊助方案內容</p>
-                    </div>
-                    <div class="col-md-4 text-md-end">
-                      <p class="card-text text-muted mb-0">
-                        贊助日期: 2022-12-29
+              <div class="card-body pb-0 pt-2 col-md-9">
+                <div class="d-flex justify-content-between me-2">
+                  <p class="text-muted mb-0">
+                    贊助日期: {{order.purchaseTime}}
+                  </p>
+                  <p class="text-muted mb-0">
+                    募資期間: {{order.startTime}} ~ {{order.endTime}}
+                  </p>
+                </div>
+                <!-- 標題 -->
+                <a
+                  href="#"
+                  class="card-title h4"
+                  style="text-decoration: none; color: #212529"
+                >
+                  {{order.productTitle}}
+                </a>
+                <hr class="m-1" />
+                <div class="mt-2">
+                  <!-- 選擇的方案 -->
+                  <h5 class="mb-0">{{order.planTitle}}</h5>
+                  <div class="my-1">
+                    <div class="d-flex justify-content-between me-2">
+                      <p class="mb-1 my-auto" style="max-width: 75%">
+                        內含 : {{order.planContent}}
+                      </p>
+                      <p class="mb-1 my-auto" style="max-width: 25%">
+                        $ {{order.planPrice}}
                       </p>
                     </div>
-                    <p
-                      class="h5 col-md-12 py-2 text-end text-decoration-underline"
-                    >
-                      總贊助金額:NT$2,000,000
-                    </p>
+                    <div class="d-flex justify-content-between me-2">
+                      <p class="mb-1 my-auto">---額外贊助</p>
+                      <p class="mb-1 my-auto border-bottom">
+                        $ {{order.addSponsorship}}
+                      </p>
+                    </div>
                   </div>
+                  <h5 class="text-end me-2 text-decoration-underline">
+                    贊助金額: $ {{order.planPrice + order.addSponsorship}}
+                  </h5>
                 </div>
               </div>
+
               <div class="col-md-12 row g-0 pb-2 justify-content-end">
-                <!-- stepper -->
-                <div class="stepper mb-md-3">
-                  <div class="step active">
+                <!-- stepper success-->
+                <div
+                  class="stepper mb-md-3"
+                  v-if="order.orderStateId==1 && !(new Date(order.endTime) < new Date() && order.targetAmount > order.currentAmount )"
+                >
+                  <div
+                    class="step"
+                    :class="{active:order.orderStateId==1 && new Date(order.endTime) > new Date(),completed:order.orderStateId>1 || new Date(order.endTime) < new Date()}"
+                  >
                     <div class="step-label"></div>
                     <div class="step-description">募資中</div>
                   </div>
-                  <div class="step">
+                  <div
+                    class="step"
+                    :class="{active:order.orderStateId==1 && new Date(order.endTime) < new Date(),completed:order.orderStateId > 1}"
+                  >
                     <div class="step-label"></div>
-                    <div class="step-description">募資完成</div>
+                    <div class="step-description">募資成功</div>
                   </div>
-                  <div class="step">
+                  <div
+                    class="step"
+                    :class="{active:order.orderStateId==2,completed:order.orderStateId>2}"
+                  >
                     <div class="step-label"></div>
                     <div class="step-description">生產階段</div>
                   </div>
-                  <div class="step">
+                  <div class="step" :class="{active:order.orderStateId==3}">
                     <div class="step-label"></div>
                     <div class="step-description">寄送產品</div>
                   </div>
                 </div>
+
+                <!-- stepper fail-->
+                <div
+                  class="stepper mb-md-3"
+                  v-if="order.orderStateId==6 || (new Date(order.endTime) < new Date() && order.targetAmount > order.currentAmount)"
+                >
+                  <div class="step completed">
+                    <div class="step-label"></div>
+                    <div class="step-description">募資中</div>
+                  </div>
+                  <div
+                    class="step"
+                    :class="{active:order.orderStateId==1 && new Date(order.endTime) < new Date(),completed:order.orderStateId > 1}"
+                  >
+                    <div class="step-label"></div>
+                    <div class="step-description">募資未達標</div>
+                  </div>
+                  <div class="step" :class="{active:order.orderStateId==5}">
+                    <div class="step-label"></div>
+                    <div class="step-description">退款完成</div>
+                  </div>
+                </div>
+
+                <!-- stepper cancel-->
+                <div
+                  class="stepper mb-md-3"
+                  v-if="order.orderStateId==4 ||order.orderStateId==5"
+                >
+                  <div class="step completed">
+                    <div class="step-label"></div>
+                    <div class="step-description">募資中</div>
+                  </div>
+                  <div
+                    class="step"
+                    :class="{active:order.orderStateId==4,completed:order.orderStateId==5}"
+                  >
+                    <div class="step-label"></div>
+                    <div class="step-description">申請取消贊助</div>
+                  </div>
+                  <div class="step" :class="{active:order.orderStateId==5}">
+                    <div class="step-label"></div>
+                    <div class="step-description">退款完成</div>
+                  </div>
+                </div>
+
                 <a
                   href="./UserMessage.html"
-                  class="col-md-2 btn btn-outline-success ms-md-3 my-1"
+                  class="col-md-2 btn btn-outline-success me-md-2 mt-1"
                 >
                   聯絡提案人
                 </a>
                 <a
                   href="./UserOrderDetail.html"
-                  class="col-md-2 btn btn-success ms-md-3 my-1"
+                  @click="ordersession(order.orderId)"
+                  class="col-md-2 btn btn-success me-md-2 mt-1"
+                  v-if="order.orderStateId==1 && new Date(order.endTime) > new Date()"
                 >
-                  修改
+                  修改寄送資訊
                 </a>
-                <a
-                  href="./UserOrderCancel.html"
-                  class="col-md-1 btn btn-default me-md-3 my-1"
+                <button
+                  class="col-md-1 btn btn-default me-md-2 mt-1"
+                  v-if="order.orderStateId==1 && new Date(order.endTime) > new Date()"
+                  data-bs-toggle="modal"
+                  data-bs-target="#cancelform"
+                  :data-bs-whatever="order.orderId"
                 >
                   取消
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 募資成功 -->
-          <div v-if="order.orderStateId==2" class="card mx-auto mt-3 shadow">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <a href="#"
-                  ><img
-                    src="../img/product.png"
-                    class="img-fluid rounded-start"
-                    alt="..."
-                /></a>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body pb-0">
-                  <a
-                    href="#"
-                    class="card-title h5"
-                    style="text-decoration: none; color: #212529"
-                  >
-                    家長必備! 圈圈的《祕密派對》-
-                    台灣原創專為2-6歲設計的身體保護翻翻書
-                  </a>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <!-- 選擇的方案 -->
-                      <p class="mb-0">選擇的贊助方案一 *2</p>
-                      <p class="mb-0">選擇的贊助方案二 *2</p>
-                    </div>
-                    <div class="col-md-4 text-md-end">
-                      <p class="card-text text-muted mb-0">贊助編號: 99999</p>
-                      <p class="card-text text-muted mb-0">
-                        贊助日期: 2022-12-29
-                      </p>
-                    </div>
-                    <p
-                      class="h5 col-md-12 py-2 text-end text-decoration-underline"
-                    >
-                      總贊助金額:NT$2,000,000
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <!-- stepper -->
-              <div class="col-md-12 row g-0 pb-2 justify-content-end">
-                <div class="stepper mb-md-3">
-                  <div class="step completed">
-                    <div class="step-label"></div>
-                    <div class="step-description">募資中</div>
-                  </div>
-                  <div class="step active">
-                    <div class="step-label"></div>
-                    <div class="step-description">募資完成</div>
-                  </div>
-                  <div class="step">
-                    <div class="step-label"></div>
-                    <div class="step-description">生產階段</div>
-                  </div>
-                  <div class="step">
-                    <div class="step-label"></div>
-                    <div class="step-description">寄送產品</div>
-                  </div>
-                </div>
-                <a
-                  href="./UserMessage.html"
-                  class="col-md-2 btn btn-outline-success my-1"
-                >
-                  聯絡提案人
-                </a>
-                <a
-                  href="./UserOrderDetail.html"
-                  class="col-md-2 btn btn-success mx-md-3 my-1"
-                >
-                  修改
-                </a>
-              </div>
-            </div>
-          </div>
-          <!-- 生產階段 -->
-          <div v-if="order.orderStateId==3" class="card mx-auto mt-3 shadow">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <a href="#"
-                  ><img
-                    src="../img/product.png"
-                    class="img-fluid rounded-start"
-                    alt="..."
-                /></a>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body pb-0">
-                  <a
-                    href="#"
-                    class="card-title h5"
-                    style="text-decoration: none; color: #212529"
-                  >
-                    家長必備! 圈圈的《祕密派對》-
-                    台灣原創專為2-6歲設計的身體保護翻翻書
-                  </a>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <!-- 選擇的方案 -->
-                      <p class="mb-0">選擇的贊助方案一 *2</p>
-                      <p class="mb-0">選擇的贊助方案二 *2</p>
-                    </div>
-                    <div class="col-md-4 text-md-end">
-                      <p class="card-text text-muted mb-0">贊助編號: 99999</p>
-                      <p class="card-text text-muted mb-0">
-                        贊助日期: 2022-12-29
-                      </p>
-                    </div>
-                    <p
-                      class="h5 col-md-12 py-2 text-end text-decoration-underline"
-                    >
-                      總贊助金額:NT$2,000,000
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <!-- stepper -->
-              <div class="col-md-12 row g-0 pb-2 justify-content-end">
-                <div class="stepper mb-md-3">
-                  <div class="step completed">
-                    <div class="step-label"></div>
-                    <div class="step-description">募資中</div>
-                  </div>
-                  <div class="step completed">
-                    <div class="step-label"></div>
-                    <div class="step-description">募資完成</div>
-                  </div>
-                  <div class="step active">
-                    <div class="step-label"></div>
-                    <div class="step-description">生產階段</div>
-                  </div>
-                  <div class="step">
-                    <div class="step-label"></div>
-                    <div class="step-description">寄送產品</div>
-                  </div>
-                </div>
-                <a
-                  href="./UserMessage.html"
-                  class="col-md-2 btn btn-outline-success mx-md-3 my-1"
-                >
-                  聯絡提案人
-                </a>
-                <a
-                  href="./UserOrderDetail.html"
-                  class="col-md-2 btn btn-success mx-md-3 my-1"
-                >
-                  修改
-                </a>
-              </div>
-            </div>
-          </div>
-          <!-- 寄送產品 -->
-          <div v-if="order.orderStateId==4" class="card mx-auto mt-3 shadow">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <a href="#"
-                  ><img
-                    src="../img/product.png"
-                    class="img-fluid rounded-start"
-                    alt="..."
-                /></a>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body pb-0">
-                  <a
-                    href="#"
-                    class="card-title h5"
-                    style="text-decoration: none; color: #212529"
-                  >
-                    家長必備! 圈圈的《祕密派對》-
-                    台灣原創專為2-6歲設計的身體保護翻翻書
-                  </a>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <!-- 選擇的方案 -->
-                      <p class="mb-0">選擇的贊助方案一 *2</p>
-                      <p class="mb-0">選擇的贊助方案二 *2</p>
-                    </div>
-                    <div class="col-md-4 text-md-end">
-                      <p class="card-text text-muted mb-0">贊助編號: 99999</p>
-                      <p class="card-text text-muted mb-0">
-                        贊助日期: 2022-12-29
-                      </p>
-                    </div>
-                    <p
-                      class="h5 col-md-12 py-2 text-end text-decoration-underline"
-                    >
-                      總贊助金額:NT$2,000,000
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <!-- stepper -->
-              <div class="col-md-12 row g-0 pb-2 justify-content-end">
-                <div class="stepper mb-md-3">
-                  <div class="step completed">
-                    <div class="step-label"></div>
-                    <div class="step-description">募資中</div>
-                  </div>
-                  <div class="step completed">
-                    <div class="step-label"></div>
-                    <div class="step-description">募資完成</div>
-                  </div>
-                  <div class="step completed">
-                    <div class="step-label"></div>
-                    <div class="step-description">生產階段</div>
-                  </div>
-                  <div class="step active">
-                    <div class="step-label"></div>
-                    <div class="step-description">寄送產品</div>
-                  </div>
-                </div>
-                <a
-                  href="./UserMessage.html"
-                  class="col-md-2 btn btn-outline-success mx-md-3 my-1"
-                >
-                  聯絡提案人
-                </a>
-              </div>
-            </div>
-          </div>
-          <!-- 募資失敗 -->
-          <div v-if="order.orderStateId==5" class="card mx-auto mt-3 shadow">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <a href="#"
-                  ><img
-                    src="../img/product.png"
-                    class="img-fluid rounded-start"
-                    alt="..."
-                /></a>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body pb-0">
-                  <a
-                    href="#"
-                    class="card-title h5"
-                    style="text-decoration: none; color: #212529"
-                  >
-                    家長必備! 圈圈的《祕密派對》-
-                    台灣原創專為2-6歲設計的身體保護翻翻書
-                  </a>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <!-- 選擇的方案 -->
-                      <p class="mb-0">選擇的贊助方案一 *2</p>
-                      <p class="mb-0">選擇的贊助方案二 *2</p>
-                    </div>
-                    <div class="col-md-4 text-md-end">
-                      <p class="card-text text-muted mb-0">贊助編號: 99999</p>
-                      <p class="card-text text-muted mb-0">贊助日期: {{}}</p>
-                    </div>
-                    <p
-                      class="h5 col-md-12 py-2 text-end text-decoration-underline"
-                    >
-                      總贊助金額:NT$2,000,000
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12 g-0 pb-2 row justify-content-end">
-                <!-- stepper -->
-                <div class="stepper mb-md-3">
-                  <div class="step completed">
-                    <div class="step-label"></div>
-                    <div class="step-description">募資中</div>
-                  </div>
-                  <div class="step completed">
-                    <div class="step-label"></div>
-                    <div class="step-description">未達標</div>
-                  </div>
-                  <div class="step active">
-                    <div class="step-label"></div>
-                    <div class="step-description">退款</div>
-                  </div>
-                </div>
-                <a
-                  href="./UserMessage.html"
-                  class="col-md-2 btn btn-outline-success mx-md-3 my-1"
-                >
-                  聯絡提案人
-                </a>
-              </div>
-            </div>
-          </div>
-          <!-- 贊助人自行取消 -->
-          <div v-if="order.orderStateId==6" class="card mx-auto mt-3 shadow">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <a href="#"
-                  ><img
-                    src="../img/product.png"
-                    class="img-fluid rounded-start"
-                    alt="..."
-                /></a>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body pb-0">
-                  <a
-                    href="#"
-                    class="card-title h5"
-                    style="text-decoration: none; color: #212529"
-                  >
-                    家長必備! 圈圈的《祕密派對》-
-                    台灣原創專為2-6歲設計的身體保護翻翻書
-                  </a>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <!-- 選擇的方案 -->
-                      <p class="mb-0">選擇的贊助方案一 *2</p>
-                      <p class="mb-0">選擇的贊助方案二 *2</p>
-                    </div>
-                    <div class="col-md-4 text-md-end">
-                      <p class="card-text text-muted mb-0">贊助編號: 99999</p>
-                      <p class="card-text text-muted mb-0">
-                        贊助日期: 2022-12-29
-                      </p>
-                    </div>
-                    <p
-                      class="h5 col-md-12 py-2 text-end text-decoration-underline"
-                    >
-                      總贊助金額:NT$2,000,000
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12 g-0 pb-2 row justify-content-end">
-                <!-- stepper -->
-                <div class="stepper mb-md-3">
-                  <div class="step completed">
-                    <div class="step-label"></div>
-                    <div class="step-description">募資中</div>
-                  </div>
-                  <div class="step completed">
-                    <div class="step-label"></div>
-                    <div class="step-description">取消贊助</div>
-                  </div>
-                  <div class="step active">
-                    <div class="step-label"></div>
-                    <div class="step-description">退款</div>
-                  </div>
-                </div>
-                <a
-                  href="./UserMessage.html"
-                  class="col-md-2 btn btn-outline-success mx-md-3 my-1"
-                >
-                  聯絡提案人
-                </a>
+                </button>
               </div>
             </div>
           </div>
         </div>
+        <div
+          class="modal fade"
+          id="cancelform"
+          tabindex="-1"
+          aria-hidden="true"
+          ref="box"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">取消贊助申請</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <form>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="message-text" class="col-form-label"
+                      >取消原因:</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="cancelresult"
+                      placeholder="請輸入取消原因"
+                      required
+                      v-model="cancelform.RefundResult"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    @click="confirmCancel"
+                    class="btn btn-success"
+                  >
+                    確認送出
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    關閉
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <h2 v-if="ordercard.length==0" class="text-center mt-5">
+          尚未贊助任何專案。
+        </h2>
       </div>
     </div>
     <script
