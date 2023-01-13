@@ -17,15 +17,27 @@
     <input type="text" name="UserPassword" id="UserPassword">
 
     <button onclick="login()">登入</button>
+    <button onclick="logout()">登出</button>
+
 
     <script>
         function login() {
-            alert("OK");
-            axios.post("http://localhost:51701/api/Login",{
-                UserEmail:document.getElementById("UserEmail").value,
-                UserPassword:document.getElementById("UserPassword").value
+
+            axios.post("http://localhost:51701/api/Login", {
+                UserEmail: document.getElementById("UserEmail").value,
+                UserPassword: document.getElementById("UserPassword").value
             })
-            .then(res => {
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(error => {
+                    console.log(error.response);
+                });
+        }
+
+        function logout() {
+            axios.delete("http://localhost:51701/api/Login")
+                .then(res => {
                     console.log(res);
                 })
                 .catch(error => {
