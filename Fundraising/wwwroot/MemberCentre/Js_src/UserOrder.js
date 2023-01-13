@@ -1,7 +1,7 @@
 // // 假設已登入
 // sessionStorage.setItem("userName", "123");
 
-const order = {
+const app = {
   data() {
     return {
       cancelform: {
@@ -21,8 +21,7 @@ const order = {
     // 取消id事件監聽資料帶入
     this.$refs.box.addEventListener("show.bs.modal", (event) => {
       let button = event.relatedTarget;
-      let oidforcancel = button.getAttribute("data-bs-whatever");
-      this.cancelform.orderId = oidforcancel;
+      this.cancelform.orderId = button.getAttribute("data-bs-whatever");
     });
   },
   methods: {
@@ -34,7 +33,9 @@ const order = {
           axios
             .put("/api/userorder/" + cancelput.orderId, cancelput)
             .then(() => {
-              window.location.reload();
+              swal("已送出取消申請!", "待人員確認後會進行退款", {
+                button: "Click Me!",
+              });
             });
         });
       });
@@ -45,4 +46,4 @@ const order = {
   },
 };
 
-Vue.createApp(order).mount("#OrderCard");
+Vue.createApp(app).mount("#app");

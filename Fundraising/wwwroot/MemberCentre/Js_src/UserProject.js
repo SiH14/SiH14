@@ -5,7 +5,7 @@ const app = {
     };
   },
   mounted() {
-    axios.get("/api/UserProject/prodlist/2").then((res) => {
+    axios.get("/api/UserProject/prodlist/1").then((res) => {
       res.data.forEach((element) => {
         if (element.productStateId == 1) {
           element.productStateId = "審核中";
