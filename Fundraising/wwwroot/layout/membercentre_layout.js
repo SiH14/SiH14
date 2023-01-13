@@ -127,7 +127,7 @@ let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a26
 
     <hr class="mb-4" style="color: black;">
 
-    <div class="row align-items-center">
+    <div style="width:99%" class="row align-items-center">
 
         <div class="justify-content-center">
             <p style="color: black; font-size: 0.975rem;">Copyright ©2022 Backer-Founder All rights reserved.</p>
