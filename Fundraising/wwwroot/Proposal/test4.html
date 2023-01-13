@@ -19,7 +19,6 @@
     <button onclick="login()">登入</button>
     <button onclick="logout()">登出</button>
 
-
     <script>
         function login() {
 
@@ -28,7 +27,10 @@
                 UserPassword: document.getElementById("UserPassword").value
             })
                 .then(res => {
-                    console.log(res);
+                    console.log(res.data);
+                    if (res.data != "帳號密碼錯誤") {
+                        window.location="./proposal.html";
+                    }
                 })
                 .catch(error => {
                     console.log(error.response);

@@ -36,7 +36,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
             </li>
             <div class="dropdown headernav">
             <a class="btn dropdown-toggle headernav" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <img style="width:55%" class="headernav loginicon" src="../img/loginicon.png" alt="">
+            <img id="iconimg" style="width:55%" class="headernav loginicon" src="../img/loginicon.png" alt="">
             </a>
           
             <ul class="dropdown-menu headernav" aria-labelledby="dropdownMenuLink">
@@ -180,3 +180,27 @@ document.addEventListener('mousedown', (e) => {
         search.classList.remove('active');
     }
 })
+
+// get登入的userid，設置頭像
+var userid = "";
+window.onload = function getuserID() {
+    axios.get("http://localhost:51701/api/Login/getuserid")
+        .then(res => {
+            console.log(res.data);
+            // if (res.data != "") {
+            //     alert("login OK")
+            // }
+            axios.get("http://localhost:51701/api/Login/getuserphoto/"+res.data)
+            .then(res =>{
+                console.log(res.data[0].userPhoto)
+                var setimg= document.getElementById("iconimg");
+                setimg.setAttribute("src", res.data[0].userPhoto)
+                setimg.style.width="30px";
+                setimg.style.height="30px";
+                setimg.style.borderRadius="15px";
+            })
+        })
+        .catch(error => {
+            console.log(error.response);
+        })
+}

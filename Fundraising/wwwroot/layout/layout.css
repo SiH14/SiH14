@@ -74,6 +74,9 @@ body {
 .loginicon {
     position: relative;
     bottom: 4.5px;
+    /* width: 30px;
+    height: 30px;
+    border-radius: 15px; */
 }
 
 .dropdown-menu{

@@ -37,7 +37,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
             <div class="dropdown">
         <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="headernav loginicon" src="../img/loginicon.png" alt="">
+            <img id="iconimg" class="headernav loginicon" src="../img/loginicon.png" alt="">
         </a>
 
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -126,8 +126,6 @@ let queryheader2 = document.querySelector("head");
 queryheader2.innerHTML += `<link rel="stylesheet" href="../layout/layout.css"/>`
 
 
-console.log(queryheader.innerHTML)
-
 // searchbar
 const icon = document.querySelector('.icon');
 const search = document.querySelector('.search');
@@ -153,24 +151,34 @@ mysearchkeydown.onkeydown = function (e) {
     }
 }
 
-// $(".dropdown-toggle").onclick(function () {
-//     if (dropdownmenu.classList.length==2) {
-//         dropdownmenu.classList.toggle('show');
-//     }
-// })
-
-// document.addEventListener('mouseup', (e) => {
-//     var apple = e.target.classList.value
-//     var bee = String(apple)
-//     if (bee.indexOf("headernav") == -1) {
-//         document.getElementById('mysearch').value = '';
-//         search.classList.remove('active');
-//     }
-// })
-
 window.onclick = function (event) {
     if (!event.target.matches('.headernav')) {
         document.getElementById('mysearch').value = '';
         search.classList.remove('active');
     }
 }
+
+// get登入的userid，設置頭像
+var userid = "";
+window.onload = function getuserID() {
+    axios.get("http://localhost:51701/api/Login/getuserid")
+        .then(res => {
+            console.log(res.data);
+            // if (res.data != "") {
+            //     alert("login OK")
+            // }
+            axios.get("http://localhost:51701/api/Login/getuserphoto/"+res.data)
+            .then(res =>{
+                console.log(res.data[0].userPhoto)
+                var setimg= document.getElementById("iconimg");
+                setimg.setAttribute("src", res.data[0].userPhoto)
+                setimg.style.width="30px";
+                setimg.style.height="30px";
+                setimg.style.borderRadius="15px";
+            })
+        })
+        .catch(error => {
+            console.log(error.response);
+        })
+}
+

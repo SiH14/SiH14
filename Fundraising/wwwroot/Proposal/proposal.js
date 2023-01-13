@@ -75,6 +75,10 @@ function readURL(input) {
     }
 }
 
+function test() {
+    console.log(coverimgdata)
+}
+
 // 方案封面圖片上傳
 const planinputarray = [];
 function readPlanURL(input) {
@@ -96,15 +100,7 @@ function readPlanURL(input) {
     }
 }
 
-window.onload = function getuserID() {
-    axios.get("http://localhost:51701/api/Products/userid")
-        .then(res => {            
-            console.log(res);
-        })
-        .catch(error => {
-            console.log(error.response);
-        });
-}
+
 
 // 送出提案function
 var dataDB;
@@ -187,7 +183,7 @@ function OK() {
 
 //常見問題新增
 var x = 0;
-function add () {
+function add() {
     $("#QAdiv").append(`<div class="qadiv">
     <div style="position: relative; float: right; bottom:5px;">
         <input style="border: none;" class="QAdelbtn btn btn-primary" onclick="del(this)"
