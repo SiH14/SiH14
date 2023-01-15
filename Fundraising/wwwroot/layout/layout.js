@@ -48,10 +48,8 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
             </ul>
           </div>
             
-        </ul>
+        
     </div>
-
-</div>
 </nav>`
 
 let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a2647">
@@ -167,15 +165,26 @@ window.onload = function getuserID() {
             // if (res.data != "") {
             //     alert("login OK")
             // }
-            axios.get("http://localhost:51701/api/Login/getuserphoto/"+res.data)
-            .then(res =>{
-                console.log(res.data[0].userPhoto)
-                var setimg= document.getElementById("iconimg");
-                setimg.setAttribute("src", res.data[0].userPhoto)
-                setimg.style.width="30px";
-                setimg.style.height="30px";
-                setimg.style.borderRadius="15px";
-            })
+            axios.get("http://localhost:51701/api/Login/getuserphoto/" + res.data)
+                .then(res => {
+                    console.log(res.data[0].userPhoto)
+                    var setimg = document.getElementById("iconimg");
+                    setimg.setAttribute("src", res.data[0].userPhoto)
+                    setimg.style.width = "30px";
+                    setimg.style.height = "30px";
+                    setimg.style.borderRadius = "15px";
+                    document.querySelector(".dropdown-menu").innerHTML = ` <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
+                    href="../MemberCentre/UserInfo.html">個人頁面</a></li>
+            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
+                    href="#">追蹤專案</a></li>
+            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
+                    href="#">贊助紀錄</a></li>
+            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
+                    href="#">提案紀錄</a></li>
+            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
+                    href="#">聯絡訊息</a></li>
+            <li style="text-align: center;"><a class="dropdown-item" href="./test4.html">登出</a></li>`
+                })
         })
         .catch(error => {
             console.log(error.response);
