@@ -64,7 +64,6 @@ function readURL(input) {
         reader.onload = function (e) {
 
             coverimgdata = reader.result;
-            console.log(coverimgdata)
 
             var img = document.getElementById(imageTagID);
 
@@ -74,6 +73,10 @@ function readURL(input) {
         // reader.readAsArrayBuffer(input.files[0]);
         // reader.readAsBinaryString(input.files[0]);
     }
+}
+
+function test() {
+    console.log(coverimgdata)
 }
 
 // 方案封面圖片上傳
@@ -96,6 +99,8 @@ function readPlanURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+
 
 // 送出提案function
 var dataDB;
@@ -122,7 +127,7 @@ function OK() {
             UserID: 2,
             ProductStateID: 1
         }
-        axios.post("http://localhost:36827/api/Products", proposaldata)
+        axios.post("http://localhost:51701/api/Products", proposaldata)
             .then(res => {
                 callback(res.data.productId);
                 console.log(res.data.productId);
@@ -139,7 +144,7 @@ function OK() {
         for (let index = 0, j = 1; index < egg.length, j < egg.length; index += 2, j += 2) {
             console.log(egg[index].value)
             console.log(egg[j].value)
-            axios.post("http://localhost:36827/api/Questions", {
+            axios.post("http://localhost:51701/api/Questions", {
                 ProductID: xxx,
                 QuestionTitle: egg[index].value,
                 QuestionContent: egg[j].value
@@ -159,7 +164,7 @@ function OK() {
             console.log(good[y].value)
             console.log(planinputarray[z])
 
-            axios.post("http://localhost:36827/api/Plans", {
+            axios.post("http://localhost:51701/api/Plans", {
                 ProductID: xxx,
                 PlanTitle: good[x].value,
                 PlanContent: good[y].value,
@@ -178,7 +183,7 @@ function OK() {
 
 //常見問題新增
 var x = 0;
-$(".QAaddbtn").click(function () {
+function add() {
     $("#QAdiv").append(`<div class="qadiv">
     <div style="position: relative; float: right; bottom:5px;">
         <input style="border: none;" class="QAdelbtn btn btn-primary" onclick="del(this)"
@@ -198,7 +203,7 @@ $(".QAaddbtn").click(function () {
     </div>
     <br>
 </div>`)
-})
+}
 
 // 方案新增
 var y = 0;
@@ -224,7 +229,7 @@ style="display: flex; width:100%; border:solid gray 1px; background-color: white
                     <input
                         style="width:120px; color: #047c51; font-size: 20px; border: none;"
                         name="PlanPrice${y}" id="PlanPrice${y}" type="number"
-                        value="100">
+                        value="100" class="inputplan">
                 </span>
             </div>
             <div

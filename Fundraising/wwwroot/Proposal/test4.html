@@ -1,20 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
 </head>
+
 <body>
-    <input type="date" name="" id="apple">
-    <button onclick="OK()">123</button>
+    <label for="UserEmail">帳號</label>
+    <input type="text" name="UserEmail" id="UserEmail">
+    <br>
+    <label for="UserPassword">密碼</label>
+    <input type="text" name="UserPassword" id="UserPassword">
+
+    <button onclick="login()">登入</button>
+    <button onclick="logout()">登出</button>
 
     <script>
-        function OK() {
-            var bee= document.getElementById("apple").value
-            alert(typeof( bee));
+        function login() {
+
+            axios.post("http://localhost:51701/api/Login", {
+                UserEmail: document.getElementById("UserEmail").value,
+                UserPassword: document.getElementById("UserPassword").value
+            })
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data != "帳號密碼錯誤") {
+                        window.location="./proposal.html";
+                    }
+                })
+                .catch(error => {
+                    console.log(error.response);
+                });
+        }
+
+        function logout() {
+            axios.delete("http://localhost:51701/api/Login")
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(error => {
+                    console.log(error.response);
+                });
         }
     </script>
+
 </body>
+
 </html>
