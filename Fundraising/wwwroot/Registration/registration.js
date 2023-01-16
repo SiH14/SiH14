@@ -31,20 +31,21 @@ function OK() {
     apple = document.getElementById("UserEmail").value;
     bee = document.getElementById("UserNickname").value;
     cat = document.getElementById("UserPassword").value;
+    dog = document.getElementById("confirmPassword").value;
 
-    console.log(apple, bee, cat)
-    axios.post("https://localhost:44398/api/Register", {
-        UserEmail: apple,
-        UserNickname: bee,
-        UserPassword: cat
-    })
-        .then(res => {
-
-            console.log(res);
+        axios.post("https://localhost:44398/api/Register", {
+            UserEmail: apple,
+            UserNickname: bee,
+            UserPassword: cat
         })
-        .catch(error => {
-            console.log(error.response);
-        });
-    window.location = "https://www.youtube.com/";
+            .then(res => {
+                swal("恭喜", "註冊成功", "success")
+                console.log(res);
+            })
+            .catch(error => {
+                console.log(error.response);
+            });
+    }
 
-}
+
+
