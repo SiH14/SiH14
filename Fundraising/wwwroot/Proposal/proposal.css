@@ -12,10 +12,10 @@ body {
     font-family: sans-serif;
 }
 
-body ul,
-body li {
-    background-color: transparent !important;
-}
+    body ul,
+    body li {
+        background-color: transparent !important;
+    }
 
 form span,
 form p {
@@ -26,14 +26,6 @@ form p {
     position: absolute;
     left: -150px;
     z-index: -1;
-}
-
-#eraser {
-    position: absolute;
-    right: 0px;
-    bottom: -100px;
-    z-index: -1;
-
 }
 
 .container {
@@ -97,21 +89,21 @@ input::-webkit-inner-spin-button {
     width: 550px;
 }
 
-.file input {
-    position: absolute;
-    font-size: 100px;
-    right: 0;
-    top: 0;
-    opacity: 0;
-}
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
 
-.file:hover {
-    background: #047c51;
-    border-color: #047c51;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .file:hover {
+        background: #047c51;
+        border-color: #047c51;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
 .file2 {
     position: relative;
@@ -124,21 +116,21 @@ input::-webkit-inner-spin-button {
     text-indent: 0;
 }
 
-.file2 input {
-    position: absolute;
-    font-size: 100px;
-    right: 0;
-    top: 0;
-    opacity: 0;
-}
+    .file2 input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
 
-.file2:hover {
-    background: #047c51;
-    border-color: #047c51;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .file2:hover {
+        background: #047c51;
+        border-color: #047c51;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
 /* .ProductContenthiddeninput{
     position: absolute;
@@ -167,15 +159,19 @@ input::-webkit-inner-spin-button {
     width: 12vh;
 }
 
-.pagebtn:hover {
-    background-color: #047c51;
-    color: white;
-}
+    .pagebtn:active {
+        background-color: #047c51 !important;
+        color: white !important;
+    }
+
+    .pagebtn:hover {
+        background-color: #047c51;
+        color: white;
+    }
 
 /* 文字編輯器 */
 #container {
     width: 100%;
-    margin: 20px auto;
 }
 
 .ck-editor__editable[role="textbox"] {
@@ -185,13 +181,12 @@ input::-webkit-inner-spin-button {
 }
 
 .ck-editor__editable[role="toolbox"] {
-
     background-color: black !important;
 }
 
 .ck-content .image {
     /* block images */
-    max-width: 80%;
+    max-width: 50%;
     margin: 20px auto;
 }
 
@@ -203,16 +198,21 @@ input::-webkit-inner-spin-button {
 
 .QAaddbtn,
 .QAdelbtn {
-
     border-radius: 0;
     border: #047c51 solid 2px;
     background-color: transparent;
-    color: black
+    color: black;
 }
 
-.QAaddbtn:hover,
-.QAdelbtn:hover {
-    background-color: #047c51;
-    border: #047c51 solid 2px;
-    color: white
-}
+    .QAaddbtn:active,
+    .QAdelbtn:active {
+        background-color: #047c51 !important;
+        color: white !important;
+    }
+
+    .QAaddbtn:hover,
+    .QAdelbtn:hover {
+        background-color: #047c51;
+        border: #047c51 solid 2px;
+        color: white;
+    }

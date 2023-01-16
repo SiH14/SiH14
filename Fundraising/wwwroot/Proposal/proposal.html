@@ -21,7 +21,6 @@
 
 <body>
     <img id="pencil" src="../img/pencil.png" alt="">
-    <img id="eraser" src="../img/eraser.png" alt="">
     <form name="proposalfrom" class="needs-validation" novalidate>
         <div>
             <!-- 頁籤 -->
@@ -45,8 +44,6 @@
                         type="button" role="tab" aria-controls="infor" aria-selected="false">提案資料</button>
                 </li>
             </ul>
-
-            <input type="button" onclick="test()" value="test">
 
             <div class="tab-content container">
                 <!-- 專案大綱 -->
@@ -116,11 +113,7 @@
                                         <a href="javascript:;" class="file">上傳封面圖片
                                             <input style="cursor: pointer;" type="file" onchange="readURL(this)"
                                                 targetID="preview_progressbarTW_img" accept="image/jpeg, image/png"
-                                                name="Featured" id="Featured" class="form-control" required>
-                                            <div class="invalid-feedback"
-                                                style="background-color: transparent !important;">
-                                                請上傳封面圖片！
-                                            </div>
+                                                name="Featured" id="Featured">                                           
                                         </a>
                                         <p style="font-size: 14px; text-align: left;">請提供 JPEG、PNG 檔，圖片尺寸
                                             5:3； 2MB 以內。</p>
@@ -167,11 +160,7 @@
                     <div style="text-align: left;" id="container">
                         <span class="dot">●</span>
                         <label class="boldfont" for="ProductContent">專案內容</label>
-                        <textarea style="resize: none;" id="ProductContent" name="ProductContent"></textarea>
-                        <!-- <input class="ProductContenthiddeninput" type="text" class="form-control" required>
-                        <div class="invalid-feedback">
-                            請填寫專案內容！
-                        </div> -->
+                        <textarea style="resize: none;" id="ProductContent" name="ProductContent"></textarea>                    
                     </div>
                     <br>
                     <div id="QAdiv" style="text-align: left;">
