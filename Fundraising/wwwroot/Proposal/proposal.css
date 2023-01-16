@@ -28,14 +28,6 @@ form p {
     z-index: -1;
 }
 
-#eraser {
-    position: absolute;
-    right: 0px;
-    bottom: -100px;
-    z-index: -1;
-
-}
-
 .container {
     padding: 0px 200px;
 }
@@ -175,7 +167,6 @@ input::-webkit-inner-spin-button {
 /* 文字編輯器 */
 #container {
     width: 100%;
-    margin: 20px auto;
 }
 
 .ck-editor__editable[role="textbox"] {
@@ -191,7 +182,7 @@ input::-webkit-inner-spin-button {
 
 .ck-content .image {
     /* block images */
-    max-width: 80%;
+    max-width: 50%;
     margin: 20px auto;
 }
 

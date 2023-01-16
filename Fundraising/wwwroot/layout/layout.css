@@ -10,6 +10,7 @@ body {
     /* background-color: black !important; */
     background-image: url("../img/headerbackgroud.png") !important;
     background-size: cover;
+    margin-bottom: -0.5px;
 }
 
 
@@ -106,6 +107,7 @@ body {
     border-radius: 0px 0px 0px 0px;
     transition: 0.5s;
     overflow: hidden;
+    border-bottom: solid 0px transparent;
 }
 
 .search:hover::before {
@@ -116,7 +118,7 @@ body {
 .search.active {
     width: 250px;
     background: transparent;
-    border-bottom: solid 2px #047c51;
+    border-bottom: solid 3px #047c51;
 }
 
 .search .icon:hover {
@@ -241,19 +243,20 @@ footer {
 
 .footericon {
     position: relative;
-    bottom: 150px;
+    bottom: 165px;
     left: 870px;
     width: 500px;
 }
 
 .footer-item h4 {
     text-align: left;
-    font-size: 0.975rem !important;
+    font-size: 16px !important;
+    font-weight:bold;
 }
 
 .footer-item p {
     text-align: left;
-    font-size: 12px !important;
+    font-size: 16px !important;
     cursor: pointer;
 }
 

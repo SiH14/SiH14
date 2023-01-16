@@ -208,10 +208,20 @@ window.onload = function getuserID() {
                     href="#">提案紀錄</a></li>
             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
                     href="#">聯絡訊息</a></li>
-            <li style="text-align: center;"><a class="dropdown-item" href="./test4.html">登出</a></li>`
+      <li style="text-align: center;"><a class="dropdown-item" href="http://localhost:51701/Proposal/myproposal.html" onclick="logout()">登出</a></li>`
                 })
         })
         .catch(error => {
             console.log(error.response);
         })
+}
+
+function logout() {
+    axios.delete("http://localhost:51701/api/Login")
+        .then(res => {
+            console.log(res);
+        })
+        .catch(error => {
+            console.log(error.response);
+        });
 }
