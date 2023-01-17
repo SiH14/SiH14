@@ -133,7 +133,7 @@ function OK() {
             UserID: userid,
             ProductStateID: 1
         }
-        axios.post("http://localhost:51701/api/Products", proposaldata)
+        axios.post("http://localhost:44398/api/Products", proposaldata)
             .then(res => {
                 callback(res.data.productId);
                 console.log(res.data.productId);
@@ -150,7 +150,7 @@ function OK() {
         for (let index = 0, j = 1; index < egg.length, j < egg.length; index += 2, j += 2) {
             console.log(egg[index].value)
             console.log(egg[j].value)
-            axios.post("http://localhost:51701/api/Questions", {
+            axios.post("http://localhost:44398/api/Questions", {
                 ProductID: xxx,
                 QuestionTitle: egg[index].value,
                 QuestionContent: egg[j].value
@@ -170,7 +170,7 @@ function OK() {
             console.log(good[y].value)
             console.log(planinputarray[z])
 
-            axios.post("http://localhost:51701/api/Plans", {
+            axios.post("http://localhost:44398/api/Plans", {
                 ProductID: xxx,
                 PlanTitle: good[x].value,
                 PlanContent: good[y].value,

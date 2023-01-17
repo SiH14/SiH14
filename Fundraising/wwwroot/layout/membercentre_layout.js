@@ -183,14 +183,14 @@ document.addEventListener('mousedown', (e) => {
 var userid = "";
 window.onload = function getuserID() {
     getid = function (callback) {
-        axios.get("http://localhost:51701/api/Login/getuserid")
+        axios.get("http://localhost:44398/api/Login/getuserid")
             .then(res => {
                 callback(res.data);
                 console.log(res.data);
                 // if (res.data != "") {
                 //     alert("login OK")
                 // }
-                axios.get("http://localhost:51701/api/Login/getuserphoto/" + res.data)
+                axios.get("http://localhost:44398/api/Login/getuserphoto/" + res.data)
                     .then(res => {
                         //console.log(res.data[0].userPhoto)
                         var setimg = document.getElementById("iconimg");
@@ -222,7 +222,7 @@ window.onload = function getuserID() {
 }
 
 function logout() {
-    axios.delete("http://localhost:51701/api/Login")
+    axios.delete("http://localhost:44398/api/Login")
         .then(res => {
             console.log(res);
         })

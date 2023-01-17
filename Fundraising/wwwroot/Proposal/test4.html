@@ -22,14 +22,14 @@
     <script>
         function login() {
 
-            axios.post("http://localhost:51701/api/Login", {
+            axios.post("http://localhost:44398/api/Login", {
                 UserEmail: document.getElementById("UserEmail").value,
                 UserPassword: document.getElementById("UserPassword").value
             })
                 .then(res => {
                     console.log(res.data);
                     if (res.data != "帳號密碼錯誤") {
-                        window.location ="http://localhost:51701/Proposal/myproposal.html";
+                        window.location ="http://localhost:44398/Proposal/myproposal.html";
                     }
                 })
                 .catch(error => {
@@ -38,7 +38,7 @@
         }
 
         function logout() {
-            axios.delete("http://localhost:51701/api/Login")
+            axios.delete("http://localhost:44398/api/Login")
                 .then(res => {
                     console.log(res);
                 })
