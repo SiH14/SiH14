@@ -99,7 +99,8 @@
                                     <textarea disabled style="border: none; background-color: white; resize: none;"
                                         name="cardtitle" id="cardtitle" cols="26" rows="3"
                                         placeholder="例：40個字以內的專案標題"></textarea>
-                                    <p style="text-align: left; font-size: 14px; padding: 15px 0px 0px 10px;">設計by XXX
+                                    <p class="designby"
+                                        style="text-align: left; font-size: 14px; padding: 15px 0px 0px 10px;">設計by XXX
                                     </p>
                                 </div>
                             </li>
@@ -310,8 +311,9 @@
                                     <span class="dot">●</span>
                                     <label class="boldfont" for="PrincipalId">提案人身分證</label>
                                     <br>
-                                    <input minlength="10" maxlength="10" type="text" style="border-radius: 5px;border: black 1px solid"
-                                        name="PrincipalId" id="PrincipalId" class="form-control" required>
+                                    <input minlength="10" maxlength="10" type="text"
+                                        style="border-radius: 5px;border: black 1px solid" name="PrincipalId"
+                                        id="PrincipalId" class="form-control" required>
                                     <div class="invalid-feedback">
                                         請輸入正確的身分證字號！
                                     </div>
@@ -329,7 +331,8 @@
                                     <span class="dot">●</span>
                                     <label class="boldfont" for="PrincipalEmail">電子郵件</label>
                                     <br>
-                                    <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3,4}$" style="border-radius: 5px;border: black 1px solid" name="PrincipalEmail"
+                                    <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3,4}$"
+                                        style="border-radius: 5px;border: black 1px solid" name="PrincipalEmail"
                                         id="PrincipalEmail" class="form-control" required>
                                     <div class="invalid-feedback">
                                         請輸入正確格式的電子郵件！
@@ -342,8 +345,9 @@
                                     <span class="dot">●</span>
                                     <label class="boldfont" for="PrincipalPhone">行動電話</label>
                                     <br>
-                                    <input minlength="10" maxlength="10" type="tel" style="border-radius: 5px;border: black 1px solid"
-                                        name="PrincipalPhone" id="PrincipalPhone" class="form-control" required>
+                                    <input minlength="10" maxlength="10" type="tel"
+                                        style="border-radius: 5px;border: black 1px solid" name="PrincipalPhone"
+                                        id="PrincipalPhone" class="form-control" required>
                                     <div class="invalid-feedback">
                                         請輸入正確格式的行動電話！
                                     </div>
@@ -358,8 +362,9 @@
                         <label class="boldfont" for="PrincipalBankAccount">銀行帳號</label>
                         <div style="display: flex;">
                             <div>
-                                <input id="bankcode" style="border: black 1px solid; width: 180px; height: 36px; border-radius: 5px;" list="area"
-                                    placeholder="請輸入銀行代碼" type="text" class="form-control" required />
+                                <input id="bankcode"
+                                    style="border: black 1px solid; width: 180px; height: 36px; border-radius: 5px;"
+                                    list="area" placeholder="請輸入銀行代碼" type="text" class="form-control" required />
                                 <div class="invalid-feedback">
                                     請輸入銀行代碼！
                                 </div>
@@ -406,11 +411,11 @@
     firstTab.show()
 </script>
 
-
 <!-- 導入Layout -->
 <script src="../layout/layout.js"></script>
 <!-- 導入js -->
 <script src="./proposal.js"></script>
+
 </body>
 
 </html>

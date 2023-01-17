@@ -96,8 +96,9 @@ body {
 }
 
 .dropdown-menu a:hover {
-    background-color: transparent !important;
+    background-color: rgb(205, 203, 203) !important;
     color: #047c51;
+    font-weight: bold;
 }
 
 .btn:focus {

@@ -165,13 +165,13 @@ window.onload = function getuserID() {
         axios.get("https://localhost:44398/api/Login/getuserid")
             .then(res => {
                 callback(res.data);
-                console.log(res.data);
+                // console.log(res.data);
                 // if (res.data != "") {
                 //     alert("login OK")
                 // }
                 axios.get("https://localhost:44398/api/Login/getuserphoto/" + res.data)
                     .then(res => {
-                        //console.log(res.data[0].userPhoto)
+                        // console.log(res.data[0].userPhoto)
                         var setimg = document.getElementById("iconimg");
                         setimg.setAttribute("src", res.data[0].userPhoto)
                         setimg.style.width = "30px";
@@ -195,7 +195,7 @@ window.onload = function getuserID() {
             })
     }
     getid(function (myuser) {
-        console.log(myuser)
+        // console.log(myuser)
         userid = myuser;
     })
 }
