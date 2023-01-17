@@ -1,6 +1,3 @@
-// // 假設已登入
-// sessionStorage.setItem("userName", "123");
-
 const app = {
   data() {
     return {

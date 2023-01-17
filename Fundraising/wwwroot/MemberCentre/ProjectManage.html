@@ -37,6 +37,7 @@
   </head>
   <body>
     <div class="container" id="app">
+      <!-- 當前分頁 -->
       <div class="mx-auto ps-4 pt-3" style="width: 100%">
         <h5>
           <a href="./UserProject.html" class="text-dark text-decoration-none h5"
@@ -45,30 +46,58 @@
           / <span class="text-decoration-underline">專案管理</span>
         </h5>
       </div>
-
+      <!-- 主要內容 -->
       <div class="card mt-3 mx-auto p-3" style="width: 100%">
         <h5 class="m-2">贊助人清單</h5>
-        <div class="d-flex justify-content-between">
+        <!-- buttons -->
+        <div class="d-flex justify-content-between m-2">
           <div>
-            <button type="button" class="btn me-1 btn-secondary">
+            <button
+              @click="filter"
+              type="button"
+              class="btn me-1 btn-secondary"
+              value="全部贊助"
+            >
               全部贊助
             </button>
-            <button type="button" class="btn me-1">待開始</button>
-            <button type="button" class="btn me-1">備貨中</button>
-            <button type="button" class="btn me-1">已寄送</button>
+            <button
+              @click="filter"
+              type="button"
+              class="btn me-1"
+              value="待開始"
+            >
+              待開始
+            </button>
+            <button
+              @click="filter"
+              type="button"
+              class="btn me-1"
+              value="備貨中"
+            >
+              備貨中
+            </button>
+            <button
+              @click="filter"
+              type="button"
+              class="btn me-1"
+              value="已寄送"
+            >
+              已寄送
+            </button>
+            <button
+              @click="filter"
+              type="button"
+              class="btn me-1"
+              value="已取消"
+            >
+              已取消
+            </button>
           </div>
-          <div class="d-inline">
-            <input
-              type="text"
-              name="search"
-              id="search"
-              class="form-control me-1"
-              style="display: inline-block; width: 200px"
-            />
-            <button class="btn btn-success me-1">儲存變更</button>
-          </div>
+          <button @click="submitstate" class="btn btn-success me-1">
+            儲存變更
+          </button>
         </div>
-
+        <!-- 表格 -->
         <table id="table" class="table table-hover align-middle text-center">
           <thead>
             <tr>
@@ -82,7 +111,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="order in pjorderlist">
+            <tr
+              v-for="order in pjorderlist"
+              v-show="showed==order.orderStateId||showed=='全部贊助'"
+              :key="order.orderId"
+            >
               <!-- 贊助日期 -->
               <td>{{order.purchaseTime}}</td>
               <!-- 狀態 -->
@@ -137,15 +170,27 @@
                   name="status"
                   id="status"
                   class="form-select"
+                  @change="statechange"
                   v-if="order.orderStateId!='已寄送'&&order.orderStateId!='已取消'"
                 >
-                  <option value="1" v-if="order.orderStateId=='待開始'">
+                  <option
+                    :value="[order.orderId,1]"
+                    v-if="order.orderStateId=='待開始'"
+                  >
                     待開始
                   </option>
-                  <option value="2" v-if="order.orderStateId=='備貨中'">
+                  <option
+                    :value="[order.orderId,2]"
+                    v-if="order.orderStateId=='待開始'||order.orderStateId=='備貨中'"
+                  >
                     生產階段
                   </option>
-                  <option value="3">產品寄送</option>
+                  <option
+                    :value="[order.orderId,3]"
+                    v-if="order.orderStateId=='備貨中'"
+                  >
+                    產品寄送
+                  </option>
                 </select>
               </td>
             </tr>
