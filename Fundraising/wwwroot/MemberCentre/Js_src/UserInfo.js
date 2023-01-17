@@ -1,14 +1,7 @@
 Vue.createApp({
   data() {
     return {
-      userdata: {
-        userId: 9999,
-        userName: "TEST NAME",
-        userIntro: "測試",
-        userPhoto: "",
-        productCNT: 9999,
-        orderCNT: 9999,
-      },
+      userdata: {},
       ProductsList: [],
     };
   },

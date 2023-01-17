@@ -16,60 +16,66 @@ using Microsoft.EntityFrameworkCore;
 using Fundraising.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Fundraising.Hubs;
 
 namespace Fundraising
 {
-	public class Startup
-	{
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-		public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddDbContext<FundraisingDbContext>(options =>
-		  options.UseSqlServer(Configuration.GetConnectionString("linkToNewsDb")));
-			services.AddControllers();
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<FundraisingDbContext>(options =>
+          options.UseSqlServer(Configuration.GetConnectionString("linkToNewsDb")));
+            services.AddControllers();
 
-			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
-			{
-				//未登入時會自動導到這個網址
-				option.LoginPath = new PathString("/api/Login/NoLogin");
-				//option.ExpireTimeSpan = TimeSpan.FromDays(1);
-			});
-		}
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+            {
+                //未登入時會自動導到這個網址
+                option.LoginPath = new PathString("/api/Login/NoLogin");
+                //option.ExpireTimeSpan = TimeSpan.FromDays(1);
+            });
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-		{
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-				//app.UseSwagger();
-				//app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Fundraising v1"));
-			}
+            //連線SignalR
+            services.AddSignalR();
+        }
 
-			app.UseHttpsRedirection();
-			//靜態
-			app.UseDefaultFiles();
-			app.UseStaticFiles();
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                //app.UseSwagger();
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Fundraising v1"));
+            }
 
-			app.UseRouting();
+            app.UseHttpsRedirection();
+            //靜態
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
-			app.UseCookiePolicy();
-			app.UseAuthentication();
-			app.UseAuthorization();
+            app.UseRouting();
 
-			app.UseAuthorization();
+            app.UseCookiePolicy();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllers();
-			});
-		}
-	}
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chatHub");
+
+            });
+        }
+    }
 }
