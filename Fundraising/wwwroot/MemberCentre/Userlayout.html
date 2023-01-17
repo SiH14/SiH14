@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
+    <style>
+      .memberlink:focus {
+        box-shadow: none;
+      }
+      .memberlink:hover {
+        color: #047c51;
+      }
+      .active {
+        text-decoration: underline;
+      }
+      .card {
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+        width: 80%;
+        transition: 0.5s;
+        border: 0;
+        border-radius: 0.55rem;
+        position: relative;
+      }
+    </style>
+    <title>Layout</title>
+  </head>
+  <body>
+    <div id="MemberCentre" class="row py-3 mx-auto">
+      <a
+        href="./UserInfo.html"
+        class="memberlink col-4 col-lg-1 col-md-3 offset-0 offset-lg-3 btn btn-default"
+        >個人頁面</a
+      >
+      <a
+        href="./UserFollowing.html"
+        class="memberlink col-4 col-lg-1 col-md-3 btn btn-default"
+        >追蹤專案</a
+      >
+      <a
+        href="./UserOrder.html"
+        class="memberlink col-4 col-lg-1 col-md-3 btn btn-default"
+        >贊助紀錄</a
+      >
+      <a
+        href="./UserProject.html"
+        class="memberlink col-4 col-lg-1 col-md-3 btn btn-default"
+        >提案紀錄</a
+      >
+      <a
+        href="./UserMessage.html"
+        class="memberlink col-4 col-lg-1 col-md-3 btn btn-default"
+        >聯絡訊息</a
+      >
+      <a
+        href="./UserSetting.html"
+        class="memberlink col-4 col-lg-1 col-md-3 btn btn-default"
+        >帳戶設定</a
+      >
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../layout/membercentre_layout.js"></script>
+  </body>
+</html>

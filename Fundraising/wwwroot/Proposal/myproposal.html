@@ -9,6 +9,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
     <style>
         * {
@@ -38,8 +41,8 @@
 
             .abtn:active {
                 background-color: #047c51 !important;
-                border: solid 2px #047c51!important;
-                color:white !important;
+                border: solid 2px #047c51 !important;
+                color: white !important;
             }
 
             .abtn:hover {
@@ -135,7 +138,7 @@
         <div class="propaltitle2">
             <h2 class="fs-2">我要的被實現</h2>
             <h4>用群眾的力量，讓有價值的事物獲得更好的機會</h4>
-            <a href="./proposal.html" class="abtn btn btn-info" role="button">開始提案</a>
+            <a class="abtn btn btn-info" role="button" onclick="gotoproposal()">開始提案</a>
         </div>
     </div>
 
@@ -233,7 +236,30 @@
         </div>
     </div>
     <script src="../layout/layout.js"></script>
-
+    <script>
+        function gotoproposal() {
+            console.log(userid)
+            if (userid == "") {
+                swal("尚未登入", "前往登入頁面?", "warning", {
+                    buttons: {
+                        確定: true,
+                        取消: true
+                    },
+                })
+                    .then((value) => {
+                        switch (value) {
+                            case "確定":
+                                window.location = "http://localhost:51701/Proposal/test4.html";
+                                break;
+                            case "取消":
+                                break;
+                        }
+                    });
+            } else {
+                window.location = "http://localhost:51701/Proposal/proposal.html";
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -216,3 +216,7 @@ input::-webkit-inner-spin-button {
         border: #047c51 solid 2px;
         color: white;
     }
+
+    .bankcode:hover{
+        cursor: pointer;
+    }

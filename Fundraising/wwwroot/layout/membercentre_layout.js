@@ -29,32 +29,30 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
                 <div class="search headernav">                
                     <a class="icon headernav" href="#" role="button"></a>
                     <div class="input headernav">
-                        <input class="headernav" type="text" placeholder="請輸入關鍵字" id="mysearch">
+                        <input class="headernav" type="text" placeholder="搜尋專案" id="mysearch">
                     </div>
                     <span class="clear headernav"></span>
                 </div>
             </li>
-            <div class="dropdown headernav">
-            <a class="btn dropdown-toggle headernav" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <img id="iconimg" style="width:55%" class="headernav loginicon" src="../img/loginicon.png" alt="">
-            </a>
-          
-            <ul class="dropdown-menu headernav" aria-labelledby="dropdownMenuLink">
-            <div class="dropdown-div headernav">
-            <div>
-            <a style="border-bottom: solid 1px rgb(188, 185, 185);" class="dropdown-item headernav" href="#">註冊</a>
-            </div>
-            <div>
-            <a class="dropdown-item headernav" href="#">登入</a>
-            </div>
-            </div>              
+            <div class="dropdown">
+        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img id="iconimg" class="headernav loginicon" src="../img/loginicon.png" alt="">
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item" href="#">註冊</a></li>
+            <li><a class="dropdown-item" href="http://localhost:51701/Proposal/test4.html">登入</a></li>
+        </ul>
+    </div>             
             </ul>
           </div>
-            
-        </ul>
+          <div>
+          <img class="headerbackgroudicon" src="../img/headerbackgroudicon.png" alt="">
+      </div>
+        
     </div>
-
-</div>
+    
 </nav>`+ `<div id="MemberCentre" class="row text-dark py-3 fs-5 justify-content-center m-0">
 <a
   href="./UserInfo.html"
@@ -184,21 +182,23 @@ document.addEventListener('mousedown', (e) => {
 // get登入的userid，設置頭像
 var userid = "";
 window.onload = function getuserID() {
-    axios.get("http://localhost:51701/api/Login/getuserid")
-        .then(res => {
-            console.log(res.data);
-            // if (res.data != "") {
-            //     alert("login OK")
-            // }
-            axios.get("http://localhost:51701/api/Login/getuserphoto/" + res.data)
-                .then(res => {
-                    console.log(res.data[0].userPhoto)
-                    var setimg = document.getElementById("iconimg");
-                    setimg.setAttribute("src", res.data[0].userPhoto)
-                    setimg.style.width = "30px";
-                    setimg.style.height = "30px";
-                    setimg.style.borderRadius = "15px";
-                    document.querySelector(".dropdown-menu").innerHTML = ` <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
+    getid = function (callback) {
+        axios.get("http://localhost:51701/api/Login/getuserid")
+            .then(res => {
+                callback(res.data);
+                console.log(res.data);
+                // if (res.data != "") {
+                //     alert("login OK")
+                // }
+                axios.get("http://localhost:51701/api/Login/getuserphoto/" + res.data)
+                    .then(res => {
+                        //console.log(res.data[0].userPhoto)
+                        var setimg = document.getElementById("iconimg");
+                        setimg.setAttribute("src", res.data[0].userPhoto)
+                        setimg.style.width = "30px";
+                        setimg.style.height = "30px";
+                        setimg.style.borderRadius = "15px";
+                        document.querySelector(".dropdown-menu").innerHTML = ` <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
                     href="../MemberCentre/UserInfo.html">個人頁面</a></li>
             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
                     href="#">追蹤專案</a></li>
@@ -208,12 +208,17 @@ window.onload = function getuserID() {
                     href="#">提案紀錄</a></li>
             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
                     href="#">聯絡訊息</a></li>
-      <li style="text-align: center;"><a class="dropdown-item" href="http://localhost:51701/Proposal/myproposal.html" onclick="logout()">登出</a></li>`
-                })
-        })
-        .catch(error => {
-            console.log(error.response);
-        })
+            <li style="text-align: center;"><a class="dropdown-item" href="http://localhost:51701/Proposal/myproposal.html" onclick="logout()">登出</a></li>`
+                    })
+            })
+            .catch(error => {
+                console.log(error.response);
+            })
+    }
+    getid(function (myuser) {
+        console.log(myuser)
+        userid = myuser;
+    })
 }
 
 function logout() {

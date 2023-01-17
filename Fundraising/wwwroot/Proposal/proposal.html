@@ -45,6 +45,8 @@
                 </li>
             </ul>
 
+            <!-- <input type="button" value="test" onclick="test()"> -->
+
             <div class="tab-content container">
                 <!-- 專案大綱 -->
                 <div style="width: 105%; position: relative; right: 30px;"
@@ -113,7 +115,7 @@
                                         <a href="javascript:;" class="file">上傳封面圖片
                                             <input style="cursor: pointer;" type="file" onchange="readURL(this)"
                                                 targetID="preview_progressbarTW_img" accept="image/jpeg, image/png"
-                                                name="Featured" id="Featured">                                           
+                                                name="Featured" id="Featured">
                                         </a>
                                         <p style="font-size: 14px; text-align: left;">請提供 JPEG、PNG 檔，圖片尺寸
                                             5:3； 2MB 以內。</p>
@@ -160,7 +162,7 @@
                     <div style="text-align: left;" id="container">
                         <span class="dot">●</span>
                         <label class="boldfont" for="ProductContent">專案內容</label>
-                        <textarea style="resize: none;" id="ProductContent" name="ProductContent"></textarea>                    
+                        <textarea style="resize: none;" id="ProductContent" name="ProductContent"></textarea>
                     </div>
                     <br>
                     <div id="QAdiv" style="text-align: left;">
@@ -233,8 +235,8 @@
                                                         <span>
                                                             <input
                                                                 style="width:120px; color: #047c51; font-size: 20px; border: none;"
-                                                                name="PlanPrice" id="PlanPrice" type="number" class="inputplan"
-                                                                value="100">
+                                                                name="PlanPrice" id="PlanPrice" type="number"
+                                                                class="inputplan" value="100">
                                                         </span>
                                                     </div>
                                                     <div
@@ -308,10 +310,10 @@
                                     <span class="dot">●</span>
                                     <label class="boldfont" for="PrincipalId">提案人身分證</label>
                                     <br>
-                                    <input type="text" style="border-radius: 5px;border: black 1px solid"
+                                    <input minlength="10" maxlength="10" type="text" style="border-radius: 5px;border: black 1px solid"
                                         name="PrincipalId" id="PrincipalId" class="form-control" required>
                                     <div class="invalid-feedback">
-                                        請輸入身分證字號！
+                                        請輸入正確的身分證字號！
                                     </div>
                                     <p style="font-size: 14px;padding-top: 5px;">
                                         提案者必須是具備完全行為能力的自然人、合法登記的法人或團體。若提案者為未成年人，應由其法定代理人閱讀、暸解，才可進行提案流程。</p>
@@ -327,10 +329,10 @@
                                     <span class="dot">●</span>
                                     <label class="boldfont" for="PrincipalEmail">電子郵件</label>
                                     <br>
-                                    <input style="border-radius: 5px;border: black 1px solid" name="PrincipalEmail"
+                                    <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3,4}$" style="border-radius: 5px;border: black 1px solid" name="PrincipalEmail"
                                         id="PrincipalEmail" class="form-control" required>
                                     <div class="invalid-feedback">
-                                        請輸入您的電子郵件！
+                                        請輸入正確格式的電子郵件！
                                     </div>
                                     <p style="font-size: 14px;padding-top: 5px;">請填寫聯絡信箱。</p>
                                 </div>
@@ -340,7 +342,7 @@
                                     <span class="dot">●</span>
                                     <label class="boldfont" for="PrincipalPhone">行動電話</label>
                                     <br>
-                                    <input type="tel" style="border-radius: 5px;border: black 1px solid"
+                                    <input minlength="10" maxlength="10" type="tel" style="border-radius: 5px;border: black 1px solid"
                                         name="PrincipalPhone" id="PrincipalPhone" class="form-control" required>
                                     <div class="invalid-feedback">
                                         請輸入正確格式的行動電話！
@@ -354,14 +356,33 @@
                     <div style="text-align: left; padding: 20px 15px;">
                         <span class="dot">●</span>
                         <label class="boldfont" for="PrincipalBankAccount">銀行帳號</label>
-                        <div>
-                            <input style="width: 100%; border: black 1px solid" type="text" id="PrincipalBankAccount"
-                                name="PrincipalBankAccount" class="form-control" required>
-                            <div class="invalid-feedback">
-                                請輸入銀行帳號！
+                        <div style="display: flex;">
+                            <div>
+                                <input id="bankcode" style="border: black 1px solid; width: 180px; height: 36px; border-radius: 5px;" list="area"
+                                    placeholder="請輸入銀行代碼" type="text" class="form-control" required />
+                                <div class="invalid-feedback">
+                                    請輸入銀行代碼！
+                                </div>
+                                <datalist id="area">
+                                    <option value="(001)中央信託"></option>
+                                    <option value="(003)交通銀行"></option>
+                                    <option value="(004)台灣銀行"></option>
+                                    <option value="(005)土地銀行"></option>
+                                    <option value="(006)合庫商銀"></option>
+                                    <option value="(007)第一銀行"></option>
+                                </datalist>
                             </div>
-                            <p style="font-size: 14px;padding-top: 5px;">用於接收募資款項的帳戶，此帳戶必須位於在台灣。</p>
+                            <span>&nbsp&nbsp</span>
+                            <div>
+                                <input placeholder="請輸入10~16位數的銀行帳戶" maxlength="16" minlength="10"
+                                    style="width: 365px; border: black 1px solid" type="text" id="PrincipalBankAccount"
+                                    name="PrincipalBankAccount" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    請輸入銀行帳號！
+                                </div>
+                            </div>
                         </div>
+                        <p style="font-size: 14px;padding-top: 5px;">用於接收募資款項的帳戶，此帳戶必須位於在台灣。</p>
                     </div>
 
                     <div class="pagebtndiv">
