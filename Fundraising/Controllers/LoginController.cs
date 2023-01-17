@@ -41,9 +41,8 @@ namespace Fundraising.Controllers
 				var claims = new List<Claim>
 				{
 					new Claim(ClaimTypes.Name, user.UserEmail),
+					new Claim("userName", user.UserName),
 					new Claim("userID", user.UserId.ToString()),
-					//new Claim("userPhoto", user.UserPhoto)
-				               // new Claim(ClaimTypes.Role, "Administrator")
 				            };
 
 				var authProperties = new AuthenticationProperties
@@ -85,11 +84,19 @@ namespace Fundraising.Controllers
 			return Content(userID);
 		}
 
+		[HttpGet("getusername")]
+		public IActionResult getuserName()
+		{
+			var Claim = HttpContext.User.Claims.ToList();
+			var userName= Claim.Where(a => a.Type == "userName").First().Value;
+			return Content(userName);
+		}
+
 		[HttpGet("getuserphoto/{id}")]
 		public ActionResult<IEnumerable<dynamic>> getuserPhoto(string id)
 		{
 			var user = _context.Users.Where(x => x.UserId == Convert.ToInt32(id));
-				return user.ToList();
+			return user.ToList();
 		}
 
 		[HttpDelete]

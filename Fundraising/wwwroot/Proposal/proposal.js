@@ -75,9 +75,9 @@ function readURL(input) {
     }
 }
 
-function test() {
-    console.log(coverimgdata)
-}
+// function test() {
+//     console.log(userid);
+// }
 
 // 方案封面圖片上傳
 const planinputarray = [];
@@ -100,17 +100,32 @@ function readPlanURL(input) {
     }
 }
 
-//取得userid
-// function test() {
-//     var bankCode = document.querySelector("#bankcode").value
-//     console.log(bankCode.substr(0,5))
-// }
+ // 取得username
+ $(document).ready(function () {
+    axios.get("https://localhost:44398/api/Login/getuserid/")
+        .then(res => {
+            console.log(res.data);
+            axios.get("https://localhost:44398/api/Login/getuserphoto/" + res.data)
+                .then(res => {
+                    console.log(res.data[0]);
+                    console.log(document.querySelector(".designby").innerHTML);
+                    document.querySelector(".designby").innerHTML = "設計by " + res.data[0].userName;
+                    document.querySelector("#PrincipalName").value = res.data[0].userName;
+                    document.querySelector("#PrincipalEmail").value = res.data[0].userEmail;
+                    document.querySelector("#PrincipalPhone").value = res.data[0].userPhone;
+
+                })
+        })
+        .catch(error => {
+            console.log(error.response);
+        })
+})
 
 // 送出提案function
 var dataDB;
 var egg;
 var good;
-function OK() {
+function confirmsubmit() {
     dataDB = CKEDITOR.instances.ProductContent.getData();
 
     // 提送表單大部分內容
@@ -118,7 +133,7 @@ function OK() {
         // console.log(dataDB);
         // console.log(coverimgdata);
         var bankCode = document.querySelector("#bankcode").value
-        console.log(bankCode.substr(0,5))
+        console.log(bankCode.substr(0, 5))
         var proposaldata = {
             coverphoto: coverimgdata,
             ProductTitle: document.getElementById("ProductTitle").value,
@@ -129,7 +144,7 @@ function OK() {
             PrincipalName: document.getElementById("PrincipalName").value,
             PrincipalPhone: document.getElementById("PrincipalPhone").value,
             PrincipalEmail: document.getElementById("PrincipalEmail").value,
-            PrincipalBankAccount: bankCode.substr(0,5)+document.getElementById("PrincipalBankAccount").value,
+            PrincipalBankAccount: bankCode.substr(0, 5) + document.getElementById("PrincipalBankAccount").value,
             UserID: userid,
             ProductStateID: 1
         }
@@ -306,8 +321,9 @@ var dataDB;
                         .then((value) => {
                             switch (value) {
                                 case "確定":
-                                    OK();
+                                    confirmsubmit();
                                     swal("表單已送出!", "", "success");
+                                    window.onload="https://localhost:44398/Proposal/myproposal.html"
                                     break;
                                 case "取消":
                                     break;
