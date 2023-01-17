@@ -42,7 +42,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
 
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item" href="#">註冊</a></li>
-            <li><a class="dropdown-item" href="http://localhost:51701/Proposal/test4.html">登入</a></li>
+            <li><a class="dropdown-item" href="https://localhost:44398/Proposal/test4.html">登入</a></li>
         </ul>
     </div>             
             </ul>
@@ -183,14 +183,14 @@ document.addEventListener('mousedown', (e) => {
 var userid = "";
 window.onload = function getuserID() {
     getid = function (callback) {
-        axios.get("http://localhost:44398/api/Login/getuserid")
+        axios.get("https://localhost:44398/api/Login/getuserid")
             .then(res => {
                 callback(res.data);
                 console.log(res.data);
                 // if (res.data != "") {
                 //     alert("login OK")
                 // }
-                axios.get("http://localhost:44398/api/Login/getuserphoto/" + res.data)
+                axios.get("https://localhost:44398/api/Login/getuserphoto/" + res.data)
                     .then(res => {
                         //console.log(res.data[0].userPhoto)
                         var setimg = document.getElementById("iconimg");
@@ -208,7 +208,7 @@ window.onload = function getuserID() {
                     href="#">提案紀錄</a></li>
             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
                     href="#">聯絡訊息</a></li>
-            <li style="text-align: center;"><a class="dropdown-item" href="http://localhost:51701/Proposal/myproposal.html" onclick="logout()">登出</a></li>`
+            <li style="text-align: center;"><a class="dropdown-item" href="https://localhost:44398/Proposal/myproposal.html" onclick="logout()">登出</a></li>`
                     })
             })
             .catch(error => {
@@ -222,7 +222,7 @@ window.onload = function getuserID() {
 }
 
 function logout() {
-    axios.delete("http://localhost:44398/api/Login")
+    axios.delete("https://localhost:44398/api/Login")
         .then(res => {
             console.log(res);
         })
