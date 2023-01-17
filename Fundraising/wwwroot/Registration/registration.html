@@ -232,7 +232,7 @@
 
 
                     <div class="field button-field">
-                        <button id ="registerBtn" type="button">註冊</button>
+                        <button id="registerBtn" type="button">註冊</button>
                     </div>
 
                 </form>
@@ -259,78 +259,166 @@
 
     <!-- 驗證 -->
     <script>
-        const form = document.getElementById('form')
-        const emailField = form.querySelector("email-field")
-        const email = document.getElementById('UserEmail')
-        const username = document.getElementById('UserNickname')
-        const password = document.getElementById('UserPassword')
-        const password2 = document.getElementById('confirmPassword')
+        const form = document.querySelector('#form')
+        const emailEl = document.querySelector('#UserEmail')
+        const usernameEl = document.querySelector('#UserNickname')
+        const passwordEl = document.querySelector('#UserPassword')
+        const confirmPasswordEl = document.querySelector('#confirmPassword')
 
+        //  檢查會員姓名
+        const checkUsername = () => {
+
+            let valid = false;
+            const min = 3,
+                max = 15;
+            const username = usernameEl.value.trim();
+
+            if (!isRequired(username)) {
+                showError(usernameEl, '會員名稱不能為空');
+            } else if (!isBetween(username.length, min, max)) {
+                showError(usernameEl, `會員名稱需在 ${min} 和 ${max} 字之間`)
+            } else {
+                showSuccess(usernameEl);
+                valid = true;
+            }
+            return valid;
+        }
+
+        // 檢查信箱
+        const checkEmail = () => {
+            let valid = false;
+            const email = emailEl.value.trim();
+            if (!isRequired(email)) {
+                showError(emailEl, 'Email不能為空');
+            } else if (!isEmailValid(email)) {
+                showError(emailEl, 'Email格式錯誤')
+            } else {
+                showSuccess(emailEl);
+                valid = true;
+            }
+            return valid;
+        }
+
+        // 檢查密碼
+        const checkPassword = () => {
+
+            let valid = false;
+
+            const password = passwordEl.value.trim();
+
+            if (!isRequired(password)) {
+                showError(passwordEl, '密碼不能為空');
+            } else if (!isPasswordSecure(password)) {
+                showError(passwordEl, '密碼至少八碼，須包含英文數字');
+            } else {
+                showSuccess(passwordEl);
+                valid = true;
+            }
+
+            return valid;
+        };
+
+        // 確認密碼
+        const checkConfirmPassword = () => {
+            let valid = false;
+
+            const confirmPassword = confirmPasswordEl.value.trim();
+            const password = passwordEl.value.trim();
+
+            if (!isRequired(confirmPassword)) {
+                showError(confirmPasswordEl, '請重新輸入密碼');
+            } else if (password !== confirmPassword) {
+                showError(confirmPasswordEl, '與密碼不相符，請重新輸入');
+            } else {
+                showSuccess(confirmPasswordEl);
+                valid = true;
+            }
+
+            return valid;
+        };
+
+        // 檢查欄位是否為空
+        const isRequired = value => value === '' ? false : true;
+
+        // 會員名稱長度
+        const isBetween = (length, min, max) => length < min || length > max ? false : true;
+
+        // 檢查email格式
+        const isEmailValid = (email) => {
+            return /^\w+((-\w+)|(\.\w+)|(\+\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/.test(email);
+        };
+
+        // 檢查密碼格式
+        const isPasswordSecure = (password) => {
+            return /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/.test(password);
+        };
+
+        //  錯誤
+        function showError(input, message) {
+            const formControl = input.parentElement;
+            const small = formControl.querySelector('small');
+
+            small.innerText = message;
+
+            formControl.className = 'field error';
+        }
+
+        //  成功
+        function showSuccess(input) {
+            const formControl = input.parentElement;
+            formControl.className = 'field success'
+        }
 
         document.getElementById('registerBtn').addEventListener('click', (e) => {
             e.preventDefault();
-            checkInputs();
 
+            let isUsernameValid = checkUsername(),
+                isEmailValid = checkEmail(),
+                isPasswordValid = checkPassword(),
+                isConfirmPasswordValid = checkConfirmPassword();
+
+            let isFormValid = isUsernameValid &&
+                isEmailValid &&
+                isPasswordValid &&
+                isConfirmPasswordValid;
+
+            if (isFormValid) {
+                var apple = document.getElementById("UserEmail").value;
+                    var bee = document.getElementById("UserNickname").value;
+                    var cat = document.getElementById("UserPassword").value;
+
+                    axios.post("https://localhost:44398/api/Register", {
+                        UserEmail: apple,
+                        UserNickname: bee,
+                        UserPassword: cat
+                    })
+                        .then(res => {
+                            swal("恭喜", "註冊成功", "success")
+                            console.log(res);
+                        })
+                        .catch(error => {
+                            console.log(error.response);
+                        });
+            }
         })
 
-        function checkInputs() {
-            const usernameValue = username.value.trim();
-            const emailValue = email.value.trim();
-            const passwordValue = password.value.trim();
-            const password2Value = password2.value.trim();
-
-            if (usernameValue === '') {
-                setErrorFor(username, '會員名稱不能為空白');
-            } else {
-                setSuccessFor(username);
+        form.addEventListener('input', function (e) {
+            switch (e.target.id) {
+                case 'UserNickname':
+                    checkUsername();
+                    break;
+                case 'UserEmail':
+                    checkEmail();
+                    break;
+                case 'UserPassword':
+                    checkPassword();
+                    break;
+                case 'confirmPassword':
+                    checkConfirmPassword();
+                    break;
             }
+        });
 
-            if (emailValue === '') {
-                setErrorFor(email, '信箱不能為空白');
-            } else if (!isEmail(emailValue)) {
-                setErrorFor(email, '信箱格式錯誤')
-            } else {
-                setSuccessFor(email);
-            }
-
-            if (passwordValue === '') {
-                setErrorFor(password, '密碼不能為空白')
-            } else if (!isPassword(passwordValue)) {
-                setErrorFor(password, '密碼格式錯誤')
-            } else {
-                setSuccessFor(password);
-            }
-
-            if (password2Value === '') {
-                setErrorFor(password2, '確認密碼不能為空白')
-            } else if (passwordValue != password2Value) {
-                setErrorFor(password2, '與密碼不相符，請重新輸入')
-            } else {
-                setSuccessFor(password2);
-            }
-
-            function setErrorFor(input, message) {
-                const formControl = input.parentElement;
-                const small = formControl.querySelector('small');
-
-                small.innerText = message;
-
-                formControl.className = 'field error';
-            }
-
-            function setSuccessFor(input) {
-                const formControl = input.parentElement;
-                formControl.className = 'field success'
-            }
-
-            function isEmail(email) {
-                return /^\w+((-\w+)|(\.\w+)|(\+\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/.test(email);
-            }
-
-            function isPassword(password) {
-                return /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/.test(password);
-            }
-        }
 
     </script>
 
