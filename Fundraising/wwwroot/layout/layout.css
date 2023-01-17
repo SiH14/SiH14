@@ -67,6 +67,13 @@ body {
     margin-right: 10%;
 }
 
+.headerbackgroudicon{
+    position: absolute;
+    width: 70px;
+    top: -3px;
+    right: -145px;
+}
+
 /* Login */
 .dropdown-toggle {
     border: none;
@@ -80,7 +87,7 @@ body {
     border-radius: 15px; */
 }
 
-.dropdown-menu{
+.dropdown-menu {
     background-color: white !important;
     border-radius: 0px;
     min-width: 8vh;
@@ -88,12 +95,12 @@ body {
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
 }
 
-.dropdown-menu a:hover{
+.dropdown-menu a:hover {
     background-color: transparent !important;
     color: #047c51;
 }
 
-.btn:focus{
+.btn:focus {
     box-shadow: none !important;
 }
 
@@ -251,7 +258,7 @@ footer {
 .footer-item h4 {
     text-align: left;
     font-size: 16px !important;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .footer-item p {

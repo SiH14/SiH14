@@ -47,9 +47,12 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
     </div>             
             </ul>
           </div>
-            
+          <div>
+          <img class="headerbackgroudicon" src="../img/headerbackgroudicon.png" alt="">
+      </div>
         
     </div>
+    
 </nav>`
 
 let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a2647">
