@@ -46,14 +46,16 @@
   </head>
   <body>
     <div class="container">
+      <!-- 標題 -->
       <div class="mx-auto" style="width: 80%">
         <h5 class="ms-4 mt-3">個人頁面</h5>
       </div>
+
       <div class="card mx-auto mt-3" id="app">
+        <!-- 個人資料 -->
         <div class="mx-auto mt-4 d-flex" style="width: 65%">
           <img
             :src="userdata.userPhoto"
-            alt="PersonalPhoto"
             class="rounded-circle"
             id="ProfileImg"
           />
@@ -89,8 +91,12 @@
 
         <!-- 贊助/發起項目 -->
         <div class="row" id="OrdersRow">
-          <div class="col-8 mx-auto" v-for="item in ProductsList">
-            <a href="#" class="bg-body rounded btn btn-default shadow p-2 mb-3">
+          <div class="col-8 mx-auto" v-if="userdata.orderCNT!=0">
+            <a
+              href="#"
+              class="bg-body rounded btn btn-default shadow p-2 mb-3"
+              v-for="item in ProductsList"
+            >
               <div class="row pe-3">
                 <div class="col-md-3">
                   <img
@@ -103,16 +109,23 @@
                   <h5 class="text-md-start">{{item.prod.productTitle}}</h5>
                   <!-- <p class="text-md-start">{{item.prod.startime}}~{{item.prod.endtime}}</p> -->
                   <p class="text-muted fs-6 text-md-end">
-                    提案者123 {{item.userNickname}}
+                    提案者 {{item.userName}}
                   </p>
                 </div>
               </div>
             </a>
           </div>
+          <div class="col-8 mx-auto" v-else>
+            <p>尚未贊助任何專案。</p>
+          </div>
         </div>
         <div class="row" id="ProductsRow" style="display: none">
-          <div class="col-8 mx-auto" v-for="item in ProductsList">
-            <a href="#" class="bg-body rounded btn btn-default shadow p-2 mb-3">
+          <div class="col-8 mx-auto" v-if="userdata.productCNT!=0">
+            <a
+              href="#"
+              class="bg-body rounded btn btn-default shadow p-2 mb-3"
+              v-for="item in ProductsList"
+            >
               <div class="row pe-3">
                 <div class="col-md-3">
                   <img
@@ -125,11 +138,14 @@
                   <h5 class="text-md-start">{{item.prod.productTitle}}</h5>
                   <!-- <p class="text-md-start">{{item.prod.startime}}~{{item.prod.endtime}}</p> -->
                   <p class="text-muted fs-6 text-md-end">
-                    提案者 {{item.userNickname}}
+                    提案者 {{item.userName}}
                   </p>
                 </div>
               </div>
             </a>
+          </div>
+          <div class="col-8 mx-auto" v-else>
+            <p>尚未贊助任何專案。</p>
           </div>
         </div>
       </div>

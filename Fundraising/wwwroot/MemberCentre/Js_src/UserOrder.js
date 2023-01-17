@@ -24,8 +24,10 @@ const app = {
     });
   },
   methods: {
+    // post取消表單
     confirmCancel() {
       axios.post("/api/Refunds", this.cancelform).then((res) => {
+        // 然後更改order狀態
         axios.get("/api/userorder/" + res.data.orderId).then((res) => {
           let cancelput = res.data;
           cancelput.orderStateId = 4;

@@ -33,21 +33,16 @@
   <body>
     <div id="app">
       <form>
-        <label for="userid-input">userid:</label>
-        <input type="text" v-model="userid" id="userid-input" />
-        <button type="button" @click="connect">連接</button>
-      </form>
-      <form>
         <label for="user-input">to:</label>
-        <input type="text" v-model="touser" id="user-input" />
+        <input type="text" v-model="msg.toUserID" id="user-input" />
         <br />
         <label for="message-input">訊息:</label>
-        <input type="text" v-model="message" id="message-input" />
+        <input type="text" v-model="msg.contact" id="message-input" />
         <br />
         <button type="button" @click="sendToUser">傳送給特定使用者</button>
       </form>
       <div id="messages">
-        <p v-for="m in messages">{{ m }}</p>
+        <p v-for="m in messages">From{{m.fromUserId}} says {{m.contact}}</p>
       </div>
     </div>
 
@@ -149,6 +144,7 @@
                       史蒂夫鑽研全球投資機會
                     </div>
                   </li>
+
                   <li class="clearfix">
                     <div class="message-data text-end">
                       <span class="message-data-time">10:12 AM, 今天</span>
@@ -182,6 +178,7 @@
         </div>
       </div>
     </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
