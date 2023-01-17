@@ -10,9 +10,11 @@ const app = {
     };
   },
   mounted() {
-    // ordercard資料帶入
-    axios.get("/api/userorder/list/1").then((res) => {
-      this.ordercard = res.data;
+    axios.get("/api/login/getuserid").then((res) => {
+      // ordercard資料帶入
+      axios.get("/api/userorder/list/" + res.data).then((res) => {
+        this.ordercard = res.data;
+      });
     });
 
     // 取消id事件監聽資料帶入
@@ -38,7 +40,7 @@ const app = {
       });
     },
     ordersession(e) {
-      sessionStorage.setItem("orderId", e);
+      sessionStorage.setItem("orderdetailId", e);
     },
   },
 };

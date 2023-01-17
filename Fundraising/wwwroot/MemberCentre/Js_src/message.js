@@ -47,7 +47,12 @@ const app = {
     },
     sendToUser() {
       this.connection
-        .invoke("SendMessageToUser", this.touser, this.message, this.userid)
+        .invoke(
+          "SendMessageToUser",
+          this.touser,
+          this.message,
+          parseInt(this.userid)
+        )
         .catch((err) => console.error(err.toString()));
       this.messages.push("我說:" + this.message);
       this.message = "";

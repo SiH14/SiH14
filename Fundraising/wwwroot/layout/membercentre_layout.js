@@ -1,4 +1,5 @@
-let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-white border-bottom" id="header">
+let header =
+  `<nav class="headernav navbar navbar-expand-lg navbar-light bg-white border-bottom" id="header">
 
 <div class="container-fluid headernav" id="header-container">
     <!--LOGO -->
@@ -53,7 +54,8 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
         
     </div>
     
-</nav>`+ `<div id="MemberCentre" class="row text-dark py-3 fs-5 justify-content-center m-0">
+</nav>` +
+  `<div id="MemberCentre" class="row text-dark py-3 fs-5 justify-content-center m-0">
 <a
   href="./UserInfo.html"
   class="memberlink col-4 col-xl-1 col-md-3 offset-0 btn btn-default"
@@ -74,7 +76,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
 <a href="./UserSetting.html" class="memberlink col-4 col-xl-1 col-md-3 btn btn-default"
   >帳戶設定</a
 >
-</div>`
+</div>`;
 
 let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a2647">
 
@@ -146,59 +148,62 @@ querybody.innerHTML += footer;
 queryheader.innerHTML += `<link rel="stylesheet" href="../layout/layout.css"/>`;
 
 // searchbar
-const icon = document.querySelector('.icon');
-const search = document.querySelector('.search');
-const clear = document.querySelector('.clear');
-const dropdowntoggle = document.querySelector('.dropdowntoggle');
-const dropdownmenu = document.querySelector('.dropdownmenu');
+const icon = document.querySelector(".icon");
+const search = document.querySelector(".search");
+const clear = document.querySelector(".clear");
+const dropdowntoggle = document.querySelector(".dropdowntoggle");
+const dropdownmenu = document.querySelector(".dropdownmenu");
 icon.onclick = function () {
-    search.classList.toggle('active');
-    icon.classList.toggle('active');
-}
+  search.classList.toggle("active");
+  icon.classList.toggle("active");
+};
 
 clear.onclick = function () {
-    document.getElementById('mysearch').value = ''
-}
-
+  document.getElementById("mysearch").value = "";
+};
 
 let mysearchkeydown = document.getElementById("mysearch");
 
 mysearchkeydown.onkeydown = function (e) {
-    if (e.keyCode == 13) {
-        //触发键盘事件enter
-        window.location = "https://www.youtube.com/?themeRefresh=1";
-    }
-}
+  if (e.keyCode == 13) {
+    //触发键盘事件enter
+    window.location = "https://www.youtube.com/?themeRefresh=1";
+  }
+};
 
-document.addEventListener('mousedown', (e) => {
-    var apple = e.target.classList.value
-    var bee = String(apple)
-    if (bee.indexOf("headernav") == -1) {
-        document.getElementById('mysearch').value = '';
-        search.classList.remove('active');
-    }
-})
+document.addEventListener("mousedown", (e) => {
+  var apple = e.target.classList.value;
+  var bee = String(apple);
+  if (bee.indexOf("headernav") == -1) {
+    document.getElementById("mysearch").value = "";
+    search.classList.remove("active");
+  }
+});
 
 // get登入的userid，設置頭像
 var userid = "";
 window.onload = function getuserID() {
-    getid = function (callback) {
-        axios.get("https://localhost:44398/api/Login/getuserid")
-            .then(res => {
-                callback(res.data);
-                console.log(res.data);
-                // if (res.data != "") {
-                //     alert("login OK")
-                // }
-                axios.get("https://localhost:44398/api/Login/getuserphoto/" + res.data)
-                    .then(res => {
-                        //console.log(res.data[0].userPhoto)
-                        var setimg = document.getElementById("iconimg");
-                        setimg.setAttribute("src", res.data[0].userPhoto)
-                        setimg.style.width = "30px";
-                        setimg.style.height = "30px";
-                        setimg.style.borderRadius = "15px";
-                        document.querySelector(".dropdown-menu").innerHTML = ` <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
+  getid = function (callback) {
+    axios
+      .get("https://localhost:44398/api/Login/getuserid")
+      .then((res) => {
+        callback(res.data);
+        console.log(res.data);
+        // if (res.data != "") {
+        //     alert("login OK")
+        // }
+        axios
+          .get("https://localhost:44398/api/Login/getuserphoto/" + res.data)
+          .then((res) => {
+            //console.log(res.data[0].userPhoto)
+            var setimg = document.getElementById("iconimg");
+            setimg.setAttribute("src", res.data[0].userPhoto);
+            setimg.style.width = "30px";
+            setimg.style.height = "30px";
+            setimg.style.borderRadius = "15px";
+            document.querySelector(
+              ".dropdown-menu"
+            ).innerHTML = ` <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
                     href="../MemberCentre/UserInfo.html">個人頁面</a></li>
             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
                     href="#">追蹤專案</a></li>
@@ -208,25 +213,26 @@ window.onload = function getuserID() {
                     href="#">提案紀錄</a></li>
             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
                     href="#">聯絡訊息</a></li>
-            <li style="text-align: center;"><a class="dropdown-item" href="https://localhost:44398/Proposal/myproposal.html" onclick="logout()">登出</a></li>`
-                    })
-            })
-            .catch(error => {
-                console.log(error.response);
-            })
-    }
-    getid(function (myuser) {
-        console.log(myuser)
-        userid = myuser;
-    })
-}
+            <li style="text-align: center;"><a class="dropdown-item" href="https://localhost:44398/Proposal/myproposal.html" onclick="logout()">登出</a></li>`;
+          });
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+  getid(function (myuser) {
+    console.log(myuser);
+    userid = myuser;
+  });
+};
 
 function logout() {
-    axios.delete("https://localhost:44398/api/Login")
-        .then(res => {
-            console.log(res);
-        })
-        .catch(error => {
-            console.log(error.response);
-        });
+  axios
+    .delete("https://localhost:44398/api/Login")
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
 }

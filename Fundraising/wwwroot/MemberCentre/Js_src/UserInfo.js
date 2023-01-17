@@ -16,11 +16,15 @@ Vue.createApp({
     },
   },
   mounted() {
-    axios.get("/api/userinfo/1").then((res) => {
-      this.userdata = res.data;
-    });
-    axios.get("/api/userinfo/ProductList/1").then((res) => {
-      this.ProductsList = res.data;
+    axios.get("/api/login/getuserid").then((res) => {
+      // 拿userdata
+      axios.get("/api/userinfo/" + res.data).then((res) => {
+        this.userdata = res.data;
+      });
+      // 拿ProductsList
+      axios.get("/api/userinfo/ProductList/" + res.data).then((res) => {
+        this.ProductsList = res.data;
+      });
     });
   },
 }).mount("#app");

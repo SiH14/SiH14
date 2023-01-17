@@ -33,6 +33,7 @@
   </head>
   <body>
     <div class="container" id="app">
+      <!-- 標題˙ -->
       <div class="mx-auto ps-4 pt-3" style="width: 80%">
         <h5>贊助紀錄</h5>
         <p style="font-size: 0.9rem">
@@ -40,6 +41,7 @@
         </p>
       </div>
       <div id="OrderCard">
+        <!-- 每筆訂單 -->
         <div
           class="card mx-auto mt-3 shadow-sm px-2"
           v-for="order in ordercard"
@@ -198,11 +200,13 @@
             </div>
           </div>
         </div>
-
+        <!-- 若未曾贊助 -->
         <h2 v-if="ordercard.length==0" class="text-center mt-5">
           尚未贊助任何專案。
         </h2>
       </div>
+
+      <!-- 彈出式取消表單 -->
       <div
         class="modal fade"
         id="cancelform"

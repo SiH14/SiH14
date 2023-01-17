@@ -5,8 +5,10 @@ const app = {
     };
   },
   mounted() {
-    axios.get("/api/userinfo/setting/1").then((res) => {
-      this.userinfo = res.data;
+    axios.get("/api/login/getuserid").then((res) => {
+      axios.get("/api/userinfo/setting/" + res.data).then((res) => {
+        this.userinfo = res.data;
+      });
     });
   },
   methods: {
@@ -22,10 +24,12 @@ const app = {
       }
     },
     submitSetting() {
-      axios.put("/api/userinfo/setting/1", this.userinfo).then((res) => {
-        alert("儲存成功!");
-        history.go(0);
-      });
+      axios
+        .put("/api/userinfo/setting/" + this.userinfo.userId, this.userinfo)
+        .then(() => {
+          alert("儲存成功!");
+          history.go(0);
+        });
     },
   },
 };
