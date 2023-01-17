@@ -196,7 +196,6 @@
             color: #e74c3c;
             visibility: visible;
         }
-
     </style>
 </head>
 
@@ -207,7 +206,7 @@
 
                 <header>註冊新帳號</header>
 
-                <form action="#" id="form">
+                <form id="form">
 
                     <div class="field input-field email-field">
                         <input type="text" id="UserEmail" placeholder="輸入信箱" class="input" />
@@ -233,7 +232,7 @@
 
 
                     <div class="field button-field">
-                        <button id="registerBtn" type="button" onclick="OK()">註冊</button>
+                        <button id ="registerBtn" type="button">註冊</button>
                     </div>
 
                 </form>
@@ -254,6 +253,7 @@
         </div>
     </section>
 
+
     <script src="../layout/layout.js"></script>
     <script src="registration.js"></script>
 
@@ -266,10 +266,11 @@
         const password = document.getElementById('UserPassword')
         const password2 = document.getElementById('confirmPassword')
 
+
         document.getElementById('registerBtn').addEventListener('click', (e) => {
             e.preventDefault();
-
             checkInputs();
+
         })
 
         function checkInputs() {
@@ -330,6 +331,7 @@
                 return /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/.test(password);
             }
         }
+
     </script>
 
 </body>
