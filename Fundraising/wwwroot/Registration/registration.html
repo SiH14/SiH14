@@ -204,7 +204,7 @@
         <div class="form signup">
             <div class="form-content">
 
-                <header>註冊新帳號</header>
+                <header>註冊會員</header>
 
                 <form id="form">
 
@@ -214,7 +214,7 @@
                     </div>
 
                     <div class="field input-field">
-                        <input type="text" id="UserNickname" placeholder="輸入會員名稱" class="input" />
+                        <input type="text" id="UserName" placeholder="輸入會員名稱" class="input" />
 
                         <small>error message</small>
                     </div>
@@ -238,7 +238,7 @@
                 </form>
 
                 <div class="form-link">
-                    <span>已經是會員?<a href="#" class="link signup-link">直接登入</a></span>
+                    <span>已經是會員?<a href="https://localhost:44398/Login/login.html" class="link signup-link">直接登入</a></span>
                 </div>
             </div>
 
@@ -246,7 +246,7 @@
 
             <div class="media-options">
                 <a href="" class="field google">
-                    <img src="/google icon.png" alt="" style="width: 20px; height: 20px; object-fit: cover;">
+                    <img src="./google icon.png" alt="" style="width: 20px; height: 20px; object-fit: cover;">
                     <span>使用Google帳號繼續</span>
                 </a>
             </div>
@@ -261,7 +261,7 @@
     <script>
         const form = document.querySelector('#form')
         const emailEl = document.querySelector('#UserEmail')
-        const usernameEl = document.querySelector('#UserNickname')
+        const usernameEl = document.querySelector('#UserName')
         const passwordEl = document.querySelector('#UserPassword')
         const confirmPasswordEl = document.querySelector('#confirmPassword')
 
@@ -384,27 +384,65 @@
 
             if (isFormValid) {
                 var apple = document.getElementById("UserEmail").value;
-                    var bee = document.getElementById("UserNickname").value;
-                    var cat = document.getElementById("UserPassword").value;
+                var bee = document.getElementById("UserName").value;
+                var cat = document.getElementById("UserPassword").value;
 
-                    axios.post("https://localhost:44398/api/Register", {
-                        UserEmail: apple,
-                        UserNickname: bee,
-                        UserPassword: cat
+                axios.post("https://localhost:44398/api/login/register", {
+                    UserEmail: apple,
+                    UserName: bee,
+                    UserPassword: cat
+                })
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data == "此帳號已有人使用") {
+                            swal(res.data, "", "warning", {
+                                buttons: {
+                                    確定: true
+                                },
+                            })
+                                .then((value) => {
+                                    switch (value) {
+                                        case "確定":
+                                            break;
+                                    }
+                                });
+                        }
+                        else {
+                            axios.post("https://localhost:44398/api/Register", {
+                                UserEmail: apple,
+                                UserName: bee,
+                                UserPassword: cat
+                            })
+                                .then(res => {
+                                    swal("恭喜註冊成功", "", "success", {
+                                        buttons: {
+                                            確定: true
+                                        },
+                                    })
+                                        .then((value) => {
+                                            switch (value) {
+                                                case "確定":
+                                                    window.location = "https://localhost:44398/Login/login.html"
+                                                    break;
+                                            }
+                                        });
+
+                                    console.log(res);
+                                })
+                                .catch(error => {
+                                    console.log(error.response);
+                                });
+                        }
                     })
-                        .then(res => {
-                            swal("恭喜", "註冊成功", "success")
-                            console.log(res);
-                        })
-                        .catch(error => {
-                            console.log(error.response);
-                        });
+                    .catch(error => {
+                        console.log(error.response);
+                    });
             }
         })
 
         form.addEventListener('input', function (e) {
             switch (e.target.id) {
-                case 'UserNickname':
+                case 'UserName':
                     checkUsername();
                     break;
                 case 'UserEmail':

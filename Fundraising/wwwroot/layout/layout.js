@@ -2,7 +2,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
 
 <div class="container-fluid headernav" id="header-container">
     <!--LOGO -->
-    <a class="navbar-brand fs-2 headernav" id="header-brand" href="#">咱的募資平台</a>
+    <a class="navbar-brand fs-2 headernav" id="header-brand" href="https://localhost:44398/MainPage/MainPage.html">咱的募資平台</a>
 
     <!-- Bar -->
 
@@ -10,10 +10,10 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
         <!-- LEFT -->
         <ul class="navbar-nav me-auto fs-5 headernav">
             <li class="nav-item headernav">
-                <a class="nav-link headernav" href="#" id="header-home">首頁</a>
+                <a class="nav-link headernav" href="https://localhost:44398/MainPage/MainPage.html" id="header-home">首頁</a>
             </li>
             <li class="nav-item headernav" id="header-items">
-                <a class="nav-link headernav" href="./myproposal.html">提案</a>
+                <a class="nav-link headernav" href="https://localhost:44398/Proposal/myproposal.html">提案</a>
             </li>
             <li class="nav-item headernav" id="header-items">
                 <a class="nav-link headernav" href="#">探索</a>
@@ -41,8 +41,8 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
         </a>
 
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item" href="#">註冊</a></li>
-            <li><a class="dropdown-item" href="https://localhost:44398/Proposal/test4.html">登入</a></li>
+            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item" href="https://localhost:44398/Registration/registration.html">註冊</a></li>
+            <li><a class="dropdown-item" href="https://localhost:44398/Login/login.html">登入</a></li>
         </ul>
     </div>             
             </ul>
@@ -55,7 +55,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
     
 </nav>`
 
-let footer = `<footer class="text-dark pt-5 pb-4" style="background-color: #0a2647">
+let footer = `<footer class="text-dark pt-5 pb-4">
 
 <div class="footer-container text-center text-md-left">
 
@@ -126,7 +126,6 @@ queryheader.innerHTML += `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.
 let queryheader2 = document.querySelector("head");
 queryheader2.innerHTML += `<link rel="stylesheet" href="../layout/layout.css"/>`
 
-
 // searchbar
 const icon = document.querySelector('.icon');
 const search = document.querySelector('.search');
@@ -187,7 +186,7 @@ window.onload = function getuserID() {
                     href="#">提案紀錄</a></li>
             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
                     href="#">聯絡訊息</a></li>
-            <li style="text-align: center;"><a class="dropdown-item" href="https://localhost:44398/Proposal/myproposal.html" onclick="logout()">登出</a></li>`
+            <li style="text-align: center;"><a class="dropdown-item" href="https://localhost:44398/MainPage/MainPage.html" onclick="logout()">登出</a></li>`
                     })
             })
             .catch(error => {

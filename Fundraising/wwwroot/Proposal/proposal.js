@@ -323,7 +323,7 @@ var dataDB;
                                 case "確定":
                                     confirmsubmit();
                                     swal("表單已送出!", "", "success");
-                                    window.onload="https://localhost:44398/Proposal/myproposal.html"
+                                    window.location="https://localhost:44398/Proposal/myproposal.html"
                                     break;
                                 case "取消":
                                     break;

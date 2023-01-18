@@ -24,6 +24,20 @@ namespace Fundraising.Controllers
 			_context = context;
 		}
 
+		[HttpPost("register")]
+		public string register(LoginPost value)
+		{
+			var userregister = (from a in _context.Users
+						where a.UserEmail == value.UserEmail
+						select a).SingleOrDefault();
+
+			if (userregister != null)
+			{
+				return "此帳號已有人使用";
+			}
+			return value.UserEmail;
+		}
+
 		[HttpPost]
 		public string login(LoginPost value)
 		{
