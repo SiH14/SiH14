@@ -10,19 +10,20 @@ namespace Fundraising.Hubs
     public class ChatHub : Hub
     {
 
-        public async Task Connect(int userid)
+        public async Task Connect(int fromuser)
         {
             //使用者連線
-            string userId = userid.ToString();
-            await Groups.AddToGroupAsync(Context.ConnectionId, userId);
+            string formUser = fromuser.ToString();
+            await Groups.AddToGroupAsync(Context.ConnectionId, formUser);
         }
 
 
-        public Task SendMessageToUser(int userid,string user, string message)
+        public Task SendMessageToUser(int fromuser,int touser, string message)
         {
             // 透過Groups.SendAsync將訊息傳送給特定群組
-            string userId= userid.ToString();
-            return Clients.Group(user).SendAsync("ReceiveMessage", userId, user, message);
+            string formUser= fromuser.ToString();
+            string toUser= touser.ToString();
+            return Clients.Group(toUser).SendAsync("ReceiveMessage", formUser, toUser, message);
         }
 
 

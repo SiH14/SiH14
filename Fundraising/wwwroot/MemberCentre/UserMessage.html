@@ -31,26 +31,13 @@
     <title>聯絡訊息</title>
   </head>
   <body>
-    <div id="app">
-      <form>
-        <label for="user-input">to:</label>
-        <input type="text" v-model="msg.toUserID" id="user-input" />
-        <br />
-        <label for="message-input">訊息:</label>
-        <input type="text" v-model="msg.contact" id="message-input" />
-        <br />
-        <button type="button" @click="sendToUser">傳送給特定使用者</button>
-      </form>
-      <div id="messages">
-        <p v-for="m in messages">From{{m.fromUserId}} says {{m.contact}}</p>
-      </div>
-    </div>
-
-    <div class="container">
+    <div class="container" id="app">
+      <!-- 標題 -->
       <div class="mx-auto" style="width: 80%">
         <h5 class="ms-4 mt-3">聯絡訊息</h5>
       </div>
-      <div class="clearfix mx-auto card mt-3">
+
+      <div class="clearfix mx-auto card my-3">
         <div class="mt-3">
           <div class="chat-app mx-auto">
             <!-- 對象(左) -->
@@ -105,12 +92,9 @@
 
             <!-- 聊天(右) -->
             <div class="chat">
+              <!-- 目前對話對象(標題) -->
               <div class="chat-header clearfix mt-2">
-                <a
-                  href="javascript:void(0);"
-                  data-toggle="modal"
-                  data-target="#view_info"
-                >
+                <a href="#" data-toggle="modal" data-target="#view_info">
                   <img
                     class="img-"
                     src="../img/PersonalPhoto.jpg"
@@ -122,43 +106,28 @@
                   <small>上次訊息: 2022-12-29 22:38</small>
                 </div>
               </div>
+
               <!-- 聊天記錄 -->
               <div class="chat-history">
                 <ul class="m-b-0">
                   <!-- 每一筆聊天 -->
-                  <!-- 自己 -->
-                  <li class="clearfix">
-                    <div class="message-data text-end">
-                      <span class="message-data-time">10:12 AM, 今天</span>
+                  <li class="clearfix" v-for="item in messages">
+                    <!-- 判斷為誰發送 -->
+                    <div v-if="item.fromUserId==msg.fromUserId">
+                      <div class="message-data text-end">
+                        <span class="message-data-time">10:12 AM, 今天</span>
+                      </div>
+                      <div class="message other-message float-right shadow-sm">
+                        {{item.contact}}
+                      </div>
                     </div>
-                    <div class="message other-message float-right shadow-sm">
-                      史蒂夫和戴夫都使用eToro投資金融市場
-                    </div>
-                  </li>
-                  <!-- 對方 -->
-                  <li class="clearfix">
-                    <div class="message-data">
-                      <span class="message-data-time">10:12 AM, 今天</span>
-                    </div>
-                    <div class="message my-message shadow-sm">
-                      史蒂夫鑽研全球投資機會
-                    </div>
-                  </li>
-
-                  <li class="clearfix">
-                    <div class="message-data text-end">
-                      <span class="message-data-time">10:12 AM, 今天</span>
-                    </div>
-                    <div class="message other-message float-right shadow-sm">
-                      戴夫精研如何成為六十級巫師
-                    </div>
-                  </li>
-                  <li class="clearfix">
-                    <div class="message-data">
-                      <span class="message-data-time">10:15 AM, 今天</span>
-                    </div>
-                    <div class="message my-message shadow-sm">
-                      史蒂夫追蹤新聞動態 掌握最新市場消息
+                    <div v-else>
+                      <div class="message-data">
+                        <span class="message-data-time">10:12 AM, 今天</span>
+                      </div>
+                      <div class="message my-message shadow-sm">
+                        {{item.contact}}
+                      </div>
                     </div>
                   </li>
                 </ul>
@@ -169,8 +138,15 @@
                     type="text"
                     class="form-control"
                     placeholder="輸入訊息"
+                    v-model="msg.contact"
+                    id="message-input"
                   />
-                  <span class="input-group-text"> 發送 </span>
+                  <button
+                    @click="sendToUser"
+                    class="btn btn-secondary input-group-text"
+                  >
+                    發送
+                  </button>
                 </div>
               </div>
             </div>

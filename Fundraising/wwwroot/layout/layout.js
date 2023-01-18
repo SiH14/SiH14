@@ -176,6 +176,7 @@ window.onload = function getuserID() {
                         setimg.style.width = "30px";
                         setimg.style.height = "30px";
                         setimg.style.borderRadius = "15px";
+                        setimg.style.objectFit = "cover";
                         document.querySelector(".dropdown-menu").innerHTML = ` <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
                     href="../MemberCentre/UserInfo.html">個人頁面</a></li>
             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
