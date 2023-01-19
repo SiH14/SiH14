@@ -100,25 +100,41 @@ function readPlanURL(input) {
     }
 }
 
- // 取得username
- $(document).ready(function () {
-    axios.get("https://localhost:44398/api/Login/getuserid/")
+
+
+// 取得username
+$(document).ready(function () {
+
+    axios.get("https://localhost:44398/api/Login/getusername")
         .then(res => {
             console.log(res.data);
-            axios.get("https://localhost:44398/api/Login/getuserphoto/" + res.data)
-                .then(res => {
-                    console.log(res.data[0]);
-                    console.log(document.querySelector(".designby").innerHTML);
-                    document.querySelector(".designby").innerHTML = "設計by " + res.data[0].userName;
-                    document.querySelector("#PrincipalName").value = res.data[0].userName;
-                    document.querySelector("#PrincipalEmail").value = res.data[0].userEmail;
-                    document.querySelector("#PrincipalPhone").value = res.data[0].userPhone;
+            if (res.data == "未登入") {
+                window.location = "https://localhost:44398/Login/login.html"
+            } else {
+                axios.get("https://localhost:44398/api/Login/getuserid/")
+                    .then(res => {
+                        console.log(res.data);
+                        axios.get("https://localhost:44398/api/Login/getuserphoto/" + res.data)
+                            .then(res => {
+                                console.log(res.data[0]);
+                                console.log(document.querySelector(".designby").innerHTML);
+                                document.querySelector(".designby").innerHTML = "設計by " + res.data[0].userName;
+                                document.querySelector("#PrincipalName").value = res.data[0].userName;
+                                document.querySelector("#PrincipalEmail").value = res.data[0].userEmail;
+                                document.querySelector("#PrincipalPhone").value = res.data[0].userPhone;
 
-                })
+                            })
+                    })
+                    .catch(error => {
+                        console.log(error.response);
+                    })
+            }
         })
         .catch(error => {
             console.log(error.response);
         })
+
+
 })
 
 // 送出提案function
@@ -323,7 +339,7 @@ var dataDB;
                                 case "確定":
                                     confirmsubmit();
                                     swal("表單已送出!", "", "success");
-                                    window.location="https://localhost:44398/Proposal/myproposal.html"
+                                    window.location = "https://localhost:44398/Proposal/myproposal.html"
                                     break;
                                 case "取消":
                                     break;
