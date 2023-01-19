@@ -10,6 +10,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Fundraising.Controllers
 {
@@ -98,6 +99,7 @@ namespace Fundraising.Controllers
 			return Content(userID);
 		}
 
+		[Authorize]
 		[HttpGet("getusername")]
 		public IActionResult getuserName()
 		{
