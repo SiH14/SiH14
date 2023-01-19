@@ -138,7 +138,7 @@
                 <!-- stepper fail-->
                 <div
                   class="stepper mb-md-3"
-                  v-if="order.orderStateId==6 || (new Date(order.endTime) < new Date() && order.targetAmount > order.currentAmount &&order.orderStateId==1)"
+                  v-else-if="order.orderStateId==6 || (new Date(order.endTime) < new Date() && order.targetAmount > order.currentAmount &&order.orderStateId==1)"
                 >
                   <div class="step completed">
                     <div class="step-label"></div>
@@ -160,7 +160,7 @@
                 <!-- stepper cancel-->
                 <div
                   class="stepper mb-md-3"
-                  v-if="order.orderStateId==4 || order.orderStateId==5"
+                  v-else-if="order.orderStateId==4 || order.orderStateId==5"
                 >
                   <div class="step completed">
                     <div class="step-label"></div>

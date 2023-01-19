@@ -1,6 +1,8 @@
 const app = {
   data() {
     return {
+      userid: "",
+      chatroom: [],
       msg: { fromUserId: "", toUserId: 2, contact: "" },
       messages: [],
       connection: null,
@@ -9,7 +11,7 @@ const app = {
   mounted() {
     // 初始化
     axios.get("/api/login/getuserid").then((res) => {
-      this.msg.fromUserId = res.data;
+      this.userid = res.data;
       // 連線
       this.connection = new signalR.HubConnectionBuilder()
         .withUrl("/chatHub")
