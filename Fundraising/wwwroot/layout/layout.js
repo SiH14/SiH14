@@ -25,6 +25,28 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
 
     <div class="headernav">
         <ul class="navbar-nav me-5 headernav">
+        <button type="button" class="btn voicesearch" data-bs-toggle="modal" data-bs-target="#myModal">
+            🎤
+        </button>
+
+        <!-- 語音搜尋窗口 -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">語音偵測</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <p class = "voicesearchtext">請開始說話...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
             <li class="headernav" style="padding-right: 10px;">
                 <div class="search headernav">                
                     <a class="icon headernav" href="#" role="button"></a>
@@ -140,13 +162,29 @@ clear.onclick = function () {
     document.getElementById('mysearch').value = ''
 }
 
+let voicesearch = document.querySelector(".voicesearch");
+voicesearch.onclick = function () {
+    if (document.querySelector(".voicesearchtext").innerText != "請再說一次.") {
+        setTimeout(wangaa, 6500);
+    }
+}
+
+function wangaa() {
+    sessionStorage.setItem("filterans", document.getElementById("mysearch").value);
+    window.location = "/productpage/filterans.html";
+}
 
 let mysearchkeydown = document.getElementById("mysearch");
 
 mysearchkeydown.onkeydown = function (e) {
     if (e.keyCode == 13) {
         //触发键盘事件enter
-        window.location = "https://www.youtube.com/?themeRefresh=1";
+        /*  window.location = "https://www.youtube.com/?themeRefresh=1";*/
+
+        //我加入搜尋
+        sessionStorage.setItem("filterans", document.getElementById("mysearch").value);
+        window.location = "/productpage/filterans.html";
+        //我加入搜尋
     }
 }
 
