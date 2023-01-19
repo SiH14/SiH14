@@ -279,6 +279,10 @@ footer {
     cursor: pointer;
 }
 
+.footertext{
+    width:100%;
+}
+
 /* membercentre */
 .memberlink {
     font-size: 16px;
