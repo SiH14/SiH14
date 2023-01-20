@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Back-Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <script src="js/sb-admin-2.min.js"></script> -->
+    <script src="./js/logincheck.js"></script>
+</head>
+
+<body id="app">
+    <div class="container-fluid p-0 bg-theme" >
+        <!-- 導覽列 -->
+        <div id="myheader" class="bg-white" style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
+
+        </div>
+        <!-- 結束 導覽列 -->
+        <div class=" container-fluid px-5 p-4">
+            <div class="row justify-content-center">
+                <!-- 側邊欄位 -->
+
+                <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar">
+                    <br>
+                    <div id="mysider"></div>
+                </ul>
+
+                <!-- 結束 側邊欄位 -->
+                <!--主要內容======================================================================================================== -->
+                <div class="col-10">
+                    <div class="px-3">
+                        <!-- 內容標頭-->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h2 mb-0 text-gray-800 font-weight-bold">編輯首頁</h1>
+                        </div>
+                        <div class="row" >
+                            <textarea name="editor1" id="editor1" rows="10" cols="80">
+                            
+                            </textarea>
+                        </div>
+                        <!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->                        
+                    </div>
+                </div>
+                <!-- 結束 主要內容 -->
+            </div>
+        </div>
+    </div>
+    <!-- 頁尾 -->
+    <div id="myfooter"></div>
+    <!-- 結束 頁尾r -->
+    <script>
+        CKEDITOR.replace( 'editor1' );
+        var data = CKEDITOR.instances.editor1.getData();
+
+
+    </script>
+
+  
+    <!-- 回上方按鈕-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <script src="./js/myjs.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+
+
+    <script>
+        const { createApp } = Vue
+
+        createApp({
+            data() {
+                return {
+                    employeeinfo: []
+                }
+            },
+            methods: {
+                logout: function () {
+                    // alert("1523 ")
+                    axios.get("/api/back/logout").then(res => { if (res.data == "已登出") { window.location.reload() } })
+                },
+                getuserinfo: function (index) {
+                    // console.log(index)
+                    axios.get(`/api/users/${index}`)
+                        .then((response) => {
+                            this.userinfo = response.data
+                            this.userinfo.userBirthday = this.userinfo.userBirthday.substr(0, 10)
+                        })
+                }
+            },
+
+            mounted() {
+            },
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

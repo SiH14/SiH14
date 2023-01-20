@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Back-Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/logincheck.js"></script>
+</head>
+
+<body id="app">
+    <div class="container-fluid p-0 bg-theme">
+        <!-- 導覽列 -->
+        <div id="myheader" class="bg-white" style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
+
+        </div>
+        <!-- 結束 導覽列 -->
+        <div class=" container-fluid px-5 p-4">
+            <div class="row justify-content-center" >
+                <!-- 側邊欄位 -->
+
+                <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar">
+                    <br>
+                    <div id="mysider"></div>
+                </ul>
+
+                <!-- 結束 側邊欄位 -->
+                <!--主要內容-->
+                <div class="col-10">
+                    <div class="px-3">
+                        <div class="bg-white item-style ">
+                            <!-- ===============================================================================================================  -->
+                            <div class="min-vh-100 ">
+                                <div class="card-header py-3 mb-3">
+                                    <h3 class="m-0">提案查詢</h6>
+                                </div>
+                                <div class="row justify-content-center p-3">
+
+                                    <div class="mb-3 col-12">
+                                        <form action="" class="py-4"
+                                            style=" position: relative; border: 1px solid #e3e6f0;">
+                                            <div class="row " style="line-height: 32px;">
+                                                <p class="bg-white"
+                                                    style="position: absolute; top: -15px; left: 2%; font-size: 24px;">
+                                                    查詢條件</p>
+                                                <div class="">
+                                                    <label class="px-3" for="">提案編號:</label>
+                                                    <input type="text">
+                                                </div>
+                                                <div class="">
+                                                    <label class="px-3" for="">提案名稱:</label>
+                                                    <input type="text">
+                                                </div>
+                                                <div class="">
+                                                    <label class="px-3" for="">提案狀態:</label>
+                                                    <select name="" id="" style="width: 100px; height: 100%;">
+                                                        <option value="">審核中</option>
+                                                        <option value="">募資中</option>
+                                                        <option value="">已取消</option>
+                                                    </select>
+                                                </div>
+                                                <div class="px-3">
+                                                    <button class="btn btn-success" style="width: 100px;">查詢</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover" id="dataTable" width="100%"
+                                                cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>提案編號</th>
+                                                        <th>負責人</th>
+                                                        <th>圖片</th>
+                                                        <th>提案名稱</th>
+                                                        <th>狀態</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="item in productlist">
+                                                        <td>{{item.p.productId}}</td>
+                                                        <td>{{item.p.principalName}}</td>
+                                                        <td class="col-1 p-1"><img :src="item.p.coverphoto" alt=""
+                                                                style=" width: 100%;"></td>
+                                                        <td>{{item.p.productTitle}}</td>
+                                                        <td>{{item.p.productStateId}}</td>
+                                                        <td>
+                                                            <div>
+                                                                <!-- <a href="./PdetailsEdit.html"
+                                                                    class="btn btn-outline-success mr-3"
+                                                                    v-on:click="checkmenber(item.p.productId)">編輯 </a> -->
+                                                                <a href="./PdetailsView.html"
+                                                                    class="btn btn-outline-success"
+                                                                    v-on:click="checkmenber(item.p.productId)">查看內容</a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- <tr>
+                                                        <td>P1231001</td>
+                                                        <td><img src="" alt="" style="height: 50px; width: 100px;"></td>
+                                                        <td>London</td>
+                                                        <td>已成功</td>
+                                                        <td><a href="./PdetailsView.html"
+                                                                class="btn btn-outline-success">詳細內容</a></td>
+                                                    </tr> -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ===============================================================================================================  -->
+                        </div>
+                    </div>
+                </div>
+                <!-- 結束 主要內容 -->
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- 頁尾 -->
+    <div id="myfooter"></div>
+    <!-- 結束 頁尾r -->
+    <!-- 回上方按鈕-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- 登出彈跳視窗-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/myjs.js"></script>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Chart.js 套件引入 -->
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script> -->
+    <!-- Chart.js 套件引入 -->
+
+    <script>
+        const { createApp } = Vue
+
+        createApp({
+            data() {
+                return {
+                    productlist: [],
+                    employeeinfo: []
+
+                }
+            },
+            methods: {
+                checkmenber: function (a) {
+                    sessionStorage.setItem("productId", a);
+
+                }
+            },
+            mounted() {
+                axios.get('/api/back/ProductList')
+                    .then((response) => {
+                        Object.values(response.data)
+                        // console.log(response.data)
+                        response.data.forEach(e => {
+                            // console.log(e)
+                            if (e.p.productStateId == 1) {
+                                e.p.productStateId = "審核中"
+                            } else if (e.p.productStateId == 2) {
+                                e.p.productStateId = "審核不通過"
+                            } else if (e.p.productStateId == 3 && new Date(e.p.startime) < new Date() && new Date(e.p.endtime) > new Date()) {
+                                e.p.productStateId = "募資中"
+                            } else if (e.p.productStateId == 3 && new Date(e.p.endtime) < new Date() && e.sum > e.p.targetAmount) {
+                                e.p.productStateId = "募資成功"
+                            } else if (e.p.productStateId == 3 && new Date(e.p.endtime) < new Date() && e.sum < e.p.targetAmount) {
+                                e.p.productStateId = "募資失敗"
+                            }
+
+                            this.productlist = response.data
+                        });
+                        // this.orderlist = response.data
+                        // console.log(response.data.length)
+                    })
+                axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
+
+                    this.employeeinfo = res.data
+                    console.log(this.employeeinfo)
+                })
+            },
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Back-Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+    <script src="./js/logincheck.js"></script>
+</head>
+
+<body id="app">
+    <div class="container-fluid p-0 bg-theme">
+        <!-- 導覽列 -->
+        <div id="myheader" class="bg-white" style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
+
+        </div>
+        <!-- 結束 導覽列 -->
+        <div class=" container-fluid px-5 p-4">
+            <div class="row justify-content-center">
+                <!-- 側邊欄位 -->
+
+                <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar">
+                    <br>
+                    <div id="mysider"></div>
+                </ul>
+
+                <!-- 結束 側邊欄位 -->
+                <!--主要內容-->
+                <div class="col-10">
+                    <div class="px-3">
+                        <div class="bg-white item-style mb-5">
+                            <!-- ===============================================================================================================  -->
+                            <div class="">
+                                <div class="card-header py-3 mb-3">
+                                    <h3 class="m-0">留言管理</h6>
+                                </div>
+                                <div class="row justify-content-center p-3">
+                                    <div class="mb-3  col-12">
+                                        <form action="" class="py-4"
+                                            style=" position: relative; border: 1px solid #e3e6f0;">
+                                            <div class="row m-0 px-2">
+                                                <p class="bg-white"
+                                                    style="position: absolute; top: -15px; left: 2%; font-size: 24px;">
+                                                    查詢條件</p>
+                                                <div style="font-size: 24px;">
+                                                    選擇題案名稱:</div>
+                                                <select name="" id="productselect" v-on:change="changegetcomment">
+                                                    <option v-for="item in productlist.filter(x=>x.productStateId == 3)"
+                                                        :value="item.productId">{{item.productTitle}}</option>
+                                                </select>
+
+
+                                                <div class="px-3">
+                                                    <button class="btn btn-success" style="width: 100px;">查詢</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class=" col-10">
+                                        <div class="row">
+                                            <div class="col-4"><img :src="productcomment.Coverphoto" alt="" class="img-fluid"></div>
+                                            <div class="col-8">
+                                                <h3>提案標題:{{productcomment.productTitle}}</h3>
+                                                <p>提案人:{{productcomment.principalName}}</p>
+                                                <p>{{productcomment.comcount}}則留言</p>
+                                            </div>
+                                        </div>
+                                        <div v-if="productcomment.comments == 0">暫時沒有留言</div>
+                                        <div class="row mb-3" style="border-bottom: 1px solid black;"
+                                            v-for="comitem in productcomment.comments">
+                                            <div class="col-12">
+                                                <div class="row">
+
+                                                    <div class="col-1"><img :src="comitem.comuser.userPhoto" alt="" class="rounded-circle border img-fluid"></div>
+                                                    <div class="col-9">
+                                                        <div class="d-flex justify-content-between">
+                                                            <h4>{{comitem.comuser.userName}}</h4>
+                                                            <p>{{comitem.commenttime}}</p>
+                                                        </div>
+                                                        <div class="mb-2">{{comitem.commentContent}}</div>
+                                                    </div>
+                                                    <div class="col-2 text-right"><a class="btn btn-danger"
+                                                            v-on:click="setdeletecom(comitem)" data-toggle="modal"
+                                                            data-target="#deletecomment">刪除留言</a> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-1"></div>
+                                            <div class="col-11">
+                                                <div>
+                                                    <a class="" href="#" data-toggle="collapse"
+                                                        :data-target="'#'+comitem.commentContent" aria-expanded="true"
+                                                        aria-controls="collapseTwo">
+                                                        <span>{{comitem.anscount}}則回覆</span>
+                                                    </a>
+                                                </div>
+                                                <div v-for=" ansitem in comitem.answers">
+                                                    <div :id="comitem.commentContent" class="collapse"
+                                                        aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                                                        <div class="bg-white py-2 row">
+                                                            <div class="col-1"><img :src="ansitem.ansUser.userPhoto" alt="" class="rounded-circle border img-fluid"></div>
+                                                            <div class="col-9">
+                                                                <div class="d-flex justify-content-between">
+                                                                    <h5>{{ansitem.ansUser.userName}}</h5>
+                                                                    <p>{{ansitem.answerTime}}</p>
+                                                                </div>
+                                                                <div>{{ansitem.answerContent}}</div>
+                                                            </div>
+                                                            <div class="col-2 text-right"><a data-toggle="modal"
+                                                                    data-target="#deleteanswer" class="btn btn-danger"
+                                                                    v-on:click="setdeleteans(ansitem)">刪除回覆</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                        </div>
+                                        <!-- <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">會員編號</th>
+                                                        <th scope="col">會員姓名</th>
+                                                        <th scope="col">留言內容</th>
+                                                        <th scope="col">留言時間</th>
+                                                        <th scope="col">操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="">
+                                                    <tr>
+                                                        <th>005</th>
+                                                        <td>Mark</td>
+                                                        <td>馬克杯</td>
+                                                        <td>2022-12-29</td>
+                                                        <td><a class="">移除 <i class="fa fa-times-circle"
+                                                                    aria-hidden="true"></i></a></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <th>005</th>
+                                                        <td>Mark</td>
+                                                        <td>馬克杯</td>
+                                                        <td>2022-12-29</td>
+                                                        <td><a class="">移除 <i class="fa fa-times-circle"
+                                                                    aria-hidden="true"></i></a></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <th>005</th>
+                                                        <td>Mark</td>
+                                                        <td>馬克杯</td>
+                                                        <td>2022-12-29</td>
+                                                        <td><a class="">移除 <i class="fa fa-times-circle"
+                                                                    aria-hidden="true"></i></a></td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ===============================================================================================================  -->
+
+                        </div>
+
+                        <!-- Button trigger modal -->
+                        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button> -->
+
+                        <!-- Modal -->
+                        <div class="modal fade " id="deletecomment" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">您即將刪除留言</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body d-flex">
+                                        <div>{{deletecom.commentContent}}</div>
+                                        <div>{{deletecom.commenttime}}</div>
+
+                                    </div>
+                                    <div class="text-right">注意!此留言的回覆會一併刪除</div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                                        <button type="button" class="btn btn-danger"
+                                            v-on:click="deletecomapi(deletecom.commentId)"
+                                            data-dismiss="modal">刪除</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="modal fade " id="deleteanswer" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">您即將刪除回覆</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body d-flex">
+                                        <div>{{deleteans.answerContent}}</div>
+                                        <div>{{deleteans.answerTime}}</div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                                        <button type="button" class="btn btn-danger"
+                                            v-on:click="deletecomapi(deleteans.answerId)"
+                                            data-dismiss="modal">刪除</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 結束 主要內容 -->
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- 頁尾 -->
+    <div id="myfooter"></div>
+    <!-- 結束 頁尾r -->
+    <!-- 回上方按鈕-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- 登出彈跳視窗-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/myjs.js"></script>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Chart.js 套件引入 -->
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script> -->
+    <!-- Chart.js 套件引入 -->
+
+
+
+    <script>
+        const { createApp } = Vue
+
+        createApp({
+            data() {
+                return {
+                    employeeinfo: [],
+                    deletecom: {},
+                    deleteans: {},
+                    productlist: [],
+                    productcomment:
+                    {
+                        "productId": 7,
+                        "coverphoto": "",
+                        "productTitle": "毛孩的彩虹天堂｜汪貓與兔新春文創",
+                        "comcount": 0,
+                        "comments": []
+                    }
+                    ,
+                }
+            },
+            methods: {
+                logout: function () {
+                    // alert("1523 ")
+                    axios.get("/api/back/logout").then(window.location.reload())
+                },
+                changegetcomment: function () {
+                    axios.get(`/api/back/getcomment/${productselect.value}`).then(res => {
+                        this.productcomment = res.data[0];
+                        console.log(res.data[0])
+
+                    })
+
+                },
+                setdeletecom: function (item) {
+                    this.deletecom = item;
+
+                },
+                setdeleteans: function (item) {
+                    this.deleteans = item;
+                    console.log(this.deleteans)
+                },
+                deletecomapi: function (index) {
+                    axios.delete(`/api/Comments/${index}`).then(res => this.changegetcomment())
+                },
+                deleteansapi: function (index) {
+                    console.log(index)
+                },
+            },
+
+            mounted() {
+                axios.get("/api/products").then(res => {
+                    // console.log(res)    
+                    this.productlist = res.data
+                })
+                axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
+
+                    this.employeeinfo = res.data
+                    console.log(this.employeeinfo)
+                })
+            },
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
