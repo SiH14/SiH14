@@ -139,15 +139,16 @@
 
 
         <!--篩選-->
-        <div style="width: 300px;">
+        <!--<div style="width: 300px;">
             <select onchange="filterchiose(this)" style="box-shadow: none;" class="form-select" aria-label="Default select example">
                 <option value="1" selected>熱門</option>
                 <option value="2">最新</option>
                 <option value="3">募資金額</option>
                 <option value="4">募資人數</option>
             </select>
-        </div>
+        </div>-->
         <!--篩選-->
+
         <!--v-for="item in fliterList"-->
         <div class="row g-4 py-8 row-cols-1 row-cols-lg-3">
             <a href="./product.html" style="text-decoration: none; color: black;" v-on:click="getproductID(item)" v-for="item in fliterList">
@@ -165,7 +166,7 @@
 
                     <div class="d-flex justify-content-between">
                         <p style="font-weight:bold">$ {{item.currentAmount}}</p>
-                        <span>866 人支持</span>
+                        <span>{{item.nowperson}} 人支持</span>
                     </div>
 
                     <!-- 進度條 -->

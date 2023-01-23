@@ -16,6 +16,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!--<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
     <style>
@@ -130,15 +131,18 @@
 </head>
 
 <body>
+    <!--初版搜尋-->
     <input id="filtersearch" type="text" placeholder="搜尋…">
+    <!--<button class="btn ">
+        🎤
+    </button>-->
+    <!--初版搜尋-->
 
     <div class="container px-4 py-5" id="mySelected">
         <h2 class="pb-2 border-bottom">
             探索更多{{fliterList.length}}
-            <a href="./product.html" style="font-size: 14px; float: right; text-decoration: none;">More ></a>
+            <!--<a href="./product.html" style="font-size: 14px; float: right; text-decoration: none;">More ></a>-->
         </h2>
-
-
         <!--篩選-->
         <div style="width: 300px;">
             <select onchange="filterchiose(this)" style="box-shadow: none;" class="form-select" aria-label="Default select example">
@@ -163,15 +167,14 @@
                     <img class="selectedimg" src="./page.png" alt="">
                     <p></p>
                     <h3 class="fs-5" style="height: 70px">{{item.productTitle}}</h3>
-
                     <div class="d-flex justify-content-between">
-                        <p style="font-weight:bold">$ {{item.currentAmount}}</p>
-                        <span>866 人支持</span>
+                        <p style="font-weight:bold">$ {{item.currentAmount | money}}</p>
+                        <span>{{item.nowperson}} 人支持</span>
                     </div>
 
                     <!-- 進度條 -->
                     <div class="progress" style="height: 10px;">
-                        <div class="wid progress-bar bg-success" role="progressbar" :style="{width: item.percent+'%'}" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-success" role="progressbar" :style="{width: item.percent+'%'}" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="pb-2"></div>
                     <div class="d-flex justify-content-between">
@@ -181,20 +184,155 @@
                 </div>
             </a>
         </div>
+        <br>
+        <br>
+        <br>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item    ">
+                    <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+    <!-- UI code goes here -->
+    <!--<div id="warning">
+        <h1 style="font-weight:500;">Speech Recognition Speech SDK not found (microsoft.cognitiveservices.speech.sdk.bundle.js missing).</h1>
+    </div>-->
+
+    <div id="content" style="display:none">
+        <table width="100%">
+            <!--<tr>
+                <td></td>
+                <td><h1 style="font-weight:500;">Microsoft Cognitive Services Speech SDK JavaScript Quickstart</h1></td>
+            </tr>-->
+            <!--<tr>
+                <td align="right"><a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/get-started" target="_blank">Subscription</a>:</td>
+                <td><input id="subscriptionKey" type="text" size="40" value="f433aba72ed643f19bd014887e3ad78d"></td>
+            </tr>-->
+            <!--<tr>
+                <td align="right">Region</td>
+                <td><input id="serviceRegion" type="text" size="40" value="southeastasia"></td>
+            </tr>-->
+            <!--<tr>
+                <td></td>
+                <td><button id="startRecognizeOnceAsyncButton">Start recognition</button></td>
+            </tr>-->
+            <!--<tr>
+                <td align="right" valign="top">Results</td>
+                <td><textarea id="phraseDiv" style="display: inline-block;width:500px;height:200px"></textarea></td>
+            </tr>-->
+        </table>
     </div>
 
     <script src="../layout/layout.js"></script>
+    <script src="microsoft.cognitiveservices.speech.sdk.bundle.js"></script>
     <script>
-        /*搜尋*/
-        document.getElementById("filtersearch")
-            .addEventListener("keyup", function (e) {
-                if (e.code === 'Enter') {
-                    document.getElementById("filtersearch").value;
-                    alert(document.getElementById("filtersearch").value);
-                    window.location = "/productpage/filterans.html";
-                    sessionStorage.setItem("filterans", document.getElementById("filtersearch").value);
-                }
+        // status fields and start button in UI
+        var phraseDiv;
+        var startRecognizeOnceAsyncButton;
+
+        // subscription key and region for speech services.
+        var subscriptionKey, serviceRegion;
+        var authorizationToken;
+        var SpeechSDK;
+        var recognizer;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            startRecognizeOnceAsyncButton = document.querySelector('.voicesearch');
+            subscriptionKey = document.getElementById("subscriptionKey");
+            serviceRegion = document.getElementById("serviceRegion");
+            phraseDiv = document.getElementById("phraseDiv");
+
+            // startRecognizeOnceAsyncButton
+            startRecognizeOnceAsyncButton.addEventListener("click", function () {
+                startRecognizeOnceAsyncButton.disabled = true;
+             /*   phraseDiv.innerHTML = "";*/
+
+                // if we got an authorization token, use the token. Otherwise use the provided subscription key
+                var speechConfig;
+                speechConfig = SpeechSDK.SpeechConfig.fromSubscription("f433aba72ed643f19bd014887e3ad78d", "southeastasia");
+                //if (authorizationToken) {
+                //    speechConfig = SpeechSDK.SpeechConfig.fromAuthorizationToken(authorizationToken, serviceRegion.value);
+                //} else {
+                //    if (subscriptionKey.value === "" || subscriptionKey.value === "subscription") {
+                //        alert("Please enter your Microsoft Cognitive Services Speech subscription key!");
+                //        return;
+                //    }
+                //    speechConfig = SpeechSDK.SpeechConfig.fromSubscription("f433aba72ed643f19bd014887e3ad78d", "southeastasia");
+                //}
+
+                // speechConfig.speechRecognitionLanguage = "en-US";
+                speechConfig.speechRecognitionLanguage = "zh-TW";
+                var audioConfig = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
+                recognizer = new SpeechSDK.SpeechRecognizer(speechConfig, audioConfig);
+
+                recognizer.recognizeOnceAsync(
+                    function (result) {
+                        startRecognizeOnceAsyncButton.disabled = false;
+              /*          phraseDiv.innerHTML += result.text;*/
+                        window.console.log(result);
+                        const textresult = result.text
+                        document.getElementById("mysearch").value = result.text.substring(0, textresult.length - 1);
+                        document.querySelector(".voicesearchtext").innerHTML = result.text.substring(0, textresult.length - 1);
+                        recognizer.close();
+                        recognizer = undefined;
+                    },
+                    function (err) {
+                        startRecognizeOnceAsyncButton.disabled = false;
+                    /*    phraseDiv.innerHTML += err;*/
+                        window.console.log(err);
+                        document.getElementById("mysearch").value = "請再說一次.";
+                        document.querySelector(".voicesearchtext").innerHTML = "請再說一次.";
+                        recognizer.close();
+                        recognizer = undefined;
+                    });
             });
+
+            if (!!window.SpeechSDK) {
+                SpeechSDK = window.SpeechSDK;
+                startRecognizeOnceAsyncButton.disabled = false;
+
+                document.getElementById('content').style.display = 'block';
+                document.getElementById('warning').style.display = 'none';
+
+                // in case we have a function for getting an authorization token, call it.
+                if (typeof RequestAuthorizationToken === "function") {
+                    RequestAuthorizationToken();
+                }
+            }
+        });
+    </script>
+
+    <script>
+        //function voicesearch() {
+        //    console.log(98877);
+        //}
+
+        Vue.filter('money', function (num) {
+            const parts = num.toString().split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return parts.join('.');
+        });
+
+        /*搜尋*/
+        //document.getElementById("filtersearch")
+        //    .addEventListener("keyup", function (e) {
+        //        if (e.code === 'Enter') {
+        //            document.getElementById("filtersearch").value;
+        //            alert(document.getElementById("filtersearch").value);
+        //            window.location = "/productpage/filterans.html";
+        //            sessionStorage.setItem("filterans", document.getElementById("filtersearch").value);
+        //        }
+        //    });
         /*搜尋*/
 
 
@@ -239,26 +377,30 @@
 
 
 
-            //Vue.createApp({
-            //    data() {
-            //        return {
-            //            fliterList: [
-            //                { "todoItemId": 1, "name": "Job A", "isComplete": true },
-            //                { "todoItemId": 2, "name": "Job B", "isComplete": false }
-            //            ]
-            //        }
-            //    },
-            //    mounted() {
-            //        axios.get('/api/Fundraising')
-            //            .then(response => (this.fliterList = response.data))
-            //    }, updated() {
-            //        this.$nextTick(function () {
-            //            //document.querySelector('.wid').style.width = "50%"
-            //        });
+                                    //Vue.createApp({
+                                    //    data() {
+                                    //        return {
+                                    //            fliterList: [
+                                    //                { "todoItemId": 1, "name": "Job A", "isComplete": true },
+                                    //                { "todoItemId": 2, "name": "Job B", "isComplete": false }
+                                    //            ]
+                                    //        }
+                                    //    },
+                                    //    mounted() {
+                                    //        axios.get('/api/Fundraising')
+                                    //            .then(response => (this.fliterList = response.data))
+                                    //    }, updated() {
+                                    //        this.$nextTick(function () {
+                                    //            //document.querySelector('.wid').style.width = "50%"
+                                    //        });
 
-            //    }
-            //}).mount('.container')
+                                    //    }
+                                    //}).mount('.container')
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>
