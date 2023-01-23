@@ -74,7 +74,7 @@ namespace Fundraising
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<ChatHub>("/chatHub");
-
+                endpoints.MapHub<CommentHub>("/commentHub");
             });
         }
     }

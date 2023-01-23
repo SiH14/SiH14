@@ -25,7 +25,25 @@ namespace Fundraising.Controllers
 			_context = context;
 		}
 
-		[HttpPost("register")]
+        [HttpGet("followuserid/{followproductid}")]
+        public IActionResult cheakfollow(long followproductid)
+        {
+            var Claim = HttpContext.User.Claims.ToList();
+            var userID = Claim.Where(a => a.Type == "userID").First().Value;
+            var theuserid = Convert.ToInt32(userID);
+
+            var followuser = (from p in _context.Followings
+                              where p.UserId == theuserid && p.ProductId == followproductid
+                              select p).SingleOrDefault();
+            if (followuser == null)
+            {
+                return Content("0");
+            }
+
+            return Content("1");
+        }
+
+        [HttpPost("register")]
 		public string register(LoginPost value)
 		{
 			var userregister = (from a in _context.Users
