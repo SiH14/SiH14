@@ -68,71 +68,17 @@
             padding-right: 10px;
         }
 
-        /*       @keyframes progressAnimationStrike {
-            from {
-                width: 0;
-            }
-
-            to {
-                width: 100%;
-            }
+        .selectedimgdiv {
+            width: 100%;
+            height: 214px;
         }
-
-        .myprogress {
-            width: 98%;
-            text-align: center;
-        }
-
-        .progress2 {
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.25);
-        }
-
-        .progress-bar2 {
-            height: 20px;
-            border-radius: 30px;
-            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
-            transition: 0.9s linear;
-            transition-property: width, background-color;
-            text-align: left;
-        }
-
-        .progress-moved .progress-bar2 {
-            width: 85%;
-            background-color: #EF476F;
-            animation: progressAnimation 1s;
-        }*/
-
-        /*        @keyframes progressAnimation {
-            0% {
-                width: 5%;
-                background-color: #F9BCCA;
-            }
-
-            100% {
-                width: 85%;
-                background-color: #EF476F;
-            }
-        }
-
-        .mainQA {
-            background-color: gainsboro;
-            padding: 100px 300px;
-            position: relative;
-            margin-top: 100px;
-        }
-
-        .mainQAText {
-            text-align: center;
-            position: relative;
-        }*/
     </style>
 
 </head>
 
 <body>
     <!--初版搜尋-->
-    <input id="filtersearch" type="text" placeholder="搜尋…">
+    <!--<input id="filtersearch" type="text" placeholder="搜尋…">-->
     <!--<button class="btn ">
         🎤
     </button>-->
@@ -140,8 +86,7 @@
 
     <div class="container px-4 py-5" id="mySelected">
         <h2 class="pb-2 border-bottom">
-            探索更多{{fliterList.length}}
-            <!--<a href="./product.html" style="font-size: 14px; float: right; text-decoration: none;">More ></a>-->
+            探索更多<!--{{fliterList.length}}-->
         </h2>
         <!--篩選-->
         <div style="width: 300px;">
@@ -164,7 +109,9 @@
                     </div>
 
                     <!-- 資訊卡 -->
-                    <img class="selectedimg" src="./page.png" alt="">
+                    <div class="selectedimgdiv">
+                        <img class="selectedimg" :src="item.coverphoto" alt="">
+                    </div>
                     <p></p>
                     <h3 class="fs-5" style="height: 70px">{{item.productTitle}}</h3>
                     <div class="d-flex justify-content-between">

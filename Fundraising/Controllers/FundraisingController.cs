@@ -495,6 +495,7 @@ namespace Fundraising.Controllers
                         {
                             ProductId = o.ProductId,
                             ProductTitle = product.ProductTitle,
+                            coverphoto = product.Coverphoto,
                             CurrentAmount = o.nowmoney,
                             TargetAmount = product.TargetAmount,
                             Startime = product.Startime,

@@ -67,64 +67,10 @@
             padding-right: 10px;
         }
 
-        /*       @keyframes progressAnimationStrike {
-            from {
-                width: 0;
-            }
-
-            to {
-                width: 100%;
-            }
+        .selectedimgdiv {
+            width: 100%;
+            height: 214px;
         }
-
-        .myprogress {
-            width: 98%;
-            text-align: center;
-        }
-
-        .progress2 {
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.25);
-        }
-
-        .progress-bar2 {
-            height: 20px;
-            border-radius: 30px;
-            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
-            transition: 0.9s linear;
-            transition-property: width, background-color;
-            text-align: left;
-        }
-
-        .progress-moved .progress-bar2 {
-            width: 85%;
-            background-color: #EF476F;
-            animation: progressAnimation 1s;
-        }*/
-
-        /*        @keyframes progressAnimation {
-            0% {
-                width: 5%;
-                background-color: #F9BCCA;
-            }
-
-            100% {
-                width: 85%;
-                background-color: #EF476F;
-            }
-        }
-
-        .mainQA {
-            background-color: gainsboro;
-            padding: 100px 300px;
-            position: relative;
-            margin-top: 100px;
-        }
-
-        .mainQAText {
-            text-align: center;
-            position: relative;
-        }*/
     </style>
 
 </head>
@@ -134,7 +80,6 @@
     <div class="container px-4 py-5" id="mySelected">
         <h2 class="pb-2 border-bottom">
             找到「<span id="keyword"></span>」有關的 {{fliterList.length}} 個方案
-            <a href="#" style="font-size: 14px; float: right; text-decoration: none;">More ></a>
         </h2>
 
 
@@ -148,7 +93,6 @@
             </select>
         </div>-->
         <!--篩選-->
-
         <!--v-for="item in fliterList"-->
         <div class="row g-4 py-8 row-cols-1 row-cols-lg-3">
             <a href="./product.html" style="text-decoration: none; color: black;" v-on:click="getproductID(item)" v-for="item in fliterList">
@@ -160,7 +104,9 @@
                     </div>
 
                     <!-- 資訊卡 -->
-                    <img class="selectedimg" src="./page.png" alt="">
+                    <div class="selectedimgdiv">
+                        <img class="selectedimg" :src="item.coverphoto" alt="">
+                    </div>
                     <p></p>
                     <h3 class="fs-5" style="height: 70px">{{item.productTitle}}</h3>
 
@@ -183,7 +129,7 @@
         </div>
     </div>
 
-
+    <script src="../layout/layout.js"></script> 
     <script>
 
         /*篩選*/
@@ -227,25 +173,25 @@
 
 
 
-            //Vue.createApp({
-            //    data() {
-            //        return {
-            //            fliterList: [
-            //                { "todoItemId": 1, "name": "Job A", "isComplete": true },
-            //                { "todoItemId": 2, "name": "Job B", "isComplete": false }
-            //            ]
-            //        }
-            //    },
-            //    mounted() {
-            //        axios.get('/api/Fundraising')
-            //            .then(response => (this.fliterList = response.data))
-            //    }, updated() {
-            //        this.$nextTick(function () {
-            //            //document.querySelector('.wid').style.width = "50%"
-            //        });
+                //Vue.createApp({
+                //    data() {
+                //        return {
+                //            fliterList: [
+                //                { "todoItemId": 1, "name": "Job A", "isComplete": true },
+                //                { "todoItemId": 2, "name": "Job B", "isComplete": false }
+                //            ]
+                //        }
+                //    },
+                //    mounted() {
+                //        axios.get('/api/Fundraising')
+                //            .then(response => (this.fliterList = response.data))
+                //    }, updated() {
+                //        this.$nextTick(function () {
+                //            //document.querySelector('.wid').style.width = "50%"
+                //        });
 
-            //    }
-            //}).mount('.container')
+                //    }
+                //}).mount('.container')
     </script>
 </body>
 
