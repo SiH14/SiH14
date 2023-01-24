@@ -2,7 +2,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
 
 <div class="container-fluid headernav" id="header-container">
     <!--LOGO -->
-    <a class="navbar-brand fs-2 headernav" id="header-brand" href="https://localhost:44398/MainPage/MainPage.html">咱的募資平台</a>
+    <a class="navbar-brand fs-2 headernav" id="header-brand" href="https://localhost:44398/ProductPage/mymainpage.html">咱的募資平台</a>
 
     <!-- Bar -->
 
@@ -10,7 +10,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
         <!-- LEFT -->
         <ul class="navbar-nav me-auto fs-5 headernav">
             <li class="nav-item headernav">
-                <a class="nav-link headernav" href="https://localhost:44398/MainPage/MainPage.html" id="header-home">首頁</a>
+                <a class="nav-link headernav" href="https://localhost:44398/ProductPage/mymainpage.html" id="header-home">首頁</a>
             </li>
             <li class="nav-item headernav" id="header-items">
                 <a class="nav-link headernav" href="https://localhost:44398/Proposal/myproposal.html">提案</a>
@@ -225,7 +225,7 @@ window.onload = function getuserID() {
                     href="#">提案紀錄</a></li>
             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
                     href="#">聯絡訊息</a></li>
-            <li style="text-align: center;"><a class="dropdown-item" href="https://localhost:44398/MainPage/MainPage.html" onclick="logout()">登出</a></li>`
+            <li style="text-align: center;"><a class="dropdown-item" href="https://localhost:44398/ProductPage/mymainpage.html" onclick="logout()">登出</a></li>`
                     })
             })
             .catch(error => {
