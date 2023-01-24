@@ -59,75 +59,71 @@
         <!-- 商品分頁導覽列 -->
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="./product.html">專案內容</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">專案News</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="./faq.html">常見問題</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="./comments.html">留言</a>
-                  </li>
-                </ul>
-
-                <div class="col-sm-4">
-
-                    <a class="btn btn-danger " style="width: 300px;"
-                    href="./project.html">贊助專案</a>
-                    <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
-                    <div style="width: 145px;">
-    
+                <!--<a class="navbar-brand" href="./product.html">專案內容</a>-->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./product.html"><span style="font-size:18px">專案內容</span></a>
+                        </li>
+                        <li class="nav-item" style="padding-left:80px">
+                            <a class="nav-link" href="./faq.html"><span style="font-size:18px">常見問題</span></a>
+                        </li>
+                        <li class="nav-item" style="padding-left:80px">
+                            <a class="nav-link" href="./comments.html"><span style="font-size:18px">留言</span></a>
+                        </li>
+                    </ul>
+                    <div class="col-sm-4">
+                        <a class="btn btn-danger " style="width: 300px;"
+                           href="#" v-on:click="gotoplan()">贊助專案</a>
+                        <div style="width: 145px;">
+                        </div>
                     </div>
+                    <div style="width: 20px;"> </div>
+                    <!-- <div class="col-sm-1"> </div> -->
                 </div>
-                <div style="width: 20px;"> </div>
-                <!-- <div class="col-sm-1"> </div> -->
-              </div>
             </div>
-          </nav>
-      <!-- 商品分頁導覽列 -->
+        </nav>
+        <!-- 商品分頁導覽列 -->
 
-      <br>
+        <br>
 
-          <div class="container">
-              <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="container">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item" v-for="(item,key) in fqaList">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'.panelopen'+key" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                          Q{{key+1}}. {{item.questiontitle}}
-                      </button>
-                  </h2>
-                  <div id="panelopen0" :class="'panelopen'+key+' '+'accordion-collapse collapse'" aria-labelledby="panelsStayOpen-headingOne">
-                    <div class="accordion-body">
-                        <p style="white-space: pre-wrap;">{{item.questioncontent}}</p>
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'.panelopen'+key" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                            Q{{key+1}}. {{item.questiontitle}}
+                        </button>
+                    </h2>
+                    <div id="panelopen0" :class="'panelopen'+key+' '+'accordion-collapse collapse'" aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body">
+                            <p style="white-space: pre-wrap;">{{item.questioncontent}}</p>
+                        </div>
                     </div>
-                  </div>
                 </div>
 
 
 
                 <!--<div class="accordion-item">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                      Accordion Item #2
-                    </button>
-                  </h2>
-                  <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                    <div class="accordion-body">
-                      <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                  </div>
-                </div>-->
+              <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                  Accordion Item #2
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                <div class="accordion-body">
+                  <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
               </div>
-          </div>
+            </div>-->
+            </div>
+        </div>
     </div>
-      
 
+    <script src="../layout/layout.js"></script>
 
     <script>
         Vue.filter('money', function (num) {
@@ -139,8 +135,8 @@
         var app = new Vue({
             el: ".thisfqa",
             data: {
-                productList:[],
-                fqaList:[]
+                productList: [],
+                fqaList: []
             },
             mounted: function () {
                 //alert(123)
@@ -166,8 +162,8 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -83,30 +83,26 @@
         <!-- 商品分頁導覽列 -->
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="./product.html">專案內容</a>
+                <!--<a class="navbar-brand" href="./product.html">專案內容</a>-->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">專案News</a>
+                            <a class="nav-link" href="./product.html"><span style="font-size:18px">專案內容</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./faq.html">常見問題</a>
+                        <li class="nav-item" style="padding-left:80px">
+                            <a class="nav-link" href="./faq.html"><span style="font-size:18px">常見問題</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./comments.html">留言</a>
+                        <li class="nav-item" style="padding-left:80px">
+                            <a class="nav-link" href="./comments.html"><span style="font-size:18px">留言</span></a>
                         </li>
                     </ul>
-
                     <div class="col-sm-4">
-
                         <a class="btn btn-danger " style="width: 300px;"
-                           href="/ProductPage/plan.html">贊助專案</a>
-                        <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+                           href="#" v-on:click="gotoplan()">贊助專案</a>
                         <div style="width: 145px;">
-
                         </div>
                     </div>
                     <div style="width: 20px;"> </div>
@@ -126,11 +122,11 @@
 
 
                 <!--右邊欄位-->
-                <div class="col-sm-4" v-if="whouser == ''">
+                <div class="col-sm-4">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12 mb-2" v-for="item in planList">
-                                <a href="./test4.html" v-on:click="getplanID(item.planid)" style="text-decoration:none; color: black;">
+                                <a href="#" v-on:click="getplanID(item.planid)" style="text-decoration:none; color: black;">
                                     <div style="border: solid #D0D0D0; ">
                                         <div style="width: 90%; margin: auto;">
                                             <div class="mb-1 p-2" style="text-align: center;">
@@ -147,35 +143,11 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-sm-4" v-else>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-12 mb-2" v-for="item in planList">
-                                <a href="./orderpay.html" v-on:click="getplanID(item.planid)" style="text-decoration:none; color: black;">
-                                    <div style="border: solid #D0D0D0; ">
-                                        <div style="width: 90%; margin: auto;">
-                                            <div class="mb-1 p-2" style="text-align: center;">
-                                                <img :src="item.planphoto" style="width: 100%;">
-                                            </div>
-                                            <div class="mb-3"><h5>{{item.plantitle}}</h5></div>
-                                            <div class="mb-4"><h4>NT${{item.planprice | money}}</h4></div>
-                                            <div><p style="white-space: pre-wrap;">{{item.plancontent}}</p></div>
-                                            <hr>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
-    <script src="../layout/layout.js"></script>
     </div>
 
-
+    <script src="../layout/layout.js"></script>
     <script>
         Vue.filter('money', function (num) {
             const parts = num.toString().split('.');
@@ -190,13 +162,13 @@
             data: {
                 fliterList: [],
                 planList: [],
-                followList:0,
+                followList: 0,
                 addfollowList: {},
-                whouser:''
-         
+                whouser: ''
+
             },
             mounted: function () {
-                
+
                 /* document.querySelector('.follow').style.width = '10%';*/
                 $.ajax({
                     type: 'Get',
@@ -207,7 +179,7 @@
                         /*    console.log(e[0].productcontent)*/
                     }
                 })
-                
+
                 $.ajax({
                     type: 'Get',
                     url: '/api/Fundraising/prduct/' + sessionStorage.getItem("productId"),
@@ -256,17 +228,17 @@
                                 console.log(this.data);
                             },
                             success: function () {
-                                alert("成功");
+                                /*                                alert("成功");*/
                                 window.location = "./product.html";
                             }
                         })
                     }
                     else {
-                        window.location = "./test4.html";
+                        window.location = "../login/login.html";
                     }
                 },
                 delfollow: function () {
-                    alert('刪除')
+                    /*      alert('刪除');*/
                     $.ajax({
                         type: 'DELETE',
                         url: '/api/SiFollowings/' + parseInt(this.whouser) + '/' + sessionStorage.getItem("productId"),
@@ -280,8 +252,21 @@
                     })
                 },
                 getplanID: function (e) {
-                    /* console.log(e.productId)*/
                     sessionStorage.setItem("planId", e);
+                    if (parseInt(this.whouser) > 0) {
+                        window.location = "./orderpay.html";
+                    }
+                    else {
+                        window.location = "../login/login.html";
+                    }
+                },
+                gotoplan: function () {
+                    if (parseInt(this.whouser) > 0) {
+                        window.location = "./plan.html";
+                    }
+                    else {
+                        window.location = "../login/login.html";
+                    }
                 }
             }
         })

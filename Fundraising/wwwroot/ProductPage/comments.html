@@ -67,30 +67,26 @@
         <!-- 商品分頁導覽列 -->
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="./product.html">專案內容</a>
+                <!--<a class="navbar-brand" href="./product.html">專案內容</a>-->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">專案News</a>
+                            <a class="nav-link" href="./product.html"><span style="font-size:18px">專案內容</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./faq.html">常見問題</a>
+                        <li class="nav-item" style="padding-left:80px">
+                            <a class="nav-link" href="./faq.html"><span style="font-size:18px">常見問題</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">留言</a>
+                        <li class="nav-item" style="padding-left:80px">
+                            <a class="nav-link" href="./comments.html"><span style="font-size:18px">留言</span></a>
                         </li>
                     </ul>
-
                     <div class="col-sm-4">
-
                         <a class="btn btn-danger " style="width: 300px;"
-                           href="./project.html">贊助專案</a>
-                        <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+                           href="#" v-on:click="gotoplan()">贊助專案</a>
                         <div style="width: 145px;">
-
                         </div>
                     </div>
                     <div style="width: 20px;"> </div>
@@ -177,13 +173,13 @@
                         <button v-on:click="okeditanswer(itemm.answerid)" class="btn btn-success">確定</button><button v-on:click="canceleditanswer(itemm.answerid)" class="btn btn-danger">取消</button>
                     </div>
                     <!--<div v-if="itemm.userid == whouser" class="bd-highlight mb-1" style="display:flex">
-        <div style="height: 30px; width: 40px;"></div>
-        <textarea v-on:click="move2(key)" id="textinput2" :class="'wang'+key + ' ' + 'form-control'" style="width: 95%;" v-model="editanswerList.answercontent" :value="editanswerList.answercontent"></textarea>
-    </div>-->
+                        <div style="height: 30px; width: 40px;"></div>
+                        <textarea v-on:click="move2(key)" id="textinput2" :class="'wang'+key + ' ' + 'form-control'" style="width: 95%;" v-model="editanswerList.answercontent" :value="editanswerList.answercontent"></textarea>
+                    </div>-->
                     <!--<div v-if="itemm.userid == whouser" class="bd-highlight mb-3" style="display:flex">
-        <div style="height: 0px; width: 40px;"></div>
-        <button v-on:click="okeditanswer(editanswerList.answerid)" class="btn btn-success">確定</button><button class="btn btn-danger">取消</button>
-    </div>-->
+                        <div style="height: 0px; width: 40px;"></div>
+                        <button v-on:click="okeditanswer(editanswerList.answerid)" class="btn btn-success">確定</button><button class="btn btn-danger">取消</button>
+                    </div>-->
                 </div>
                 <div class="mb-3" style="display:flex" v-if="whouser != ''">
                     <textarea v-on:click="move2(key)" id="textinput2" :class="'wang'+key + ' ' + 'form-control'" style="width: 95%;" placeholder="回覆留言..."></textarea>
@@ -193,6 +189,8 @@
             </div>
         </div>
     </div>
+
+    <script src="../layout/layout.js"></script>
 
     <!--引入signalr-->
     <script src="../lib/microsoft/signalr/dist/browser/signalr.js"></script>
@@ -227,7 +225,7 @@
                 editanswerList: {},
                 whouser: '',
                 productuserid: '',
-                meno:[],
+                meno: [],
                 connection: null
             },
             mounted: function () {
@@ -251,11 +249,11 @@
                     })
                     .catch((err) => console.error(err.toString()));
 
-                this.connection.on("ReceiveMessage",  () => {
+                this.connection.on("ReceiveMessage", () => {
                     this.meno.push("新留言");
-   /*                 console.log(123)*/
+                    /*                 console.log(123)*/
                 });
-/*                alert(123)*/
+                /*                alert(123)*/
 
                 $.ajax({
                     type: 'Get',
@@ -289,13 +287,13 @@
                         )
                         .catch((err) => console.error(err.toString()));
                     this.meno.push("我要留言");
-                  /*  console.log(typeof this.whouser);*/
+                    /*  console.log(typeof this.whouser);*/
                     //this.message = "";
 
                     this.addcommentList["UserID"] = parseInt(this.whouser);
                     this.addcommentList["ProductID"] = parseInt(sessionStorage.getItem("productId"));
                     this.addcommentList["CommentContent"] = document.getElementById('textinput1').value;
-            /*        console.log(parseInt(sessionStorage.getItem("productId")))*/
+                    /*        console.log(parseInt(sessionStorage.getItem("productId")))*/
                     $.ajax({
                         type: 'POST',
                         url: '/api/SiComments/',
@@ -349,10 +347,10 @@
                     var btndisnone = document.querySelector('.btncdis' + e);
                     btndisnone.style.display = "flex";
                     document.querySelector('.editinpu' + e).value = answercontent;
-                /*       console.log(e);*/
+                    /*       console.log(e);*/
                     $.ajax({
                         type: 'Get',
-                        url: '/api/SiAnswers/editans/'+e,
+                        url: '/api/SiAnswers/editans/' + e,
                         success: function (e) {
                             app.editanswerList = e
                             console.log(e)
@@ -428,7 +426,7 @@
                     });
                 },
                 move2: function (e) {
-     /*               console.log(e)*/
+                    /*               console.log(e)*/
                     var textinput2 = document.querySelector('.wang' + e);
                     textinput2.addEventListener('input', (e) => {
                         textinput2.style.height = '40px';

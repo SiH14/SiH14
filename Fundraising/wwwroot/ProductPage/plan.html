@@ -140,9 +140,10 @@
 
         <br>
 
-        <div class="container card-group card-group-scroll" v-if="whouser == ''">
+        <div class="container card-group card-group-scroll">
+            <!--v-if="whouser == ''"-->
             <div class="card" style="padding:10px" v-for="item in planList">
-                <a href="/ProductPage/test4.html" style="text-decoration: none; color: black;" v-on:click="getplanID(item.planId)">
+                <a href="#" style="text-decoration: none; color: black;" v-on:click="getplanID(item.planId)">
                     <img :src="item.planphoto" class="card-img-top"
                          alt="Hollywood Sign on The Hill" />
                     <div class="card-body">
@@ -159,7 +160,7 @@
             </div>
         </div>
 
-        <div class="container card-group card-group-scroll" v-else>
+        <!--<div class="container card-group card-group-scroll" v-else>
             <div class="card" style="padding:10px" v-for="item in planList">
                 <a href="/ProductPage/orderpay.html" style="text-decoration: none; color: black;" v-on:click="getplanID(item.planId)">
                     <img :src="item.planphoto" class="card-img-top"
@@ -176,7 +177,7 @@
                     </div>
                 </a>
             </div>
-        </div>
+        </div>-->
     </div>
 
     <!--<div v-for="item in planList" class="" style="padding:10px">
@@ -215,11 +216,11 @@
         </a>
     </div>-->
 
-    姓名：<input type="text" id="name"><br>
+    <!--姓名：<input type="text" id="name"><br>
     訊息：<input type="text" id="msg"><br>
     <Button type="Button" id="submitBtn">送出</Button><br>
-    <div id="msgDiv"></div>
-    <script src="../lib/signalr/dist/browser/signalr.js"></script>
+    <div id="msgDiv"></div>-->
+    <!--<script src="../lib/signalr/dist/browser/signalr.js"></script>
     <script>
         // 建立SignalR連接
         var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
@@ -244,7 +245,7 @@
             });
             event.preventDefault();
         });
-    </script>
+    </script>-->
 
     <script>
         var app = new Vue({
@@ -287,8 +288,13 @@
             ,
             methods: {
                 getplanID: function (e) {
-                    /* console.log(e.productId)*/
                     sessionStorage.setItem("planId", e);
+                    if (parseInt(this.whouser) > 0) {
+                        window.location = "./orderpay.html";
+                    }
+                    else {
+                        window.location = "../login/login.html";
+                    }
                 }
             }
         })
