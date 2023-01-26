@@ -18,12 +18,13 @@ namespace Fundraising.Hubs
         }
 
 
-        public Task SendMessageToUser(int fromuser, int touser, string message)
+        public Task SendMessageToUser(int sender, int receiver, int chat,string content,string time)
         {
             // 透過Groups.SendAsync將訊息傳送給特定群組
-            string formUser = fromuser.ToString();
-            string toUser = touser.ToString();
-            return Clients.Group(toUser).SendAsync("ReceiveMessage", formUser, toUser, message);
+            string formUser = sender.ToString();
+            string toUser = receiver.ToString();
+            string chatroom = chat.ToString();
+            return Clients.Group(toUser).SendAsync("ReceiveMessage", formUser, toUser,chatroom, content,time);
         }
 
 
