@@ -9,10 +9,14 @@ Vue.createApp({
     ShowMyOrders() {
       document.querySelector("#OrdersRow").style.display = "flex";
       document.querySelector("#ProductsRow").style.display = "none";
+      document.querySelector(".selectedbtn").classList.remove("selectedbtn");
+      document.querySelector("#orderbtn").classList.add("selectedbtn");
     },
     ShowMyProducts() {
       document.querySelector("#OrdersRow").style.display = "none";
       document.querySelector("#ProductsRow").style.display = "flex";
+      document.querySelector(".selectedbtn").classList.remove("selectedbtn");
+      document.querySelector("#productbtn").classList.add("selectedbtn");
     },
   },
   mounted() {
