@@ -29,6 +29,23 @@ namespace Fundraising.Controllers
         //    return await _context.Products.ToListAsync();
         //}
 
+        [HttpGet("tolpage")]//總頁數
+        public IActionResult GettolpageList()
+        {
+            var query = _context.Products.Count();
+            var tolpage = 0;
+            if (query/9 == 0)
+            {
+                tolpage = query / 9;
+                return Content(tolpage.ToString());
+            }
+            else
+            {
+                tolpage = (query / 9)+1;
+                return Content(tolpage.ToString());
+            }
+        }
+
         //api/Fundraising
         [HttpGet]
         public async Task<ActionResult<IEnumerable<dynamic>>> GetList()
