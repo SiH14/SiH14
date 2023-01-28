@@ -12,7 +12,8 @@ a:hover{
 }
 .item-style {
     border-radius: 10px;
-    box-shadow: 0 3px 5px #00000005, 0 0 2px #0000000d, 0 1px 4px #00000014;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 30%);
+    /* box-shadow: 0 3px 5px #00000005, 0 0 2px #0000000d, 0 1px 4px #00000014; */
     border: 1px solid #dfe7ef;
 }
 
@@ -56,4 +57,8 @@ footer{
 }
 #mysider a:hover{
     background-color: #57c29c;
+}
+
+[v-cloak] {
+    display: none;
 }

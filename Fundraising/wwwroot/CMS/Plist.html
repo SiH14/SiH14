@@ -20,102 +20,109 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/mystyle.css">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/logincheck.js"></script>
 </head>
 
-<body id="app">
-    <div class="container-fluid p-0 bg-theme">
-        <!-- 導覽列 -->
-        <div id="myheader" class="bg-white" style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
+<body>
+    <div id="app">
+        <loading :can-cancel="true"></loading>
+        <div class="container-fluid p-0 bg-theme" id="page-top">
+            <!-- 導覽列 -->
+            <div id="myheader" class="bg-white"
+                style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
 
-        </div>
-        <!-- 結束 導覽列 -->
-        <div class=" container-fluid px-5 p-4">
-            <div class="row justify-content-center" >
-                <!-- 側邊欄位 -->
+            </div>
+            <!-- 結束 導覽列 -->
+            <div class=" container-fluid px-5 p-4">
+                <div class="row justify-content-center">
+                    <!-- 側邊欄位 -->
 
-                <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar">
-                    <br>
-                    <div id="mysider"></div>
-                </ul>
+                    <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar">
+                        <br>
+                        <div id="mysider"></div>
+                    </ul>
 
-                <!-- 結束 側邊欄位 -->
-                <!--主要內容-->
-                <div class="col-10">
-                    <div class="px-3">
-                        <div class="bg-white item-style ">
-                            <!-- ===============================================================================================================  -->
-                            <div class="min-vh-100 ">
-                                <div class="card-header py-3 mb-3">
-                                    <h3 class="m-0">提案查詢</h6>
-                                </div>
-                                <div class="row justify-content-center p-3">
-
-                                    <div class="mb-3 col-12">
-                                        <form action="" class="py-4"
-                                            style=" position: relative; border: 1px solid #e3e6f0;">
-                                            <div class="row " style="line-height: 32px;">
-                                                <p class="bg-white"
-                                                    style="position: absolute; top: -15px; left: 2%; font-size: 24px;">
-                                                    查詢條件</p>
-                                                <div class="">
-                                                    <label class="px-3" for="">提案編號:</label>
-                                                    <input type="text">
-                                                </div>
-                                                <div class="">
-                                                    <label class="px-3" for="">提案名稱:</label>
-                                                    <input type="text">
-                                                </div>
-                                                <div class="">
-                                                    <label class="px-3" for="">提案狀態:</label>
-                                                    <select name="" id="" style="width: 100px; height: 100%;">
-                                                        <option value="">審核中</option>
-                                                        <option value="">募資中</option>
-                                                        <option value="">已取消</option>
-                                                    </select>
-                                                </div>
-                                                <div class="px-3">
-                                                    <button class="btn btn-success" style="width: 100px;">查詢</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                    <!-- 結束 側邊欄位 -->
+                    <!--主要內容-->
+                    <div class="col-10">
+                        <div class="px-3">
+                            <div class="bg-white item-style ">
+                                <!-- ===============================================================================================================  -->
+                                <div class="min-vh-100 ">
+                                    <div class="card-header py-3 mb-3">
+                                        <h3 class="m-0">提案查詢</h6>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-hover" id="dataTable" width="100%"
-                                                cellspacing="0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>提案編號</th>
-                                                        <th>負責人</th>
-                                                        <th>圖片</th>
-                                                        <th>提案名稱</th>
-                                                        <th>狀態</th>
-                                                        <th>操作</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr v-for="item in productlist">
-                                                        <td>{{item.p.productId}}</td>
-                                                        <td>{{item.p.principalName}}</td>
-                                                        <td class="col-1 p-1"><img :src="item.p.coverphoto" alt=""
-                                                                style=" width: 100%;"></td>
-                                                        <td>{{item.p.productTitle}}</td>
-                                                        <td>{{item.p.productStateId}}</td>
-                                                        <td>
-                                                            <div>
-                                                                <!-- <a href="./PdetailsEdit.html"
+                                    <div class="row justify-content-center p-3">
+
+                                        <div class="mb-3 col-12">
+                                            <form class="py-4" style=" position: relative; border: 1px solid #e3e6f0;">
+                                                <div class="row " style="line-height: 32px;">
+                                                    <p class="bg-white"
+                                                        style="position: absolute; top: -15px; left: 2%; font-size: 24px;">
+                                                        篩選條件</p>
+                                                    <div class="">
+                                                        <label class="px-3" for="">編號:</label>
+                                                        <input type="text" id="productId" name="productId"
+                                                            v-model.trim="input.productId">
+                                                    </div>
+                                                    <div class="">
+                                                        <label class="px-3" for="">提案名稱:</label>
+                                                        <input type="text" id="productTitle" name="productTitle"
+                                                            v-model.trim="input.productTitle">
+                                                    </div>
+                                                    <div class="">
+                                                        <label class="px-3" for="">提案狀態:</label>
+                                                        <select name="productStateId" id="productStateId"
+                                                            style="width: 100px; height: 100%;"
+                                                            v-model="input.productStateId">
+                                                            <option value="全部">全部</option>
+                                                            <option value="審核中">審核中</option>
+                                                            <option value="募資中">募資中</option>
+                                                            <option value="募資失敗">募資失敗</option>
+                                                            <option value="募資成功">募資成功</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover" id="dataTable"
+                                                    width="100%" cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-1">編號</th>
+                                                            <th class="col-1">負責人</th>
+                                                            <th>圖片</th>
+                                                            <th>提案名稱</th>
+                                                            <th class="col-1">狀態</th>
+                                                            <th  class="col-1">操作</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="item in Idchange">
+                                                            <td v-cloak>{{item.p.productId}}</td>
+                                                            <td v-cloak>{{item.p.principalName}}</td>
+                                                            <td v-cloak class="col-1 p-1"><img :src="item.p.coverphoto"
+                                                                    alt="" style=" width: 100%;"></td>
+                                                            <td v-cloak>{{item.p.productTitle}}</td>
+                                                            <td v-cloak>{{item.p.productStateId}}</td>
+                                                            <td v-cloak>
+                                                                <div>
+                                                                    <!-- <a href="./PdetailsEdit.html"
                                                                     class="btn btn-outline-success mr-3"
                                                                     v-on:click="checkmenber(item.p.productId)">編輯 </a> -->
-                                                                <a href="./PdetailsView.html"
-                                                                    class="btn btn-outline-success"
-                                                                    v-on:click="checkmenber(item.p.productId)">查看內容</a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- <tr>
+                                                                    <a href="./PdetailsView.html"
+                                                                        class=""
+                                                                        v-on:click="checkmenber(item.p.productId)">查看</a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- <tr>
                                                         <td>P1231001</td>
                                                         <td><img src="" alt="" style="height: 50px; width: 100px;"></td>
                                                         <td>London</td>
@@ -123,78 +130,140 @@
                                                         <td><a href="./PdetailsView.html"
                                                                 class="btn btn-outline-success">詳細內容</a></td>
                                                     </tr> -->
-                                                </tbody>
-                                            </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- ===============================================================================================================  -->
                             </div>
-                            <!-- ===============================================================================================================  -->
                         </div>
                     </div>
-                </div>
-                <!-- 結束 主要內容 -->
-            </div>
-        </div>
-    </div>
-    </div>
-    <!-- 頁尾 -->
-    <div id="myfooter"></div>
-    <!-- 結束 頁尾r -->
-    <!-- 回上方按鈕-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <!-- 登出彈跳視窗-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <!-- 結束 主要內容 -->
                 </div>
             </div>
         </div>
+        <!-- 頁尾 -->
+        <div id="myfooter"></div>
+        <!-- 結束 頁尾r -->
+        <!-- 回上方按鈕-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- 登出彈跳視窗-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="./js/myjs.js"></script>
 
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Chart.js 套件引入 -->
-    <!-- <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script> -->
-    <!-- Chart.js 套件引入 -->
-
+    <script src="./js/myjs.js"></script>
     <script>
-        const { createApp } = Vue
+        Vue.use(VueLoading);
 
-        createApp({
-            data() {
-                return {
-                    productlist: [],
-                    employeeinfo: []
-
+        var app = new Vue({
+            el: '#app',
+            data: {
+                LoaderVisiable: false,
+                productlist: [],
+                employeeinfo: [],
+                input: {
+                    productId: "",
+                    productTitle: "",
+                    productStateId: "全部"
                 }
+            },
+            components: {
+                Loading: VueLoading
             },
             methods: {
+                open: function () {
+                    console.log('open');
+                    let loader = this.$loading.show({
+                        loader: 'dots'
+                    });
+                    setTimeout(() => loader.hide(), 3 * 1000);
+                },
+                logout: function () {
+                    // alert("1523 ")
+                    axios.get("/api/back/logout").then(res => { if (res.data == "已登出") { window.location.reload() } })
+                },
                 checkmenber: function (a) {
                     sessionStorage.setItem("productId", a);
+                },
+                // fliterlist: function () {
+                //     var id = document.getElementById("productId").value
+                //     var Title = document.getElementById("productTitle").value
+                //     var StateId = document.getElementById("productStateId").value
+                //     alert(id + Title + StateId)
+                //     var list = Array.from(this.productlist)
+                //     var newlist = list.filter(function (value) {
+                //         return value.p.productStateId == StateId
+                //     })
+                //     this.productlist = newlist
+                //     console.log(newlist)
 
+                // }
+            },
+            computed: {
+                myfliter() {
+
+                },
+                StateIdchange() {
+                    if (this.input.productStateId !== "全部") {
+                        return this.productlist.filter(item => {
+                            return item.p.productStateId == this.input.productStateId
+                        })
+                    } else {
+                        return this.productlist
+                    }
+                },
+                titlechange() {
+                    if (this.input.productTitle) {
+                        return this.StateIdchange.filter(item => {
+                            return item.p.productTitle.indexOf(this.input.productTitle) !== -1
+                        })
+                    } else {
+
+                        return this.StateIdchange
+                    }
+                },
+                Idchange() {
+                    if (this.input.productId) {
+                        return this.titlechange.filter(item => {
+                            return item.p.productId == this.input.productId
+                        })
+                    } else {
+
+                        return this.titlechange
+                    }
                 }
             },
+
+
             mounted() {
+                let loader = this.$loading.show({
+                    loader: 'dots'
+                });
                 axios.get('/api/back/ProductList')
                     .then((response) => {
                         Object.values(response.data)
@@ -214,6 +283,7 @@
                             }
 
                             this.productlist = response.data
+                            setTimeout(() => loader.hide(), 0.5 * 1000);
                         });
                         // this.orderlist = response.data
                         // console.log(response.data.length)
@@ -222,9 +292,10 @@
 
                     this.employeeinfo = res.data
                     console.log(this.employeeinfo)
+
                 })
-            },
-        }).mount('#app')
+            }
+        })
     </script>
 </body>
 

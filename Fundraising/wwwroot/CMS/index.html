@@ -20,148 +20,155 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/mystyle.css">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- <script src="js/sb-admin-2.min.js"></script> -->
     <script src="./js/logincheck.js"></script>
 </head>
 
-<body id="app">
-    <div class="container-fluid p-0 bg-theme">
-        <!-- 導覽列 -->
-        <div id="myheader" class="bg-white"  style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
+<body>
+    <div id="app">
+        <loading :can-cancel="true"></loading>
+        <div class="container-fluid p-0 bg-theme">
+            <!-- 導覽列 -->
+            <div id="myheader" class="bg-white"
+                style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
+            </div>
+            <!-- 結束 導覽列 -->
+            <div class=" container-fluid px-5 p-4">
+                <div class="row justify-content-center">
+                    <!-- 側邊欄位 -->
 
-        </div>
-        <!-- 結束 導覽列 -->
-        <div class=" container-fluid px-5 p-4">
-            <div class="row justify-content-center">
-                <!-- 側邊欄位 -->
+                    <ul class="navbar-nav bg-white col-2 item-style sidebar " id="accordionSidebar">
+                        <br>
+                        <div id="mysider"></div>
+                    </ul>
 
-                <ul class="navbar-nav bg-white col-2 item-style sidebar " id="accordionSidebar">
-                    <br>
-                    <div id="mysider"></div>
-                </ul>
+                    <!-- 結束 側邊欄位 -->
+                    <!--主要內容======================================================================================================== -->
+                    <div class="col-10">
+                        <div class="px-3">
+                            <!-- 內容標頭-->
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h2 mb-0 text-gray-800 font-weight-bold">後台總覽</h1>
+                            </div>
 
-                <!-- 結束 側邊欄位 -->
-                <!--主要內容======================================================================================================== -->
-                <div class="col-10">
-                    <div class="px-3">
-                        <!-- 內容標頭-->
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h2 mb-0 text-gray-800 font-weight-bold">後台總覽{{message}}</h1>
-                        </div>
-
-                        <div class="row">
-                            <!-- 四欄統計 -->
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body py-2">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="font-weight-bold text-success text-uppercase mb-1">
-                                                    成功募資數</div>
-                                                <div class="h2 mb-0 font-weight-bold">
-                                                    {{mydata.successesTotal}}
+                            <div class="row">
+                                <!-- 四欄統計 -->
+                                <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body py-2">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="font-weight-bold text-success text-uppercase mb-1">
+                                                        成功募資數</div>
+                                                    <div v-cloak class="h2 mb-0 font-weight-bold">
+                                                        {{mydata.successesTotal}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fa fa-check-square fa-3x text-success"
+                                                        aria-hidden="true"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fa fa-check-square fa-3x text-success" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body  py-2">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="font-weight-bold text-success text-uppercase mb-1">
+                                                        成功募資總額</div>
+                                                    <div v-cloak class="h5 mb-0 font-weight-bold ">
+                                                        {{mydata.successesMoney}}</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-dollar-sign fa-3x text-warning"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body  py-2">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="font-weight-bold text-success text-uppercase mb-1">
+                                                        提案總數
+                                                    </div>
+                                                    <div v-cloak class="h2 mb-0 font-weight-bold ">
+                                                        {{mydata.productTotal}}
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-clipboard-list fa-3x text-info"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body  py-2">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="font-weight-bold text-success text-uppercase mb-1">
+                                                        會員總人數</div>
+                                                    <div v-cloak class="h2 mb-0 font-weight-bold ">
+                                                        {{mydata.memberTotal}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fa fa-users fa-3x text-primary" aria-hidden="true"></i>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body  py-2">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="font-weight-bold text-success text-uppercase mb-1">
-                                                    成功募資總額</div>
-                                                <div class="h5 mb-0 font-weight-bold ">
-                                                    {{mydata.successesMoney}}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-dollar-sign fa-3x text-warning"></i>
-                                            </div>
+
+                            <div class="row">
+
+                                <!-- 圖表內容 -->
+                                <div class="col-12">
+                                    <div class="card shadow mb-4">
+
+                                        <div
+                                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                            <h1 class="m-0 font-weight-bold text-success">熱門提案</h6>
+
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body  py-2">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="font-weight-bold text-success text-uppercase mb-1">
-                                                    提案總數
-                                                </div>
-                                                <div class="h2 mb-0 font-weight-bold ">
-                                                    {{mydata.productTotal}}
-                                                </div>
-
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-clipboard-list fa-3x text-info"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body  py-2">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="font-weight-bold text-success text-uppercase mb-1">
-                                                    會員總人數</div>
-                                                <div class="h2 mb-0 font-weight-bold ">
-                                                    {{mydata.memberTotal}}
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fa fa-users fa-3x text-primary" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-
-                            <!-- 圖表內容 -->
-                            <div class="col-12">
-                                <div class="card shadow mb-4">
-
-                                    <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h1 class="m-0 font-weight-bold text-success">熱門提案</h6>
-
-                                    </div>
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr class="text-center">
-                                                <th class="col-1">排名</th>
-                                                <th>提案名稱</th>
-                                                <th>目前金額</th>
-                                                <th>目前進度</th>
-                                                <th>贊助人數</th>
-                                                <th>操作</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="(item, index ) in mydata.hotProduct">
-                                                <td>{{index+1}}</td>
-                                                <td>{{item.p.productTitle}}</td>
-                                                <td>{{item.sumformat}}</td>
-                                                <td>{{((item.sum/item.p.targetAmount)*100).toFixed(1) +"%"}} </td>
-                                                <td>{{item.count}}</td>
-                                                <td><a href="./PdetailsView.html" class="btn btn-outline-success"
-                                                        v-on:click="setsessionStorage(item.p.productId)">查看<i
-                                                            class="fa fa-search" aria-hidden="true"></i></a></td>
-                                            </tr>
-                                            <!-- <tr>
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr class="">
+                                                    <th class="col-1">排名</th>
+                                                    <th>提案名稱</th>
+                                                    <th>目前金額</th>
+                                                    <th>目前進度</th>
+                                                    <th>贊助人數</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="(item, index ) in mydata.hotProduct">
+                                                    <td v-cloak>{{index+1}}</td>
+                                                    <td v-cloak>{{item.p.productTitle}}</td>
+                                                    <td v-cloak>{{item.sumformat}}</td>
+                                                    <td v-cloak>{{((item.sum/item.p.targetAmount)*100).toFixed(1) +"%"}}
+                                                    </td>
+                                                    <td v-cloak>{{item.count}}</td>
+                                                    <td v-cloak><a href="./PdetailsView.html"
+                                                            class="btn btn-outline-success"
+                                                            v-on:click="setsessionStorage(item.p.productId)">查看<i
+                                                                class="fa fa-search" aria-hidden="true"></i></a></td>
+                                                </tr>
+                                                <!-- <tr>
                                                 <th>999</th>
                                                 <td>Mason</td>
                                                 <td>NT$999</td>
@@ -170,149 +177,157 @@
                                                 <td><a href="./PdetailsView.html" class="btn btn-outline-success">查看<i
                                                             class="fa fa-search" aria-hidden="true"></i></a></td>
                                             </tr> -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-
-                            <div class=" col-12">
-                                <div class="card shadow mb-4">
-
-                                    <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h2 class="m-0 font-weight-bold text-success">新進會員</h2>
-
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr class="text-center">
-                                                <th class="col-1">頭像</th>
-                                                <th class="col-2">姓名</th>
-                                                <th class="">簡介</th>
-                                                <th class="col-2">操作</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-if="mydata.newmember == 0">
-                                                <td>近期無新增會員</td>
-                                            </tr>
-                                            <tr v-for="item in mydata.newmember">
-                                                <td><img :src="item.userPhoto" alt="" class="img-fluid rounded-circle border-secondar"></td>
-                                                <td>{{item.userName}}</td>
-                                                <td>{{item.userIntro}}</td>
-                                                <td><a class="btn btn-outline-success" data-toggle="modal"
-                                                        data-target="#exampleModal"
-                                                        v-on:click="getuserinfo(item.userId)">查看<i class="fa fa-search"
-                                                            aria-hidden="true"></i></a></td>
-                                            </tr>
+                                </div>
 
 
-                                        </tbody>
-                                    </table>
+                                <div class=" col-12">
+                                    <div class="card shadow mb-4">
+
+                                        <div
+                                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                            <h2 class="m-0 font-weight-bold text-success">新進會員</h2>
+
+                                        </div>
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr class="">
+                                                    <th class="col-1">頭像</th>
+                                                    <th class="col-2">姓名</th>
+                                                    <th class="">簡介</th>
+                                                    <th class="col-2">操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-if="mydata.newmember == 0">
+                                                    <td colspan="4">近期無新增會員</td>
+                                                </tr>
+                                                <tr v-for="item in mydata.newmember">
+                                                    <td v-cloak><img :src="item.userPhoto" alt=""
+                                                            class="img-fluid rounded-circle border-secondar"></td>
+                                                    <td v-cloak>{{item.userName}}</td>
+                                                    <td v-cloak>{{item.userIntro}}</td>
+                                                    <td v-cloak><a class="btn btn-outline-success" data-toggle="modal"
+                                                            data-target="#exampleModal"
+                                                            v-on:click="getuserinfo(item.userId)">查看<i
+                                                                class="fa fa-search" aria-hidden="true"></i></a></td>
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
+                        </div>
+                    </div>
+                    <!-- 結束 主要內容 -->
+                </div>
+            </div>
+        </div>
+        <!-- 頁尾 -->
+        <div id="myfooter" class=""></div>
+        <!-- 結束 頁尾r -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered  ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">會員資訊</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body px-3">
+                        <div class="row  justify-content-center mb-3">
+                            <div class="col-5">1</div>
+                            <div class="col-6 ">
+                                <div class="">
+                                    <label for="">會員編號:</label><br>
+                                    <p>{{userinfo.userId}}</p>
+                                </div>
+                                <div>
+                                    <label for="">會員姓名:</label><br>
+                                    <p>{{userinfo.userName}}</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
-                    </div>
-                </div>
-                <!-- 結束 主要內容 -->
-            </div>
-        </div>
-    </div>
-    <!-- 頁尾 -->
-    <div id="myfooter" class=""></div>
-    <!-- 結束 頁尾r -->
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered  ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">會員資訊</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body px-3">
-                    <div class="row  justify-content-center mb-3">
-                        <div class="col-5">1</div>
-                        <div class="col-6 ">
-                            <div class="">
-                                <label for="">會員編號:</label><br>
-                                <p>{{userinfo.userId}}</p>
+                        <div class="row justify-content-center">
+                            <div class="col-5">
+                                <div class="">
+                                    <label for="">性別:</label><br>
+                                    <p v-if="userinfo.userGender">男</p>
+                                    <p v-else>女</p>
+                                </div>
+                                <div class="">
+                                    <label for="">生日:</label><br>
+                                    <p>{{(userinfo.userBirthday)}}</p>
+                                </div>
                             </div>
-                            <div>
-                                <label for="">會員姓名:</label><br>
-                                <p>{{userinfo.userName}}</p>
+                            <div class="col-6 ">
+                                <div class="">
+                                    <label for="">會員信箱:</label><br>
+                                    <p>{{userinfo.userEmail}}</p>
+                                </div>
+                                <div>
+                                    <label for="">會員電話:</label><br>
+                                    <p>{{userinfo.userPhone}}</p>
+                                </div>
+                            </div>
+                            <div class="col-11">
+                                <div class="">
+                                    <label for="">簡介:</label><br>
+                                    <p>{{userinfo.userIntro}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-5">
-                            <div class="">
-                                <label for="">性別:</label><br>
-                                <p v-if="userinfo.userGender">男</p>
-                                <p v-else>女</p>
-                            </div>
-                            <div class="">
-                                <label for="">生日:</label><br>
-                                <p>{{(userinfo.userBirthday)}}</p>
-                            </div>
-                        </div>
-                        <div class="col-6 ">
-                            <div class="">
-                                <label for="">會員信箱:</label><br>
-                                <p>{{userinfo.userEmail}}</p>
-                            </div>
-                            <div>
-                                <label for="">會員電話:</label><br>
-                                <p>{{userinfo.userPhone}}</p>
-                            </div>
-                        </div>
-                        <div class="col-11">
-                            <div class="">
-                                <label for="">簡介:</label><br>
-                                <p>{{userinfo.userIntro}}</p>
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
+        <!-- 回上方按鈕-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
     </div>
-    <!-- 回上方按鈕-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <script src="./js/myjs.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Page level plugins -->
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+    <script src="./js/myjs.js"></script>
 
 
     <script>
-        const { createApp } = Vue
+        Vue.use(VueLoading);
 
-        createApp({
-            data() {
-                return {
-                    mydata: [],
-                    userinfo: [],
-                    employeeinfo: []
-                }
+        var app = new Vue({
+            el: '#app',
+            data: {
+                LoaderVisiable: false,
+                mydata: [],
+                userinfo: [],
+                employeeinfo: []
+            },
+            components: {
+                Loading: VueLoading
             },
             methods: {
+                open: function () {
+                    console.log('open');
+                    let loader = this.$loading.show({
+                        loader: 'dots'
+                    });
+                    setTimeout(() => loader.hide(), 3 * 1000);
+                },
                 logout: function () {
                     // alert("1523 ")
                     axios.get("/api/back/logout").then(res => { if (res.data == "已登出") { window.location.reload() } })
@@ -330,9 +345,10 @@
                         })
                 }
             },
-
             mounted() {
-
+                let loader = this.$loading.show({
+                    loader: 'dots'
+                });
                 sessionStorage.clear();
                 axios.get('/api/back/index').then((response) => {
                     // console.log(response.data[0])
@@ -342,14 +358,10 @@
 
                     this.employeeinfo = res.data
                     console.log(this.employeeinfo)
+                    setTimeout(() => loader.hide(), 0.5 * 1000);
                 })
-                // axios.post('/user', {
-                //     firstName: 'Fred',
-                //     lastName: 'Flintstone'
-                // }
-                // ),
-            },
-        }).mount('#app')
+            }
+        })
     </script>
 </body>
 

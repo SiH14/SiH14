@@ -24,29 +24,37 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/logincheck.js"></script>
 
+    <style scoped>
+        .btn{
+            background-color: #047c51;
+            color: white;
+        }
+
+
+    </style>
 </head>
 
-<body class="bg-gradient-primary" id="app">
+<body class="bg-theme" id="app">
 
     <div class="container">
 
         <div class="row justify-content-center mt-5 ">
-            <div class="col-lg-6 bg-white mt-5 item-style">
-                <div class="p-5">
+            <div class="col-lg-6 bg-white mt-5 item-style" style="max-width: 430px;">
+                <div class="p-4">
                     <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                        <h1 class="h4 mb-4 font-weight-bold">後台登入</h1>
                     </div>
                     <form class="user">
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" placeholder="請輸入帳號"
+                            <input type="text" class="form-control " placeholder="請輸入帳號"
                                 name="userName" v-model="login.employeeAccount">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control form-control-user" placeholder="請輸入密碼"
+                            <input type="password" class="form-control" placeholder="請輸入密碼"
                                 name="password" v-model="login.employeePassword">
                         </div>
                         <hr>
-                        <a  class="btn btn-primary btn-user btn-block" value="登入" v-on:click="startlogin()">
+                        <a  class="btn  btn-block" value="登入" v-on:click="startlogin()">
                             登入
                         </a>
                     </form>
