@@ -11,6 +11,13 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./stepper.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
+      integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <style>
       .card {
         box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
@@ -20,12 +27,52 @@
         border-radius: 0.55rem;
         position: relative;
       }
+
+      #app img {
+        width: 100%;
+        height: 50%;
+        object-fit: cover;
+      }
+
+      #app button {
+        width: 88%;
+      }
+
+      .following {
+        height: 340px;
+        position: relative;
+      }
+
+      .cancelbtn {
+        position: absolute;
+        bottom: 0;
+        left: 6%;
+      }
     </style>
     <title>追蹤專案</title>
   </head>
   <body>
     <div class="container">
-      <div class="card mt-3 mx-auto"></div>
+      <!-- 標題˙ -->
+      <div class="mx-auto ps-4 pt-3" style="width: 80%">
+        <h5>追蹤專案</h5>
+      </div>
+      <div class="card mx-auto mt-3" id="app">
+        <div class="row m-3" v-if="myfollow.length>0">
+          <div class="following col-4 my-3" v-for="item in myfollow">
+            <img :src="item.photo" alt="product" />
+            <h5 class="px-0">{{item.ptitle}}</h5>
+            <p class="text-muted px-2">提案人 {{item.puser}}</p>
+            <button
+              class="btn btn-outline-success d-block mx-auto cancelbtn"
+              @click="cancel(item)"
+            >
+              取消追蹤
+            </button>
+          </div>
+        </div>
+        <h4 v-else class="text-center my-5">目前沒有專案，立即去探索！</h4>
+      </div>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
@@ -33,5 +80,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="../layout/membercentre_layout.js"></script>
+    <script src="./Js_src/UserFollowing.js"></script>
   </body>
 </html>

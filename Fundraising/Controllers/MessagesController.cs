@@ -41,6 +41,25 @@ namespace Fundraising.Controllers
             return message;
         }
 
+        //拿取對話內容，id=chatroomid
+        [HttpGet("detail/{id}")]
+        public async Task<ActionResult<dynamic>> GetMsg(int id)
+        {
+            var query = from msg in _context.Messages
+                        where msg.ChatroomId == id
+                        select new
+                        {
+                            chatroomId = msg.ChatroomId,
+                            sender = msg.SenderId,
+                            receiver = msg.ReceiverId,
+                            content = msg.MessageContent,
+                            sentTime = msg.SentTime.AddHours(8).ToString("yyyy-MM-dd HH:mm")
+                        };
+
+
+            return await query.ToListAsync();
+        }
+
         // PUT: api/Messages/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

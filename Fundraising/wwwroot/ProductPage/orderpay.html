@@ -218,29 +218,6 @@
         </div>
     </div>
 
-
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-    <h1>000</h1>
-
     <script src="../layout/layout.js"></script>
     <script>
 
@@ -280,19 +257,22 @@
                     this.orderpayList["PlanID"] = this.fliterList[0].planId;
                     this.orderpayList["UserID"] = 1;
                     this.orderpayList["AddSponsorship"] = document.getElementById("autoSizingInputGroup").value;
-                    $.ajax({
-                        type: 'POST',
-                        url: '/api/Orders/',
-                        contentType: "application/json",
-                        data: JSON.stringify(this.orderpayList),
-                        error: function () {
-                            console.log('錯誤回傳');
-                            console.log(this.data);
-                        },
-                        success: function () {
-                            alert("成功");
-                        }
-                    })
+                    sessionStorage.setItem("orderpayList", JSON.stringify(this.orderpayList));
+                  /*  console.log(this.orderpayList);*/
+                    window.location = "./creditcard.html";
+                    //$.ajax({
+                    //    type: 'POST',
+                    //    url: '/api/Orders/',
+                    //    contentType: "application/json",
+                    //    data: JSON.stringify(this.orderpayList),
+                    //    error: function () {
+                    //        console.log('錯誤回傳');
+                    //        console.log(this.data);
+                    //    },
+                    //    success: function () {
+                    //        alert("成功");
+                    //    }
+                    //})
                 }
             }
         })

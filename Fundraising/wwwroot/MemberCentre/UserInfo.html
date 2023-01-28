@@ -30,6 +30,11 @@
       .donebtn:focus {
         box-shadow: none;
       }
+
+      .donebtn:hover {
+        border-bottom: 4px solid #047c51;
+      }
+
       .selectedbtn {
         border-bottom: 4px solid #047c51;
       }
@@ -47,7 +52,7 @@
   <body>
     <div class="container">
       <!-- 標題 -->
-      <div class="mx-auto" style="width: 80%">
+      <div class="mx-auto ps-4 pt-3" style="width: 80%">
         <h5 class="ms-4 mt-3">個人頁面</h5>
       </div>
 
@@ -72,6 +77,7 @@
         <!-- 切換已贊助/已發起 -->
         <div class="row justify-content-center">
           <button
+            id="orderbtn"
             type="button"
             class="btn col-6 me-3 mb-3 donebtn selectedbtn"
             style="width: 15%"
@@ -80,6 +86,7 @@
             已贊助計畫
           </button>
           <button
+            id="productbtn"
             type="button"
             class="btn col-6 ms-3 mb-3 donebtn"
             style="width: 15%"
@@ -94,7 +101,7 @@
           <div class="col-8 mx-auto" v-if="userdata.orderCNT!=0">
             <a
               href="#"
-              class="bg-body rounded btn btn-default shadow p-2 mb-3"
+              class="bg-light rounded btn btn-default shadow-sm p-2 mb-3"
               v-for="item in ProductsList"
             >
               <div class="row pe-3">
@@ -123,7 +130,7 @@
           <div class="col-8 mx-auto" v-if="userdata.productCNT!=0">
             <a
               href="#"
-              class="bg-body rounded btn btn-default shadow p-2 mb-3"
+              class="bg-light rounded btn btn-default shadow-sm p-2 mb-3"
               v-for="item in ProductsList"
             >
               <div class="row pe-3">
