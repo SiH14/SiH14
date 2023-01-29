@@ -1,4 +1,23 @@
 
+//<div>
+//<form class="d-none d-sm-inline-block form-inline  mt-3 mw-100 navbar-search ">
+//<div class="input-group">
+//<select name="" id="" class="">
+         //   <option value="">提案編號</option>
+         //   <option value="">贊助編號</option>
+           // <option value="">會員編號</option>
+       // </select>
+       // <input type="text" class="" style="width: 60% ;" placeholder="Search for..."
+        //    aria-label="Search" aria-describedby="basic-addon2">
+       // <div class="input-group-append">
+         //   <button class="btn btn-primary" type="button">
+         //       <i class="fas fa-search fa-sm"></i>
+         //   </button>
+       // </div>
+   // </div>
+//</form>
+//</div>
+
 // 導覽列
 document.getElementById("myheader").innerHTML = `
 <nav class="navbar navbar-expand navbar-light  static-top " style="margin: auto;
@@ -9,27 +28,8 @@ max-width: 80%;">
 <!-- 導覽列右邊 -->
 <!-- 導覽收尋欄-->
 <div class="row">
-<div>
-<form class="d-none d-sm-inline-block form-inline  mt-3 mw-100 navbar-search ">
-<div class="input-group">
-<select name="" id="" class="">
-            <option value="">提案編號</option>
-            <option value="">贊助編號</option>
-            <option value="">會員編號</option>
-        </select>
-        <input type="text" class="" style="width: 60% ;" placeholder="Search for..."
-            aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
-                <i class="fas fa-search fa-sm"></i>
-            </button>
-        </div>
-    </div>
-</form>
-</div>
-<div>
 <ul class="navbar-nav mx-5">
-
+<div>
     <li class="nav-item dropdown no-arrow d-sm-none">
         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -142,18 +142,17 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
 <a class="nav-link" href="./profile.html">
 <i class="fa fa-user" aria-hidden="true"></i>
     <span>個人資料</span></a>
-
-</li>
-<div class="sidebar-heading">
-前台管理
-</div>
-<li class="nav-item ">
-<a class="nav-link" href="./editHome.html">
-<i class="fa fa-user" aria-hidden="true"></i>
-    <span>編輯首頁</span></a>
-
-</li>
-`;
+    `;
+    // </li>
+    // <div class="sidebar-heading">
+    // 前台管理
+    // </div>
+    // <li class="nav-item ">
+    // <a class="nav-link" href="./editHome.html">
+    // <i class="fa fa-user" aria-hidden="true"></i>
+    //     <span>編輯首頁</span></a>
+    
+    // </li>
 
 // 頁尾
 document.getElementById("myfooter").innerHTML = ` <footer class="p-5">

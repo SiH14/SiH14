@@ -13,8 +13,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Fundraising.Models;
-
-
+using Microsoft.IdentityModel.Tokens;
 
 namespace 募資.Controllers
 {
@@ -177,7 +176,7 @@ namespace 募資.Controllers
                               join finsum in finallysum on p.ProductId equals finsum.productid
                               select new
                               {
-                                  OrderId = o.OrderId,
+                                  OrderId = o.OrderId.ToString(),
                                   UserId = o.UserId,
                                   ProductTitle = p.ProductTitle,
                                   PlanTitle = pl.PlanTitle,
@@ -321,97 +320,67 @@ namespace 募資.Controllers
         [HttpGet("Pdetails/{id}")]
         public async Task<ActionResult<IEnumerable<dynamic>>> GetPdetails(int id)
         {
-            var prodsum = (from product in _context.Products
-                          join plan in _context.Plans on product.ProductId equals plan.ProductId
-                          join order in _context.Orders on plan.PlanId equals order.PlanId
-                          where order.OrderStateId != 5 && order.OrderStateId != 4
-                          group new { plan, order } by product.ProductId into s
-                          where s.Key == id
-                          select new
-                          {
-                              productId = s.Key,
-                              sum = s.Sum(a => a.plan.PlanPrice + a.order.AddSponsorship).ToString()?? "0",
-                              sumstring = (s.Sum(a => a.plan.PlanPrice + a.order.AddSponsorship)).ToString("C0")
-                          });
-            var test = _context.Products.Select(p => new
-            {
-                p.ProductId,
-                p.ProductTitle,
-                p.ProductContent,
-                p.TargetAmount,
-                TargetAmountstring = (p.TargetAmount).ToString("C0"),
-                Startime = (p.Startime).ToString("yyyy-MM-dd"),
-                Endtime = (p.Endtime).ToString("yyyy-MM-dd"),
-                p.ProductStateId,
-                p.PrincipalId,
-                p.PrincipalName,
-                p.PrincipalPhone,
-                p.PrincipalEmail,
-                p.PrincipalBankAccount,
-                p.Featured,
-                p.Coverphoto,
-                Questions = p.Questions,
-                plan = p.Plans,
-                sum = new {
-                    sum = _context.Orders.Join(_context.Plans, o => o.PlanId, pl => pl.PlanId, (o,pl) =>new{o.PlanId }),
-                    sumstring = string.Empty,
-                }
-            }).Where(x=>x.ProductId == id);
-            var Pdetails = from pd in _context.Products
-                           where pd.ProductId == id
+            var sumprive = from pl in _context.Plans
+                           join o in _context.Orders on pl.PlanId equals o.PlanId
+                           where o.OrderStateId != 5 && o.OrderStateId != 4
+                           group new { pl, o } by new { pl.ProductId } into s
                            select new
                            {
-                               pd.ProductId,
-                               pd.ProductTitle,
-                               pd.ProductContent,
-                               pd.TargetAmount,
-                               TargetAmountstring = (pd.TargetAmount).ToString("C0"),
-                               Startime = (pd.Startime).ToString("yyyy-MM-dd"),
-                               Endtime = (pd.Endtime).ToString("yyyy-MM-dd"),
-                               pd.ProductStateId,
-                               pd.PrincipalId,
-                               pd.PrincipalName,
-                               pd.PrincipalPhone,
-                               pd.PrincipalEmail,
-                               pd.PrincipalBankAccount,
-                               pd.Featured,
-                               pd.Coverphoto,
-                               sum = prodsum.ToList(),
-                               plan = _context.Plans.Where(x => x.ProductId == pd.ProductId)
-                                       .Select(x => new
-                                       {
-                                           ProductId = x.ProductId,
-                                           PlanId = x.PlanId,
-                                           PlanPhoto = x.PlanPhoto,
-                                           PlanTitle = x.PlanTitle,
-                                           PlanContent = x.PlanContent,
-                                           PlanPrice = x.PlanPrice.ToString("C0")
-                                       }).ToList(),
-                               qusetion = _context.Questions.Where(x => x.ProductId == pd.ProductId).ToList()
+                               ProductId = s.Key.ProductId,
+                               sum = s.Sum(x => x.pl.PlanPrice + x.o.AddSponsorship)
                            };
-
-
-
-            var testjoin = _context.Orders.Join(_context.Plans, o => o.PlanId, pl => pl.PlanId, (o, pl) => new
-            {
-                o.OrderStateId,
-                o.AddSponsorship,
-                pl.PlanId,
-                pl.PlanPrice,
-                pl.ProductId,
-                sum = o.AddSponsorship + pl.PlanPrice
-            }).GroupBy(x => x.ProductId).Select(s => new
-            {
-                s.Key,
-                sum = s.Sum(x => x.AddSponsorship + x.PlanPrice)
-            }).Where(s => s.Key == id)
-            .DefaultIfEmpty()
-            ;
-
-
-
-            return await Pdetails.ToListAsync();
+            var pdquery = from pd in _context.Products
+                          join sp in sumprive on pd.ProductId equals sp.ProductId into ps
+                          from sp in ps.DefaultIfEmpty()
+                          where pd.ProductId == id
+                          select new
+                          {
+                              pd.ProductId,
+                              pd.ProductTitle,
+                              pd.ProductContent,
+                              pd.TargetAmount,
+                              TargetAmountstring = (pd.TargetAmount).ToString("C0"),
+                              Startime = (pd.Startime).ToString("yyyy-MM-dd"),
+                              Endtime = (pd.Endtime).ToString("yyyy-MM-dd"),
+                              pd.ProductStateId,
+                              pd.PrincipalId,
+                              pd.PrincipalName,
+                              pd.PrincipalPhone,
+                              pd.PrincipalEmail,
+                              pd.PrincipalBankAccount,
+                              pd.Featured,
+                              pd.Coverphoto,
+                              sum = sp.sum == null ? 0 : sp.sum,
+                              sumstring = sp.sum == null ? "NT$0" : sp.sum.ToString("c0"),
+                          };
+            return await pdquery.ToListAsync();
         }
+        // GET: api/back/Pplans/id 取得產品方案
+        [HttpGet("Pplans/{id}")]
+        public async Task<ActionResult<IEnumerable<dynamic>>> Pplans(int id)
+        {
+            var query = _context.Plans.Where(x => x.ProductId == id).Select(x => new
+            {
+                planId = x.PlanId,
+                productId = x.ProductId,
+                planTitle = x.PlanTitle,
+                planContent = x.PlanContent,
+                planPrice = x.PlanPrice.ToString("c0"),
+                planPhoto = x.PlanPhoto
+            });
+            return await query.ToListAsync();
+        }
+        // GET: api/back/Pquestion/id 取得產品方案
+        [HttpGet("Pquestion/{id}")]
+        public async Task<ActionResult<IEnumerable<dynamic>>> Pquestion(int id)
+        {
+            var query = _context.Questions.Where(x => x.ProductId == id).Select(x => x);
+            return await query.ToListAsync();
+        }
+
+
+
+
         // PUT: api/back/Products/ID   修改產品
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("Products/{id}")]
@@ -489,6 +458,28 @@ namespace 募資.Controllers
 
             return await p.ToListAsync();
         }
+        //api/back/users
+        [HttpGet("Users")]
+        public async Task<ActionResult<IEnumerable<dynamic>>> GetUser()
+        {
+            var result = _context.Users.Select(x => new
+            {
+                UserId = x.UserId.ToString(),
+                UserEmail = x.UserEmail,
+                UserPassword = x.UserPassword,
+                UserName = x.UserName,
+                UserPhone = x.UserPhone,
+                UserBirthday = x.UserBirthday,
+                UserGender = x.UserGender,
+                UserIntro = x.UserIntro,
+                UserFblink = x.UserFblink,
+                CreateDate = x.CreateDate,
+                UserPhoto = x.UserPhoto
+            });
+            return await result.ToListAsync();
+        }
+
+
 
 
     }
