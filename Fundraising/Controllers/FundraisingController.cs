@@ -684,8 +684,10 @@ namespace Fundraising.Controllers
                         select new
                         {
                             PlanId = plan.PlanId,
+                            planphoto = plan.PlanPhoto,
                             ProjectTitle = plan.PlanTitle,
-                            PlanPrice = plan.PlanPrice
+                            PlanPrice = plan.PlanPrice,
+                            plancontent = plan.PlanContent
                         };
             return await query.ToListAsync();
         }
