@@ -107,36 +107,7 @@
               <div class="row pe-3">
                 <div class="col-md-3">
                   <img
-                    src="../img/product.png"
-                    alt=".."
-                    class="img-thumbnail"
-                  />
-                </div>
-                <div class="col-md-9 my-auto">
-                  <h5 class="text-md-start">{{item.order.productTitle}}</h5>
-                  <!-- <p class="text-md-start">{{item.prod.startime}}~{{item.prod.endtime}}</p> -->
-                  <p class="text-muted fs-6 text-md-end">
-                    提案者 {{item.userName}}
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-8 mx-auto" v-else>
-            <p>尚未贊助任何專案。</p>
-          </div>
-        </div>
-        <div class="row" id="ProductsRow" style="display: none">
-          <div class="col-8 mx-auto" v-if="userdata.productCNT!=0">
-            <a
-              href="#"
-              class="bg-light rounded btn btn-default shadow-sm p-2 mb-3"
-              v-for="item in ProductsList"
-            >
-              <div class="row pe-3">
-                <div class="col-md-3">
-                  <img
-                    src="../img/product.png"
+                    :src="item.prod.coverphoto"
                     alt=".."
                     class="img-thumbnail"
                   />
@@ -151,8 +122,37 @@
               </div>
             </a>
           </div>
-          <div class="col-8 mx-auto" v-else>
-            <p>尚未贊助任何專案。</p>
+          <div class="col-8 mx-auto text-center my-4" v-else>
+            <h5>尚未贊助任何專案。</h5>
+          </div>
+        </div>
+        <div class="row" id="ProductsRow" style="display: none">
+          <div class="col-8 mx-auto" v-if="userdata.productCNT!=0">
+            <a
+              href="#"
+              class="bg-light rounded btn btn-default shadow-sm p-2 mb-3"
+              v-for="item in ProductsList"
+            >
+              <div class="row pe-3">
+                <div class="col-md-3">
+                  <img
+                    :src="item.prod.coverphoto"
+                    alt=".."
+                    class="img-thumbnail"
+                  />
+                </div>
+                <div class="col-md-9 my-auto">
+                  <h5 class="text-md-start">{{item.prod.productTitle}}</h5>
+                  <!-- <p class="text-md-start">{{item.prod.startime}}~{{item.prod.endtime}}</p> -->
+                  <p class="text-muted fs-6 text-md-end">
+                    提案者 {{item.userName}}
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-8 mx-auto text-center my-4" v-else>
+            <h5>尚未發起任何專案。</ㄘ>
           </div>
         </div>
       </div>

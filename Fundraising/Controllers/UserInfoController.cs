@@ -95,25 +95,17 @@ namespace Fundraising.Controllers
         [HttpGet("OrderList/{id}")]
         public async Task<ActionResult<dynamic>> GetOrder(int id)
         {
-            var productlist = from user in _context.Users
-                              join prod in _context.Products on user.UserId equals prod.UserId
-                              where prod.UserId == id
-                              select new
-                              {
-                                  user.UserId,
-                                  user.UserName,
-                                  prod
-                              };
-
-
             var orderlist = from user in _context.Users
                               join order in _context.Orders on user.UserId equals order.UserId
+                              join plan in _context.Plans on order.PlanId equals plan.PlanId
+                              join prod in _context.Products on plan.ProductId equals prod.ProductId
+                              join pu in _context.Users on prod.UserId equals pu.UserId
                               where order.UserId == id
                               select new
                               {
-                                  user.UserId,
-                                  user.UserName,
-                                  order
+                                  prod,
+                                  pu.UserName
+
                               };
             return await orderlist.ToListAsync();
         }

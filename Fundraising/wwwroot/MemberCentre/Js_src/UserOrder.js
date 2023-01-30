@@ -44,6 +44,9 @@ const app = {
     ordersession(e) {
       sessionStorage.setItem("orderdetailId", e);
     },
+    chat(e) {
+      console.log(e);
+    },
   },
 };
 
