@@ -103,6 +103,10 @@
     .card-group.card-group-scroll>.card {
         flex-basis: 35%;
     }
+
+/*    .card-group-scroll{
+        display:flex;
+    }*/
     /* 滾動贊助 */
 </style>
 
@@ -122,15 +126,15 @@
                     <div>
                         <br>
                         <a style="color: black; text-decoration:none;" href="./product.html">
-                            <h4>POIEMA Evo 空氣淨化器｜大口呼吸．淨化革命</h4>
+                            <h4>{{productList[0].producttitle}}</h4>
                         </a>
                     </div>
                     <div>
-                        <span>提案人 </span><span><a style="text-decoration:none;" href="#">Hunter</a></span>
+                        <span>提案人 </span><span><a style="text-decoration:none;" href="#">{{productList[0].username}}</a></span>
                     </div>
                     <br>
                     <div>
-                        <span style="font-weight: bold; font-size: 20px;">NT$220,000</span><span> / 目標 NT$100,000</span>
+                        <span style="font-weight: bold; font-size: 20px;">NT${{productList[0].currentamount | money}}</span><span> / 目標 NT${{productList[0].targetamount | money}}</span>
                     </div>
                 </div>
                 <hr>
@@ -143,22 +147,21 @@
         <div class="container card-group card-group-scroll">
             <!--v-if="whouser == ''"-->
             <div class="card" style="padding:10px" v-for="item in planList">
-                <a href="#" style="text-decoration: none; color: black;" v-on:click="getplanID(item.planId)">
+                <a href="#" style="text-decoration: none; color: black;" v-on:click="getplanID(item.planid)">
                     <img :src="item.planphoto" class="card-img-top"
                          alt="Hollywood Sign on The Hill" />
                     <div class="card-body">
-                        <h5 class="card-title">{{item.projectTitle}}</h5>
-                        <p class="card-text">
-                            This is a wider card with supporting text below as a natural lead-in to additional content. This
-                            content is a little bit longer.
-                        </p>
+                        <h5 class="mb-3 card-title">{{item.plantitle}}</h5>
+                        <div class="mb-4"><h4>NT${{item.planprice | money}}</h4></div>
+                        <div><p class="card-text" style="white-space: pre-wrap;">{{item.plancontent}}</p></div>
                     </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+                    <div class="card-footer" style="text-align:center">
+                        <small class="text-muted">贊助</small>
                     </div>
                 </a>
             </div>
         </div>
+
 
         <!--<div class="container card-group card-group-scroll" v-else>
             <div class="card" style="padding:10px" v-for="item in planList">
@@ -215,7 +218,6 @@
             </div>
         </a>
     </div>-->
-
     <!--姓名：<input type="text" id="name"><br>
     訊息：<input type="text" id="msg"><br>
     <Button type="Button" id="submitBtn">送出</Button><br>
@@ -247,7 +249,15 @@
         });
     </script>-->
 
+    <script src="../layout/layout.js"></script>
+
     <script>
+        Vue.filter('money', function (num) {
+            const parts = num.toString().split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return parts.join('.');
+        });
+
         var app = new Vue({
             el: ".getplan",
             data: {
@@ -279,7 +289,7 @@
                 })
                 $.ajax({
                     type: 'Get',
-                    url: '/api/Fundraising/plan/' + sessionStorage.getItem("productId"),
+                    url: '/api/Fundraising/prductplan/' + sessionStorage.getItem("productId"),
                     success: function (e) {
                         app.planList = e
                     }

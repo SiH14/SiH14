@@ -19,108 +19,124 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/mystyle.css">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- <script src="js/sb-admin-2.min.js"></script> -->
     <script src="./js/logincheck.js"></script>
 </head>
 
-<body id="app">
-    <div class="container-fluid p-0 bg-theme">
-        <!-- 導覽列 -->
-        <div id="myheader" class="bg-white"
-            style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
-        </div>
-        <!-- 結束 導覽列 -->
-        <div class=" container-fluid px-5 p-4">
-            <div class="row justify-content-center">
-                <!-- 側邊欄位 -->
-                <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar">
-                    <br>
-                    <div id="mysider"></div>
-                </ul>
-                <!-- 結束 側邊欄位 -->
-                <!--主要內容-->
-                <div class="col-10">
-                    <div class="px-3">
-                        <div class="bg-white item-style mb-5">
-                            <!-- ===============================================================================================================  -->
-                            <div class="card-header py-3 mb-3">
-                                <h3 class="m-0">基本資料</h6>
-                            </div>
-                            <div class="row justify-content-center p-5 ">
-                                <div class="col-6">
-                                    <form class="text-center">
-                                        <img src="img/undraw_profile.svg" alt="" style="height: 150px; width: 150px;">
-                                        <h3 class="p-3">朱小名</h3>
-                                        <div class="form-group d-flex justify-content-center">
-                                            <div class="col-10">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <i class="fa fa-address-card"></i>
-                                                        </div>
-                                                    </div>
-                                                    <input id="account" name="account" type="text" class="form-control"
-                                                        disabled>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group d-flex justify-content-center">
-                                            <div class="col-10">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <i class="fa fa-key"></i>
-                                                        </div>
-                                                    </div>
-                                                    <input id="password" name="password" type="text"
-                                                        class="form-control" placeholder="輸入密碼">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group  d-flex justify-content-center">
-                                            <div class="col-10">
-                                                <button name="submit" type="submit" class="btn btn-primary px-5 ">
-                                                    提交
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
+<body>
+    <div id="app">
+        <loading :can-cancel="true"></loading>
+        <div class="container-fluid p-0 bg-theme">
+            <!-- 導覽列 -->
+            <div id="myheader" class="bg-white"
+                style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
+            </div>
+            <!-- 結束 導覽列 -->
+            <div class=" container-fluid px-5 p-4">
+                <div class="row justify-content-center">
+                    <!-- 側邊欄位 -->
+                    <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar">
+                        <br>
+                        <div id="mysider"></div>
+                    </ul>
+                    <!-- 結束 側邊欄位 -->
+                    <!--主要內容-->
+                    <div class="col-10">
+                        <div class="px-3">
+                            <div class="bg-white item-style mb-5">
+                                <!-- ===============================================================================================================  -->
+                                <div class="card-header py-3 mb-3">
+                                    <h3 class="m-0">基本資料</h6>
                                 </div>
+                                <div class="row justify-content-center p-5 ">
+                                    <div class="col-6">
+                                        <form class="text-center">
+                                            <img src="img/undraw_profile.svg" alt=""
+                                                style="height: 150px; width: 150px;">
+                                            <h3 class="p-3">朱小名</h3>
+                                            <div class="form-group d-flex justify-content-center">
+                                                <div class="col-10">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <i class="fa fa-address-card"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input id="account" name="account" type="text"
+                                                            class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group d-flex justify-content-center">
+                                                <div class="col-10">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <i class="fa fa-key"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input id="password" name="password" type="text"
+                                                            class="form-control" placeholder="輸入密碼">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group  d-flex justify-content-center">
+                                                <div class="col-10">
+                                                    <button name="submit" type="submit" class="btn btn-primary px-5 ">
+                                                        提交
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- ===============================================================================================================  -->
                             </div>
-                            <!-- ===============================================================================================================  -->
                         </div>
                     </div>
+                    <!-- 結束 主要內容 -->
                 </div>
-                <!-- 結束 主要內容 -->
             </div>
         </div>
+        <!-- 頁尾 -->
+        <div id="myfooter"></div>
+        <!-- 結束 頁尾r -->
+        <!-- 回上方按鈕-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
     </div>
-    </div>
-    <!-- 頁尾 -->
-    <div id="myfooter"></div>
-    <!-- 結束 頁尾r -->
-    <!-- 回上方按鈕-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <script src="./js/myjs.js"></script>
 
+    
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="./js/myjs.js"></script>
 
     <script>
-        const { createApp } = Vue
+        Vue.use(VueLoading);
 
-        createApp({
-            data() {
-                return {
-                    employeeinfo: []
-                }
+        var app = new Vue({
+            el: '#app',
+            data: {
+                LoaderVisiable: false,
+                employeeinfo: []
+            },
+            components: {
+                Loading: VueLoading
             },
             methods: {
+                open: function () {
+                    console.log('open');
+                    let loader = this.$loading.show({
+                        loader: 'dots'
+                    });
+                    // setTimeout(() => loader.hide(), 0.5 * 1000);
+                },
                 logout: function () {
                     // alert("1523 ")
                     axios.get("/api/back/logout").then(res => { if (res.data == "已登出") { window.location.reload() } })
@@ -134,13 +150,18 @@
                         })
                 }
             },
+
             mounted() {
+                let loader = this.$loading.show({
+                    loader: 'dots'
+                });
                 axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
                     this.employeeinfo = res.data
                     console.log(this.employeeinfo)
+                    setTimeout(() => loader.hide(), 0.5 * 1000);
                 })
-            },
-        }).mount('#app')
+            }
+        })
     </script>
 </body>
 

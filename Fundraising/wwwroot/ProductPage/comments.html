@@ -124,7 +124,7 @@
                 <!-- 這則留言 -->
                 <hr>
                 <div class="d-flex bd-highlight mb-3" style="display:none;">
-                    <img style="height: 30px; width: 30px;" src="./photo/page.png" alt="">
+                    <img style="height: 30px; width: 30px;" :src="item.userphoto" alt="">
                     <div class="p-2 bd-highlight"><a href="#" style="text-decoration: none;">{{item.username}}</a></div>
                     <div class="p-2 bd-highlight" style="height: 35px; background-color: #ABFFAB ">留言者</div>
                     <div class="ms-auto p-2 bd-highlight"><button v-if="item.userid == whouser" class="btn" style="display:inline"><i class="fa-solid fa-pen-to-square"></i></button>{{item.commenttime}}</div>
@@ -432,6 +432,14 @@
                         textinput2.style.height = '40px';
                         textinput2.style.height = e.target.scrollHeight + 'px';
                     });
+                },
+                gotoplan: function () {
+                    if (parseInt(this.whouser) > 0) {
+                        window.location = "./plan.html";
+                    }
+                    else {
+                        window.location = "../login/login.html";
+                    }
                 }
             }
         })

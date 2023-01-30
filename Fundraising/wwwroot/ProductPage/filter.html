@@ -83,8 +83,16 @@
         🎤
     </button>-->
     <!--初版搜尋-->
+    <!--<div class="app">
+        <router-view></router-view>
+    </div>
+    <script type="text/x-template" id="filter-template">
+        <tbody>
+            <h1>123{{fliterList}}</h1>
+        </tbody>
+    </script>-->
 
-    <div class="container px-4 py-5" id="mySelected">
+    <div class="app container px-4 py-5" id="mySelected">
         <h2 class="pb-2 border-bottom">
             探索更多<!--{{fliterList.length}}-->
         </h2>
@@ -108,7 +116,7 @@
                         </svg>
                     </div>
 
-                    <!-- 資訊卡 -->
+                     <!--資訊卡--> 
                     <div class="selectedimgdiv">
                         <img class="selectedimg" :src="item.coverphoto" alt="">
                     </div>
@@ -119,7 +127,7 @@
                         <span>{{item.nowperson}} 人支持</span>
                     </div>
 
-                    <!-- 進度條 -->
+                     <!--進度條--> 
                     <div class="progress" style="height: 10px;">
                         <div class="progress-bar bg-success" role="progressbar" :style="{width: item.percent+'%'}" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -148,7 +156,6 @@
             </ul>
         </nav>
     </div>
-
 
     <!-- UI code goes here -->
     <!--<div id="warning">
@@ -180,6 +187,7 @@
         </table>
     </div>
 
+
     <script src="../layout/layout.js"></script>
     <script src="microsoft.cognitiveservices.speech.sdk.bundle.js"></script>
     <script>
@@ -202,7 +210,7 @@
             // startRecognizeOnceAsyncButton
             startRecognizeOnceAsyncButton.addEventListener("click", function () {
                 startRecognizeOnceAsyncButton.disabled = true;
-             /*   phraseDiv.innerHTML = "";*/
+                /*   phraseDiv.innerHTML = "";*/
 
                 // if we got an authorization token, use the token. Otherwise use the provided subscription key
                 var speechConfig;
@@ -225,7 +233,7 @@
                 recognizer.recognizeOnceAsync(
                     function (result) {
                         startRecognizeOnceAsyncButton.disabled = false;
-              /*          phraseDiv.innerHTML += result.text;*/
+                        /*          phraseDiv.innerHTML += result.text;*/
                         window.console.log(result);
                         const textresult = result.text
                         document.getElementById("mysearch").value = result.text.substring(0, textresult.length - 1);
@@ -235,7 +243,7 @@
                     },
                     function (err) {
                         startRecognizeOnceAsyncButton.disabled = false;
-                    /*    phraseDiv.innerHTML += err;*/
+                        /*    phraseDiv.innerHTML += err;*/
                         window.console.log(err);
                         document.getElementById("mysearch").value = "請再說一次.";
                         document.querySelector(".voicesearchtext").innerHTML = "請再說一次.";
@@ -249,7 +257,7 @@
                 startRecognizeOnceAsyncButton.disabled = false;
 
                 document.getElementById('content').style.display = 'block';
-                document.getElementById('warning').style.display = 'none';
+                /* document.getElementById('warning').style.display = 'none';*/
 
                 // in case we have a function for getting an authorization token, call it.
                 if (typeof RequestAuthorizationToken === "function") {
@@ -295,10 +303,70 @@
             })
         }
         /*篩選*/
+        //var ddd = [{ "id": 1 }, { "id": 2 }, { "id": 2 }]
 
+        //var filterPageComponent = {
+        //    template: "#filter-template",
+        //    data: function () {
+        //        return {
+        //            fliterList: 0
+        //        }
+        //    }
+        //    ,
+        //    beforeMount() {
+        //        $.ajax({
+        //            type: 'Get',
+        //            url: '/api/Fundraising',
+        //            success: function (e) {
+        //           /*     console.log(1313)*/
+        //                console.log(this.fff)
+        //            }
+        //        })
+        //    }
+        //    ,
+        //    mounted: function (){
+        //    /*    alert(123);*/
+        //        $.ajax({
+        //            type: 'Get',
+        //            url: '/api/Fundraising',
+        //            success: function (e) {
+        //                console.log(filterPageComponent)
+        //            }
+        //        })
+        //    }
+        //    //,
+        //    //methods: {
+        //    //    gotopage2: function () {
+        //    //        router.push("/page2?param1=100");
+        //    //    }
+        //    //}
+        //};
 
+        //var page2Component = {
+        //    template: "#page2-template",
+        //    data: function () {
+        //        return {
+        //            param1Value: this.$route.query.param1
+        //        }
+        //    }
+        //};
+
+        //const routes = [
+        //    { path: "/filter", name: "filter", component: filterPageComponent}
+        //    /*            { path: "/page2", name: "page2", component: page2Component }*/
+        //];
+
+        //const router = new VueRouter({
+        //    routes
+        //});
+        
         var app = new Vue({
-            el: ".container",
+            el: ".app",
+            //router: router,
+            //beforeMount() {
+            //    router.push("/filter");
+            //}
+            //,
             data: {
                 fliterList: [],
                 tolpage: 0
@@ -318,6 +386,7 @@
                     url: '/api/Fundraising',
                     success: function (e) {
                         app.fliterList = e
+                     /*   console.log(e)*/
                     }
                 })
             }
@@ -329,28 +398,29 @@
                 }
             }
         })
+        console.log(app)
 
 
 
-                                    //Vue.createApp({
-                                    //    data() {
-                                    //        return {
-                                    //            fliterList: [
-                                    //                { "todoItemId": 1, "name": "Job A", "isComplete": true },
-                                    //                { "todoItemId": 2, "name": "Job B", "isComplete": false }
-                                    //            ]
-                                    //        }
-                                    //    },
-                                    //    mounted() {
-                                    //        axios.get('/api/Fundraising')
-                                    //            .then(response => (this.fliterList = response.data))
-                                    //    }, updated() {
-                                    //        this.$nextTick(function () {
-                                    //            //document.querySelector('.wid').style.width = "50%"
-                                    //        });
+                                                //Vue.createApp({
+                                                //    data() {
+                                                //        return {
+                                                //            fliterList: [
+                                                //                { "todoItemId": 1, "name": "Job A", "isComplete": true },
+                                                //                { "todoItemId": 2, "name": "Job B", "isComplete": false }
+                                                //            ]
+                                                //        }
+                                                //    },
+                                                //    mounted() {
+                                                //        axios.get('/api/Fundraising')
+                                                //            .then(response => (this.fliterList = response.data))
+                                                //    }, updated() {
+                                                //        this.$nextTick(function () {
+                                                //            //document.querySelector('.wid').style.width = "50%"
+                                                //        });
 
-                                    //    }
-                                    //}).mount('.container')
+                                                //    }
+                                                //}).mount('.container')
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
