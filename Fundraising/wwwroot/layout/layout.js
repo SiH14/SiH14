@@ -18,7 +18,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
                 <a class="nav-link headernav" href="../Proposal/myproposal.html">提案</a>
             </li>
             <li class="nav-item headernav" id="header-items">
-                <a class="nav-link headernav" href="../productpage/filter.html">探索</a>
+                <a class="nav-link headernav" onclick="gotofilter()" href="../productpage/filter.html">探索</a>
             </li>
 
         </ul>
@@ -149,6 +149,10 @@ querybody.innerHTML = header + querybody.innerHTML + footer;
 queryheader.innerHTML += `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>`;
 let queryheader2 = document.querySelector("head");
 queryheader2.innerHTML += `<link rel="stylesheet" href="../layout/layout.css"/>`
+
+function gotofilter() {
+    sessionStorage.setItem("topage", 0);
+}
 
 // searchbar
 const icon = document.querySelector('.icon');
