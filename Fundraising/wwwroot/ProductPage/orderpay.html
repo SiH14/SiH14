@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <style>
@@ -132,7 +133,7 @@
                         <h4>贊助項目 :</h4>
                     </div>
 
-                    <div style="border: solid wheat;">
+                    <div style="border: solid #A9A9A9; ">
                         <div style="width: 90%; margin: auto;">
                             <a href="#" style="text-decoration:none; color: black;">
                                 <div class="mb-1" style="text-align: center;">
@@ -172,36 +173,54 @@
                     </div>
 
                     <div>
-                        <form>
+                        <form class="needs-validation" novalidate>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">加碼贊助 (選擇)</label>
                                 <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
                                 <div class="input-group">
                                     <div class="input-group-text" style="background-color:white">NT$</div>
-                                    <input type="number" class="form-control" id="autoSizingInputGroup" v-model="AddSponsorshipValue">
+                                    <input type="number" class="form-control" id="autoSizingInputGroup" oninput="if(value.length>8)value=value.slice(0,8)" v-model="AddSponsorshipValue" required>
+                                    <div class="invalid-feedback">
+                                        無須贊助請填'0'
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-9">
                                     <label for="formGroupExampleInput" class="form-label">收件地址</label>
-                                    <input v-model="orderpayList.RecipientAddress" type="text" class="form-control" id="formGroupExampleInput" placeholder="請填寫詳細地址">
+                                    <input v-model="orderpayList.RecipientAddress" type="text" class="form-control" id="formGroupExampleInput" placeholder="請填寫詳細地址" required>
+                                    <div class="invalid-feedback">
+                                        必填
+                                    </div>
                                 </div>
                                 <div class="col-3">
                                     <label for="formGroupExampleInput" class="form-label">郵遞區號</label>
-                                    <input v-model="orderpayList.PostCode" type="text" class="form-control" id="formGroupExampleInput" placeholder="區號">
+                                    <input v-model="orderpayList.PostCode" type="text" class="form-control" id="formGroupExampleInput" placeholder="區號" required>
+                                    <div class="invalid-feedback">
+                                        必填
+                                    </div>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput" class="form-label">姓名</label>
-                                <input v-model="orderpayList.RecipientName" type="text" class="form-control" id="formGroupExampleInput" placeholder="請填寫真實姓名">
+                                <input v-model="orderpayList.RecipientName" type="text" class="form-control" id="formGroupExampleInput" placeholder="請填寫真實姓名" required>
+                                <div class="invalid-feedback">
+                                    必填
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">連絡電話</label>
-                                <input v-model="orderpayList.RecipientPhone" type="text" class="form-control" id="formGroupExampleInput2" placeholder="請填寫常用電話，以利提案團隊聯繫">
+                                <input v-model="orderpayList.RecipientPhone" type="text" class="form-control" id="formGroupExampleInput2" placeholder="請填寫常用電話，以利提案團隊聯繫" required>
+                                <div class="invalid-feedback">
+                                    必填
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">連絡信箱</label>
-                                <input v-model="orderpayList.RecipientMail" type="text" class="form-control" id="formGroupExampleInput2" placeholder="請填寫常用信箱，以利提案團隊聯繫">
+                                <input v-model="orderpayList.RecipientMail" type="text" class="form-control" id="formGroupExampleInput2" placeholder="請填寫常用信箱，以利提案團隊聯繫" required>
+                                <div class="invalid-feedback">
+                                    必填
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">備註</label>
@@ -209,13 +228,13 @@
                             </div>
                             <div class="col-12">
                                 <div class="mb-2 form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck" required>
                                     <label class="form-check-label" for="gridCheck">
                                         我已閱讀並同意咱的服務條款與隱私權政策。
                                     </label>
                                 </div>
                                 <div class="col-12">
-                                    <input type="button" class="appo btn btn-primary" value="立刻贊助" v-on:click="okButtonClick"><!--onclick="okButtonClick()"-->
+                                    <input type="button" class="appo btn btn-primary" id="orderpaysubmit" value="立刻贊助" v-on:click="okButtonClick"><!--onclick="okButtonClick()"-->
                                 </div>
                             </div>
                         </form>
@@ -227,6 +246,11 @@
 
     <script src="../layout/layout.js"></script>
     <script>
+        //function test() {
+        //    alert(123);
+        //}
+
+
 
         Vue.filter('money', function (num) {
             const parts = num.toString().split('.');
@@ -268,12 +292,38 @@
             },
             methods: {
                 okButtonClick: function () {
-                    this.orderpayList["PlanID"] = this.fliterList[0].planId;
-                    this.orderpayList["UserID"] = 1;
-                    this.orderpayList["AddSponsorship"] = document.getElementById("autoSizingInputGroup").value;
-                    sessionStorage.setItem("orderpayList", JSON.stringify(this.orderpayList));
+                    //表單驗證
+                    (function () {
+                        'use strict'
+
+                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                        var forms = document.querySelectorAll('.needs-validation')
+
+                        // Loop over them and prevent submission
+                        Array.prototype.slice.call(forms)
+                            .forEach(function (form) {
+                                if (!form.checkValidity()) {
+                                    swal("", "尚有必填欄位未輸入", "error")
+                                        event.preventDefault()
+                                        event.stopPropagation()
+                                } else if (form.checkValidity()) {
+                                    app.orderpayList["PlanID"] = app.fliterList[0].planId;
+                                    app.orderpayList["UserID"] = 1;
+                                    app.orderpayList["AddSponsorship"] = document.getElementById("autoSizingInputGroup").value;
+                                    sessionStorage.setItem("orderpayList", JSON.stringify(app.orderpayList));
+                                    console.log(app.orderpayList)
+                                    window.location = "./creditcard.html";
+                                    }
+                             
+                                    form.classList.add('was-validated')
+      
+                            })
+                    })()
+
+            /*        window.location = "./creditcard.html";*/
+
                   /*  console.log(this.orderpayList);*/
-                    window.location = "./creditcard.html";
+                /*    window.location = "./creditcard.html";*/
                     //$.ajax({
                     //    type: 'POST',
                     //    url: '/api/Orders/',
@@ -339,7 +389,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
