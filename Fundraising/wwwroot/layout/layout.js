@@ -24,7 +24,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
     </div>
 
     <div class="headernav">
-        <ul class="navbar-nav me-5 headernav">
+        <ul id="headicon" class="navbar-nav me-5 headernav">
         <button type="button" class="btn voicesearch" data-bs-toggle="modal" data-bs-target="#myModal">
         <img id="mic" src="../img/microphone.png" alt="">
         </button>
@@ -209,6 +209,10 @@ window.onload = function getuserID() {
                 axios.get("https://localhost:44398/api/Login/getuserphoto/" + res.data)
                     .then(res => {
                         // console.log(res.data[0].userPhoto)
+                        var headnav=document.getElementById("headicon");
+                        headnav.style.marginTop="4px";
+                        var setmicicon =document.getElementById("mic");
+                        setmicicon.style.marginTop="-1vh";
                         var setimg = document.getElementById("iconimg");
                         setimg.setAttribute("src", res.data[0].userPhoto)
                         setimg.style.width = "30px";

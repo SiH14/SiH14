@@ -309,8 +309,12 @@ function del(obj) {
 }
 
 // CKEditor 4
-CKEDITOR.replace('ProductContent');
+CKEDITOR.replace('ProductContent', {
+    height: 500,
+    removeButtons: 'PasteFromWord'
+});
 var dataDB;
+
 
 //表單驗證
 (function () {
@@ -338,8 +342,18 @@ var dataDB;
                             switch (value) {
                                 case "確定":
                                     confirmsubmit();
-                                    swal("表單已送出!", "", "success");
-                                    window.location = "https://localhost:44398/Proposal/myproposal.html"
+                                    swal("表單已送出!", "", "success", {
+                                        buttons: {
+                                            確定: true
+                                        },
+                                    })
+                                        .then((value) => {
+                                            switch (value) {
+                                                case "確定":
+                                                    window.location = "https://localhost:44398/Proposal/myproposal.html"
+                                                    break;
+                                            }
+                                        })
                                     break;
                                 case "取消":
                                     break;

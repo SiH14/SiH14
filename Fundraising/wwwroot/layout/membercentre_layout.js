@@ -25,7 +25,7 @@ let header =
     </div>
 
     <div class="headernav">
-        <ul class="navbar-nav me-5 headernav">
+        <ul id="headicon" class="navbar-nav me-5 headernav">
             <li class="headernav" style="padding-right: 10px;">
                 <div class="search headernav">                
                     <a class="icon headernav" href="#" role="button"></a>
@@ -203,6 +203,8 @@ window.onload = function getuserID() {
                                 .get("https://localhost:44398/api/Login/getuserphoto/" + res.data)
                                 .then((res) => {
                                     //console.log(res.data[0].userPhoto)
+                                    var headnav = document.getElementById("headicon");
+                                    headnav.style.marginTop = "4px";
                                     var setimg = document.getElementById("iconimg");
                                     setimg.setAttribute("src", res.data[0].userPhoto);
                                     setimg.style.width = "30px";

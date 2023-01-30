@@ -79,6 +79,10 @@ body {
     border: none;
 }
 
+/* .headicon{
+    padding: 6px;
+} */
+
 .voicesearch{
     padding: 0px 0px;
 }
@@ -95,6 +99,7 @@ body {
     width:50px;
     position:relative;
     padding-right: 16px;
+    margin-top: -0.5vh;
 }
 
 .dropdown-menu {
