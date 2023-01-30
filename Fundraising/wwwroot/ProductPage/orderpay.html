@@ -271,9 +271,17 @@
                 productList: [],
                 AddSponsorshipValue: 0,
                 fliterList: [],
-                orderpayList: {}
+                orderpayList: {},
+                whouser: ''
             },
             mounted: function () {
+                $.ajax({
+                    type: 'Get',
+                    url: '/api/login/getuserid',
+                    success: function (e) {
+                        app.whouser = e
+                    }
+                })
                 $.ajax({
                     type: 'Get',
                     url: '/api/Fundraising/prduct/' + sessionStorage.getItem("productId"),
@@ -308,7 +316,7 @@
                                         event.stopPropagation()
                                 } else if (form.checkValidity()) {
                                     app.orderpayList["PlanID"] = app.fliterList[0].planId;
-                                    app.orderpayList["UserID"] = 1;
+                                    app.orderpayList["UserID"] = parseInt(app.whouser);
                                     app.orderpayList["AddSponsorship"] = document.getElementById("autoSizingInputGroup").value;
                                     sessionStorage.setItem("orderpayList", JSON.stringify(app.orderpayList));
                                     console.log(app.orderpayList)
