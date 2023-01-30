@@ -2,7 +2,9 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
 
 <div class="container-fluid headernav" id="header-container">
     <!--LOGO -->
-    <a class="navbar-brand fs-2 headernav" id="header-brand" href="../ProductPage/mymainpage.html">咱的募資平台</a>
+    <a class="navbar-brand fs-2 headernav" id="header-brand" href="../ProductPage/mymainpage.html">
+    <img id="brand" src="../img/brand.png" alt="">
+    </a>
 
     <!-- Bar -->
 
