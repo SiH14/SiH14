@@ -3,6 +3,7 @@ Vue.createApp({
     return {
       userdata: {},
       ProductsList: [],
+      OrdersList: [],
     };
   },
   methods: {
@@ -28,6 +29,10 @@ Vue.createApp({
       // 拿ProductsList
       axios.get("/api/userinfo/ProductList/" + res.data).then((res) => {
         this.ProductsList = res.data;
+      });
+      // 拿OrdersList
+      axios.get("/api/userinfo/OrderList/" + res.data).then((res) => {
+        this.OrdersList = res.data;
       });
     });
   },
