@@ -26,7 +26,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
     <div class="headernav">
         <ul class="navbar-nav me-5 headernav">
         <button type="button" class="btn voicesearch" data-bs-toggle="modal" data-bs-target="#myModal">
-            🎤
+        <img id="mic" src="../img/microphone.png" alt="">
         </button>
 
         <!-- 語音搜尋窗口 -->

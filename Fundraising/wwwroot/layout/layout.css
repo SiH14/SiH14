@@ -79,12 +79,22 @@ body {
     border: none;
 }
 
+.voicesearch{
+    padding: 0px 0px;
+}
+
 .loginicon {
     position: relative;
     bottom: 4.5px;
     /* width: 30px;
     height: 30px;
     border-radius: 15px; */
+}
+
+#mic{
+    width:50px;
+    position:relative;
+    padding-right: 16px;
 }
 
 .dropdown-menu {
