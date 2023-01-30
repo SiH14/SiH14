@@ -3,7 +3,7 @@ let header =
 
 <div class="container-fluid headernav" id="header-container">
     <!--LOGO -->
-    <a class="navbar-brand fs-2 headernav" id="header-brand" href="https://localhost:44398/ProductPage/mymainpage.html">咱的募資平台</a>
+    <a class="navbar-brand fs-2 headernav" id="header-brand" href="../ProductPage/mymainpage.html">咱的募資平台</a>
 
     <!-- Bar -->
 
@@ -11,10 +11,10 @@ let header =
         <!-- LEFT -->
         <ul class="navbar-nav me-auto fs-5 headernav">
             <li class="nav-item headernav">
-                <a class="nav-link headernav" href="https://localhost:44398/ProductPage/mymainpage.html" id="header-home">首頁</a>
+                <a class="nav-link headernav" href="../ProductPage/mymainpage.html" id="header-home">首頁</a>
             </li>
             <li class="nav-item headernav" id="header-items">
-                <a class="nav-link headernav" href="https://localhost:44398/Proposal/myproposal.html">提案</a>
+                <a class="nav-link headernav" href="../Proposal/myproposal.html">提案</a>
             </li>
             <li class="nav-item headernav" id="header-items">
                 <a class="nav-link headernav" href="#">探索</a>
@@ -42,8 +42,8 @@ let header =
         </a>
 
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item" href="https://localhost:44398/Registration/registration.html">註冊</a></li>
-            <li><a class="dropdown-item" href="https://localhost:44398/Login/login.html">登入</a></li>
+            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item" href="../Registration/registration.html">註冊</a></li>
+            <li><a class="dropdown-item" href="../Login/login.html">登入</a></li>
         </ul>
     </div>             
             </ul>
@@ -184,15 +184,15 @@ document.addEventListener("mousedown", (e) => {
 var userid = "";
 window.onload = function getuserID() {
 
-    axios.get("https://localhost:44398/api/Login/getusername")
+    axios.get("/api/Login/getusername")
         .then(res => {
             console.log(res.data);
             if (res.data == "未登入") {
-                window.location = "https://localhost:44398/Login/login.html"
+                window.location = "../Login/login.html"
             } else {
                 getid = function (callback) {
                     axios
-                        .get("https://localhost:44398/api/Login/getuserid")
+                        .get("/api/Login/getuserid")
                         .then((res) => {
                             callback(res.data);
                             console.log(res.data);
@@ -200,7 +200,7 @@ window.onload = function getuserID() {
                             //     alert("login OK")
                             // }
                             axios
-                                .get("https://localhost:44398/api/Login/getuserphoto/" + res.data)
+                                .get("/api/Login/getuserphoto/" + res.data)
                                 .then((res) => {
                                     //console.log(res.data[0].userPhoto)
                                     var headnav = document.getElementById("headicon");
@@ -213,17 +213,17 @@ window.onload = function getuserID() {
                                     setimg.style.objectFit = "cover";
                                     document.querySelector(
                                         ".dropdown-menu"
-                                    ).innerHTML = ` <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
-                    href="../MemberCentre/UserInfo.html">個人頁面</a></li>
-            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
-                    href="#">追蹤專案</a></li>
-            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
-                    href="#">贊助紀錄</a></li>
-            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
-                    href="#">提案紀錄</a></li>
-            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a target="_blank" class="dropdown-item"
-                    href="#">聯絡訊息</a></li>
-            <li style="text-align: center;"><a class="dropdown-item" href="https://localhost:44398/ProductPage/mymainpage.html" onclick="logout()">登出</a></li>`;
+                                    ).innerHTML = ` <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+                                    href="../MemberCentre/UserInfo.html">個人頁面</a></li>
+                            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+                                    href="../MemberCentre/UserFollowing.html">追蹤專案</a></li>
+                            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+                                    href="../MemberCentre/UserOrder.html">贊助紀錄</a></li>
+                            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+                                    href="../MemberCentre/UserProject.html">提案紀錄</a></li>
+                            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+                                    href="../MemberCentre/UserMessage.html">聯絡訊息</a></li>
+                            <li style="text-align: center;"><a class="dropdown-item" href="../ProductPage/mymainpage.html" onclick="logout()">登出</a></li>`;
                                 });
                         })
                         .catch((error) => {
@@ -244,7 +244,7 @@ window.onload = function getuserID() {
 
 function logout() {
     axios
-        .delete("https://localhost:44398/api/Login")
+        .delete("/api/Login")
         .then((res) => {
             console.log(res);
         })
