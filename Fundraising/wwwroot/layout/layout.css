@@ -224,6 +224,11 @@ body {
     border-bottom: solid 2px #047c51;
 }
 
+#brand{
+    width: 140px;
+    padding-bottom: 10px;
+}
+
 /* .clear {
     position: absolute;
     top: 50%;

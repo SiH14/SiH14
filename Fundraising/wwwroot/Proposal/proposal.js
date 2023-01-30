@@ -105,16 +105,16 @@ function readPlanURL(input) {
 // 取得username
 $(document).ready(function () {
 
-    axios.get("https://localhost:44398/api/Login/getusername")
+    axios.get("/api/Login/getusername")
         .then(res => {
             console.log(res.data);
             if (res.data == "未登入") {
-                window.location = "https://localhost:44398/Login/login.html"
+                window.location = "../Login/login.html"
             } else {
-                axios.get("https://localhost:44398/api/Login/getuserid/")
+                axios.get("/api/Login/getuserid/")
                     .then(res => {
                         console.log(res.data);
-                        axios.get("https://localhost:44398/api/Login/getuserphoto/" + res.data)
+                        axios.get("/api/Login/getuserphoto/" + res.data)
                             .then(res => {
                                 console.log(res.data[0]);
                                 console.log(document.querySelector(".designby").innerHTML);
@@ -164,7 +164,7 @@ function confirmsubmit() {
             UserID: userid,
             ProductStateID: 1
         }
-        axios.post("https://localhost:44398/api/Products", proposaldata)
+        axios.post("/api/Products", proposaldata)
             .then(res => {
                 callback(res.data.productId);
                 console.log(res.data.productId);
@@ -181,7 +181,7 @@ function confirmsubmit() {
         for (let index = 0, j = 1; index < egg.length, j < egg.length; index += 2, j += 2) {
             console.log(egg[index].value)
             console.log(egg[j].value)
-            axios.post("https://localhost:44398/api/Questions", {
+            axios.post("/api/Questions", {
                 ProductID: xxx,
                 QuestionTitle: egg[index].value,
                 QuestionContent: egg[j].value
@@ -201,7 +201,7 @@ function confirmsubmit() {
             console.log(good[y].value)
             console.log(planinputarray[z])
 
-            axios.post("https://localhost:44398/api/Plans", {
+            axios.post("/api/Plans", {
                 ProductID: xxx,
                 PlanTitle: good[x].value,
                 PlanContent: good[y].value,
@@ -312,22 +312,22 @@ function del(obj) {
 CKEDITOR.replace('ProductContent', {
     height: 500,
     removeButtons: 'PasteFromWord',
-    toolbarGroups : [
-		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-		{ name: 'links' },
-		// { name: 'insert' },
-		{ name: 'forms' },
-		{ name: 'tools' },
-		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
-		{ name: 'others' },
-		// '/',
-		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-		{ name: 'styles' },
-		{ name: 'colors' },
-		{ name: 'about' }
-	]
+    toolbarGroups: [
+        { name: 'clipboard', groups: ['clipboard', 'undo'] },
+        { name: 'editing', groups: ['find', 'selection', 'spellchecker'] },
+        { name: 'links' },
+        // { name: 'insert' },
+        { name: 'forms' },
+        { name: 'tools' },
+        { name: 'document', groups: ['mode', 'document', 'doctools'] },
+        { name: 'others' },
+        // '/',
+        { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+        { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi'] },
+        { name: 'styles' },
+        { name: 'colors' },
+        { name: 'about' }
+    ]
 });
 var dataDB;
 
@@ -366,7 +366,7 @@ var dataDB;
                                         .then((value) => {
                                             switch (value) {
                                                 case "確定":
-                                                    window.location = "https://localhost:44398/Proposal/myproposal.html"
+                                                    window.location = "../Proposal/myproposal.html"
                                                     break;
                                             }
                                         })

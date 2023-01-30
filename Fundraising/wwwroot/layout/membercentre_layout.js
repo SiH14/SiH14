@@ -17,7 +17,7 @@ let header =
                 <a class="nav-link headernav" href="../Proposal/myproposal.html">提案</a>
             </li>
             <li class="nav-item headernav" id="header-items">
-                <a class="nav-link headernav" href="#">探索</a>
+                <a class="nav-link headernav" href="../productpage/filter.html">探索</a>
             </li>
 
         </ul>
