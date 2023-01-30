@@ -49,6 +49,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Search..."
+                  v-model="search"
                 />
               </div>
 
@@ -56,8 +57,9 @@
               <ul class="list-unstyled chat-list mt-2 mb-0">
                 <li
                   class="clearfix shadow-sm my-1 border"
-                  @click="nowchatting,getMsg(item)"
-                  v-for="item in chatroom"
+                  @click="getMsg(item)"
+                  v-on:click="nowchatting"
+                  v-for="item in searchList"
                 >
                   <img :src="item.userPhoto" alt="avatar" />
                   <div class="about">
@@ -74,7 +76,7 @@
             <div class="chat">
               <!-- 目前對話對象(標題) -->
               <div class="chat-header clearfix mt-2" v-if="chatting!=''">
-                <img src="../img/PersonalPhoto.jpg" alt="avatar" />
+                <img :src="chattingPhoto" alt="avatar" />
                 <div class="chat-about">
                   <h6 class="m-b-0">{{chattingname}}</h6>
                   <small>上次訊息: 2022-12-29 22:38</small>
@@ -82,8 +84,8 @@
               </div>
 
               <!-- 聊天記錄 -->
-              <div class="chat-history">
-                <ul class="m-b-0">
+              <div class="chat-history" id="chat-his">
+                <ul class="m-b-0" id="chat-hist">
                   <!-- 每一筆聊天 -->
                   <li class="clearfix" v-for="item in messages">
                     <!-- 判斷為誰發送 -->

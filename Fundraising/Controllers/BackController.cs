@@ -66,7 +66,7 @@ namespace 募資.Controllers
                     new CookieOptions()
                     {
                         //HttpOnly = true,
-                        Expires = DateTime.Now.AddDays(14)
+                        Expires = DateTime.Now.AddHours(1)
                     };
                 Response.Cookies.Append("employeeId", user.EmployeeId.ToString(), cookieOptions);
                 return Content("成功登入");

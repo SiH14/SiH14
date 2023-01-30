@@ -2,9 +2,11 @@ const app = {
   data() {
     return {
       userid: "",
-      chatroom: [],
+      chatrooms: [],
+      search: "",
       chatting: "",
       chattingname: "",
+      chattingPhoto: "",
       msg: { chatroom: "", content: "" },
       messages: [],
       connection: null,
@@ -34,6 +36,12 @@ const app = {
                   content: content,
                   sentTime: time,
                 });
+                // 移至底部
+                setTimeout(() => this.gobottom(), 0);
+              } else {
+                axios.get("/api/chatrooms/chats/" + res.data).then((res) => {
+                  this.chatrooms = res.data;
+                });
               }
             }
           );
@@ -41,11 +49,15 @@ const app = {
         .catch((err) => console.error(err.toString()));
       // 拿取對話清單
       axios.get("/api/chatrooms/chats/" + res.data).then((res) => {
-        this.chatroom = res.data;
+        this.chatrooms = res.data;
       });
     });
   },
   methods: {
+    gobottom() {
+      document.getElementById("chat-his").scrollTop =
+        document.getElementById("chat-his").scrollHeight;
+    },
     // 發送訊息
     sendToUser() {
       //時間格式化
@@ -87,6 +99,8 @@ const app = {
               content: this.msg.content,
               sentTime: currentime,
             });
+            // 移至底部
+            setTimeout(() => this.gobottom(), 0);
             // 清空input
             this.msg.content = "";
           });
@@ -104,10 +118,23 @@ const app = {
       this.messages = [];
       this.chatting = e.userId;
       this.chattingname = e.userName;
+      this.chattingPhoto = e.userPhoto;
       this.msg.chatroom = e.chatroomId;
       axios.get("/api/messages/detail/" + e.chatroomId).then((res) => {
         this.messages = res.data;
+        setTimeout(() => this.gobottom(), 0);
       });
+    },
+  },
+  computed: {
+    searchList() {
+      if (this.search) {
+        return this.chatrooms.filter((item) => {
+          return item.userName.indexOf(this.search) !== -1;
+        });
+      } else {
+        return this.chatrooms;
+      }
     },
   },
 };
