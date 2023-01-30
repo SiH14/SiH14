@@ -57,7 +57,7 @@ max-width: 80%;">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="mr-2 d-none d-lg-inline ">{{employeeinfo.name}}</span>
-            <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+            <img class="img-profile rounded-circle imgset" src="img/undraw_profile.svg">
         </a>
         <!-- 下拉清單 -->
         <div class="dropdown-menu  shadow animated--grow-in"
@@ -139,11 +139,16 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
 後台管理
 </div>
 <li class="nav-item ">
+<a class="nav-link" href="./Employee.html">
+<i class="fa fa-user" aria-hidden="true"></i>
+    <span>員工</span></a>
+    </li>
+    <li class="nav-item ">
 <a class="nav-link" href="./profile.html">
 <i class="fa fa-user" aria-hidden="true"></i>
     <span>個人資料</span></a>
+    </li>
     `;
-    // </li>
     // <div class="sidebar-heading">
     // 前台管理
     // </div>
