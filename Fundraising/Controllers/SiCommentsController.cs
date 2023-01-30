@@ -54,6 +54,7 @@ namespace Fundraising.Controllers
                         select new
                         {
                             CommentID = comment.CommentId,
+                            userphoto = u.UserPhoto,
                             CommentContent = comment.CommentContent,
                             Commenttime = comment.Commenttime.ToString("yyyy年MM月dd日 HH:mm"),
                             userid = comment.UserId,

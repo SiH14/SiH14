@@ -124,7 +124,7 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
 會員相關
 </div>
 <li class="nav-item">
-<a class="nav-link collapsed w-100" href="./menber.html" >
+<a class="nav-link collapsed w-100" href="./member.html" >
     <i class="fas fa-fw fa-folder"></i>
     <span>會員列表</span>
 </a>

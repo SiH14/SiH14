@@ -228,12 +228,12 @@ function add() {
     </div>
     <div class="QAQA">    
         <div class="question">
-            <textarea style="border-radius: 5px;border: black 1px solid" placeholder="請輸入此專案常見問題" class="QAtext form-control " name="questiontext${x += 1}" id="questiontext${x}" rows="3" required></textarea>            
+            <textarea style="border-radius: 5px;border: black 1px solid" placeholder="✎ 請輸入此專案常見問題" class="QAtext form-control " name="questiontext${x += 1}" id="questiontext${x}" rows="3" required></textarea>            
             <div class="invalid-feedback">請輸入常見問題！</div>
         </div>
         <br>
         <div class="answer">        
-            <textarea style="border-radius: 5px;border: black 1px solid" placeholder="請輸入上述問題的正確答覆" class="QAtext form-control" name="answertext${x}" id="answertext${x}" rows="5" required></textarea>
+            <textarea style="border-radius: 5px;border: black 1px solid" placeholder="✎ 請輸入上述問題的正確答覆" class="QAtext form-control" name="answertext${x}" id="answertext${x}" rows="5" required></textarea>
             <div class="invalid-feedback">請輸入正確答覆！</div>
         </div>
         <hr>        
@@ -246,7 +246,7 @@ function add() {
 var y = 0;
 $("#addplan").click(function () {
     y += 1;
-    $("#plandiv").append(`<div>
+    $("#plandiv").append(`<hr><div>
     <div style="position: relative; float: right; bottom:5px;">
     <input style="border: none;" class="QAdelbtn btn btn-primary" type="button"
         value="✖" onclick="del(this)">
@@ -261,12 +261,12 @@ style="display: flex; width:100%; border:solid gray 1px; background-color: white
         <div
             style="position: relative; display: flex; text-align: left; left: 5px; padding: 5px; width: 100%;">
             <div style="height: 30px;">
-                <span style="color: #047c51; font-size: 20px;">✎ $</span>
+                <span style="color: #047c51; font-size: 20px;">$</span>
                 <span>
                     <input
                         style="width:120px; color: #047c51; font-size: 20px; border: none;"
                         name="PlanPrice${y}" id="PlanPrice${y}" type="number"
-                        value="100" class="inputplan">
+                        placeholder="✎ 方案金額" class="inputplan">
                 </span>
             </div>
             <div
@@ -294,13 +294,13 @@ style="display: flex; width:100%; border:solid gray 1px; background-color: white
 
     <div style="padding: 5px;">
         <textarea style="border: none; resize: none;" name="plantext${y}"
-            id="plantext${y}" cols="48" rows="7" placeholder='請在此簡單介紹您的方案內容 ✎'
+            id="plantext${y}" cols="48" rows="7" placeholder='✎ 請在此簡單介紹您的方案內容'
             class="form-control inputplan" required></textarea>
     </div>
 
 </div>
 </div>
-<hr>`)
+<br>`)
 })
 
 //常見問題刪除
@@ -309,8 +309,28 @@ function del(obj) {
 }
 
 // CKEditor 4
-CKEDITOR.replace('ProductContent');
+CKEDITOR.replace('ProductContent', {
+    height: 500,
+    removeButtons: 'PasteFromWord',
+    toolbarGroups : [
+		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
+		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
+		{ name: 'links' },
+		// { name: 'insert' },
+		{ name: 'forms' },
+		{ name: 'tools' },
+		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
+		{ name: 'others' },
+		// '/',
+		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+		{ name: 'styles' },
+		{ name: 'colors' },
+		{ name: 'about' }
+	]
+});
 var dataDB;
+
 
 //表單驗證
 (function () {
@@ -338,8 +358,18 @@ var dataDB;
                             switch (value) {
                                 case "確定":
                                     confirmsubmit();
-                                    swal("表單已送出!", "", "success");
-                                    window.location = "https://localhost:44398/Proposal/myproposal.html"
+                                    swal("表單已送出!", "", "success", {
+                                        buttons: {
+                                            確定: true
+                                        },
+                                    })
+                                        .then((value) => {
+                                            switch (value) {
+                                                case "確定":
+                                                    window.location = "https://localhost:44398/Proposal/myproposal.html"
+                                                    break;
+                                            }
+                                        })
                                     break;
                                 case "取消":
                                     break;
