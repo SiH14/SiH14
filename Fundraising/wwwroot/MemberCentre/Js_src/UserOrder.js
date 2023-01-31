@@ -45,7 +45,22 @@ const app = {
       sessionStorage.setItem("orderdetailId", e);
     },
     chat(e) {
-      console.log(e);
+      axios.get(`/api/chatrooms/chat/${e.userId}/${e.puserId}`).then((res) => {
+        if (res.data) {
+          sessionStorage.setItem("chatuserId", e.puserId);
+          location.href = "./UserMessage.html";
+        } else {
+          axios
+            .post("/api/chatrooms", {
+              userId1: e.userId,
+              userId2: e.puserId,
+            })
+            .then((res) => {
+              sessionStorage.setItem("chatuserId", e.puserId);
+              location.href = "./UserMessage.html";
+            });
+        }
+      });
     },
   },
 };

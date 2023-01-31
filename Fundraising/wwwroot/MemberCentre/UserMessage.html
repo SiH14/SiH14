@@ -93,7 +93,10 @@
                       <div class="message-data text-end">
                         <span class="message-data-time">{{item.sentTime}}</span>
                       </div>
-                      <div class="message other-message float-right shadow-sm">
+                      <div
+                        class="message other-message float-right shadow-sm"
+                        style="max-width: 60%"
+                      >
                         {{item.content}}
                       </div>
                     </div>
@@ -101,7 +104,10 @@
                       <div class="message-data">
                         <span class="message-data-time">{{item.sentTime}}</span>
                       </div>
-                      <div class="message my-message shadow-sm">
+                      <div
+                        class="message my-message shadow-sm"
+                        style="max-width: 60%"
+                      >
                         {{item.content}}
                       </div>
                     </div>
@@ -117,6 +123,7 @@
                     autocomplete="off"
                     v-model="msg.content"
                     id="message-input"
+                    @keyup.enter="sendToUser"
                   />
                   <button
                     @click="sendToUser"

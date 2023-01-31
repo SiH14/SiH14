@@ -43,7 +43,21 @@ namespace Fundraising.Controllers
             return Content("1");
         }
 
-        [HttpPost("register")]
+		[HttpGet("gooleCertified/{googlemail}")]
+		public string certified(string googlemail)
+		{
+			var gooleCertified = (from a in _context.Users
+								where a.UserEmail == googlemail
+								  select a).SingleOrDefault();
+
+			if (gooleCertified != null)
+			{
+				return "此帳號已註冊";
+			}
+			return googlemail;
+		}
+
+		[HttpPost("register")]
 		public string register(LoginPost value)
 		{
 			var userregister = (from a in _context.Users
