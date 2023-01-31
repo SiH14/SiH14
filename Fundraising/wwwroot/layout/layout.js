@@ -71,9 +71,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
     </div>             
             </ul>
           </div>
-          <div>
-          <img class="headerbackgroudicon" src="../img/headerbackgroudicon.png" alt="">
-      </div>
+    
         
     </div>
     
@@ -215,10 +213,10 @@ window.onload = function getuserID() {
                 axios.get("/api/Login/getuserphoto/" + res.data)
                     .then(res => {
                         // console.log(res.data[0].userPhoto)
-                        var headnav=document.getElementById("headicon");
-                        headnav.style.marginTop="4px";
-                        var setmicicon =document.getElementById("mic");
-                        setmicicon.style.marginTop="-1vh";
+                        var headnav = document.getElementById("headicon");
+                        headnav.style.marginTop = "4px";
+                        var setmicicon = document.getElementById("mic");
+                        setmicicon.style.marginTop = "-1vh";
                         var setimg = document.getElementById("iconimg");
                         setimg.setAttribute("src", res.data[0].userPhoto)
                         setimg.style.width = "30px";
@@ -235,6 +233,8 @@ window.onload = function getuserID() {
                     href="../MemberCentre/UserProject.html">提案紀錄</a></li>
             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
                     href="../MemberCentre/UserMessage.html">聯絡訊息</a></li>
+                    <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+                    href="../MemberCentre/UserSetting.html">帳戶設定</a></li>
             <li style="text-align: center;"><a class="dropdown-item" href="../ProductPage/mymainpage.html" onclick="logout()">登出</a></li>`
                     })
             })
