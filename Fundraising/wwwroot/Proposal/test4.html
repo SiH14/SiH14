@@ -1,33 +1,170 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/css/swiper.min.css">
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <meta charset="utf-8">
+    <title>Swiper demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="../dist/css/swiper.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- Demo styles -->
+    <style>
+        html,
+        body {
+            position: relative;
+            height: 100%;
+        }
+
+        body {
+            background: #000;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .swiper-slide {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .gallery-top {
+            height: 80%;
+            width: 100%;
+        }
+
+        .gallery-thumbs {
+            height: 20%;
+            box-sizing: border-box;
+            padding: 10px 0;
+        }
+
+        .gallery-thumbs .swiper-slide {
+            width: 25%;
+            height: 100%;
+            opacity: 0.4;
+        }
+
+        .gallery-thumbs .swiper-slide-active {
+            opacity: 1;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="g_id_onload" data-client_id="762792073286-id6ruvd00ar6toi9341t7rl2scejpmim.apps.googleusercontent.com" data-callback="handleCallback" data-auto_prompt="false">
-    </div>
-    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with"
-        data-shape="square" data-logo_alignment="left"></div>
-    <script>
-        function parseJwt(token) {
-            var base64Url = token.split('.')[1];
-            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
+    <!-- Swiper -->
+    <p><img alt="" src="https://assets.zeczec.com/asset_558255_image_big.webp?1668303924" /></p>
+    <script src="../dist/js/swiper.min.js"></script>
 
-            return JSON.parse(jsonPayload);
-        };
-        function handleCallback(response) {
-            const data = parseJwt(response.credential);
-            console.log(data);
-        }
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                featuredList: [],
+                recentList: [],
+                message: 'word'
+            },
+            beforeMount() {
+                //var apitopage = (sessionStorage.getItem("topage") == null) ? 0 : sessionStorage.getItem("topage")
+                //$.ajax({
+                //    type: 'Get',
+                //    url: '/api/Fundraising/topage/' + parseInt(apitopage),
+                //    success: function (e) {
+                //        app.fliterList = e
+                //    }
+                //})
+            }
+            ,
+            mounted: function () {
+                axios.get('/api/Fundraising/featured')//精選
+                    .then((res) => {
+                        this.featuredList = res.data;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                axios.get('/api/Fundraising/recent')//近期
+                    .then((res) => {
+                        this.recentList = res.data;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+            ,
+            methods: {
+                getproductID: function (e) {
+                    /* console.log(e.productId)*/
+                    sessionStorage.setItem("productId", e.productId);
+                }
+            }
+        })
+
+        //const app = {
+        //    data() {
+        //        return {
+        //            featuredList: [],
+        //            recentList: [],
+        //            message: 'word'
+        //        }
+        //    },
+        //    mounted() {
+        //        axios.get('/api/Fundraising/featured')//精選
+        //            .then((res) => {
+        //                this.featuredList = res.data;
+        //            })
+        //            .catch(function (error) {
+        //                console.log(error);
+        //            });
+        //        axios.get('/api/Fundraising/recent')//近期
+        //            .then((res) => {
+        //                this.recentList = res.data;
+        //            })
+        //            .catch(function (error) {
+        //                console.log(error);
+        //            });
+        //    },
+        //    methods: {
+        //        getproductID(e) {
+        //            /* console.log(e.productId)*/
+        //            sessionStorage.setItem("productId", e.productId);
+        //        }
+        //    },
+        //};
+        //Vue.createApp(app).mount("#app");
+    </script>
+    <!-- Swiper JS -->
+
+    <!-- Initialize Swiper -->
+    <script>
+        var galleryTop = new Swiper('.gallery-top', {
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+        var galleryThumbs = new Swiper('.gallery-thumbs', {
+            spaceBetween: 10,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            touchRatio: 0.2,
+            slideToClickedSlide: true,
+        });
+        galleryTop.controller.control = galleryThumbs;
+        galleryThumbs.controller.control = galleryTop;
     </script>
 </body>
 

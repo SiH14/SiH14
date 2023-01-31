@@ -3,7 +3,9 @@ let header =
 
 <div class="container-fluid headernav" id="header-container">
     <!--LOGO -->
-    <a class="navbar-brand fs-2 headernav" id="header-brand" href="../ProductPage/mymainpage.html">咱的募資平台</a>
+    <a class="navbar-brand fs-2 headernav" id="header-brand" href="../ProductPage/mymainpage.html">
+    <img id="brand" src="../img/brand.png" alt="">
+    </a>
 
     <!-- Bar -->
 
@@ -38,7 +40,7 @@ let header =
             <div class="dropdown">
         <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <img id="iconimg" class="headernav loginicon" src="../img/loginicon.png" alt="">
+            <img id="iconimg" class="headernav loginicon" src="" alt="">
         </a>
 
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -226,10 +228,12 @@ window.onload = function getuserID() {
                         })
                         .catch((error) => {
                             console.log(error.response);
+                            var nologinsetimg = document.getElementById("iconimg");
+                            nologinsetimg.setAttribute("src", "../img/loginicon.png")
                         });
                 };
                 getid(function (myuser) {
-                    console.log(myuser);
+                    // console.log(myuser);
                     userid = myuser;
                 });
             }
@@ -237,7 +241,6 @@ window.onload = function getuserID() {
         .catch(error => {
             console.log(error.response);
         })
-
 };
 
 function logout() {
