@@ -92,9 +92,11 @@
                 <a
                   v-if="prod.productStateId=='募資成功'"
                   href="./ProjectManage.html"
+                  @click="manage(prod)"
                   class="btn btn-success"
-                  >管理</a
                 >
+                  管理
+                </a>
               </td>
             </tr>
           </tbody>

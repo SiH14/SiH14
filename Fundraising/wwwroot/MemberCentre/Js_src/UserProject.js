@@ -40,4 +40,9 @@ const app = new Vue({
       });
     });
   },
+  methods: {
+    manage(e) {
+      sessionStorage.setItem("pmId", e.productId);
+    },
+  },
 });

@@ -40,7 +40,7 @@
       }
 
       #app button {
-        width: 88%;
+        width: 93%;
       }
 
       .following {
@@ -51,7 +51,6 @@
       .cancelbtn {
         position: absolute;
         bottom: 0;
-        left: 6%;
       }
     </style>
     <title>追蹤專案</title>
@@ -64,12 +63,11 @@
         <h5>追蹤專案</h5>
       </div>
       <div class="card mx-auto mt-3">
-        <loading :active.sync="isLoading"></loading>
         <div class="row m-3" v-if="myfollow.length>0">
           <div class="following col-4 my-3" v-for="item in myfollow">
             <img :src="item.photo" alt="product" />
             <h5 class="px-0">{{item.ptitle}}</h5>
-            <p class="text-muted px-2">提案人 {{item.puser}}</p>
+            <p class="text-muted">提案人 {{item.puser}}</p>
             <button
               class="btn btn-outline-success d-block mx-auto cancelbtn"
               @click="cancel(item)"
