@@ -8,7 +8,28 @@ const app = {
       changedData: [],
     };
   },
+};
+
+Vue.createApp(app).mount("#app");
+
+Vue.use(VueLoading);
+
+const app = new Vue({
+  el: "#app",
+  data: {
+    pjorderlist: [],
+    orderdetail: {},
+    showed: "全部贊助",
+    changed: [],
+    changedData: [],
+  },
+  components: {
+    Loading: VueLoading,
+  },
   mounted() {
+    let loader = this.$loading.show({
+      loader: "dots",
+    });
     // 初始載入資料
     axios.get("/api/UserOrder/ProjectOrder/15").then((res) => {
       res.data.forEach((element) => {
@@ -23,6 +44,7 @@ const app = {
         }
       });
       this.pjorderlist = res.data;
+      setTimeout(() => loader.hide(), 500);
     });
 
     // 取消id事件監聽資料帶入
@@ -73,6 +95,4 @@ const app = {
       }
     },
   },
-};
-
-Vue.createApp(app).mount("#app");
+});

@@ -1,16 +1,19 @@
-const app = {
-  data() {
-    return {
-      userid: "",
-      chatrooms: [],
-      search: "",
-      chatting: "",
-      chattingname: "",
-      chattingPhoto: "",
-      msg: { chatroom: "", content: "" },
-      messages: [],
-      connection: null,
-    };
+Vue.use(VueLoading);
+const app = new Vue({
+  el: "#app",
+  data: {
+    userid: "",
+    chatrooms: [],
+    search: "",
+    chatting: "",
+    chattingname: "",
+    chattingPhoto: "",
+    msg: { chatroom: "", content: "" },
+    messages: [],
+    connection: null,
+  },
+  components: {
+    Loading: VueLoading,
   },
   mounted() {
     if (sessionStorage.getItem("chatuserId")) {
@@ -54,7 +57,12 @@ const app = {
       // 拿取對話清單
       axios.get("/api/chatrooms/chats/" + res.data).then((res) => {
         this.chatrooms = res.data;
+        setTimeout(() => loader.hide(), 200);
       });
+    });
+
+    let loader = this.$loading.show({
+      loader: "dots",
     });
   },
   methods: {
@@ -141,6 +149,4 @@ const app = {
       }
     },
   },
-};
-
-Vue.createApp(app).mount("#app");
+});
