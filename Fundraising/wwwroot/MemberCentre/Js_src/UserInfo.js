@@ -1,10 +1,14 @@
-Vue.createApp({
-  data() {
-    return {
-      userdata: {},
-      ProductsList: [],
-      OrdersList: [],
-    };
+Vue.use(VueLoading);
+
+const app = new Vue({
+  el: "#app",
+  data: {
+    userdata: {},
+    ProductsList: [],
+    OrdersList: [],
+  },
+  components: {
+    Loading: VueLoading,
   },
   methods: {
     ShowMyOrders() {
@@ -21,6 +25,10 @@ Vue.createApp({
     },
   },
   mounted() {
+    let loader = this.$loading.show({
+      loader: "dots",
+    });
+
     axios.get("/api/login/getuserid").then((res) => {
       // 拿userdata
       axios.get("/api/userinfo/" + res.data).then((res) => {
@@ -33,7 +41,8 @@ Vue.createApp({
       // 拿OrdersList
       axios.get("/api/userinfo/OrderList/" + res.data).then((res) => {
         this.OrdersList = res.data;
+        setTimeout(() => loader.hide(), 600);
       });
     });
   },
-}).mount("#app");
+});

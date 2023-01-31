@@ -1,19 +1,24 @@
-const app = {
-  data() {
-    return {
-      cancelform: {
-        orderId: "",
-        RefundResult: "",
-      },
-      ordercard: [],
-      cancelput: {},
-    };
+Vue.use(VueLoading);
+
+const app = new Vue({
+  el: "#app",
+  data: {
+    cancelform: {
+      orderId: "",
+      RefundResult: "",
+    },
+    ordercard: [],
+    cancelput: {},
+  },
+  components: {
+    Loading: VueLoading,
   },
   mounted() {
     axios.get("/api/login/getuserid").then((res) => {
       // ordercard資料帶入
       axios.get("/api/userorder/list/" + res.data).then((res) => {
         this.ordercard = res.data;
+        setTimeout(() => loader.hide(), 400);
       });
     });
 
@@ -21,6 +26,10 @@ const app = {
     this.$refs.box.addEventListener("show.bs.modal", (event) => {
       let button = event.relatedTarget;
       this.cancelform.orderId = button.getAttribute("data-bs-whatever");
+    });
+    // loading overlay
+    let loader = this.$loading.show({
+      loader: "dots",
     });
   },
   methods: {
@@ -63,6 +72,4 @@ const app = {
       });
     },
   },
-};
-
-Vue.createApp(app).mount("#app");
+});

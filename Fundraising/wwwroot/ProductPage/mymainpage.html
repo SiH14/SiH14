@@ -162,17 +162,17 @@
 
 </head>
 
-<body >
+<body>
     <div id="app">
         <!--<h1>{{featuredList[0]}}</h1>-->
         <div class="headerpage"></div>
         <!-- 輪播圖 -->
         <div class="gallery js-flickity" data-flickity-options='{ "wrapAround": true }'>
-            <div class="gallery-cell" v-for="item in featuredList"><a href="./product.html"><img src="./page.png" alt=""></a></div>
-            <!--<div class="gallery-cell"><a href="https://www.flyingv.cc/"><img src="../img/slider2.png" alt=""></a></div>
+            <div class="gallery-cell"><a href="https://www.flyingv.cc/"><img src="../img/slider1.png" alt=""></a></div>
+            <div class="gallery-cell"><a href="https://www.flyingv.cc/"><img src="../img/slider2.png" alt=""></a></div>
             <div class="gallery-cell"><a href="https://www.flyingv.cc/"><img src="../img/slider3.png" alt=""></a></div>
             <div class="gallery-cell"><a href="https://www.flyingv.cc/"><img src="../img/slider4.png" alt=""></a></div>
-            <div class="gallery-cell"><a href="https://www.flyingv.cc/"><img src="../img/slider5.png" alt=""></a></div>-->
+            <div class="gallery-cell"><a href="https://www.flyingv.cc/"><img src="../img/slider5.png" alt=""></a></div>
         </div>
 
         <div class="container px-4 py-5" id="mySelected">
@@ -299,9 +299,9 @@
         var app = new Vue({
             el: "#app",
             data: {
-                    featuredList: [],
-                    recentList: [],
-                    message: 'word'
+                featuredList: [],
+                recentList: [],
+                message: 'word'
             },
             beforeMount() {
                 //$.ajax({
@@ -346,38 +346,38 @@
             }
         })
 
-        //const app = {
-        //    data() {
-        //        return {
-        //            featuredList: [],
-        //            recentList: [],
-        //            message: 'word'
-        //        }
-        //    },
-        //    mounted() {
-        //        axios.get('/api/Fundraising/featured')//精選
-        //            .then((res) => {
-        //                this.featuredList = res.data;
-        //            })
-        //            .catch(function (error) {
-        //                console.log(error);
-        //            });
-        //        axios.get('/api/Fundraising/recent')//近期
-        //            .then((res) => {
-        //                this.recentList = res.data;
-        //            })
-        //            .catch(function (error) {
-        //                console.log(error);
-        //            });
-        //    },
-        //    methods: {
-        //        getproductID(e) {
-        //            /* console.log(e.productId)*/
-        //            sessionStorage.setItem("productId", e.productId);
-        //        }
-        //    },
-        //};
-        //Vue.createApp(app).mount("#app");
+            //const app = {
+            //    data() {
+            //        return {
+            //            featuredList: [],
+            //            recentList: [],
+            //            message: 'word'
+            //        }
+            //    },
+            //    mounted() {
+            //        axios.get('/api/Fundraising/featured')//精選
+            //            .then((res) => {
+            //                this.featuredList = res.data;
+            //            })
+            //            .catch(function (error) {
+            //                console.log(error);
+            //            });
+            //        axios.get('/api/Fundraising/recent')//近期
+            //            .then((res) => {
+            //                this.recentList = res.data;
+            //            })
+            //            .catch(function (error) {
+            //                console.log(error);
+            //            });
+            //    },
+            //    methods: {
+            //        getproductID(e) {
+            //            /* console.log(e.productId)*/
+            //            sessionStorage.setItem("productId", e.productId);
+            //        }
+            //    },
+            //};
+            //Vue.createApp(app).mount("#app");
     </script>
 
 </body>

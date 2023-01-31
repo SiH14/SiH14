@@ -1,14 +1,23 @@
-const orderdetail = {
-  data() {
-    return {
-      myorder: {},
-    };
+Vue.use(VueLoading);
+
+const app = new Vue({
+  el: "#app",
+  data: {
+    myorder: {},
+  },
+  components: {
+    Loading: VueLoading,
   },
   mounted() {
+    let loader = this.$loading.show({
+      loader: "dots",
+    });
+
     axios
       .get("/api/UserOrder/myorder/" + sessionStorage.getItem("orderdetailId"))
       .then((res) => {
         this.myorder = res.data;
+        setTimeout(() => loader.hide(), 600);
       });
   },
   methods: {
@@ -26,6 +35,4 @@ const orderdetail = {
       });
     },
   },
-};
-
-Vue.createApp(orderdetail).mount("#app");
+});

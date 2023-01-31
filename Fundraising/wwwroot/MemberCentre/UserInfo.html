@@ -16,7 +16,12 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css"
+      rel="stylesheet"
+    />
     <style>
       #ProfileImg {
         object-fit: cover;
@@ -50,13 +55,14 @@
     <title>個人頁面</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container" id="app">
+      <loading :can-cancel="true"></loading>
       <!-- 標題 -->
       <div class="mx-auto ps-4 pt-3" style="width: 80%">
         <h5 class="ms-4 mt-3">個人頁面</h5>
       </div>
 
-      <div class="card mx-auto mt-3" id="app">
+      <div class="card mx-auto mt-3">
         <!-- 個人資料 -->
         <div class="mx-auto mt-4 d-flex" style="width: 65%">
           <img

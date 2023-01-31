@@ -17,7 +17,12 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css"
+      rel="stylesheet"
+    />
     <style>
       .card {
         box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
@@ -31,11 +36,12 @@
     <title>提案紀錄</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container" id="app">
+      <loading :can-cancel="true"></loading>
       <div class="mx-auto" style="width: 90%">
         <h5 class="ms-4 mt-3">提案紀錄</h5>
       </div>
-      <div class="card mt-3 mx-auto" style="width: 90%" id="app">
+      <div class="card mt-3 mx-auto" style="width: 90%">
         <table class="table table-hover align-middle text-center">
           <thead>
             <tr>
@@ -86,9 +92,11 @@
                 <a
                   v-if="prod.productStateId=='募資成功'"
                   href="./ProjectManage.html"
+                  @click="manage(prod)"
                   class="btn btn-success"
-                  >管理</a
                 >
+                  管理
+                </a>
               </td>
             </tr>
           </tbody>

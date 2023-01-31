@@ -1,10 +1,17 @@
-const app = {
-  data() {
-    return {
-      prodlist: [],
-    };
+Vue.use(VueLoading);
+
+const app = new Vue({
+  el: "#app",
+  data: {
+    prodlist: [],
+  },
+  components: {
+    Loading: VueLoading,
   },
   mounted() {
+    let loader = this.$loading.show({
+      loader: "dots",
+    });
     axios.get("/api/login/getuserid").then((res) => {
       axios.get("/api/UserProject/prodlist/" + res.data).then((res) => {
         res.data.forEach((element) => {
@@ -25,20 +32,17 @@ const app = {
           ) {
             element.productStateId = "募資失敗";
           } else {
-            alert("錯誤");
+            alert("錯誤，請聯絡客服人員");
           }
         });
         this.prodlist = res.data;
+        setTimeout(() => loader.hide(), 400);
       });
     });
   },
-};
-
-Vue.createApp(app).mount("#app");
-// 審核中
-// 審核不通過;
-// 募資中;
-// 募資成功;
-// 生產階段;
-// 寄送產品;
-// 募資失敗（未達標）
+  methods: {
+    manage(e) {
+      sessionStorage.setItem("pmId", e.productId);
+    },
+  },
+});
