@@ -36,8 +36,13 @@ const app = new Vue({
           }
         });
         this.prodlist = res.data;
-        setTimeout(() => loader.hide(), 200);
+        setTimeout(() => loader.hide(), 400);
       });
     });
+  },
+  methods: {
+    manage(e) {
+      sessionStorage.setItem("pmId", e.productId);
+    },
   },
 });

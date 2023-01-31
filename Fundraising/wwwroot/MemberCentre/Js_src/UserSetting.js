@@ -16,7 +16,7 @@ const app = new Vue({
     axios.get("/api/login/getuserid").then((res) => {
       axios.get("/api/userinfo/setting/" + res.data).then((res) => {
         this.userinfo = res.data;
-        setTimeout(() => loader.hide(), 200);
+        setTimeout(() => loader.hide(), 400);
       });
     });
   },

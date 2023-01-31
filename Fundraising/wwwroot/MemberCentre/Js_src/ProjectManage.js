@@ -1,17 +1,3 @@
-const app = {
-  data() {
-    return {
-      pjorderlist: [],
-      orderdetail: {},
-      showed: "全部贊助",
-      changed: [],
-      changedData: [],
-    };
-  },
-};
-
-Vue.createApp(app).mount("#app");
-
 Vue.use(VueLoading);
 
 const app = new Vue({
@@ -31,21 +17,23 @@ const app = new Vue({
       loader: "dots",
     });
     // 初始載入資料
-    axios.get("/api/UserOrder/ProjectOrder/15").then((res) => {
-      res.data.forEach((element) => {
-        if (element.orderStateId == 1) {
-          element.orderStateId = "待開始";
-        } else if (element.orderStateId == 2) {
-          element.orderStateId = "備貨中";
-        } else if (element.orderStateId == 3) {
-          element.orderStateId = "已寄送";
-        } else if (element.orderStateId == 4 || element.orderStateId == 5) {
-          element.orderStateId = "已取消";
-        }
+    axios
+      .get("/api/UserOrder/ProjectOrder/" + sessionStorage.getItem("pmId"))
+      .then((res) => {
+        res.data.forEach((element) => {
+          if (element.orderStateId == 1) {
+            element.orderStateId = "待開始";
+          } else if (element.orderStateId == 2) {
+            element.orderStateId = "備貨中";
+          } else if (element.orderStateId == 3) {
+            element.orderStateId = "已寄送";
+          } else if (element.orderStateId == 4 || element.orderStateId == 5) {
+            element.orderStateId = "已取消";
+          }
+        });
+        this.pjorderlist = res.data;
+        setTimeout(() => loader.hide(), 600);
       });
-      this.pjorderlist = res.data;
-      setTimeout(() => loader.hide(), 500);
-    });
 
     // 取消id事件監聽資料帶入
     this.$refs.box.addEventListener("show.bs.modal", (event) => {

@@ -61,7 +61,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
             <div class="dropdown">
         <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <img id="iconimg" class="headernav loginicon" src="../img/loginicon.png" alt="">
+            <img id="iconimg" class="headernav loginicon" src="" alt="">
         </a>
 
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -207,9 +207,6 @@ window.onload = function getuserID() {
             .then(res => {
                 callback(res.data);
                 // console.log(res.data);
-                // if (res.data != "") {
-                //     alert("login OK")
-                // }
                 axios.get("/api/Login/getuserphoto/" + res.data)
                     .then(res => {
                         // console.log(res.data[0].userPhoto)
@@ -224,26 +221,28 @@ window.onload = function getuserID() {
                         setimg.style.borderRadius = "15px";
                         setimg.style.objectFit = "cover";
                         document.querySelector(".dropdown-menu").innerHTML = ` <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
-                    href="../MemberCentre/UserInfo.html">個人頁面</a></li>
-            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
-                    href="../MemberCentre/UserFollowing.html">追蹤專案</a></li>
-            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
-                    href="../MemberCentre/UserOrder.html">贊助紀錄</a></li>
-            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
-                    href="../MemberCentre/UserProject.html">提案紀錄</a></li>
-            <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
-                    href="../MemberCentre/UserMessage.html">聯絡訊息</a></li>
-                    <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
-                    href="../MemberCentre/UserSetting.html">帳戶設定</a></li>
-            <li style="text-align: center;"><a class="dropdown-item" href="../ProductPage/mymainpage.html" onclick="logout()">登出</a></li>`
+                        href="../MemberCentre/UserInfo.html">個人頁面</a></li>
+                <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+                        href="../MemberCentre/UserFollowing.html">追蹤專案</a></li>
+                <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+                        href="../MemberCentre/UserOrder.html">贊助紀錄</a></li>
+                <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+                        href="../MemberCentre/UserProject.html">提案紀錄</a></li>
+                <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+                        href="../MemberCentre/UserMessage.html">聯絡訊息</a></li>
+                        <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+                        href="../MemberCentre/UserSetting.html">帳戶設定</a></li>
+                <li style="text-align: center;"><a class="dropdown-item" href="../ProductPage/mymainpage.html" onclick="logout()">登出</a></li>`
                     })
+
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error.response);
-            })
+                var nologinsetimg = document.getElementById("iconimg");
+                nologinsetimg.setAttribute("src", "../img/loginicon.png")
+            });
     }
     getid(function (myuser) {
-        // console.log(myuser)
         userid = myuser;
     })
 }

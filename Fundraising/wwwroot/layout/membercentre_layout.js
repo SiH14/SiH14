@@ -3,7 +3,9 @@ let header =
 
 <div class="container-fluid headernav" id="header-container">
     <!--LOGO -->
-    <a class="navbar-brand fs-2 headernav" id="header-brand" href="../ProductPage/mymainpage.html">咱的募資平台</a>
+    <a class="navbar-brand fs-2 headernav" id="header-brand" href="../ProductPage/mymainpage.html">
+    <img id="brand" src="../img/brand.png" alt="">
+    </a>
 
     <!-- Bar -->
 
@@ -38,7 +40,7 @@ let header =
             <div class="dropdown">
         <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <img id="iconimg" class="headernav loginicon" src="../img/loginicon.png" alt="">
+            <img id="iconimg" class="headernav loginicon" src="" alt="">
         </a>
 
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -51,7 +53,7 @@ let header =
     </div>
     
 </nav>` +
-    `<div id="MemberCentre" class="row text-dark py-3 fs-5 justify-content-center m-0">
+  `<div id="MemberCentre" class="row text-dark py-3 fs-5 justify-content-center m-0">
 <a
   href="./UserInfo.html"
   class="memberlink col-4 col-xl-1 col-md-3 offset-0 btn btn-default"
@@ -226,10 +228,12 @@ window.onload = function getuserID() {
                         })
                         .catch((error) => {
                             console.log(error.response);
+                            var nologinsetimg = document.getElementById("iconimg");
+                            nologinsetimg.setAttribute("src", "../img/loginicon.png")
                         });
                 };
                 getid(function (myuser) {
-                    console.log(myuser);
+                    // console.log(myuser);
                     userid = myuser;
                 });
             }
@@ -237,7 +241,6 @@ window.onload = function getuserID() {
         .catch(error => {
             console.log(error.response);
         })
-
 };
 
 function logout() {
@@ -250,3 +253,8 @@ function logout() {
             console.log(error.response);
         });
 }
+// 背景圖片
+document.querySelector("body").style.backgroundImage = "url('../img/mbbg.png')";
+document.querySelector("body").style.backgroundRepeat = "no-repeat";
+document.querySelector("body").style.backgroundAttachment = "fixed";
+document.querySelector("body").style.backgroundSize = "100%";

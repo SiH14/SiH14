@@ -57,7 +57,7 @@ const app = new Vue({
       // 拿取對話清單
       axios.get("/api/chatrooms/chats/" + res.data).then((res) => {
         this.chatrooms = res.data;
-        setTimeout(() => loader.hide(), 200);
+        setTimeout(() => loader.hide(), 400);
       });
     });
 
