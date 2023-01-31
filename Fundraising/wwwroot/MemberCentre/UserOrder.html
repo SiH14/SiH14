@@ -54,9 +54,10 @@
               <div class="col-md-3">
                 <a href="#"
                   ><img
-                    :src="order.coverphoto"
-                    class="img-fluid rounded-start"
+                    :src="order.productPhoto"
+                    class="img-fluid rounded-start p-2 pt-3"
                     alt="..."
+                    style="height: 80%; object-fit: cover"
                 /></a>
               </div>
 
@@ -179,12 +180,12 @@
                   </div>
                 </div>
                 <!-- button -->
-                <a
-                  href="./UserMessage.html"
+                <button
+                  @click="chat(order)"
                   class="col-md-2 btn btn-outline-success me-md-2 mt-1"
                 >
                   聯絡提案人
-                </a>
+                </button>
                 <a
                   href="./UserOrderDetail.html"
                   @click="ordersession(order.orderId)"
