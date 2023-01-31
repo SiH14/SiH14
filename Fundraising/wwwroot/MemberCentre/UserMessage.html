@@ -80,7 +80,7 @@
             <!-- 聊天(右) -->
             <div class="chat">
               <!-- 目前對話對象(標題) -->
-              <div class="chat-header clearfix mt-2" v-if="chatting!=''">
+              <div class="chat-header clearfix mt-2">
                 <img :src="chattingPhoto" alt="avatar" />
                 <div class="chat-about">
                   <h6 class="m-b-0">{{chattingname}}</h6>
@@ -119,8 +119,8 @@
                   </li>
                 </ul>
               </div>
-              <div v-if="chatting!=''" class="chat-message clearfix">
-                <div class="input-group mb-0">
+              <div class="chat-message clearfix">
+                <div class="input-group mb-0 chat-input">
                   <input
                     type="text"
                     class="form-control"
