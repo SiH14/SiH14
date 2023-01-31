@@ -107,22 +107,25 @@
         <br>
 
         <!--<div class="container">
-          <div class="row">
-              <div style="background-color: whitesmoke;">
-                  <span>贊助人才能留言。如有專案相關提問，請聯絡<a href="#" style="color: black; text-decoration: none; font-weight: bold;">提案人</a></span>
-                  <span>。</span>
-                </div>
-          </div>
-        </div>-->
+      <div class="row">
+          <div style="background-color: whitesmoke;">
+              <span>贊助人才能留言。如有專案相關提問，請聯絡<a href="#" style="color: black; text-decoration: none; font-weight: bold;">提案人</a></span>
+              <span>。</span>
+            </div>
+      </div>
+    </div>-->
         <br>
-        <div class="thiscomments container">
-            <div class="row" v-if="whouser == ''">
+        <div>
+            <div class="container" v-if="whouser == ''">
                 <div style="background-color: whitesmoke;">
-                    <span>成為 <a href="#" style="color: black; text-decoration: none; font-weight: bold;">咱們</a> 會員才能留言。如有專案相關提問，請聯絡<a href="#" style="color: black; text-decoration: none; font-weight: bold;">提案人</a></span>
+                    <span>成為 <a href="../Registration/registration.html" style="color: black; text-decoration: none; font-weight: bold;">needU</a> 會員才能留言。如有專案相關提問，請登入<a href="../Login/login.html" style="color: black; text-decoration: none; font-weight: bold;"> 會員</a></span>
                     <span>。</span>
                 </div>
             </div>
-            <div class="" style="display:flex;" v-else>
+        </div>
+
+        <div class="container" v-if="fliterList.length > 0">
+            <div class="" style="display:flex;">
                 <textarea v-on:click="move1()" id="textinput1" class="form-control" style="width: 95%;" s placeholder="請輸入留言內容..."></textarea>
                 <button v-on:click="addcomment()" class="fas fa-users-class" style="width: 5%;"><i class="fa-regular fa-paper-plane"></i></button>
                 <i class="fa-solid fa-paper-plane-top"></i>
@@ -208,13 +211,13 @@
                         <button v-on:click="okeditanswer(itemm.answerid)" class="btn btn-success">確定</button><button v-on:click="canceleditanswer(itemm.answerid)" class="btn btn-danger">取消</button>
                     </div>
                     <!--<div v-if="itemm.userid == whouser" class="bd-highlight mb-1" style="display:flex">
-            <div style="height: 30px; width: 40px;"></div>
-            <textarea v-on:click="move2(key)" id="textinput2" :class="'wang'+key + ' ' + 'form-control'" style="width: 95%;" v-model="editanswerList.answercontent" :value="editanswerList.answercontent"></textarea>
-        </div>-->
+                    <div style="height: 30px; width: 40px;"></div>
+                    <textarea v-on:click="move2(key)" id="textinput2" :class="'wang'+key + ' ' + 'form-control'" style="width: 95%;" v-model="editanswerList.answercontent" :value="editanswerList.answercontent"></textarea>
+                </div>-->
                     <!--<div v-if="itemm.userid == whouser" class="bd-highlight mb-3" style="display:flex">
-            <div style="height: 0px; width: 40px;"></div>
-            <button v-on:click="okeditanswer(editanswerList.answerid)" class="btn btn-success">確定</button><button class="btn btn-danger">取消</button>
-        </div>-->
+                    <div style="height: 0px; width: 40px;"></div>
+                    <button v-on:click="okeditanswer(editanswerList.answerid)" class="btn btn-success">確定</button><button class="btn btn-danger">取消</button>
+                </div>-->
                 </div>
                 <div class="mb-3" style="display:flex" v-if="whouser != ''">
                     <textarea v-on:click="move2(key)" id="textinput2" :class="'wang'+key + ' ' + 'form-control'" style="width: 95%;" placeholder="回覆留言..."></textarea>
@@ -222,6 +225,10 @@
                     <i class="fa-solid fa-paper-plane-top"></i>
                 </div>
             </div>
+        </div>
+        <div class="container" v-else>
+            <br>
+            <h1>還沒有人流言。</h1>
         </div>
     </div>
 
@@ -264,6 +271,16 @@
                 meno: [],
                 connection: null
             },
+            beforeMount() {
+                $.ajax({
+                    type: 'Get',
+                    url: '/api/SiComments/comment/' + sessionStorage.getItem("productId"),
+                    success: function (e) {
+                        app.fliterList = e
+                    }
+                })
+            }
+            ,
             mounted: function () {
                 $.ajax({
                     type: 'Get',
@@ -295,20 +312,12 @@
                         console.log(1);
                     }, 1000)
                 });
-
                 $.ajax({
                     type: 'Get',
                     url: '/api/Fundraising/prduct/' + sessionStorage.getItem("productId"),
                     success: function (e) {
                         app.productList = e
                         app.productuserid = e[0].productuserid
-                    }
-                })
-                $.ajax({
-                    type: 'Get',
-                    url: '/api/SiComments/comment/' + sessionStorage.getItem("productId"),
-                    success: function (e) {
-                        app.fliterList = e
                     }
                 })
                 $.ajax({
