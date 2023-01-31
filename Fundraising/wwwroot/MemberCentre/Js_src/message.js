@@ -127,6 +127,8 @@ const app = new Vue({
     },
     // 目前對話對象
     getMsg(e) {
+      document.querySelector(".chat-header").style.visibility = "visible ";
+      document.querySelector(".chat-input").style.visibility = "visible ";
       this.messages = [];
       this.chatting = e.userId;
       this.chattingname = e.userName;
