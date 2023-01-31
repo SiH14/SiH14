@@ -179,7 +179,7 @@
                                 <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
                                 <div class="input-group">
                                     <div class="input-group-text" style="background-color:white">NT$</div>
-                                    <input type="number" class="form-control" id="autoSizingInputGroup" oninput="if(value.length>8)value=value.slice(0,8)" v-model="AddSponsorshipValue" required>
+                                    <input type="number" class="form-control" id="autoSizingInputGroup" min="0" oninput="if(value.length>8)value=value.slice(0,8)" v-model="AddSponsorshipValue" required>
                                     <div class="invalid-feedback">
                                         無須贊助請填'0'
                                     </div>
@@ -195,7 +195,7 @@
                                 </div>
                                 <div class="col-3">
                                     <label for="formGroupExampleInput" class="form-label">郵遞區號</label>
-                                    <input v-model="orderpayList.PostCode" type="text" class="form-control" id="formGroupExampleInput" placeholder="區號" required>
+                                    <input v-model="orderpayList.PostCode" type="number" class="form-control" id="formGroupExampleInput" min="0" oninput="if(value.length>5)value=value.slice(0,5)" placeholder="區號" required>
                                     <div class="invalid-feedback">
                                         必填
                                     </div>
@@ -210,16 +210,16 @@
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">連絡電話</label>
-                                <input v-model="orderpayList.RecipientPhone" type="text" class="form-control" id="formGroupExampleInput2" placeholder="請填寫常用電話，以利提案團隊聯繫" required>
+                                <input v-model="orderpayList.RecipientPhone" type="tel"pattern="[0-9]{10}" class="form-control" id="formGroupExampleInput2" placeholder="請填寫常用電話，以利提案團隊聯繫" required>
                                 <div class="invalid-feedback">
-                                    必填
+                                    請輸入正確格式
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">連絡信箱</label>
-                                <input v-model="orderpayList.RecipientMail" type="text" class="form-control" id="formGroupExampleInput2" placeholder="請填寫常用信箱，以利提案團隊聯繫" required>
+                                <input v-model="orderpayList.RecipientMail" type="email" class="form-control" id="formGroupExampleInput2" placeholder="請填寫常用信箱，以利提案團隊聯繫" required>
                                 <div class="invalid-feedback">
-                                    必填
+                                    請輸入正確格式
                                 </div>
                             </div>
                             <div class="mb-3">
