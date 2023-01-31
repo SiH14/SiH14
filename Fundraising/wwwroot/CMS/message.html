@@ -194,7 +194,7 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">返回</button>
                                             <button type="button" class="btn btn-danger"
-                                                v-on:click="deletecomapi(deleteans.answerId)"
+                                                v-on:click="deleteansapi(deleteans.answerId)"
                                                 data-dismiss="modal">刪除</button>
                                         </div>
                                     </div>
@@ -306,7 +306,7 @@
                     axios.delete(`/api/Comments/${index}`).then(res => this.changegetcomment())
                 },
                 deleteansapi: function (index) {
-                    console.log(index)
+                    axios.delete(`/api/Answers/${index}`).then(res => this.changegetcomment())
                 },
             },
 
