@@ -1,13 +1,22 @@
-const app = {
-  data() {
-    return {
-      userinfo: {},
-    };
+Vue.use(VueLoading);
+
+const app = new Vue({
+  el: "#app",
+  data: {
+    userinfo: {},
+  },
+  components: {
+    Loading: VueLoading,
   },
   mounted() {
+    let loader = this.$loading.show({
+      loader: "dots",
+    });
+
     axios.get("/api/login/getuserid").then((res) => {
       axios.get("/api/userinfo/setting/" + res.data).then((res) => {
         this.userinfo = res.data;
+        setTimeout(() => loader.hide(), 200);
       });
     });
   },
@@ -32,6 +41,4 @@ const app = {
         });
     },
   },
-};
-
-Vue.createApp(app).mount("#app");
+});
