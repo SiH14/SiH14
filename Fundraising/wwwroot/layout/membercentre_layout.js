@@ -47,11 +47,7 @@ let header =
         </ul>
     </div>             
             </ul>
-          </div>
-          <div>
-          <img class="headerbackgroudicon" src="../img/headerbackgroudicon.png" alt="">
-      </div>
-        
+          </div>        
     </div>
     
 </nav>` +
