@@ -54,7 +54,7 @@ $("#ProductTitle").keyup(function () {
 // 提案封面圖片上傳預覽
 var coverimgdata;
 function readURL(input) {
-
+    console.log(input.files[0]);
     if (input.files && input.files[0]) {
 
         var imageTagID = input.getAttribute("targetID");
