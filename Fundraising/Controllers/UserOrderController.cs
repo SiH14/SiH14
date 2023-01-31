@@ -85,7 +85,9 @@ namespace Fundraising.Controllers
                                   planTitle = plan.PlanTitle,
                                   planContent = plan.PlanContent,
                                   planPrice = plan.PlanPrice,
-                                  AddSponsorship = order.AddSponsorship
+                                  AddSponsorship = order.AddSponsorship,
+                                  puserId = product.UserId
+
                               };
             return await orderDetail.ToListAsync();
         }
