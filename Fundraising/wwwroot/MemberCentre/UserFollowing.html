@@ -11,13 +11,18 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./stepper.css" />
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
       integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css"
+      rel="stylesheet"
+    />
     <style>
       .card {
         box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
@@ -35,7 +40,7 @@
       }
 
       #app button {
-        width: 88%;
+        width: 93%;
       }
 
       .following {
@@ -46,24 +51,23 @@
       .cancelbtn {
         position: absolute;
         bottom: 0;
-        left: 6%;
       }
     </style>
     <title>追蹤專案</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container" id="app">
+      <loading :can-cancel="true"></loading>
       <!-- 標題˙ -->
       <div class="mx-auto ps-4 pt-3" style="width: 80%">
         <h5>追蹤專案</h5>
       </div>
-      <div class="card mx-auto mt-3" id="app">
-        <loading :active.sync="isLoading"></loading>
+      <div class="card mx-auto mt-3">
         <div class="row m-3" v-if="myfollow.length>0">
           <div class="following col-4 my-3" v-for="item in myfollow">
             <img :src="item.photo" alt="product" />
             <h5 class="px-0">{{item.ptitle}}</h5>
-            <p class="text-muted px-2">提案人 {{item.puser}}</p>
+            <p class="text-muted">提案人 {{item.puser}}</p>
             <button
               class="btn btn-outline-success d-block mx-auto cancelbtn"
               @click="cancel(item)"

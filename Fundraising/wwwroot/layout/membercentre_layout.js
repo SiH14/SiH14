@@ -53,7 +53,7 @@ let header =
     </div>
     
 </nav>` +
-    `<div id="MemberCentre" class="row text-dark py-3 fs-5 justify-content-center m-0">
+  `<div id="MemberCentre" class="row text-dark py-3 fs-5 justify-content-center m-0">
 <a
   href="./UserInfo.html"
   class="memberlink col-4 col-xl-1 col-md-3 offset-0 btn btn-default"

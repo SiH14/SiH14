@@ -16,7 +16,12 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css"
+      rel="stylesheet"
+    />
     <style>
       .card {
         box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
@@ -30,11 +35,12 @@
     <title>帳戶設定</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container" id="app">
+      <loading :can-cancel="true"></loading>
       <div class="mx-auto" style="width: 80%">
         <h5 class="ms-4 mt-3">帳戶設定</h5>
       </div>
-      <div class="card mt-3 mx-auto" id="app">
+      <div class="card mt-3 mx-auto">
         <!-- 修改表單 -->
         <form class="row g-3 m-4">
           <!-- 使用者頭像 -->
