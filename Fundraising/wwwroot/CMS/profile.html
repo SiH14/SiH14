@@ -25,6 +25,12 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- <script src="js/sb-admin-2.min.js"></script> -->
     <script src="./js/logincheck.js"></script>
+
+    <style>
+        #myImg:hover #myImgInput{
+             display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,10 +62,19 @@
                                     <div class="col-6">
                                         <form class=""></form>
                                         <div class="row justify-content-around">
-                                            <div class="col-5 " >
-                                                <img src="img/undraw_profile.svg" alt=""
-                                                    style="height: 150px; width: 150px;" class="d-block mx-auto">
-                                                    <input type="file" name="" id="" class="py-3">
+                                            <div class="col-5 ">
+                                                <div class="text-center" style="position: relative;">
+                                                <img :src="employeeinfo.employeephoto" alt=""
+                                                    style="height: 150px; width: 150px; border: 1px silver solid ;border-radius: 50%;"
+                                                    class="d-block mx-auto imgset" id="myImg" >
+                                                    <input type="file" name="" id="myImgInput" class="py-3"
+                                                    v-on:change="readURL"
+                                                        accept="image/jpeg,image/png" style="max-width: 80px; position: absolute;
+                                                        top: 50%;  
+                                                        left: 50%;
+                                                        transform: translate(-50%, 30%);
+                                                        display: none;">
+                                                </div>
                                                 <h3 class="p-0 text-center">朱小名</h3>
                                                 <label for="">帳號:</label> <br>
                                                 <input type="text" name="" id="" class="w-100"> <br>
@@ -69,44 +84,44 @@
                                             <div class="col-5 d-flex flex-column justify-content-end">
                                                 <label for="">Email</label>
                                                 <input type="text" class="w-100">
-                                                <label for="">電話</label> 
-                                                <input type="text" class="w-100"> 
-                                                <label for="">性別</label> 
-                                                <input type="text" class="w-100"> 
-                                                <label for="">職位</label> 
+                                                <label for="">電話</label>
                                                 <input type="text" class="w-100">
-                                                <label for="">在職狀態</label> 
-                                                <input type="text" class="w-100"> 
-                                            </div>
-
-                                            
-                                                <div class="col-12 text-center mt-3">
-                                                    <button name="submit" type="submit" class="btn btn-primary px-5 ">
-                                                        提交
-                                                    </button>
-                                                </div>
+                                                <label for="">性別</label>
+                                                <input type="text" class="w-100">
+                                                <label for="">職位</label>
+                                                <input type="text" class="w-100">
+                                                <label for="">在職狀態</label>
+                                                <input type="text" class="w-100">
                                             </div>
 
 
+                                            <div class="col-12 text-center mt-3">
+                                                <button name="submit" type="submit" class="btn btn-primary px-5 ">
+                                                    提交
+                                                </button>
+                                            </div>
                                         </div>
-                                        </form>
+
+
                                     </div>
+                                    </form>
                                 </div>
-                                <!-- ===============================================================================================================  -->
                             </div>
+                            <!-- ===============================================================================================================  -->
                         </div>
                     </div>
-                    <!-- 結束 主要內容 -->
                 </div>
+                <!-- 結束 主要內容 -->
             </div>
         </div>
-        <!-- 頁尾 -->
-        <div id="myfooter"></div>
-        <!-- 結束 頁尾r -->
-        <!-- 回上方按鈕-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
+    <!-- 頁尾 -->
+    <div id="myfooter"></div>
+    <!-- 結束 頁尾r -->
+    <!-- 回上方按鈕-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
     </div>
 
 
@@ -122,7 +137,7 @@
             el: '#app',
             data: {
                 LoaderVisiable: false,
-                employeeinfo: []
+                employeeinfo: [],
             },
             components: {
                 Loading: VueLoading
@@ -146,9 +161,18 @@
                             this.userinfo = response.data
                             this.userinfo.userBirthday = this.userinfo.userBirthday.substr(0, 10)
                         })
-                }
-            },
+                },
+                readURL(event) {
+                    if (event.target.files && event.target.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            app._data.employeeinfo.employeephoto = reader.result
+                        }
+                        reader.readAsDataURL(event.target.files[0]);
+                    }
+                },
 
+            },
             mounted() {
                 let loader = this.$loading.show({
                     loader: 'dots'
@@ -160,6 +184,9 @@
                 })
             }
         })
+    </script>
+    <script>
+
     </script>
 </body>
 

@@ -65,6 +65,18 @@ namespace Fundraising.Controllers
             return await query.ToListAsync();
         }
 
+        //拿取特定聊天室
+        [HttpGet("Chat/{muid}/{tuid}")]
+        public async Task<ActionResult<dynamic>> GetChat(int muid,int tuid)
+        {
+            var query = from chats in _context.Chatrooms
+                        where (chats.UserId1 == muid && chats.UserId2 == tuid) || (chats.UserId2 == muid && chats.UserId1 == tuid)
+                        select chats;
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+
 
         // PUT: api/Chatrooms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

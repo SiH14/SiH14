@@ -13,6 +13,10 @@ const app = {
     };
   },
   mounted() {
+    if (sessionStorage.getItem("chatuserId")) {
+      console.log("ok");
+    }
+
     // 初始化
     axios.get("/api/login/getuserid").then((res) => {
       this.userid = res.data;
