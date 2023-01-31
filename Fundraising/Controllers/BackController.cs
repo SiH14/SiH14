@@ -14,6 +14,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Fundraising.Models;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Principal;
+using System.Xml.Linq;
 
 namespace 募資.Controllers
 {
@@ -36,6 +38,7 @@ namespace 募資.Controllers
         {
             _context = context;
         }
+
 
 
         // GET: api/back/test
@@ -478,7 +481,58 @@ namespace 募資.Controllers
             });
             return await result.ToListAsync();
         }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<dynamic>>> GetEmpolyee()
+        {
+            var result = _context.Users.Select(x => new
+            {
+                UserId = x.UserId.ToString(),
+                UserEmail = x.UserEmail,
+                UserPassword = x.UserPassword,
+                UserName = x.UserName,
+                UserPhone = x.UserPhone,
+                UserBirthday = x.UserBirthday,
+                UserGender = x.UserGender,
+                UserIntro = x.UserIntro,
+                UserFblink = x.UserFblink,
+                CreateDate = x.CreateDate,
+                UserPhoto = x.UserPhoto
+            });
+            return await result.ToListAsync();
+        }
 
+        // GET: api/back/Employees
+        [HttpGet("Employees")]
+        public async Task<ActionResult<IEnumerable<dynamic>>> GetEmployees()
+        {
+            var result = _context.Employees.Select(x => new
+            {
+                account = x.Account,
+                email = x.Email,
+                employeeId = x.EmployeeId,
+                employeephoto = x.Employeephoto,
+                name = x.Name,
+                phone = x.Phone,
+                sexy = (x.Sexy == true)? "男":"女",
+                position = x.PositionNavigation.PositionName,
+                status = x.StatusNavigation.StatusName
+            });
+            return await result.ToListAsync();
+        }
+
+        // GET: api/back/Employees/5
+        [HttpGet("Employees/{id}")]
+        public async Task<ActionResult<Employee>> GetEmployee(int id)
+        {
+            var employee = await _context.Employees.FindAsync(id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return employee;
+        }
 
 
 
