@@ -10,8 +10,10 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/layout.css">
@@ -65,9 +67,8 @@
             border-radius: 6px;
         }
 
-        .field input,
-        .field button {
-            height: 100%;
+        .field input {
+            height: 48px;
             width: 100%;
             border: none;
             font-size: 16px;
@@ -81,9 +82,9 @@
             border: 2px solid #cacaca;
         }
 
-            .field input:focus {
-                border-bottom-width: 2px;
-            }
+        .field input:focus {
+            border-bottom-width: 2px;
+        }
 
         .eye-icon {
             position: absolute;
@@ -101,27 +102,33 @@
             background-color: #047c51;
             transition: all 0.3s ease;
             cursor: pointer;
+            height: 40px;
+            width: 100%;
+            border: none;
+            font-size: 16px;
+            font-weight: 400;
+            border-radius: 6px;
         }
 
-            .field button:hover {
-                background-color: #046644;
-            }
+        .field button:hover {
+            background-color: #046644;
+        }
 
         .form-link {
             text-align: center;
             margin-top: 10px;
         }
 
-            .form-link span,
-            .form-link span a {
-                font-size: 14px;
-                font-weight: 400;
-                color: #232836;
-            }
+        .form-link span,
+        .form-link span a {
+            font-size: 14px;
+            font-weight: 400;
+            color: #232836;
+        }
 
-                .form-link span a {
-                    color: #0171d3;
-                }
+        .form-link span a {
+            color: #0171d3;
+        }
 
         .form a {
             font-size: 14px;
@@ -138,20 +145,9 @@
             position: relative;
             height: 1px;
             width: 100%;
-            margin: 36px 0;
+            margin: 40px 0 30px 0;
             background-color: #d4d4d4;
         }
-
-            .line::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                right: 50%;
-                transform: translate(-50%, -50%);
-                background-color: #fff;
-                color: #232836;
-                padding: 0 15px;
-            }
 
         .media-options a {
             display: flex;
@@ -165,16 +161,6 @@
             left: 15px;
             transform: translateY(-50%);
         }
-
-        a.google {
-            border: 1px solid #cacaca;
-        }
-
-            a.google span {
-                font-weight: 500;
-                opacity: 0.8;
-                color: #232836;
-            }
 
         /* 驗證文字 */
         .field.success input {
@@ -219,9 +205,9 @@
                         <small>error message</small>
                     </div>
 
-                    <div class="form-link">
+                    <!-- <div class="form-link">
                         <a href="#" class="forgot-pass">忘記密碼?</a>
-                    </div>
+                    </div> -->
 
                     <div class="field button-field">
                         <button id="loginBtn" type="button">登入</button>
@@ -229,24 +215,73 @@
 
                 </form>
 
-                <div class="form-link">
-                    <span>還不是會員?<a href="https://localhost:44398/Registration/registration.html" class="link login-link">馬上註冊</a></span>
+                <div style="margin-top: -6px;" class="form-link">
+                    <a style="float: left;" href="#" class="forgot-pass">忘記密碼?</a>
+                    <span style="float: right;">還不是會員?<a href="../Registration/registration.html"
+                            class="link login-link">馬上註冊</a></span>
                 </div>
             </div>
 
             <div class="line"></div>
 
-            <div class="media-options">
-                <a href="" class="field google">
-                    <img src="./google icon.png" alt="" style="width: 20px; height: 20px; object-fit: cover;">
-                    <span>使用Google帳號繼續</span>
-                </a>
+            <div id="g_id_onload"
+                data-client_id="762792073286-id6ruvd00ar6toi9341t7rl2scejpmim.apps.googleusercontent.com"
+                data-callback="handleCallback" data-auto_prompt="false">
             </div>
+            <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
+                data-text="sign_in_with" data-shape="square" data-logo_alignment="left" data-width=368></div>
         </div>
     </section>
 
 
     <script src="../layout/layout.js"></script>
+
+    <!-- google第三方登入 -->
+    <script>
+        function parseJwt(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            return JSON.parse(jsonPayload);
+        };
+        function handleCallback(response) {
+            const gooleinfo = parseJwt(response.credential);
+            console.log(gooleinfo);
+            axios.get("/api/login/gooleCertified/" + gooleinfo.email)
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data != "此帳號已註冊") {
+                        axios.post("/api/Register", {
+                            UserEmail: gooleinfo.email,
+                            UserName: gooleinfo.name,
+                            UserPassword: ""
+                        }).then(res => {
+                            console.log(res);
+                            axios.post("/api/Login", {
+                                UserEmail: gooleinfo.email,
+                                UserPassword: ""
+                            })
+                                .then(res => {
+                                    console.log(res.data);
+                                    window.location = "h../productpage/mymainpage.html";
+                                })
+                        })
+                    } else {
+                        axios.post("/api/Login", {
+                            UserEmail: gooleinfo.email,
+                            UserPassword: ""
+                        })
+                            .then(res => {
+                                console.log(res.data);
+                                window.location = "../productpage/mymainpage.html";
+                            })
+                    }
+                })
+        }
+    </script>
 
     <!-- 隱藏密碼 -->
     <script>
@@ -338,7 +373,7 @@
             let isFormValid = isEmailValid && isPasswordValid;
 
             if (isFormValid) {
-                axios.post("https://localhost:44398/api/Login", {
+                axios.post("/api/Login", {
                     UserEmail: document.getElementById("UserEmail").value,
                     UserPassword: document.getElementById("UserPassword").value
                 })
@@ -348,7 +383,7 @@
                         if (res.data == "帳號密碼錯誤") {
                             swal('登入失敗', '確認輸入的帳號密碼', 'error');
                         } else {
-                            window.location = "https://localhost:44398/productpage/mymainpage.html";
+                            window.location = "../productpage/mymainpage.html";
                         }
 
                     })
