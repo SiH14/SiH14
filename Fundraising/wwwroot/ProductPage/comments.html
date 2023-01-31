@@ -36,8 +36,15 @@
     <div class="thiscomments">
         <div class="container" style="position:relative">
             <div>
-                <div>
-                    <p style="z-index: 100" v-for="me in meno">{{me.show}}</p>
+                <div style="position: absolute; z-index: 100; right: 0px; text-align: right;">
+                    <br>
+                    <div v-for="me in meno">
+                        <div class="mb-1" style="background-color: #DFFFDF ">
+                            <span>{{me.title}}</span>
+                            <br>
+                            <span>{{me.show}}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 標題 -->
@@ -250,9 +257,9 @@
                     })
                     .catch((err) => console.error(err.toString()));
 
-                this.connection.on("ReceiveMessage", () => {
-                    this.meno.push({ "show": "有新的回應囉"});
-                    /*                 console.log(123)*/
+                this.connection.on("ReceiveMessage", (producttitle) => {
+                    this.meno.push({ "show": "有新的回應囉", "title": producttitle });
+                    alert(123)
                 });
                 /*                alert(123)*/
 
