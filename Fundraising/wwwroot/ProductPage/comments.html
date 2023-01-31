@@ -135,11 +135,38 @@
                     <img style="height: 30px; width: 30px;" :src="item.userphoto" alt="">
                     <div class="p-2 bd-highlight"><a href="#" style="text-decoration: none;">{{item.username}}</a></div>
                     <div class="p-2 bd-highlight" style="height: 35px; background-color: #ABFFAB ">留言者</div>
-                    <div class="ms-auto p-2 bd-highlight"><button v-if="item.userid == whouser" class="btn" style="display:inline"><i class="fa-solid fa-pen-to-square"></i></button>{{item.commenttime}}</div>
+                    <div class="ms-auto p-2 bd-highlight">
+                        <div v-if="item.userid == whouser" class="btn-group dropup">
+                            <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <button style="width:60px" type="button" v-on:click="delcomment(item.commentID)" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                        刪除
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="width:60px" v-on:click="editcomment(item.commentID,item.commentContent)" type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                        編輯
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        {{item.commenttime}}
+                    </div>
                 </div>
-                <div class="d-flex bd-highlight mb-3">
+                <div :class="'bd-highlight mb-3'+' '+'origcomment'+item.commentID" style="display:flex">
                     <div style="height: 30px; width: 40px;"></div>
                     <p style="white-space: pre-wrap;">{{item.commentContent}}</p>
+                </div>
+                <div v-if="item.userid == whouser" :class="'bd-highlight mb-1'+' '+'commentinpudiv'+item.commentID" style="display:none">
+                    <div style="height: 30px; width: 40px;"></div>
+                    <textarea id="textinput3" :class="'form-control'+' '+'editcommentinpu'+item.commentID" style="width: 95%;"></textarea>
+                </div>
+                <div v-if="item.userid == whouser" :class="'btncdis bd-highlight mb-3'+' '+'commentbtndiv'+item.commentID" style="display:none">
+                    <div style="height: 0px; width: 40px;"></div>
+                    <button v-on:click="okeditcomment(item.commentID)" class="btn btn-success">確定</button><button v-on:click="canceleditcomment(item.commentID)" class="btn btn-danger">取消</button>
                 </div>
 
                 <div v-for="itemm in answerList" v-if="item.commentID == itemm.commentid">
@@ -181,13 +208,13 @@
                         <button v-on:click="okeditanswer(itemm.answerid)" class="btn btn-success">確定</button><button v-on:click="canceleditanswer(itemm.answerid)" class="btn btn-danger">取消</button>
                     </div>
                     <!--<div v-if="itemm.userid == whouser" class="bd-highlight mb-1" style="display:flex">
-                        <div style="height: 30px; width: 40px;"></div>
-                        <textarea v-on:click="move2(key)" id="textinput2" :class="'wang'+key + ' ' + 'form-control'" style="width: 95%;" v-model="editanswerList.answercontent" :value="editanswerList.answercontent"></textarea>
-                    </div>-->
+            <div style="height: 30px; width: 40px;"></div>
+            <textarea v-on:click="move2(key)" id="textinput2" :class="'wang'+key + ' ' + 'form-control'" style="width: 95%;" v-model="editanswerList.answercontent" :value="editanswerList.answercontent"></textarea>
+        </div>-->
                     <!--<div v-if="itemm.userid == whouser" class="bd-highlight mb-3" style="display:flex">
-                        <div style="height: 0px; width: 40px;"></div>
-                        <button v-on:click="okeditanswer(editanswerList.answerid)" class="btn btn-success">確定</button><button class="btn btn-danger">取消</button>
-                    </div>-->
+            <div style="height: 0px; width: 40px;"></div>
+            <button v-on:click="okeditanswer(editanswerList.answerid)" class="btn btn-success">確定</button><button class="btn btn-danger">取消</button>
+        </div>-->
                 </div>
                 <div class="mb-3" style="display:flex" v-if="whouser != ''">
                     <textarea v-on:click="move2(key)" id="textinput2" :class="'wang'+key + ' ' + 'form-control'" style="width: 95%;" placeholder="回覆留言..."></textarea>
@@ -230,6 +257,7 @@
                 answerList: [],
                 addcommentList: {},
                 addanswerList: {},
+                editcommentList: {},
                 editanswerList: {},
                 whouser: '',
                 productuserid: '',
@@ -362,14 +390,14 @@
                     btndisnone.style.display = "flex";
                     document.querySelector('.editinpu' + e).value = answercontent;
                     /*       console.log(e);*/
-                    $.ajax({
-                        type: 'Get',
-                        url: '/api/SiAnswers/editans/' + e,
-                        success: function (e) {
-                            app.editanswerList = e
-                            console.log(e)
-                        }
-                    })
+                    //$.ajax({
+                    //    type: 'Get',
+                    //    url: '/api/SiAnswers/editans/' + e,
+                    //    success: function (e) {
+                    //        app.editanswerList = e
+                    //        console.log(e)
+                    //    }
+                    //})
                 },
                 okeditanswer: function (e) {
                     console.log(this.editanswerList.answercontent)
@@ -385,7 +413,6 @@
                         url: '/api/SiAnswers/editans/' + e,
                         success: function (e) {
                             app.editanswerList = e
-                            console.log(11123)
                             app.editanswerList.answercontent = document.querySelector('.editinpu' + okeditid).value
                             $.ajax({
                                 type: 'put',
@@ -431,7 +458,71 @@
                     } else {
 
                     }
-                },
+                }
+                ,
+                okeditcomment(e) {
+                    document.querySelector('.origcomment' + e).style.display = "flex";
+                    document.querySelector('.commentinpudiv' + e).style.display = "none";
+                    document.querySelector('.commentbtndiv' + e).style.display = "none";
+                    var okeditcommentid = e;
+                    $.ajax({
+                        type: 'Get',
+                        url: '/api/SiComments/editcomment/' + e,
+                        success: function (e) {
+                            app.editcommentList = e
+                            app.editcommentList.commentcontent = document.querySelector('.editcommentinpu' + okeditcommentid).value
+                            $.ajax({
+                                type: 'put',
+                                url: '/api/SiComments/' + okeditcommentid,
+                                contentType: "application/json",
+                                data: JSON.stringify(app.editcommentList),
+                                success: function () {
+                                    $.ajax({
+                                        type: 'Get',
+                                        url: '/api/SiComments/comment/' + sessionStorage.getItem("productId"),
+                                        success: function (e) {
+                                            app.fliterList = e
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
+                ,
+                canceleditcomment(e) {
+                    document.querySelector('.origcomment' + e).style.display = "flex";
+                    document.querySelector('.commentinpudiv' + e).style.display = "none";
+                    document.querySelector('.commentbtndiv' + e).style.display = "none";
+                }
+                ,
+                editcomment(e, r) {
+                    document.querySelector('.origcomment' + e).style.display = "none";
+                    document.querySelector('.commentinpudiv' + e).style.display = "flex";
+                    document.querySelector('.commentbtndiv' + e).style.display = "flex";
+                    document.querySelector('.editcommentinpu' + e).value = r;
+                }
+                ,
+                delcomment: function (e) {
+                    if (confirm('確定要刪除?') == true) {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: '/api/SiComments/' + e,
+                            success: function (e) {
+                                $.ajax({
+                                    type: 'Get',
+                                    url: '/api/SiComments/comment/' + sessionStorage.getItem("productId"),
+                                    success: function (e) {
+                                        app.fliterList = e
+                                    }
+                                })
+                            }
+                        })
+                    } else {
+
+                    }
+                }
+                ,
                 move1: function () {
                     var textinput1 = document.getElementById('textinput1');
                     textinput1.addEventListener('input', (e) => {

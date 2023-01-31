@@ -117,6 +117,22 @@ namespace Fundraising.Controllers
             return await query.ToListAsync();
         }
 
+        [HttpGet("editcomment/{id}")]
+        public async Task<ActionResult<dynamic>> Geteditans(int id)
+        {
+            var query = from comment in _context.Comments
+                        where comment.CommentId == id
+                        select new
+                        {
+                            commentid = comment.CommentId,
+                            commentcontent = comment.CommentContent,
+                            commenttime = comment.Commenttime,
+                            productid = comment.ProductId,
+                            userid = comment.UserId
+                        };
+            return await query.FirstOrDefaultAsync();
+        }
+
         // PUT: api/SiComments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
