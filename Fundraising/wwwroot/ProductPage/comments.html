@@ -34,7 +34,12 @@
 
 <body>
     <div class="thiscomments">
-        <div class="container">
+        <div class="container" style="position:relative">
+            <div>
+                <div>
+                    <p style="z-index: 100" v-for="me in meno">{{me.show}}</p>
+                </div>
+            </div>
             <!-- 標題 -->
             <div class="row">
 
@@ -58,11 +63,7 @@
                         <span style="font-weight: bold; font-size: 20px;">NT${{productList[0].currentamount | money}}</span><span> / 目標 NT${{productList[0].targetamount | money}}</span>
                     </div>
                 </div>
-
             </div>
-        </div>
-        <div>
-            <p v-for="me in meno">{{me}}</p>
         </div>
         <!-- 商品分頁導覽列 -->
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
@@ -250,7 +251,7 @@
                     .catch((err) => console.error(err.toString()));
 
                 this.connection.on("ReceiveMessage", () => {
-                    this.meno.push("新留言");
+                    this.meno.push({ "show": "有新的回應囉"});
                     /*                 console.log(123)*/
                 });
                 /*                alert(123)*/
@@ -283,10 +284,11 @@
                     this.connection
                         .invoke(
                             "SendMessageToUser",
-                            this.productuserid
+                            this.productuserid,
+                            this.productList[0].producttitle
                         )
                         .catch((err) => console.error(err.toString()));
-                    this.meno.push("我要留言");
+                 /*   this.meno.push("我要留言");*/
                     /*  console.log(typeof this.whouser);*/
                     //this.message = "";
 
