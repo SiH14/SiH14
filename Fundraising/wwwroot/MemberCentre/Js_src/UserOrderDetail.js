@@ -17,7 +17,7 @@ const app = new Vue({
       .get("/api/UserOrder/myorder/" + sessionStorage.getItem("orderdetailId"))
       .then((res) => {
         this.myorder = res.data;
-        setTimeout(() => loader.hide(), 500);
+        setTimeout(() => loader.hide(), 600);
       });
   },
   methods: {

@@ -32,7 +32,7 @@ const app = new Vue({
           }
         });
         this.pjorderlist = res.data;
-        setTimeout(() => loader.hide(), 500);
+        setTimeout(() => loader.hide(), 600);
       });
 
     // 取消id事件監聽資料帶入

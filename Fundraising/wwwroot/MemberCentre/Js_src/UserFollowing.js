@@ -17,7 +17,7 @@ const app = new Vue({
       // 拿取追蹤中的專案
       axios.get("/api/UserFollowing/my/" + res.data).then((res) => {
         this.myfollow = res.data;
-        setTimeout(() => loader.hide(), 200);
+        setTimeout(() => loader.hide(), 400);
       });
     });
   },

@@ -36,7 +36,7 @@ const app = new Vue({
           }
         });
         this.prodlist = res.data;
-        setTimeout(() => loader.hide(), 200);
+        setTimeout(() => loader.hide(), 400);
       });
     });
   },

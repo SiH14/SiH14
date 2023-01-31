@@ -18,7 +18,7 @@ const app = new Vue({
       // ordercard資料帶入
       axios.get("/api/userorder/list/" + res.data).then((res) => {
         this.ordercard = res.data;
-        setTimeout(() => loader.hide(), 200);
+        setTimeout(() => loader.hide(), 400);
       });
     });
 

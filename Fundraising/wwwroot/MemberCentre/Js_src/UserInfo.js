@@ -41,7 +41,7 @@ const app = new Vue({
       // 拿OrdersList
       axios.get("/api/userinfo/OrderList/" + res.data).then((res) => {
         this.OrdersList = res.data;
-        setTimeout(() => loader.hide(), 400);
+        setTimeout(() => loader.hide(), 600);
       });
     });
   },
