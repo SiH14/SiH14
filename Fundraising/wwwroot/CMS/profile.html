@@ -178,6 +178,7 @@
                         // console.log("profiledata" + profiledata)
                         axios.put(`/api/Employees/${this.employeeinfo.employeeId}`, profiledata).then(res => {
                             console.log(res)
+                            window.location.reload();
                         })
                     })
                 }
