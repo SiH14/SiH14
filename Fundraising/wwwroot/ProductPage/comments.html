@@ -38,8 +38,8 @@
             <div>
                 <div style="position: absolute; z-index: 100; right: 0px; text-align: right;">
                     <br>
-                    <div v-for="me in meno">
-                        <div class="mb-1" style="background-color: #DFFFDF ">
+                    <div v-for="(me,key) in meno">
+                        <div :class="'mb-1'+' '+'al'+key" style="background-color: #DFFFDF ;display:block">
                             <span>{{me.title}}</span>
                             <br>
                             <span>{{me.show}}</span>
@@ -259,7 +259,33 @@
 
                 this.connection.on("ReceiveMessage", (producttitle) => {
                     this.meno.push({ "show": "有新的回應囉", "title": producttitle });
-                    alert(123)
+                    //setTimeout(function () {
+                    //    document.querySelector('.al' + (app.meno.length - 1)).style.display = "none";
+                    //}, 7000)
+                    //setTimeout(function () {
+                    //    console.log(123);
+                    //    console.log(app.meno.length);
+                    //    console.log(document.querySelector('.al' + (app.meno.length - 1)));
+                    //}, 7000)
+                    //setTimeout(function () {
+                    //    setTimeout(function () {
+
+                    //        console.log(2);
+                    //    }, 5000)
+                    //    console.log(1);
+                    //}, 1000)
+                    setTimeout(function () {
+                        setTimeout(function () {
+                            dis.style.display = "none"
+                        }, 5000)
+                        let dis = document.querySelector('.al' + (app.meno.length - 1))
+                        console.log(1);
+                    }, 1000)
+                    /*            setTimeout(() => document.querySelector('.al').style.display = "none", 5000)*/
+         /*           setTimeout(() => console.log(document.querySelector('.al' + (app.meno.length-1))), 5000)*/
+             /*       console.log(document.querySelector('.al' + app.meno.length))*/
+                  /*  alert(123)*/
+                    
                 });
                 /*                alert(123)*/
 
