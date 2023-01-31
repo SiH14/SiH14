@@ -69,13 +69,13 @@
                             <a class="nav-link" href="./product.html"><span style="font-size:18px">專案內容</span></a>
                         </li>
                         <li class="nav-item" style="padding-left:80px">
-                            <a class="nav-link" href="./faq.html"><span style="font-size:18px">常見問題</span></a>
+                            <a class="nav-link" href="./faq.html"><span style="font-size:18px">常見問題 {{tolfaq}}</span></a>
                         </li>
                         <li class="nav-item" style="padding-left:80px">
-                            <a class="nav-link" href="./comments.html"><span style="font-size:18px">留言</span></a>
+                            <a class="nav-link" href="./comments.html"><span style="font-size:18px">留言 {{tolcomment}}</span></a>
                         </li>
                     </ul>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4" style="padding-left: 50px">
                         <a class="btn btn-danger " style="width: 300px;"
                            href="#" v-on:click="gotoplan()">贊助專案</a>
                         <div style="width: 145px;">
@@ -136,7 +136,9 @@
             el: ".thisfqa",
             data: {
                 productList: [],
-                fqaList: []
+                fqaList: [],
+                tolcomment: 0,
+                tolfaq: 0
             },
             mounted: function () {
                 //alert(123)
@@ -154,6 +156,30 @@
                     url: '/api/Fundraising/fqa/' + sessionStorage.getItem("productId"),
                     success: function (e) {
                         app.fqaList = e
+                    }
+                })
+                $.ajax({
+                    type: 'Get',
+                    url: '/api/SiFollowings/tolcomment/' + sessionStorage.getItem("productId"),
+                    success: function (e) {
+                        app.tolcomment = parseInt(e);
+                    },
+                    error: function (e) {
+                        /*     console.log(app.followList);*/
+                        console.log(e);
+                        console.log(444);
+                    }
+                })
+                $.ajax({
+                    type: 'Get',
+                    url: '/api/SiFollowings/tolfaq/' + sessionStorage.getItem("productId"),
+                    success: function (e) {
+                        app.tolfaq = parseInt(e);
+                    },
+                    error: function (e) {
+                        /*     console.log(app.followList);*/
+                        console.log(e);
+                        console.log(444);
                     }
                 })
             }

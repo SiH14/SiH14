@@ -21,6 +21,26 @@ namespace Fundraising.Controllers
             _context = context;
         }
 
+        [HttpGet("tolcomment/{productid}")]//留言
+        public IActionResult GettolcommentList(int productid)
+        {
+            var query = (from comment in _context.Comments
+                         where comment.ProductId == productid
+                         select comment).Count();
+            var tolcomment = query;
+            return Content(tolcomment.ToString());
+        }
+
+        [HttpGet("tolfaq/{productid}")]//留言
+        public IActionResult GettolfaqList(int productid)
+        {
+            var query = (from faq in _context.Questions
+                         where faq.ProductId == productid
+                         select faq).Count();
+            var tolfaq = query;
+            return Content(tolfaq.ToString());
+        }
+
         // GET: api/SiFollowings
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Following>>> GetFollowings()
