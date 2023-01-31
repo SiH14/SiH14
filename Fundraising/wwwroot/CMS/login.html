@@ -25,48 +25,47 @@
     <script src="./js/logincheck.js"></script>
 
     <style scoped>
-        .btn{
+        .btn {
             background-color: #047c51;
             color: white;
         }
-
-
     </style>
 </head>
 
 <body class="bg-theme" id="app">
-
-    <div class="container">
-
-        <div class="row justify-content-center mt-5 ">
-            <div class="col-lg-6 bg-white mt-5 item-style" style="max-width: 430px;">
-                <div class="p-4">
-                    <div class="text-center">
-                        <h1 class="h4 mb-4 font-weight-bold">後台登入</h1>
+    <div id="app">
+        <div class="container text-center pt-5">
+            <img src="" alt="" style="height: 100px; width: 300px;">
+            <h1 class="mt-auto">後台管理系統</h1>
+            <div class="row justify-content-center ">
+                <div class="col-lg-6 bg-white  item-style" style="max-width: 430px;">
+                    <div class="p-4">
+                        <div class="text-center">
+                            <h1 class="h4 mb-4 font-weight-bold">登入頁面</h1>
+                        </div>
+                        <form class="user">
+                            <div class="form-group">
+                                <input type="text" class="form-control " placeholder="請輸入帳號" name="userName"
+                                    v-model="login.employeeAccount">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="請輸入密碼" name="password"
+                                    v-model="login.employeePassword">
+                            </div>
+                            <hr>
+                            <a class="btn  btn-block" value="登入" v-on:click="startlogin()">
+                                登入
+                            </a>
+                        </form>
                     </div>
-                    <form class="user">
-                        <div class="form-group">
-                            <input type="text" class="form-control " placeholder="請輸入帳號"
-                                name="userName" v-model="login.employeeAccount">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="請輸入密碼"
-                                name="password" v-model="login.employeePassword">
-                        </div>
-                        <hr>
-                        <a  class="btn  btn-block" value="登入" v-on:click="startlogin()">
-                            登入
-                        </a>
-                    </form>
-                </div>
 
+
+                </div>
 
             </div>
 
         </div>
-
     </div>
-
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -84,7 +83,7 @@
             data() {
                 return {
                     login: {
-                        employeeAccount:"",
+                        employeeAccount: "",
                         employeePassword: "",
                     }
                 }

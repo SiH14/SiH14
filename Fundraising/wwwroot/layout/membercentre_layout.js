@@ -47,11 +47,7 @@ let header =
         </ul>
     </div>             
             </ul>
-          </div>
-          <div>
-          <img class="headerbackgroudicon" src="../img/headerbackgroudicon.png" alt="">
-      </div>
-        
+          </div>        
     </div>
     
 </nav>` +
@@ -223,6 +219,8 @@ window.onload = function getuserID() {
                                     href="../MemberCentre/UserProject.html">提案紀錄</a></li>
                             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
                                     href="../MemberCentre/UserMessage.html">聯絡訊息</a></li>
+                                    <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+                                    href="../MemberCentre/UserSetting.html">帳戶設定</a></li>
                             <li style="text-align: center;"><a class="dropdown-item" href="../ProductPage/mymainpage.html" onclick="logout()">登出</a></li>`;
                                 });
                         })
