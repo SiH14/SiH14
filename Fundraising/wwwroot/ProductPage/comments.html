@@ -154,12 +154,12 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <button type="button" v-on:click="delanswer(itemm.answerid)" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button style="width:60px" type="button" v-on:click="delanswer(itemm.answerid)" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
                                             刪除
                                         </button>
                                     </li>
                                     <li>
-                                        <button type="button" v-on:click="editanswer(itemm.answerid,itemm.answercontent)" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button style="width:60px" type="button" v-on:click="editanswer(itemm.answerid,itemm.answercontent)" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
                                             編輯
                                         </button>
                                     </li>
@@ -259,21 +259,6 @@
 
                 this.connection.on("ReceiveMessage", (producttitle) => {
                     this.meno.push({ "show": "有新的回應囉", "title": producttitle });
-                    //setTimeout(function () {
-                    //    document.querySelector('.al' + (app.meno.length - 1)).style.display = "none";
-                    //}, 7000)
-                    //setTimeout(function () {
-                    //    console.log(123);
-                    //    console.log(app.meno.length);
-                    //    console.log(document.querySelector('.al' + (app.meno.length - 1)));
-                    //}, 7000)
-                    //setTimeout(function () {
-                    //    setTimeout(function () {
-
-                    //        console.log(2);
-                    //    }, 5000)
-                    //    console.log(1);
-                    //}, 1000)
                     setTimeout(function () {
                         setTimeout(function () {
                             dis.style.display = "none"
@@ -281,13 +266,7 @@
                         let dis = document.querySelector('.al' + (app.meno.length - 1))
                         console.log(1);
                     }, 1000)
-                    /*            setTimeout(() => document.querySelector('.al').style.display = "none", 5000)*/
-         /*           setTimeout(() => console.log(document.querySelector('.al' + (app.meno.length-1))), 5000)*/
-             /*       console.log(document.querySelector('.al' + app.meno.length))*/
-                  /*  alert(123)*/
-                    
                 });
-                /*                alert(123)*/
 
                 $.ajax({
                     type: 'Get',

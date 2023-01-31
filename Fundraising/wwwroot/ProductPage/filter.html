@@ -136,15 +136,15 @@
             <br>
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item    ">
+                    <!--<li class="page-item    ">
                         <a class="page-link">Previous</a>
-                    </li>
-                    <li :class="{'page-item active':topage==n,'page-item':topage!=n}" v-for="(n,key) in tolpage"><a class="page-link" v-on:click="whatpage(key,n)" href="#">{{n}}</a></li>
+                    </li>-->
+                    <li :class="{'page-item active':topage==n,'page-item':topage!=n}" v-for="(n,key) in tolpage" style="padding-left:5px"><a class="page-link" v-on:click="whatpage(key,n)" href="#">{{n}}</a></li>
                     <!--<li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-                    <li class="page-item">
+                    <!--<li class="page-item">
                         <a class="page-link" href="#">Next</a>
-                    </li>
+                    </li>-->
                 </ul>
             </nav>
         </div>
