@@ -16,10 +16,6 @@ const app = new Vue({
     Loading: VueLoading,
   },
   mounted() {
-    if (sessionStorage.getItem("chatuserId")) {
-      console.log("ok");
-    }
-
     // 初始化
     axios.get("/api/login/getuserid").then((res) => {
       this.userid = res.data;
@@ -57,6 +53,9 @@ const app = new Vue({
       // 拿取對話清單
       axios.get("/api/chatrooms/chats/" + res.data).then((res) => {
         this.chatrooms = res.data;
+        if (sessionStorage.getItem("chatuserId")) {
+          console.log("ok");
+        }
         setTimeout(() => loader.hide(), 400);
       });
     });
@@ -76,7 +75,7 @@ const app = new Vue({
       let now = new Date();
       let year = now.getFullYear();
       let month = String(now.getMonth() + 1).padStart(2, "0");
-      let day = now.getDate();
+      let day = String(now.getDate()).padStart(2, "0");
       let hour = now.getHours();
       let min = now.getMinutes();
       let currentime = year + "-" + month + "-" + day + " " + hour + ":" + min;
