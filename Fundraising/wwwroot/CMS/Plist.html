@@ -240,7 +240,7 @@
                 titlechange() {
                     if (this.input.productTitle) {
                         return this.StateIdchange.filter(item => {
-                            return item.p.productTitle.indexOf(this.input.productTitle) !== -1
+                            return item.p.productTitle.toLowerCase().indexOf(this.input.productTitle.toLowerCase()) !== -1
                         })
                     } else {
 
@@ -250,7 +250,7 @@
                 Idchange() {
                     if (this.input.productId) {
                         return this.titlechange.filter(item => {
-                            return item.p.productId == this.input.productId
+                            return item.p.productId== this.input.productId
                         })
                     } else {
 
