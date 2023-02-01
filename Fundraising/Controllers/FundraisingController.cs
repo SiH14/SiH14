@@ -196,6 +196,30 @@ namespace Fundraising.Controllers
                 query = query.Skip(topage * 9).Take(9);
                 return await query.ToListAsync();
             }
+            else if (sele == 5)
+            {
+                var query = from o in combine
+                            join product in _context.Products on o.ProductId equals product.ProductId
+                            join user in _context.Users on product.UserId equals user.UserId
+                            where product.ProductStateId == 3 && product.Endtime < DateTime.Now && o.nowmoney > product.TargetAmount
+                            orderby o.nowperson descending
+                            select new
+                            {
+                                ProductId = o.ProductId,
+                                UserName = user.UserName,
+                                ProductTitle = product.ProductTitle,
+                                coverphoto = product.Coverphoto,
+                                CurrentAmount = o.nowmoney,
+                                TargetAmount = product.TargetAmount,
+                                Startime = product.Startime,
+                                Endtime = product.Endtime,
+                                nowperson = o.nowperson,
+                                days = 0,
+                                percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
+                            };
+                query = query.Skip(topage * 9).Take(9);
+                return await query.ToListAsync();
+            }
             queryy = queryy.Skip(topage * 9).Take(9);
             return await queryy.ToListAsync();
         }

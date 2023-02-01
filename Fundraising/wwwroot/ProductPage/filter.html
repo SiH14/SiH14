@@ -115,6 +115,7 @@
                     <option id="op2" value="2">最新</option>
                     <option id="op3" value="3">募資金額</option>
                     <option id="op4" value="4">募資人數</option>
+                    <option id="op5" value="5">成功結束專案</option>
                 </select>
             </div>
             <!--篩選-->
@@ -304,9 +305,16 @@
 
         /*篩選*/
         function filterchiose(e) {
-            sessionStorage.setItem("sele", e.value);
-            sessionStorage.setItem("topage", 0);
-            window.location = "./filter.html"
+            if (e.value == 5) {
+                sessionStorage.setItem("sele", e.value);
+                sessionStorage.setItem("topage", 0);
+                window.location = "./filter.html"
+            }
+            else {
+                sessionStorage.setItem("sele", e.value);
+                sessionStorage.setItem("topage", 0);
+                window.location = "./filter.html"
+            }
             //$.ajax({
             //    type: 'Get',
             //    url: '/api/Fundraising/filter/' + e.value,
