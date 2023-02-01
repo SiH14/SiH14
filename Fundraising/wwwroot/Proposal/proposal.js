@@ -366,7 +366,7 @@ var dataDB;
                                         .then((value) => {
                                             switch (value) {
                                                 case "確定":
-                                                    window.location = "../Proposal/myproposal.html"
+                                                    window.location = "../productpage/mymainpage.html"
                                                     break;
                                             }
                                         })
