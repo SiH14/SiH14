@@ -98,74 +98,110 @@
         🎤
     </button>-->
     <!--初版搜尋-->
-        <div class="app container px-4 py-5" id="mySelected">
-            <h2 class="pb-2 border-bottom">
-                探索更多<!--{{fliterList.length}}-->
-            </h2>
-            <!--篩選-->
-            <div style="width: 300px;">
-                <!--<div style="position:relative; background-color:red">
-                    <div style="padding-right: 30px; background-color: red; width: 100px; height: 30px; position: absolute">
-                        123
-                    </div>
-                    <h3 style="position:absolute; z-index:10;">熱門</h3>
-                </div>-->
-                <select onchange="filterchiose(this)" style="box-shadow: none;" class="form-select" aria-label="Default select example">
-                    <option id="op1" value="1">熱門</option>
-                    <option id="op2" value="2">最新</option>
-                    <option id="op3" value="3">募資金額</option>
-                    <option id="op4" value="4">募資人數</option>
-                    <option id="op5" value="5">成功結束專案</option>
-                </select>
+    <div class="app container px-4 py-5" id="mySelected">
+        <h2 class="pb-2 border-bottom">
+            探索更多<!--{{fliterList.length}}-->
+        </h2>
+        <!--篩選-->
+        <div style="width: 300px;">
+            <!--<div style="position:relative; background-color:red">
+            <div style="padding-right: 30px; background-color: red; width: 100px; height: 30px; position: absolute">
+                123
             </div>
-            <!--篩選-->
-            <!--v-for="item in fliterList"-->
-            <div class="row g-4 py-8 row-cols-1 row-cols-lg-3" id="op2">
-                <a href="./product.html" style="text-decoration: none; color: black;" v-on:click="getproductID(item)" v-for="item in fliterList">
-                    <div class="feature col">
-                        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                            <svg class="bi" width="1em" height="1em">
-                                <use xlink:href="#collection" />
-                            </svg>
-                        </div>
-
-                        <!--資訊卡-->
-                        <div class="selectphotodiv" :style="{'background-image':'url(' + item.coverphoto + ')'}">
-                        </div>
-                        <!--<div class="selectedimgdiv">
-                            <img class="selectedimg" :src="item.coverphoto" alt="">
-                        </div>-->
-                        <p></p>
-                        <h3 class="fs-5" style="height: 70px">{{item.productTitle}}</h3>
-                        <div class="d-flex justify-content-between">
-                            <p style="font-weight:bold">$ {{item.currentAmount | money}}</p>
-                            <span>{{item.nowperson}} 人支持</span>
-                        </div>
-
-                        <!--進度條-->
-                        <div class="progress" style="height: 10px;">
-                            <div class="progress-bar bg-success" role="progressbar" :style="{width: item.percent+'%'}" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="pb-2"></div>
-                        <div class="d-flex justify-content-between">
-                            <span>剩下{{item.days}} 天</span>
-                            <span class="money" style="color:green">{{item.percent}} %</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <br>
-            <br>
-            <br>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <!--<li class="page-item    ">
-                        <a class="page-link">Previous</a>
-                    </li>-->
-                    <li :class="{'page-item active':topage==n,'page-item':topage!=n}" v-for="(n,key) in tolpage" style="padding-left:5px"><a class="page-link" v-on:click="whatpage(key,n)" href="#">{{n}}</a></li>
-                </ul>
-            </nav>
+            <h3 style="position:absolute; z-index:10;">熱門</h3>
+        </div>-->
+            <select onchange="filterchiose(this)" style="box-shadow: none;" class="form-select" aria-label="Default select example">
+                <option id="op1" value="1">熱門</option>
+                <option id="op2" value="2">最新</option>
+                <option id="op3" value="3">募資金額</option>
+                <option id="op4" value="4">募資人數</option>
+                <option id="op5" value="5">成功結束專案</option>
+            </select>
         </div>
+        <!--篩選-->
+        <div class="row g-4 py-8 row-cols-1 row-cols-lg-3" v-if="true">
+            <!--id="op2"-->
+            <a href="./product.html" style="text-decoration: none; color: black;" v-on:click="getproductID(item)" v-for="item in fliterList">
+                <div class="feature col">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                        <svg class="bi" width="1em" height="1em">
+                            <use xlink:href="#collection" />
+                        </svg>
+                    </div>
+
+                    <!--資訊卡-->
+                    <div class="selectphotodiv" :style="{'background-image':'url(' + item.coverphoto + ')'}">
+                    </div>
+                    <!--<div class="selectedimgdiv">
+                    <img class="selectedimg" :src="item.coverphoto" alt="">
+                </div>-->
+                    <p></p>
+                    <h3 class="fs-5" style="height: 70px">{{item.productTitle}}</h3>
+                    <div class="d-flex justify-content-between">
+                        <p style="font-weight:bold">$ {{item.currentAmount | money}}</p>
+                        <span>{{item.nowperson}} 人支持</span>
+                    </div>
+
+                    <!--進度條-->
+                    <div class="progress" style="height: 10px;">
+                        <div class="progress-bar bg-success" role="progressbar" :style="{width: item.percent+'%'}" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="pb-2"></div>
+                    <div class="d-flex justify-content-between">
+                        <span>剩下{{item.days}} 天</span>
+                        <span class="money" style="color:green">{{item.percent}} %</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="row g-4 py-8 row-cols-1 row-cols-lg-3" v-else>
+            <!--id="op2"-->
+            <a href="./product.html" style="text-decoration: none; color: black;" v-on:click="getproductID(item)" v-for="item in fliterList">
+                <div class="feature col">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                        <svg class="bi" width="1em" height="1em">
+                            <use xlink:href="#collection" />
+                        </svg>
+                    </div>
+
+                    <!--資訊卡-->
+                    <div class="selectphotodiv" :style="{'background-image':'url(' + item.coverphoto + ')'}">
+                    </div>
+                    <!--<div class="selectedimgdiv">
+                    <img class="selectedimg" :src="item.coverphoto" alt="">
+                </div>-->
+                    <p></p>
+                    <h3 class="fs-5" style="height: 70px">{{item.productTitle}}</h3>
+                    <div class="d-flex justify-content-between">
+                        <p style="font-weight:bold">$ {{item.currentAmount | money}}</p>
+                        <span>{{item.nowperson}} 人支持</span>
+                    </div>
+
+                    <!--進度條-->
+                    <div class="progress" style="height: 10px;">
+                        <div class="progress-bar bg-success" role="progressbar" :style="{width: item.percent+'%'}" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="pb-2"></div>
+                    <div class="d-flex justify-content-between">
+                        <span>剩下{{item.days}} 天</span>
+                        <span class="money" style="color:green">{{item.percent}} %</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <br>
+        <br>
+        <br>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <!--<li class="page-item    ">
+                <a class="page-link">Previous</a>
+            </li>-->
+                <li :class="{'page-item active':topage==n,'page-item':topage!=n}" v-for="(n,key) in tolpage" style="padding-left:5px"><a class="page-link" v-on:click="whatpage(key,n)" href="#">{{n}}</a></li>
+            </ul>
+        </nav>
+    </div>
 
  
 
@@ -347,14 +383,25 @@
             }
             ,
             mounted: function () {
-                $.ajax({
-                    type: 'Get',
-                    url: '/api/Fundraising/tolpage',
-                    success: function (e) {
-                        app.tolpage = parseInt(e);
-                        console.log(999)
-                    }
-                })
+                if (sessionStorage.getItem("sele") != 5) {
+                    $.ajax({
+                        type: 'Get',
+                        url: '/api/Fundraising/tolpage',
+                        success: function (e) {
+                            app.tolpage = parseInt(e);
+                        }
+                    })
+                }
+                else {
+                    $.ajax({
+                        type: 'Get',
+                        url: '/api/Fundraising/successpage',
+                        success: function (e) {
+                            app.tolpage = parseInt(e);
+                        }
+                    })
+                }
+
                 var apitopage = (sessionStorage.getItem("topage") == null) ? 0 : sessionStorage.getItem("topage")
                 this.topage = parseInt(apitopage) + 1
                 var apisele = (sessionStorage.getItem("sele") == null) ? 1 : sessionStorage.getItem("sele");
