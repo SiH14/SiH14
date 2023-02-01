@@ -70,7 +70,7 @@
 
         .selectedimgdiv {
             width: 100%;
-            height:auto;
+            height:214px;
         }
 
         .selectedimgdiv img {
@@ -88,7 +88,6 @@
         🎤
     </button>-->
     <!--初版搜尋-->
-    <h1>123</h1>
         <div class="app container px-4 py-5" id="mySelected">
             <h2 class="pb-2 border-bottom">
                 探索更多<!--{{fliterList.length}}-->
@@ -294,14 +293,15 @@
         /*篩選*/
         function filterchiose(e) {
             console.log(e.value)
-            $.ajax({
-                type: 'Get',
-                url: '/api/Fundraising/filter/' + e.value,
-                success: function (e) {
-                    app.fliterList = e
-                    console.log(app.topage)
-                }
-            })
+            console.log(app.tolpage)
+            //$.ajax({
+            //    type: 'Get',
+            //    url: '/api/Fundraising/filter/' + e.value,
+            //    success: function (e) {
+            //        app.fliterList = e
+            //        console.log(app.topage)
+            //    }
+            //})
         }
         /*篩選*/
         
