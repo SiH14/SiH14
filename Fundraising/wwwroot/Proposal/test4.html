@@ -1,171 +1,63 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/css/swiper.min.css">
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Swiper demo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="../dist/css/swiper.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-    <!-- Demo styles -->
-    <style>
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-
-        body {
-            background: #000;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-
-        .swiper-container {
-            width: 100%;
-            height: 300px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .swiper-slide {
-            background-size: cover;
-            background-position: center;
-        }
-
-        .gallery-top {
-            height: 80%;
-            width: 100%;
-        }
-
-        .gallery-thumbs {
-            height: 20%;
-            box-sizing: border-box;
-            padding: 10px 0;
-        }
-
-        .gallery-thumbs .swiper-slide {
-            width: 25%;
-            height: 100%;
-            opacity: 0.4;
-        }
-
-        .gallery-thumbs .swiper-slide-active {
-            opacity: 1;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 
 <body>
-    <!-- Swiper -->
-    <p><img alt="" src="https://assets.zeczec.com/asset_558255_image_big.webp?1668303924" /></p>
-    <script src="../dist/js/swiper.min.js"></script>
 
-    <script>
-        var app = new Vue({
-            el: "#app",
-            data: {
-                featuredList: [],
-                recentList: [],
-                message: 'word'
-            },
-            beforeMount() {
-                //var apitopage = (sessionStorage.getItem("topage") == null) ? 0 : sessionStorage.getItem("topage")
-                //$.ajax({
-                //    type: 'Get',
-                //    url: '/api/Fundraising/topage/' + parseInt(apitopage),
-                //    success: function (e) {
-                //        app.fliterList = e
-                //    }
-                //})
-            }
-            ,
-            mounted: function () {
-                axios.get('/api/Fundraising/featured')//精選
-                    .then((res) => {
-                        this.featuredList = res.data;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                axios.get('/api/Fundraising/recent')//近期
-                    .then((res) => {
-                        this.recentList = res.data;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }
-            ,
-            methods: {
-                getproductID: function (e) {
-                    /* console.log(e.productId)*/
-                    sessionStorage.setItem("productId", e.productId);
-                }
-            }
-        })
+    <p><img alt="" src="https://i.postimg.cc/1z6jNVQv/image.png" style="height:47px; width:500px" /></p>
 
-        //const app = {
-        //    data() {
-        //        return {
-        //            featuredList: [],
-        //            recentList: [],
-        //            message: 'word'
-        //        }
-        //    },
-        //    mounted() {
-        //        axios.get('/api/Fundraising/featured')//精選
-        //            .then((res) => {
-        //                this.featuredList = res.data;
-        //            })
-        //            .catch(function (error) {
-        //                console.log(error);
-        //            });
-        //        axios.get('/api/Fundraising/recent')//近期
-        //            .then((res) => {
-        //                this.recentList = res.data;
-        //            })
-        //            .catch(function (error) {
-        //                console.log(error);
-        //            });
-        //    },
-        //    methods: {
-        //        getproductID(e) {
-        //            /* console.log(e.productId)*/
-        //            sessionStorage.setItem("productId", e.productId);
-        //        }
-        //    },
-        //};
-        //Vue.createApp(app).mount("#app");
-    </script>
-    <!-- Swiper JS -->
+<p><strong>三大模式自由選擇：</strong>可選擇自動模式、專家分享的曲線，或體驗最純粹的 DIY</p>
 
-    <!-- Initialize Swiper -->
-    <script>
-        var galleryTop = new Swiper('.gallery-top', {
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-        var galleryThumbs = new Swiper('.gallery-thumbs', {
-            spaceBetween: 10,
-            centeredSlides: true,
-            slidesPerView: 'auto',
-            touchRatio: 0.2,
-            slideToClickedSlide: true,
-        });
-        galleryTop.controller.control = galleryThumbs;
-        galleryThumbs.controller.control = galleryTop;
-    </script>
+<p><img alt="" src="https://i.postimg.cc/Hxkb1FBb/1.png" style="height:250px; width:500px" /></p>
+
+<p><img alt="" src="https://i.postimg.cc/Pq3QJtLS/2.png" style="height:211px; width:500px" /></p>
+
+<p><img alt="" src="https://i.postimg.cc/0yZpX8C9/3.png" style="height:219px; width:500px" /></p>
+
+<h3>手刀預約 FOCA 合作的專業咖啡店</h3>
+
+<h3>免費體驗,還能把自己烘焙的</h3>
+
+<h3>120 克咖啡豆免費帶回家。</h3>
+
+<p>&nbsp;</p>
+
+<h3>風險與挑戰</h3>
+
+<p>出貨順序:FOCA智慧App咖啡烘培機 將於嘖嘖集資依訂單順序陸續出貨.<br />
+FOCA智慧App咖啡烘培機將以準時完成出貨為原則，但仍有意外事件發生導致出貨延期。贊助此計畫，即視為你已同意承擔此風險，若無法接受延遲出貨風險，請於集資結束前聯繫嘖嘖客服信箱（&nbsp;<a href="mailto:support@zeczec.com">support@zeczec.com</a>&nbsp;）取消訂單。</p>
+
+<h3>退換貨規則</h3>
+
+<p>退換修政策<br />
+自簽收貨品起的「7 天內」，您可以擁有產品鑒賞期，期間內若對產品狀態有疑義，可經FOCA售後維修中心檢測確認後，辦理退換貨。</p>
+
+<p>自您簽收貨物起「7 天後」，若商品使用有功能性或異常問題，在保固期限內，可自行負擔運費寄至／親洽FOCA售後維修中心進行維修或更換處理。待產品維修完畢，我們會負擔運費將產品寄至您指定的地點。</p>
+
+<h3>客服聯絡方式</h3>
+
+<p>如有任何產品相關問題，歡迎您與我們聯繫。<br />
+售服營業時間：週一至週五 9:00-18:00；午休時間 12:30-13:30<br />
+售後服務電話：0933200865<br />
+客服信箱：<a href="mailto:foca27263@gmail.com">foca27263@gmail.com</a></p>
+
+<h3>營業人登記資訊</h3>
+
+<p>營業人名稱：祥福科技有限公司</p>
+
+<p>統一編號：83302591</p>
+
+<p>對計畫還有其他疑問嗎？請見<a href="https://www.zeczec.com/projects/hi-cp-foca/faqs">常見問答</a>。</p>
+
+<p>認為此專案有違規或不適合嘖嘖使用者的地方嗎？請<a href="https://forms.gle/1oLhKAR5qqPuJb1x8" target="_blank">填寫表單</a>協助我們檢查。</p>
+
+
 </body>
 
 </html>

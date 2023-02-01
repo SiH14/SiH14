@@ -70,7 +70,12 @@
 
         .selectedimgdiv {
             width: 100%;
-            height: 214px;
+            height:214px;
+        }
+
+        .selectedimgdiv img {
+            width: 100% !important;
+            height: auto !important;
         }
     </style>
 
@@ -83,13 +88,18 @@
         🎤
     </button>-->
     <!--初版搜尋-->
-
         <div class="app container px-4 py-5" id="mySelected">
             <h2 class="pb-2 border-bottom">
                 探索更多<!--{{fliterList.length}}-->
             </h2>
             <!--篩選-->
             <div style="width: 300px;">
+                <!--<div style="position:relative; background-color:red">
+                    <div style="padding-right: 30px; background-color: red; width: 100px; height: 30px; position: absolute">
+                        123
+                    </div>
+                    <h3 style="position:absolute; z-index:10;">熱門</h3>
+                </div>-->
                 <select onchange="filterchiose(this)" style="box-shadow: none;" class="form-select" aria-label="Default select example">
                     <option value="1" selected>熱門</option>
                     <option value="2">最新</option>
@@ -140,11 +150,6 @@
                         <a class="page-link">Previous</a>
                     </li>-->
                     <li :class="{'page-item active':topage==n,'page-item':topage!=n}" v-for="(n,key) in tolpage" style="padding-left:5px"><a class="page-link" v-on:click="whatpage(key,n)" href="#">{{n}}</a></li>
-                    <!--<li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-                    <!--<li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>-->
                 </ul>
             </nav>
         </div>
@@ -288,13 +293,15 @@
         /*篩選*/
         function filterchiose(e) {
             console.log(e.value)
-            $.ajax({
-                type: 'Get',
-                url: '/api/Fundraising/filter/' + e.value,
-                success: function (e) {
-                    app.fliterList = e
-                }
-            })
+            console.log(app.tolpage)
+            //$.ajax({
+            //    type: 'Get',
+            //    url: '/api/Fundraising/filter/' + e.value,
+            //    success: function (e) {
+            //        app.fliterList = e
+            //        console.log(app.topage)
+            //    }
+            //})
         }
         /*篩選*/
         
@@ -338,7 +345,6 @@
                 whatpage: function (e,n) {
                     sessionStorage.setItem("topage", e);
                     app.topage = n
-                    console.log(app.topage)
                     window.location = "./filter.html"
                 }
             }
