@@ -114,6 +114,11 @@ let footer = `<footer class="text-dark pt-5 pb-4">
 
     </div>
     <div class="footericon">
+    <div>
+    <a href="../ProductPage/mymainpage.html">
+    <img style="margin-top:-18px" id="brand" src="../img/brand.png" alt="">
+    </a>
+    </div>
     <a href="" style="text-decoration:none;">
             <img src="../img/fbicon.png" alt="">
         </a>

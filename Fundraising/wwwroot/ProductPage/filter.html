@@ -101,15 +101,15 @@
                     <h3 style="position:absolute; z-index:10;">熱門</h3>
                 </div>-->
                 <select onchange="filterchiose(this)" style="box-shadow: none;" class="form-select" aria-label="Default select example">
-                    <option value="1" selected>熱門</option>
-                    <option value="2">最新</option>
-                    <option value="3">募資金額</option>
-                    <option value="4">募資人數</option>
+                    <option id="op1" value="1">熱門</option>
+                    <option id="op2" value="2">最新</option>
+                    <option id="op3" value="3">募資金額</option>
+                    <option id="op4" value="4">募資人數</option>
                 </select>
             </div>
             <!--篩選-->
             <!--v-for="item in fliterList"-->
-            <div class="row g-4 py-8 row-cols-1 row-cols-lg-3">
+            <div class="row g-4 py-8 row-cols-1 row-cols-lg-3" id="op2">
                 <a href="./product.html" style="text-decoration: none; color: black;" v-on:click="getproductID(item)" v-for="item in fliterList">
                     <div class="feature col">
                         <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
@@ -292,8 +292,9 @@
 
         /*篩選*/
         function filterchiose(e) {
-            console.log(e.value)
-            console.log(app.tolpage)
+            sessionStorage.setItem("sele", e.value);
+            sessionStorage.setItem("topage", 0);
+            window.location = "./filter.html"
             //$.ajax({
             //    type: 'Get',
             //    url: '/api/Fundraising/filter/' + e.value,
@@ -310,13 +311,15 @@
             data: {
                 fliterList: [],
                 tolpage: 0,
-                topage:0
+                topage: 0,
+                sele:0,
             },
             beforeMount() {
                 var apitopage = (sessionStorage.getItem("topage") == null) ? 0 : sessionStorage.getItem("topage")
+                var apisele = (sessionStorage.getItem("sele") == null) ? 1 : sessionStorage.getItem("sele")
                 $.ajax({
                     type: 'Get',
-                    url: '/api/Fundraising/topage/' + parseInt(apitopage),
+                    url: '/api/Fundraising/topage/' + parseInt(apitopage) + '/' + parseInt(apisele),
                     success: function (e) {
                         app.fliterList = e
                     }
@@ -329,11 +332,13 @@
                     url: '/api/Fundraising/tolpage',
                     success: function (e) {
                         app.tolpage = parseInt(e);
+                        console.log(999)
                     }
                 })
                 var apitopage = (sessionStorage.getItem("topage") == null) ? 0 : sessionStorage.getItem("topage")
-                this.topage = parseInt(apitopage)+1
-                console.log(this.topage)
+                this.topage = parseInt(apitopage) + 1
+                var apisele = (sessionStorage.getItem("sele") == null) ? 1 : sessionStorage.getItem("sele");
+                console.log(document.querySelector('#op' + apisele).selected = true)
             }
             ,
             methods: {

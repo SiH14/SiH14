@@ -118,7 +118,6 @@ $(document).ready(function () {
                             .then(res => {
                                 // console.log(res.data[0]);
                                 // console.log(document.querySelector(".designby").innerHTML);
-                                document.querySelector(".designby").innerHTML = "設計by " + res.data[0].userName;
                                 document.querySelector("#PrincipalName").value = res.data[0].userName;
                                 document.querySelector("#PrincipalEmail").value = res.data[0].userEmail;
                                 document.querySelector("#PrincipalPhone").value = res.data[0].userPhone;
