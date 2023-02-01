@@ -138,7 +138,7 @@
         .mainQA {
             padding: 100px 300px;
             position: relative;
-            margin-top: 100px;
+            margin-top: 20px;
             background-image: url("../img/trust.png");
             background-size: cover;
             color: white;
@@ -153,7 +153,7 @@
         .QAbtn {
             background-color: #047c51;
             border: solid 2px #047c51;
-            border-radius: 0px;
+            border-radius: 5px;
             color: white;
             padding: 10px 5px;
             width: 150px;
@@ -167,6 +167,10 @@
             background-position: center;
             padding-bottom: 56.25%;
             position: relative;
+        }
+        
+        .container h2{
+            border-bottom: 4px solid #047c51;
         }
     </style>
 
@@ -186,7 +190,7 @@
         </div>
 
         <div class="container px-4 py-5" id="mySelected">
-            <h2 class="pb-2 border-bottom">
+            <h2 class="pb-2">
                 平台精選
                 <a href="#" class="more">
                     More
@@ -266,7 +270,7 @@
         </div>-->
 
         <div class="container px-4 py-5" id="mySelected">
-            <h2 class="pb-2 border-bottom">
+            <h2 class="pb-2">
                 近期新增
                 <a href="#" class="more">More ></a>
             </h2>
@@ -281,9 +285,12 @@
                         </div>
 
                         <!-- 資訊卡 -->
-                        <div class="selectedimgdiv">
-                            <img class="selectedimg" src="./page.png" alt="">
+                        <div class="selectphotodiv" :style="{'background-image':'url(' + item.coverphoto + ')'}">
                         </div>
+
+                        <!--<div class="selectedimgdiv">
+                            <img class="selectedimg" src="./page.png" alt="">
+                        </div>-->
                         <p></p>
                         <h3 class="fs-5" style="height: 70px">{{item.productTitle}}</h3>
                         <div class="d-flex justify-content-between">
