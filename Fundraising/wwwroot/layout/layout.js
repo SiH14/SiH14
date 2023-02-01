@@ -187,7 +187,7 @@ mysearchkeydown.onkeydown = function (e) {
 
         //我加入搜尋
         sessionStorage.setItem("filterans", document.getElementById("mysearch").value);
-        window.location = "/productpage/filterans.html";
+        window.location = "../productpage/filterans.html";
         //我加入搜尋
     }
 }

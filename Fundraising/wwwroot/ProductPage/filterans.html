@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.pkgd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/features/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -71,6 +72,16 @@
             width: 100%;
             height: 214px;
         }
+
+        .selectphotodiv {
+            height: 200px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            background-position: center;
+            padding-bottom: 56.25%;
+            position: relative;
+        }
     </style>
 
 </head>
@@ -104,9 +115,11 @@
                     </div>
 
                     <!-- 資訊卡 -->
-                    <div class="selectedimgdiv">
-                        <img class="selectedimg" :src="item.coverphoto" alt="">
+                    <div class="selectphotodiv" :style="{'background-image':'url(' + item.coverphoto + ')'}">
                     </div>
+                    <!--<div class="selectedimgdiv">
+                        <img class="selectedimg" :src="item.coverphoto" alt="">
+                    </div>-->
                     <p></p>
                     <h3 class="fs-5" style="height: 70px">{{item.productTitle}}</h3>
 

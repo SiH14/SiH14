@@ -100,7 +100,7 @@
                                                             <th>提案名稱</th>
                                                             <th>方案內容</th>
                                                             <th>訂單時間</th>
-                                                            <th>訂單狀態</th>
+                                                            <th class="col-2">訂單狀態</th>
                                                             <th class="col-1">操作</th>
                                                         </tr>
                                                     </thead>
@@ -222,7 +222,7 @@
                 productTitleChange() {
                     if (this.input.productTitle) {
                         return this.orderStateIdChange.filter(item => {
-                            return item.productTitle.indexOf(this.input.productTitle) > -1
+                            return item.productTitle.toLowerCase().indexOf(this.input.productTitle.toLowerCase()) !== -1
                         })
                     } else {
                         return this.orderStateIdChange
@@ -231,7 +231,7 @@
                 orderIdChange() {
                     if (this.input.orderId) {
                         return this.productTitleChange.filter(item => {
-                            return item.orderId == this.input.orderId
+                            return item.orderId.indexOf(this.input.orderId) !== -1
                         })
                     } else {
                         return this.productTitleChange
