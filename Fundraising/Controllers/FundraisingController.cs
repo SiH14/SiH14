@@ -30,8 +30,8 @@ namespace Fundraising.Controllers
         //}
 
         //api/Fundraising
-        [HttpGet("topage/{topage}")]
-        public async Task<ActionResult<IEnumerable<dynamic>>> GettopageList(int topage)
+        [HttpGet("topage/{topage}/{sele}")]
+        public async Task<ActionResult<IEnumerable<dynamic>>> GettopageList(int topage , int sele)
         {
             var addprice = from p in _context.Plans
                            join o in _context.Orders on p.PlanId equals o.PlanId
@@ -80,7 +80,7 @@ namespace Fundraising.Controllers
                               nowperson = c.Coun == null ? 0 : c.Coun
                           };
 
-            var query = from o in combine
+            var queryy = from o in combine
                         join product in _context.Products on o.ProductId equals product.ProductId
                         join user in _context.Users on product.UserId equals user.UserId
                         where product.ProductStateId == 3
@@ -100,8 +100,104 @@ namespace Fundraising.Controllers
                             percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
                         };
 
-            query = query.Skip(topage*9).Take(9);
-            return await query.ToListAsync();
+            if (sele == 1)
+            {
+                var query = from o in combine
+                            join product in _context.Products on o.ProductId equals product.ProductId
+                            join user in _context.Users on product.UserId equals user.UserId
+                            where product.ProductStateId == 3
+                            orderby (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100) descending
+                            select new
+                            {
+                                ProductId = o.ProductId,
+                                UserName = user.UserName,
+                                ProductTitle = product.ProductTitle,
+                                coverphoto = product.Coverphoto,
+                                CurrentAmount = o.nowmoney,
+                                TargetAmount = product.TargetAmount,
+                                Startime = product.Startime,
+                                Endtime = product.Endtime,
+                                nowperson = o.nowperson,
+                                days = (product.Endtime - DateTime.Now).Days + 1,
+                                percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
+                            };
+                query = query.Skip(topage * 9).Take(9);
+                return await query.ToListAsync();
+            }
+            else if (sele == 2)
+            {
+                var query = from o in combine
+                            join product in _context.Products on o.ProductId equals product.ProductId
+                            join user in _context.Users on product.UserId equals user.UserId
+                            where product.ProductStateId == 3
+                            orderby product.Startime
+                            select new
+                            {
+                                ProductId = o.ProductId,
+                                UserName = user.UserName,
+                                ProductTitle = product.ProductTitle,
+                                coverphoto = product.Coverphoto,
+                                CurrentAmount = o.nowmoney,
+                                TargetAmount = product.TargetAmount,
+                                Startime = product.Startime,
+                                Endtime = product.Endtime,
+                                nowperson = o.nowperson,
+                                days = (product.Endtime - DateTime.Now).Days + 1,
+                                percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
+                            };
+                query = query.Skip(topage * 9).Take(9);
+                return await query.ToListAsync();
+            }
+            else if (sele == 3)
+            {
+                var query = from o in combine
+                            join product in _context.Products on o.ProductId equals product.ProductId
+                            join user in _context.Users on product.UserId equals user.UserId
+                            where product.ProductStateId == 3
+                            orderby o.nowmoney descending
+                            select new
+                            {
+                                ProductId = o.ProductId,
+                                UserName = user.UserName,
+                                ProductTitle = product.ProductTitle,
+                                coverphoto = product.Coverphoto,
+                                CurrentAmount = o.nowmoney,
+                                TargetAmount = product.TargetAmount,
+                                Startime = product.Startime,
+                                Endtime = product.Endtime,
+                                nowperson = o.nowperson,
+                                days = (product.Endtime - DateTime.Now).Days + 1,
+                                percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
+                            };
+                query = query.Skip(topage * 9).Take(9);
+                return await query.ToListAsync();
+            }
+            else if (sele == 4)
+            {
+                var query = from o in combine
+                            join product in _context.Products on o.ProductId equals product.ProductId
+                            join user in _context.Users on product.UserId equals user.UserId
+                            where product.ProductStateId == 3
+                            orderby o.nowperson descending
+                            select new
+                            {
+                                ProductId = o.ProductId,
+                                UserName = user.UserName,
+                                ProductTitle = product.ProductTitle,
+                                coverphoto = product.Coverphoto,
+                                CurrentAmount = o.nowmoney,
+                                TargetAmount = product.TargetAmount,
+                                Startime = product.Startime,
+                                Endtime = product.Endtime,
+                                nowperson = o.nowperson,
+                                days = (product.Endtime - DateTime.Now).Days + 1,
+                                percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
+                            };
+                query = query.Skip(topage * 9).Take(9);
+                return await query.ToListAsync();
+            }
+            queryy = queryy.Skip(topage * 9).Take(9);
+            return await queryy.ToListAsync();
         }
         //api/Fundraising
         [HttpGet]
