@@ -105,7 +105,7 @@ namespace Fundraising.Controllers
                 var query = from o in combine
                             join product in _context.Products on o.ProductId equals product.ProductId
                             join user in _context.Users on product.UserId equals user.UserId
-                            where product.ProductStateId == 3
+                            where product.ProductStateId == 3 && product.Endtime > DateTime.Now
                             orderby (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100) descending
                             select new
                             {
@@ -129,7 +129,7 @@ namespace Fundraising.Controllers
                 var query = from o in combine
                             join product in _context.Products on o.ProductId equals product.ProductId
                             join user in _context.Users on product.UserId equals user.UserId
-                            where product.ProductStateId == 3
+                            where product.ProductStateId == 3 && product.Endtime > DateTime.Now
                             orderby product.Startime
                             select new
                             {
@@ -153,7 +153,7 @@ namespace Fundraising.Controllers
                 var query = from o in combine
                             join product in _context.Products on o.ProductId equals product.ProductId
                             join user in _context.Users on product.UserId equals user.UserId
-                            where product.ProductStateId == 3
+                            where product.ProductStateId == 3 && product.Endtime > DateTime.Now
                             orderby o.nowmoney descending
                             select new
                             {
@@ -177,7 +177,7 @@ namespace Fundraising.Controllers
                 var query = from o in combine
                             join product in _context.Products on o.ProductId equals product.ProductId
                             join user in _context.Users on product.UserId equals user.UserId
-                            where product.ProductStateId == 3
+                            where product.ProductStateId == 3 && product.Endtime > DateTime.Now
                             orderby o.nowperson descending
                             select new
                             {
@@ -842,7 +842,7 @@ namespace Fundraising.Controllers
         [HttpGet("tolpage")]//總頁數
         public IActionResult GettolpageList()
         {
-            var query = _context.Products.Where(x => x.ProductStateId ==3).Count();
+            var query = _context.Products.Where(x => x.ProductStateId ==3 && x.Endtime > DateTime.Now).Count();
             var tolpage = 0;
             if (query / 9 == 0)
             {
