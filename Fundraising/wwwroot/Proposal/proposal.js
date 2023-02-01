@@ -54,7 +54,7 @@ $("#ProductTitle").keyup(function () {
 // 提案封面圖片上傳預覽
 var coverimgdata;
 function readURL(input) {
-    console.log(input.files[0]);
+    // console.log(input.files[0]);
     if (input.files && input.files[0]) {
 
         var imageTagID = input.getAttribute("targetID");
@@ -107,17 +107,17 @@ $(document).ready(function () {
 
     axios.get("/api/Login/getusername")
         .then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data == "未登入") {
                 window.location = "../Login/login.html"
             } else {
                 axios.get("/api/Login/getuserid/")
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                         axios.get("/api/Login/getuserphoto/" + res.data)
                             .then(res => {
-                                console.log(res.data[0]);
-                                console.log(document.querySelector(".designby").innerHTML);
+                                // console.log(res.data[0]);
+                                // console.log(document.querySelector(".designby").innerHTML);
                                 document.querySelector(".designby").innerHTML = "設計by " + res.data[0].userName;
                                 document.querySelector("#PrincipalName").value = res.data[0].userName;
                                 document.querySelector("#PrincipalEmail").value = res.data[0].userEmail;
@@ -149,7 +149,7 @@ function confirmsubmit() {
         // console.log(dataDB);
         // console.log(coverimgdata);
         var bankCode = document.querySelector("#bankcode").value
-        console.log(bankCode.substr(0, 5))
+        // console.log(bankCode.substr(0, 5))
         var proposaldata = {
             coverphoto: coverimgdata,
             ProductTitle: document.getElementById("ProductTitle").value,
@@ -167,28 +167,28 @@ function confirmsubmit() {
         axios.post("/api/Products", proposaldata)
             .then(res => {
                 callback(res.data.productId);
-                console.log(res.data.productId);
+                // console.log(res.data.productId);
             })
             .catch(error => {
                 console.log(error.response);
             });
     }
     productsubmit(function (xxx) {
-        console.log(xxx)
+        // console.log(xxx)
 
         // 取得ProductID，送常見問題表單
         egg = document.querySelectorAll('div[class=QAQA] textarea')
         for (let index = 0, j = 1; index < egg.length, j < egg.length; index += 2, j += 2) {
-            console.log(egg[index].value)
-            console.log(egg[j].value)
+            // console.log(egg[index].value)
+            // console.log(egg[j].value)
             axios.post("/api/Questions", {
                 ProductID: xxx,
                 QuestionTitle: egg[index].value,
                 QuestionContent: egg[j].value
             })
-                .then(res => {
-                    console.log(res);
-                })
+                // .then(res => {
+                //     console.log(res);
+                // })
                 .catch(error => {
                     console.log(error.response);
                 });
@@ -196,10 +196,10 @@ function confirmsubmit() {
 
         good = document.querySelectorAll('div[class=planinputdiv] .inputplan')
         for (let w = 0, x = 1, y = 2, z = 0; w < good.length, x < good.length, y < good.length, z < good.length; w += 3, x += 3, y += 3, z++) {
-            console.log(good[w].value)
-            console.log(good[x].value)
-            console.log(good[y].value)
-            console.log(planinputarray[z])
+            // console.log(good[w].value)
+            // console.log(good[x].value)
+            // console.log(good[y].value)
+            // console.log(planinputarray[z])
 
             axios.post("/api/Plans", {
                 ProductID: xxx,
@@ -208,9 +208,9 @@ function confirmsubmit() {
                 PlanPrice: good[w].value,
                 PlanPhoto: planinputarray[z]
             })
-                .then(res => {
-                    console.log(res);
-                })
+                // .then(res => {
+                //     console.log(res);
+                // })
                 .catch(error => {
                     console.log(error.response);
                 });
@@ -366,7 +366,7 @@ var dataDB;
                                         .then((value) => {
                                             switch (value) {
                                                 case "確定":
-                                                    window.location = "../Proposal/myproposal.html"
+                                                    window.location = "../productpage/mymainpage.html"
                                                     break;
                                             }
                                         })
