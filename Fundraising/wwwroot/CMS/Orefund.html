@@ -217,7 +217,7 @@
                 productTitleChange(){
                     if(this.input.productTitle){
                         return this.orderIdChange.filter(item =>{
-                            return item.productTitle.indexOf(this.input.productTitle) !== -1
+                            return item.productTitle.toLowerCase().indexOf(this.input.productTitle.toLowerCase()) !== -1
                         })
                     }else{
                         return this.orderIdChange

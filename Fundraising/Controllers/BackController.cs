@@ -180,11 +180,11 @@ namespace 募資.Controllers
                               select new
                               {
                                   OrderId = o.OrderId.ToString(),
-                                  UserId = o.UserId,
+                                  //UserId = o.UserId,
                                   ProductTitle = p.ProductTitle,
                                   PlanTitle = pl.PlanTitle,
-                                  PlanPrice = pl.PlanPrice,
-                                  PlanContent = pl.PlanContent,
+                                  //PlanPrice = pl.PlanPrice,
+                                  //PlanContent = pl.PlanContent,
                                   PurchaseTime = o.PurchaseTime.ToString("yyyy-MM-dd HH:mm:ss"),
                                   OrderStateId = o.OrderStateId,
                                   TargetAmount = p.TargetAmount,
@@ -468,16 +468,16 @@ namespace 募資.Controllers
             var result = _context.Users.Select(x => new
             {
                 UserId = x.UserId.ToString(),
-                UserEmail = x.UserEmail,
-                UserPassword = x.UserPassword,
                 UserName = x.UserName,
-                UserPhone = x.UserPhone,
-                UserBirthday = x.UserBirthday,
-                UserGender = x.UserGender,
-                UserIntro = x.UserIntro,
-                UserFblink = x.UserFblink,
+                //UserIntro = x.UserIntro,
                 CreateDate = x.CreateDate,
-                UserPhoto = x.UserPhoto
+                UserEmail = x.UserEmail,
+                //UserPassword = x.UserPassword,
+                UserPhone = x.UserPhone,
+                //UserBirthday = x.UserBirthday,
+                //UserGender = x.UserGender,
+                //UserFblink = x.UserFblink,
+                //UserPhoto = x.UserPhoto
             });
             return await result.ToListAsync();
         }
