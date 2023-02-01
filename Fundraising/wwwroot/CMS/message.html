@@ -76,8 +76,8 @@
                                             </form>
                                         </div>
                                         <div class=" col-10">
-                                            <div class="row mb-2" style="border-bottom: 1px black solid;">
-                                                <div v-cloak class="col-4"><img :src="productcomment.Coverphoto" alt=""
+                                            <div class="row mb-2 py-3" style="border-bottom: 1px black solid;">
+                                                <div v-cloak class="col-4"><img :src="productcomment.coverphoto" alt=""
                                                         class="img-fluid"></div>
                                                 <div class="col-8">
                                                     <h3>提案標題:<span v-cloak>{{productcomment.productTitle}}</span></h3>
@@ -261,10 +261,10 @@
                 productlist: [],
                 productcomment:
                 {
-                    "productId": 7,
+                    "productId":"",
                     "coverphoto": "",
-                    "productTitle": "毛孩的彩虹天堂｜汪貓與兔新春文創",
-                    "comcount": 0,
+                    "productTitle": "",
+                    "comcount": "",
                     "comments": []
                 }
             },
@@ -314,6 +314,7 @@
                 let loader = this.$loading.show({
                     loader: 'dots'
                 });
+                
                 axios.get("/api/products").then(res => {
                     // console.log(res)    
                     this.productlist = res.data
