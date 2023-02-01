@@ -508,6 +508,7 @@ namespace 募資.Controllers
             var result = _context.Employees.Select(x => new
             {
                 account = x.Account,
+                password = x.Password,
                 email = x.Email,
                 employeeId = x.EmployeeId,
                 employeephoto = x.Employeephoto,

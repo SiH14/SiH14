@@ -1,171 +1,58 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/css/swiper.min.css">
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>Swiper demo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="../dist/css/swiper.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-    <!-- Demo styles -->
-    <style>
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-
-        body {
-            background: #000;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-
-        .swiper-container {
-            width: 100%;
-            height: 300px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .swiper-slide {
-            background-size: cover;
-            background-position: center;
-        }
-
-        .gallery-top {
-            height: 80%;
-            width: 100%;
-        }
-
-        .gallery-thumbs {
-            height: 20%;
-            box-sizing: border-box;
-            padding: 10px 0;
-        }
-
-        .gallery-thumbs .swiper-slide {
-            width: 25%;
-            height: 100%;
-            opacity: 0.4;
-        }
-
-        .gallery-thumbs .swiper-slide-active {
-            opacity: 1;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-
 <body>
-    <!-- Swiper -->
-    <p><img alt="" src="https://assets.zeczec.com/asset_558255_image_big.webp?1668303924" /></p>
-    <script src="../dist/js/swiper.min.js"></script>
+    <p><img alt="a28b4fd8892302694849226f7e0fc738-original" src="https://i.ibb.co/Dkq2x9Y/a28b4fd8892302694849226f7e0fc738-original.jpg" /></p>
 
-    <script>
-        var app = new Vue({
-            el: "#app",
-            data: {
-                featuredList: [],
-                recentList: [],
-                message: 'word'
-            },
-            beforeMount() {
-                //var apitopage = (sessionStorage.getItem("topage") == null) ? 0 : sessionStorage.getItem("topage")
-                //$.ajax({
-                //    type: 'Get',
-                //    url: '/api/Fundraising/topage/' + parseInt(apitopage),
-                //    success: function (e) {
-                //        app.fliterList = e
-                //    }
-                //})
-            }
-            ,
-            mounted: function () {
-                axios.get('/api/Fundraising/featured')//精選
-                    .then((res) => {
-                        this.featuredList = res.data;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                axios.get('/api/Fundraising/recent')//近期
-                    .then((res) => {
-                        this.recentList = res.data;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }
-            ,
-            methods: {
-                getproductID: function (e) {
-                    /* console.log(e.productId)*/
-                    sessionStorage.setItem("productId", e.productId);
-                }
-            }
-        })
+<h3>HELLO TAIWAN!&nbsp;</h3>
 
-        //const app = {
-        //    data() {
-        //        return {
-        //            featuredList: [],
-        //            recentList: [],
-        //            message: 'word'
-        //        }
-        //    },
-        //    mounted() {
-        //        axios.get('/api/Fundraising/featured')//精選
-        //            .then((res) => {
-        //                this.featuredList = res.data;
-        //            })
-        //            .catch(function (error) {
-        //                console.log(error);
-        //            });
-        //        axios.get('/api/Fundraising/recent')//近期
-        //            .then((res) => {
-        //                this.recentList = res.data;
-        //            })
-        //            .catch(function (error) {
-        //                console.log(error);
-        //            });
-        //    },
-        //    methods: {
-        //        getproductID(e) {
-        //            /* console.log(e.productId)*/
-        //            sessionStorage.setItem("productId", e.productId);
-        //        }
-        //    },
-        //};
-        //Vue.createApp(app).mount("#app");
-    </script>
-    <!-- Swiper JS -->
+<p>我們是美國精品廚具新寵 Hard Crafts（簡稱 HC），今天要推薦給大家的是HC歷經長達兩年多，從市場上最熱門的廚刀設計取精，更匯集了廚刀界各路的研發設計高手，共同打造出來首款HC的精品主廚刀具！<br />
+<br />
+【 REO 大馬士革主廚刀 】不只能滿足不同料理文化及廚房刀藝，無論料理職人或廚房新手都能輕鬆上手， 先來看看台灣及美國的粉絲，收到REO刀子的分享：</p>
 
-    <!-- Initialize Swiper -->
-    <script>
-        var galleryTop = new Swiper('.gallery-top', {
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-        var galleryThumbs = new Swiper('.gallery-thumbs', {
-            spaceBetween: 10,
-            centeredSlides: true,
-            slidesPerView: 'auto',
-            touchRatio: 0.2,
-            slideToClickedSlide: true,
-        });
-        galleryTop.controller.control = galleryThumbs;
-        galleryThumbs.controller.control = galleryTop;
-    </script>
+<p><img alt="asset-537129-image-big" src="https://i.ibb.co/kXQt9wt/asset-537129-image-big.webp" /></p>
+
+<p>除了革新製程研發與設計，HC 也很積極尋找具備專業熱忱客服能力的海外夥伴，以『資源讓利共享 | 互惠推展模式』讓海外的HC粉絲，也能以最好的價格優勢享受到高品質的Kitchenware廚房用品。</p>
+
+<p>經過來回嚴謹評估與洽談，HARD CRAFTS 決定將台灣設為海外亞洲區的重點首站，並選擇了在嘖嘖募資以及台灣市場推展，擁有豐富實戰經驗的『 Jolie Cool Inc ｜勁酷行銷有限公司 』作為 HARD CRAFTS 的在台官方代表。</p>
+
+<p>勁酷行銷有限公司 :</p>
+
+<p>『 Jolie Cool Inc ｜勁酷行銷有限公司 』致力於為台灣發掘並引進國外創新實用、滿足快樂生活的好設計&amp;酷品牌。從創辦以來已經成功引進了美國 【TripPal |全支撐 360度 | 舒壓頸枕】及法國設計師 Antoine D&#39;Haussy 的旗艦設計『【SBS | 隨身收納包】等優質的設計師品牌商品。</p>
+
+<h3>風險與挑戰</h3>
+
+<p>『 REO 大馬士革主廚刀 』 將於嘖嘖集資結束後盡快完成生產，並會依據各『贊助方案』以及的方案內的訂單順序陸續出貨至贊助粉絲的手上，產品後續生產進度將持續於嘖嘖募資頁面與粉絲專頁更新。</p>
+
+<p>使用本產品前請詳閱使用說明，以確保對產品有正確認知。使用本產品即視為您已詳閱免責聲明與警告信息，且理解、接受內容所提及的全部條款。</p>
+
+<p>我們很多粉絲都知道，『 Jolie Cool Inc ｜勁酷行銷有限公司 』團隊及各商業夥伴在嘖嘖募資，一直以來都是以 『準時完成生產、儘速完成出貨』為最高宗旨，也都&ldquo;使命必達&rdquo;。 但募資計畫有諸多變數，仍可能會出現不可抗拒的意外事件發生（如工廠延宕、物流延宕等）導致出貨延期。贊助此計畫，即視為你已同意承擔此風險，若無法接受延遲出貨風險，請於募資&ldquo;結束前&rdquo;聯繫嘖嘖客服信箱取消贊助，我們最希望『 REO ｜大馬士革主廚刀 』都能讓所有粉絲開開心心的收到。</p>
+
+<h3>退換貨規則</h3>
+
+<p>依照消保法第十九條第1項及第2項規定：「通訊交易或訪問交易之消費者，得於收受商品或接受服務後7日内，以退回商品或書面通知方式解除契約，無須說明理由及負操任何費用或對價，通訊交易之商品或服務有下列情形之一，並經企業告知消費者，將排除消保法第19條第1項規定解除權之適用者。</p>
+
+<p>依《消費者保護法》，消費者享有商品到貨7天鑑賞期（包含例假日）之權益，七日鑑賞期屬『考慮期』並非『試用期』，商品（含贈品）一經拆封/使用/下水、以致缺乏完整性即失去再販售價值時，為保障會員之衛生安全，恕無法退貨。(商品本身具有瑕疵不受限於此規範)</p>
+
+<p>訂單變更注意事項<br />
+贊助計畫（下單購買），即同意當訂單交易變更時，由本公司代為處理發票及銷貨退回證明單，以加速退款或其他相關作業</p>
+
+<h3>客服聯絡方式</h3>
+
+<p>臉書私訊(最快)：<a href="https://www.facebook.com/hardcrafts.tw">https://www.facebook.com/hardcrafts.tw</a><br />
+客服EMAIL：<a href="mailto:17hctw@gmail.com">17hctw@gmail.com</a><br />
+電話客服：(02)2240-2122 週一至週五，上午9點～晚上6點</p>
+
+<h3>營業人登記資訊</h3>
+
+<p>營業人名稱：勁酷行銷有限公司</p>
+
+<p>統一編號：83784062</p>
+
 </body>
-
 </html>

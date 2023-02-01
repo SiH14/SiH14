@@ -83,6 +83,7 @@ namespace Fundraising.Controllers
             var query = from o in combine
                         join product in _context.Products on o.ProductId equals product.ProductId
                         join user in _context.Users on product.UserId equals user.UserId
+                        where product.ProductStateId == 3
                         orderby o.nowmoney descending
                         select new
                         {
@@ -102,24 +103,6 @@ namespace Fundraising.Controllers
             query = query.Skip(topage*9).Take(9);
             return await query.ToListAsync();
         }
-
-        [HttpGet("tolpage")]//總頁數
-        public IActionResult GettolpageList()
-        {
-            var query = _context.Products.Count();
-            var tolpage = 0;
-            if (query/9 == 0)
-            {
-                tolpage = query / 9;
-                return Content(tolpage.ToString());
-            }
-            else
-            {
-                tolpage = (query / 9)+1;
-                return Content(tolpage.ToString());
-            }
-        }
-
         //api/Fundraising
         [HttpGet]
         public async Task<ActionResult<IEnumerable<dynamic>>> GetList()
@@ -246,7 +229,7 @@ namespace Fundraising.Controllers
                         join product in _context.Products on o.ProductId equals product.ProductId
                         join user in _context.Users on product.UserId equals user.UserId
                         where product.Featured == true
-                        orderby o.nowmoney descending
+                        //orderby o.nowmoney descending
                         select new
                         {
                             ProductId = o.ProductId,
@@ -429,6 +412,7 @@ namespace Fundraising.Controllers
                 var query = from o in combine
                             join product in _context.Products on o.ProductId equals product.ProductId
                             join user in _context.Users on product.UserId equals user.UserId
+                            where product.ProductStateId == 3
                             orderby (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100) descending
                             select new
                             {
@@ -449,6 +433,7 @@ namespace Fundraising.Controllers
                 var query = from o in combine
                             join product in _context.Products on o.ProductId equals product.ProductId
                             join user in _context.Users on product.UserId equals user.UserId
+                            where product.ProductStateId == 3
                             orderby product.Startime
                             select new
                             {
@@ -469,6 +454,7 @@ namespace Fundraising.Controllers
                 var query = from o in combine
                             join product in _context.Products on o.ProductId equals product.ProductId
                             join user in _context.Users on product.UserId equals user.UserId
+                            where product.ProductStateId == 3
                             orderby o.nowmoney descending
                             select new
                             {
@@ -489,6 +475,7 @@ namespace Fundraising.Controllers
                 var query = from o in combine
                             join product in _context.Products on o.ProductId equals product.ProductId
                             join user in _context.Users on product.UserId equals user.UserId
+                            where product.ProductStateId == 3
                             orderby o.nowperson descending
                             select new
                             {
@@ -563,7 +550,7 @@ namespace Fundraising.Controllers
             var query = from o in combine
                         join product in _context.Products on o.ProductId equals product.ProductId
                         join user in _context.Users on product.UserId equals user.UserId
-                        where product.ProductTitle.Contains(Selectans)
+                        where product.ProductTitle.Contains(Selectans) && product.ProductStateId == 3
                         select new
                         {
                             ProductId = o.ProductId,
@@ -756,6 +743,22 @@ namespace Fundraising.Controllers
             return await query.ToListAsync();
         }
 
+        [HttpGet("tolpage")]//總頁數
+        public IActionResult GettolpageList()
+        {
+            var query = _context.Products.Where(x => x.ProductStateId ==3).Count();
+            var tolpage = 0;
+            if (query / 9 == 0)
+            {
+                tolpage = query / 9;
+                return Content(tolpage.ToString());
+            }
+            else
+            {
+                tolpage = (query / 9) + 1;
+                return Content(tolpage.ToString());
+            }
+        }
 
         //[HttpPost]
         //public async Task<ActionResult<Order>> PostOrder(Order order)

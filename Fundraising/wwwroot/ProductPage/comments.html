@@ -13,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <style>
@@ -85,10 +86,10 @@
                             <a class="nav-link" href="./product.html"><span style="font-size:18px">專案內容</span></a>
                         </li>
                         <li class="nav-item" style="padding-left:80px">
-                            <a class="nav-link" href="./faq.html"><span style="font-size:18px">常見問題</span></a>
+                            <a class="nav-link" href="./faq.html"><span style="font-size:18px">常見問題 {{tolfaq}}</span></a>
                         </li>
                         <li class="nav-item" style="padding-left:80px">
-                            <a class="nav-link" href="./comments.html"><span style="font-size:18px">留言</span></a>
+                            <a class="nav-link" href="./comments.html"><span style="font-size:18px">留言 {{fliterList.length}}</span></a>
                         </li>
                     </ul>
                     <div class="col-sm-4">
@@ -116,20 +117,20 @@
     </div>-->
         <br>
         <div>
-            <div class="container" v-if="whouser == ''">
-                <div style="background-color: whitesmoke;">
+            <div class="container">
+                <div style="background-color: whitesmoke;"  v-if="whouser == ''">
                     <span>成為 <a href="../Registration/registration.html" style="color: black; text-decoration: none; font-weight: bold;">needU</a> 會員才能留言。如有專案相關提問，請登入<a href="../Login/login.html" style="color: black; text-decoration: none; font-weight: bold;"> 會員</a></span>
                     <span>。</span>
+                </div>
+                <div class="" style="display:flex;" v-else>
+                    <textarea v-on:click="move1()" id="textinput1" class="form-control" style="width: 95%;" s placeholder="請輸入留言內容..."></textarea>
+                    <button v-on:click="addcomment()" class="fas fa-users-class" style="width: 5%;"><i class="fa-regular fa-paper-plane"></i></button>
+                    <i class="fa-solid fa-paper-plane-top"></i>
                 </div>
             </div>
         </div>
 
         <div class="container" v-if="fliterList.length > 0">
-            <div class="" style="display:flex;">
-                <textarea v-on:click="move1()" id="textinput1" class="form-control" style="width: 95%;" s placeholder="請輸入留言內容..."></textarea>
-                <button v-on:click="addcomment()" class="fas fa-users-class" style="width: 5%;"><i class="fa-regular fa-paper-plane"></i></button>
-                <i class="fa-solid fa-paper-plane-top"></i>
-            </div>
             <br>
             <div class="row" v-for="(item,key) in fliterList">
                 <!-- 這則留言 -->
@@ -269,7 +270,8 @@
                 whouser: '',
                 productuserid: '',
                 meno: [],
-                connection: null
+                connection: null,
+                tolfaq: 0
             },
             beforeMount() {
                 $.ajax({
@@ -307,7 +309,7 @@
                     setTimeout(function () {
                         setTimeout(function () {
                             dis.style.display = "none"
-                        }, 5000)
+                        }, 8000)
                         let dis = document.querySelector('.al' + (app.meno.length - 1))
                         console.log(1);
                     }, 1000)
@@ -325,6 +327,18 @@
                     url: '/api/SiComments/Answer',
                     success: function (e) {
                         app.answerList = e
+                    }
+                })
+                $.ajax({
+                    type: 'Get',
+                    url: '/api/SiFollowings/tolfaq/' + sessionStorage.getItem("productId"),
+                    success: function (e) {
+                        app.tolfaq = parseInt(e);
+                    },
+                    error: function (e) {
+                        /*     console.log(app.followList);*/
+                        console.log(e);
+                        console.log(444);
                     }
                 })
             },
@@ -345,20 +359,36 @@
                     this.addcommentList["ProductID"] = parseInt(sessionStorage.getItem("productId"));
                     this.addcommentList["CommentContent"] = document.getElementById('textinput1').value;
                     /*        console.log(parseInt(sessionStorage.getItem("productId")))*/
-                    $.ajax({
-                        type: 'POST',
-                        url: '/api/SiComments/',
-                        contentType: "application/json",
-                        data: JSON.stringify(this.addcommentList),
-                        error: function () {
-                            console.log('錯誤回傳');
-                            console.log(this.data);
+                    swal("", "確定留言?", "info", {
+                        buttons: {
+                            確定: true,
+                            取消: true
                         },
-                        success: function () {
-                            alert("成功");
-                            window.location = "./comments.html";
-                        }
                     })
+                        .then((value) => {
+                            switch (value) {
+                                case "確定":
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/api/SiComments/',
+                                        contentType: "application/json",
+                                        data: JSON.stringify(app.addcommentList),
+                                        error: function () {
+                                            console.log('錯誤回傳');
+                                            console.log(this.data);
+                                        },
+                                        success: function () {
+                                            window.location = "./comments.html";
+                                            //setTimeout(function () {
+                                            //    window.location.href = "#top";
+                                            //}, 5000)
+                                        }
+                                    }) 
+                                    break;
+                                case "取消":
+                                    break;
+                            }
+                        });
                 },
                 addanswer: function (r, e) {
                     var thisidclear = e;
@@ -450,23 +480,33 @@
                     btndisnone.style.display = "none";
                 },
                 delanswer: function (e) {
-                    if (confirm('確定要刪除?') == true) {
-                        $.ajax({
-                            type: 'DELETE',
-                            url: '/api/SiAnswers/' + e,
-                            success: function (e) {
-                                $.ajax({
-                                    type: 'Get',
-                                    url: '/api/SiComments/Answer',
-                                    success: function (e) {
-                                        app.answerList = e
-                                    }
-                                })
+                    swal("", "確定要刪除?", "warning", {
+                        buttons: {
+                            確定: true,
+                            取消: true
+                        },
+                    })
+                        .then((value) => {
+                            switch (value) {
+                                case "確定":
+                                    $.ajax({
+                                        type: 'DELETE',
+                                        url: '/api/SiAnswers/' + e,
+                                        success: function (e) {
+                                            $.ajax({
+                                                type: 'Get',
+                                                url: '/api/SiComments/Answer',
+                                                success: function (e) {
+                                                    app.answerList = e
+                                                }
+                                            })
+                                        }
+                                    })
+                                    break;
+                                case "取消":
+                                    break;
                             }
-                        })
-                    } else {
-
-                    }
+                        });
                 }
                 ,
                 okeditcomment(e) {
@@ -513,23 +553,33 @@
                 }
                 ,
                 delcomment: function (e) {
-                    if (confirm('確定要刪除?') == true) {
-                        $.ajax({
-                            type: 'DELETE',
-                            url: '/api/SiComments/' + e,
-                            success: function (e) {
-                                $.ajax({
-                                    type: 'Get',
-                                    url: '/api/SiComments/comment/' + sessionStorage.getItem("productId"),
-                                    success: function (e) {
-                                        app.fliterList = e
-                                    }
-                                })
+                    swal("", "確定要刪除?", "warning", {
+                        buttons: {
+                            確定: true,
+                            取消: true
+                        },
+                    })
+                        .then((value) => {
+                            switch (value) {
+                                case "確定":
+                                    $.ajax({
+                                        type: 'DELETE',
+                                        url: '/api/SiComments/' + e,
+                                        success: function (e) {
+                                            $.ajax({
+                                                type: 'Get',
+                                                url: '/api/SiComments/comment/' + sessionStorage.getItem("productId"),
+                                                success: function (e) {
+                                                    app.fliterList = e
+                                                }
+                                            })
+                                        }
+                                    })
+                                    break;
+                                case "取消":
+                                    break;
                             }
-                        })
-                    } else {
-
-                    }
+                        });
                 }
                 ,
                 move1: function () {
