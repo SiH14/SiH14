@@ -144,13 +144,14 @@ namespace Fundraising.Controllers
         }
 
 
-        //此Project的Orderlist，id==productid
+        //ProjectManage，id==productid
         // GET: api/UserOrder/ProjectOrder/1
         [HttpGet("ProjectOrder/{id}")]
         public async Task<ActionResult<dynamic>> GetProjectOrder(int id)
         {
             var ProjectOrder = from order in _context.Orders
                                join plan in _context.Plans on order.PlanId equals plan.PlanId
+                               join prod in _context.Products on plan.ProductId equals prod.ProductId
                                where plan.ProductId == id
                                select new
                                {
@@ -162,7 +163,9 @@ namespace Fundraising.Controllers
                                    planTitle = plan.PlanTitle,
                                    planPrice = plan.PlanPrice,
                                    addSponsorship = order.AddSponsorship,
-                                   recipientName = order.RecipientName
+                                   recipientName = order.RecipientName,
+                                   userId = prod.UserId,
+                                   ouserId=order.UserId
                                };
             return await ProjectOrder.ToListAsync();
         }
