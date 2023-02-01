@@ -30,7 +30,7 @@ namespace Fundraising.Controllers
         //}
 
         //api/Fundraising
-        [HttpGet("topage/{topage}/{sele}")]
+        [HttpGet("topage/{topage}/{sele}")]//探索
         public async Task<ActionResult<IEnumerable<dynamic>>> GettopageList(int topage , int sele)
         {
             var addprice = from p in _context.Plans
@@ -200,7 +200,7 @@ namespace Fundraising.Controllers
             return await queryy.ToListAsync();
         }
         //api/Fundraising
-        [HttpGet]
+        [HttpGet]//根本
         public async Task<ActionResult<IEnumerable<dynamic>>> GetList()
         {
             var addprice = from p in _context.Plans
@@ -324,8 +324,8 @@ namespace Fundraising.Controllers
             var query = from o in combine
                         join product in _context.Products on o.ProductId equals product.ProductId
                         join user in _context.Users on product.UserId equals user.UserId
-                        where product.Featured == true
-                        //orderby o.nowmoney descending
+                        where product.Featured == true && product.ProductStateId == 3 && product.Endtime > DateTime.Now
+                        orderby (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100) descending
                         select new
                         {
                             ProductId = o.ProductId,
@@ -341,7 +341,7 @@ namespace Fundraising.Controllers
                             percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
                         };
 
-            query = query.OrderBy(x => x.Startime).Take(6);
+            query = query.Take(6);
 
             //var query = (from p in _context.Products
             //             join u in _context.Users on p.UserId equals u.UserId
@@ -415,6 +415,7 @@ namespace Fundraising.Controllers
             var query = from o in combine
                         join product in _context.Products on o.ProductId equals product.ProductId
                         join user in _context.Users on product.UserId equals user.UserId
+                        where product.ProductStateId == 3 && product.Endtime > DateTime.Now
                         orderby o.nowmoney descending
                         select new
                         {
@@ -453,145 +454,145 @@ namespace Fundraising.Controllers
         }
 
 
-        [HttpGet("filter/{SelectValue}")]//篩選
-        public async Task<ActionResult<IEnumerable<dynamic>>> GetSelectList(long SelectValue)
-        {
-            var addprice = from p in _context.Plans
-                           join o in _context.Orders on p.PlanId equals o.PlanId
-                           //group p by new {p.ProductId} into g
-                           //where p.ProductId == 15
-                           select new
-                           {
-                               ProductId = p.ProductId,
-                               toll = (p.PlanPrice + o.AddSponsorship)
-                           };
+        //[HttpGet("filter/{SelectValue}")]//篩選
+        //public async Task<ActionResult<IEnumerable<dynamic>>> GetSelectList(long SelectValue)
+        //{
+        //    var addprice = from p in _context.Plans
+        //                   join o in _context.Orders on p.PlanId equals o.PlanId
+        //                   //group p by new {p.ProductId} into g
+        //                   //where p.ProductId == 15
+        //                   select new
+        //                   {
+        //                       ProductId = p.ProductId,
+        //                       toll = (p.PlanPrice + o.AddSponsorship)
+        //                   };
 
-            var sumprice = from add in addprice
-                           group add by new { add.ProductId } into g
-                           //where p.ProductId == 15
-                           select new
-                           {
-                               ProductId = g.Key.ProductId,
-                               toll = g.Sum(ap => ap.toll)
-                           };
+        //    var sumprice = from add in addprice
+        //                   group add by new { add.ProductId } into g
+        //                   //where p.ProductId == 15
+        //                   select new
+        //                   {
+        //                       ProductId = g.Key.ProductId,
+        //                       toll = g.Sum(ap => ap.toll)
+        //                   };
 
-            var countplan = from p in _context.Plans
-                            join o in _context.Orders on p.PlanId equals o.PlanId
-                            group p by new { p.ProductId } into g
-                            select new
-                            {
-                                ProductId = g.Key.ProductId,
-                                Coun = g.Count()
-                            };
+        //    var countplan = from p in _context.Plans
+        //                    join o in _context.Orders on p.PlanId equals o.PlanId
+        //                    group p by new { p.ProductId } into g
+        //                    select new
+        //                    {
+        //                        ProductId = g.Key.ProductId,
+        //                        Coun = g.Count()
+        //                    };
 
-            var combinesum = from p in _context.Products
-                             join sp in sumprice on p.ProductId equals sp.ProductId into ps
-                             from sp in ps.DefaultIfEmpty()
-                             select new
-                             {
-                                 ProductId = p.ProductId,
-                                 nowmoney = sp.toll == null ? 0 : sp.toll
-                             };
+        //    var combinesum = from p in _context.Products
+        //                     join sp in sumprice on p.ProductId equals sp.ProductId into ps
+        //                     from sp in ps.DefaultIfEmpty()
+        //                     select new
+        //                     {
+        //                         ProductId = p.ProductId,
+        //                         nowmoney = sp.toll == null ? 0 : sp.toll
+        //                     };
 
-            var combine = from o in combinesum
-                          join c in countplan on o.ProductId equals c.ProductId into ps
-                          from c in ps.DefaultIfEmpty()
-                          select new
-                          {
-                              ProductId = o.ProductId,
-                              nowmoney = o.nowmoney,
-                              nowperson = c.Coun == null ? 0 : c.Coun
-                          };
+        //    var combine = from o in combinesum
+        //                  join c in countplan on o.ProductId equals c.ProductId into ps
+        //                  from c in ps.DefaultIfEmpty()
+        //                  select new
+        //                  {
+        //                      ProductId = o.ProductId,
+        //                      nowmoney = o.nowmoney,
+        //                      nowperson = c.Coun == null ? 0 : c.Coun
+        //                  };
 
-            if (SelectValue == 1)
-            {
-                var query = from o in combine
-                            join product in _context.Products on o.ProductId equals product.ProductId
-                            join user in _context.Users on product.UserId equals user.UserId
-                            where product.ProductStateId == 3
-                            orderby (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100) descending
-                            select new
-                            {
-                                ProductId = o.ProductId,
-                                ProductTitle = product.ProductTitle,
-                                CurrentAmount = o.nowmoney,
-                                TargetAmount = product.TargetAmount,
-                                Startime = product.Startime,
-                                Endtime = product.Endtime,
-                                nowperson = o.nowperson,
-                                days = (product.Endtime - DateTime.Now).Days + 1,
-                                percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
-                            };
-                return await query.ToListAsync();
-            }
-            else if (SelectValue == 2)
-            {
-                var query = from o in combine
-                            join product in _context.Products on o.ProductId equals product.ProductId
-                            join user in _context.Users on product.UserId equals user.UserId
-                            where product.ProductStateId == 3
-                            orderby product.Startime
-                            select new
-                            {
-                                ProductId = o.ProductId,
-                                ProductTitle = product.ProductTitle,
-                                CurrentAmount = o.nowmoney,
-                                TargetAmount = product.TargetAmount,
-                                Startime = product.Startime,
-                                Endtime = product.Endtime,
-                                nowperson = o.nowperson,
-                                days = (product.Endtime - DateTime.Now).Days + 1,
-                                percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
-                            };
-                return await query.ToListAsync();
-            }
-            else if (SelectValue == 3)
-            {
-                var query = from o in combine
-                            join product in _context.Products on o.ProductId equals product.ProductId
-                            join user in _context.Users on product.UserId equals user.UserId
-                            where product.ProductStateId == 3
-                            orderby o.nowmoney descending
-                            select new
-                            {
-                                ProductId = o.ProductId,
-                                ProductTitle = product.ProductTitle,
-                                CurrentAmount = o.nowmoney,
-                                TargetAmount = product.TargetAmount,
-                                Startime = product.Startime,
-                                Endtime = product.Endtime,
-                                nowperson = o.nowperson,
-                                days = (product.Endtime - DateTime.Now).Days + 1,
-                                percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
-                            };
-                return await query.ToListAsync();
-            }
-            else if (SelectValue == 4)
-            {
-                var query = from o in combine
-                            join product in _context.Products on o.ProductId equals product.ProductId
-                            join user in _context.Users on product.UserId equals user.UserId
-                            where product.ProductStateId == 3
-                            orderby o.nowperson descending
-                            select new
-                            {
-                                ProductId = o.ProductId,
-                                ProductTitle = product.ProductTitle,
-                                CurrentAmount = o.nowmoney,
-                                TargetAmount = product.TargetAmount,
-                                Startime = product.Startime,
-                                Endtime = product.Endtime,
-                                nowperson = o.nowperson,
-                                days = (product.Endtime - DateTime.Now).Days + 1,
-                                percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
-                            };
-                return await query.ToListAsync();
-            }
-            else
-            {
-                return await _context.Products.ToListAsync(); ;
-            }
-        }
+        //    if (SelectValue == 1)
+        //    {
+        //        var query = from o in combine
+        //                    join product in _context.Products on o.ProductId equals product.ProductId
+        //                    join user in _context.Users on product.UserId equals user.UserId
+        //                    where product.ProductStateId == 3
+        //                    orderby (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100) descending
+        //                    select new
+        //                    {
+        //                        ProductId = o.ProductId,
+        //                        ProductTitle = product.ProductTitle,
+        //                        CurrentAmount = o.nowmoney,
+        //                        TargetAmount = product.TargetAmount,
+        //                        Startime = product.Startime,
+        //                        Endtime = product.Endtime,
+        //                        nowperson = o.nowperson,
+        //                        days = (product.Endtime - DateTime.Now).Days + 1,
+        //                        percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
+        //                    };
+        //        return await query.ToListAsync();
+        //    }
+        //    else if (SelectValue == 2)
+        //    {
+        //        var query = from o in combine
+        //                    join product in _context.Products on o.ProductId equals product.ProductId
+        //                    join user in _context.Users on product.UserId equals user.UserId
+        //                    where product.ProductStateId == 3
+        //                    orderby product.Startime
+        //                    select new
+        //                    {
+        //                        ProductId = o.ProductId,
+        //                        ProductTitle = product.ProductTitle,
+        //                        CurrentAmount = o.nowmoney,
+        //                        TargetAmount = product.TargetAmount,
+        //                        Startime = product.Startime,
+        //                        Endtime = product.Endtime,
+        //                        nowperson = o.nowperson,
+        //                        days = (product.Endtime - DateTime.Now).Days + 1,
+        //                        percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
+        //                    };
+        //        return await query.ToListAsync();
+        //    }
+        //    else if (SelectValue == 3)
+        //    {
+        //        var query = from o in combine
+        //                    join product in _context.Products on o.ProductId equals product.ProductId
+        //                    join user in _context.Users on product.UserId equals user.UserId
+        //                    where product.ProductStateId == 3
+        //                    orderby o.nowmoney descending
+        //                    select new
+        //                    {
+        //                        ProductId = o.ProductId,
+        //                        ProductTitle = product.ProductTitle,
+        //                        CurrentAmount = o.nowmoney,
+        //                        TargetAmount = product.TargetAmount,
+        //                        Startime = product.Startime,
+        //                        Endtime = product.Endtime,
+        //                        nowperson = o.nowperson,
+        //                        days = (product.Endtime - DateTime.Now).Days + 1,
+        //                        percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
+        //                    };
+        //        return await query.ToListAsync();
+        //    }
+        //    else if (SelectValue == 4)
+        //    {
+        //        var query = from o in combine
+        //                    join product in _context.Products on o.ProductId equals product.ProductId
+        //                    join user in _context.Users on product.UserId equals user.UserId
+        //                    where product.ProductStateId == 3
+        //                    orderby o.nowperson descending
+        //                    select new
+        //                    {
+        //                        ProductId = o.ProductId,
+        //                        ProductTitle = product.ProductTitle,
+        //                        CurrentAmount = o.nowmoney,
+        //                        TargetAmount = product.TargetAmount,
+        //                        Startime = product.Startime,
+        //                        Endtime = product.Endtime,
+        //                        nowperson = o.nowperson,
+        //                        days = (product.Endtime - DateTime.Now).Days + 1,
+        //                        percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
+        //                    };
+        //        return await query.ToListAsync();
+        //    }
+        //    else
+        //    {
+        //        return await _context.Products.ToListAsync(); ;
+        //    }
+        //}
 
         [HttpGet("filterans/{Selectans}")]//搜尋
         public async Task<ActionResult<IEnumerable<dynamic>>> GetSelecttList(string Selectans)
