@@ -77,8 +77,8 @@
             width: 100% !important;
             height: auto !important;
         }
-
         .selectphotodiv {
+            z-index:-1;
             height: 200px;
             background-size: cover;
             background-repeat: no-repeat;
@@ -119,7 +119,7 @@
             </select>
         </div>
         <!--篩選-->
-        <div class="row g-4 py-8 row-cols-1 row-cols-lg-3" v-if="true">
+        <div class="row g-4 py-8 row-cols-1 row-cols-lg-3" v-if="sele != 5">
             <!--id="op2"-->
             <a href="./product.html" style="text-decoration: none; color: black;" v-on:click="getproductID(item)" v-for="item in fliterList">
                 <div class="feature col">
@@ -133,8 +133,8 @@
                     <div class="selectphotodiv" :style="{'background-image':'url(' + item.coverphoto + ')'}">
                     </div>
                     <!--<div class="selectedimgdiv">
-                    <img class="selectedimg" :src="item.coverphoto" alt="">
-                </div>-->
+                <img class="selectedimg" :src="item.coverphoto" alt="">
+            </div>-->
                     <p></p>
                     <h3 class="fs-5" style="height: 70px">{{item.productTitle}}</h3>
                     <div class="d-flex justify-content-between">
@@ -152,25 +152,23 @@
                         <span class="money" style="color:green">{{item.percent}} %</span>
                     </div>
                 </div>
-            </a>
+             </a>
         </div>
 
         <div class="row g-4 py-8 row-cols-1 row-cols-lg-3" v-else>
-            <!--id="op2"-->
-            <a href="./product.html" style="text-decoration: none; color: black;" v-on:click="getproductID(item)" v-for="item in fliterList">
+            <div  v-for="item in fliterList" >
                 <div class="feature col">
                     <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
                         <svg class="bi" width="1em" height="1em">
                             <use xlink:href="#collection" />
                         </svg>
                     </div>
-
+                    <div  style="text-align: center; background-color: rgb(169, 169, 169, 0.4);">
+                        <b>此專案已結束，謝謝</b>
+                    </div>
                     <!--資訊卡-->
                     <div class="selectphotodiv" :style="{'background-image':'url(' + item.coverphoto + ')'}">
                     </div>
-                    <!--<div class="selectedimgdiv">
-                    <img class="selectedimg" :src="item.coverphoto" alt="">
-                </div>-->
                     <p></p>
                     <h3 class="fs-5" style="height: 70px">{{item.productTitle}}</h3>
                     <div class="d-flex justify-content-between">
@@ -188,7 +186,7 @@
                         <span class="money" style="color:green">{{item.percent}} %</span>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
         <br>
         <br>
@@ -377,6 +375,7 @@
                     type: 'Get',
                     url: '/api/Fundraising/topage/' + parseInt(apitopage) + '/' + parseInt(apisele),
                     success: function (e) {
+                        app.sele = apisele
                         app.fliterList = e
                     }
                 })
@@ -405,7 +404,7 @@
                 var apitopage = (sessionStorage.getItem("topage") == null) ? 0 : sessionStorage.getItem("topage")
                 this.topage = parseInt(apitopage) + 1
                 var apisele = (sessionStorage.getItem("sele") == null) ? 1 : sessionStorage.getItem("sele");
-                console.log(document.querySelector('#op' + apisele).selected = true)
+                document.querySelector('#op' + apisele).selected = true;
             }
             ,
             methods: {
