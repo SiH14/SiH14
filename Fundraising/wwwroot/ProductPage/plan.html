@@ -146,7 +146,7 @@
 
         <div class="container card-group card-group-scroll">
             <!--v-if="whouser == ''"-->
-            <div class="card" style="padding:10px" v-for="item in planList">
+            <div class="card" style="padding: 10px; background-color: #f4f4f4; " v-for="item in planList">
                 <a href="#" style="text-decoration: none; color: black;" v-on:click="getplanID(item.planid)">
                     <img :src="item.planphoto" class="card-img-top"
                          alt="Hollywood Sign on The Hill" />

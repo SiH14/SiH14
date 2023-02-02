@@ -187,7 +187,7 @@
                 nameChange() {
                     if (this.input.principalName) {
                         return this.preproductlist.filter(item => {
-                            return item.p.principalName.indexOf(this.input.principalName) > -1
+                            return item.p.principalName.indexOf(this.input.principalName) !== -1
                         })
                     } else {
                         return this.preproductlist
@@ -196,7 +196,7 @@
                 titleChange() {
                     if (this.input.title) {
                         return this.nameChange.filter(item => {
-                            return item.p.productTitle.indexOf(this.input.title) > -1
+                            return item.p.productTitle.toLowerCase().indexOf(this.input.title.toLowerCase()) !== -1
                         })
                     } else {
                         return this.nameChange

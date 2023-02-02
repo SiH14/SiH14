@@ -81,17 +81,19 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="col-1">編號</th>
-                                                        <th class="col-1">會員姓名</th>
-                                                        <th scope="col">簡介</th>
+                                                        <th class="col-2">會員姓名</th>
+                                                        <th class="col-2">Email</th>
+                                                        <th class="col-2">電話</th>
                                                         <th class="col-2">加入時間</th>
-                                                        <th class="col-2">操作</th>
+                                                        <th >操作</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="">
                                                     <tr v-for="item in userNameChange">
                                                         <td v-cloak>{{item.userId}}</td>
                                                         <td v-cloak>{{item.userName}}</td>
-                                                        <td v-cloak>{{item.userIntro}}</td>
+                                                        <td v-cloak>{{item.userEmail}}</td>
+                                                        <td v-cloak>{{item.userPhone}}</td>
                                                         <td v-cloak>{{item.createDate.substring(0,10)}}</td>
                                                         <td v-cloak>
                                                             <a class="btn btn-outline-success" data-toggle="modal"
@@ -132,7 +134,7 @@
                                         </div>
                                         <div class="modal-body px-3">
                                             <div class="row  justify-content-center mb-3">
-                                                <div class="col-5">1</div>
+                                                <div class="col-5 "><img class="" :src="userinfo.userPhoto" alt="" style="width: 200px;height: 150px; object-fit: cover;"></div>
                                                 <div class="col-6 ">
                                                     <div class="">
                                                         <label for="">會員編號:</label><br>
@@ -169,7 +171,8 @@
                                                 <div class="col-11">
                                                     <div class="">
                                                         <label for="">簡介:</label><br>
-                                                        <p v-cloak>{{userinfo.userIntro}}</p>
+                                                        <p v-cloak v-if="userinfo.userIntro">{{userinfo.userIntro}}</p>
+                                                        <p v-else>無</p>
                                                     </div>
                                                 </div>
                                             </div>

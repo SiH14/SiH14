@@ -37,11 +37,12 @@
                 style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
             </div>
             <!-- 結束 導覽列 -->
-            <div class=" container-fluid px-5 p-4">
+            <div class=" container-fluid px-5 pt-4 pb-0">
                 <div class="row justify-content-center">
                     <!-- 側邊欄位 -->
 
-                    <ul class="navbar-nav bg-white col-2 item-style sidebar " id="accordionSidebar" style="overflow-x: auto;max-height: 750px;">
+                    <ul class="navbar-nav bg-white col-2 item-style sidebar " id="accordionSidebar"
+                        style="overflow-x: auto;max-height: 750px;">
                         <br>
                         <div id="mysider"></div>
                     </ul>
@@ -136,88 +137,100 @@
                             <div class="row">
 
                                 <!-- 圖表內容 -->
-                                <div class="col-12">
+                                <div class="col-8 p-0" style="overflow-y: auto;">
                                     <div class="card shadow mb-4">
 
                                         <div
                                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                            <h1 class="m-0 font-weight-bold text-success">熱門提案</h6>
+                                            <h1 class="m-0 font-weight-bold text-success">熱門提案</h1>
 
                                         </div>
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr class="">
-                                                    <th class="col-1">排名</th>
-                                                    <th>提案名稱</th>
-                                                    <th>目前金額</th>
-                                                    <th>目前進度</th>
-                                                    <th>贊助人數</th>
-                                                    <th>操作</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr v-for="(item, index ) in mydata.hotProduct">
-                                                    <td v-cloak>{{index+1}}</td>
-                                                    <td v-cloak>{{item.p.productTitle}}</td>
-                                                    <td v-cloak>{{item.sumformat}}</td>
-                                                    <td v-cloak>{{((item.sum/item.p.targetAmount)*100).toFixed(1) +"%"}}
-                                                    </td>
-                                                    <td v-cloak>{{item.count}}</td>
-                                                    <td v-cloak><a href="./PdetailsView.html"
-                                                            class="btn btn-outline-success"
-                                                            v-on:click="setsessionStorage(item.p.productId)">查看<i
-                                                                class="fa fa-search" aria-hidden="true"></i></a></td>
-                                                </tr>
-                                                <!-- <tr>
-                                                <th>999</th>
-                                                <td>Mason</td>
-                                                <td>NT$999</td>
-                                                <td>100%</td>
-                                                <td>999</td>
-                                                <td><a href="./PdetailsView.html" class="btn btn-outline-success">查看<i
-                                                            class="fa fa-search" aria-hidden="true"></i></a></td>
-                                            </tr> -->
-                                            </tbody>
-                                        </table>
+                                        <div style="overflow-y: auto; max-width: 100%; overflow-x: auto; max-height: 480px;">
+                                            <table class="table table-hover" style="width: 1000px;">
+                                                <thead>
+                                                    <tr class="">
+                                                        <th class="col-1">排名</th>
+                                                        <th>提案名稱</th>
+                                                        <th>目前金額</th>
+                                                        <th class="col-2">目前進度</th>
+                                                        <th class="col-2">贊助人數</th>
+                                                        <th class="col-2">操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <div>
+                                                    <tbody >
+                                                        <tr v-for="(item, index ) in mydata.hotProduct">
+                                                            <td v-cloak>{{index+1}}</td>
+                                                            <td v-cloak>{{item.p.productTitle}}</td>
+                                                            <td v-cloak>{{item.sumformat}}</td>
+                                                            <td v-cloak>
+                                                                {{((item.sum/item.p.targetAmount)*100).toFixed(1)
+                                                                +"%"}}
+                                                            </td>
+                                                            <td v-cloak>{{item.count}}</td>
+                                                            <td v-cloak><a href="./PdetailsView.html"
+                                                                    class="btn btn-outline-success"
+                                                                    v-on:click="setsessionStorage(item.p.productId)">查看<i
+                                                                        class="fa fa-search" aria-hidden="true"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- <tr>
+                                                        <th>999</th>
+                                                        <td>Mason</td>
+                                                        <td>NT$999</td>
+                                                        <td>100%</td>
+                                                        <td>999</td>
+                                                        <td><a href="./PdetailsView.html"
+                                                                class="btn btn-outline-success">查看<i
+                                                                    class="fa fa-search" aria-hidden="true"></i></a>
+                                                        </td>
+                                                    </tr> -->
+                                                    </tbody>
+                                                </div>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
 
 
-                                <div class=" col-12">
+                                <div class=" col-4">
                                     <div class="card shadow mb-4">
 
                                         <div
                                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                            <h2 class="m-0 font-weight-bold text-success">新進會員</h2>
+                                            <h1 class="m-0 font-weight-bold text-success">新進會員</h1>
 
                                         </div>
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr class="">
-                                                    <th class="col-1">頭像</th>
-                                                    <th class="col-2">姓名</th>
-                                                    <th class="">簡介</th>
-                                                    <th class="col-2">操作</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr v-if="mydata.newmember == 0">
-                                                    <td colspan="4">近期無新增會員</td>
-                                                </tr>
-                                                <tr v-for="item in mydata.newmember">
-                                                    <td v-cloak><img :src="item.userPhoto" alt=""
-                                                            class="imgset rounded-circle border-secondar"></td>
-                                                    <td v-cloak>{{item.userName}}</td>
-                                                    <td v-cloak>{{item.userIntro}}</td>
-                                                    <td v-cloak><a class="btn btn-outline-success" data-toggle="modal"
-                                                            data-target="#exampleModal"
-                                                            v-on:click="getuserinfo(item.userId)">查看<i
-                                                                class="fa fa-search" aria-hidden="true"></i></a></td>
-                                                </tr>
+                                        <div style="overflow-x: auto; max-height: 480px; ">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr class="">
+                                                        <th class="col-1">頭像</th>
+                                                        <th class="col-2">姓名</th>
+                                                        <!-- <th class="">簡介</th> -->
+                                                        <th class="col-2">操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-if="mydata.newmember == 0">
+                                                        <td colspan="4">近期無新增會員</td>
+                                                    </tr>
+                                                    <tr v-for="item in mydata.newmember">
+                                                        <td v-cloak><img :src="item.userPhoto" alt=""
+                                                                class="imgset rounded-circle border-secondar"></td>
+                                                        <td v-cloak>{{item.userName}}</td>
+                                                        <!-- <td v-cloak>{{item.userIntro}}</td> -->
+                                                        <td v-cloak><a class="btn btn-outline-success"
+                                                                data-toggle="modal" data-target="#exampleModal"
+                                                                v-on:click="getuserinfo(item.userId)">查看<i
+                                                                    class="fa fa-search" aria-hidden="true"></i></a>
+                                                        </td>
+                                                    </tr>
 
 
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -244,7 +257,7 @@
                     </div>
                     <div class="modal-body px-3">
                         <div class="row  justify-content-center mb-3">
-                            <div class="col-5">1</div>
+                            <div class="col-5 "><img :src="userinfo.userPhoto" style="width: 200px;height: 200px;object-fit: cover;" alt=""></div>
                             <div class="col-6 ">
                                 <div class="">
                                     <label for="">會員編號:</label><br>
@@ -353,12 +366,12 @@
                 axios.get('/api/back/index').then((response) => {
                     // console.log(response.data[0])
                     this.mydata = response.data[0]
+                    setTimeout(() => loader.hide(), 0.5 * 1000);
                 })
                 axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
 
                     this.employeeinfo = res.data
                     console.log(this.employeeinfo)
-                    setTimeout(() => loader.hide(), 0.5 * 1000);
                 })
             }
         })

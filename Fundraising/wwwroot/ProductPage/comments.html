@@ -37,13 +37,17 @@
     <div class="thiscomments">
         <div class="container" style="position:relative">
             <div>
-                <div style="position: absolute; z-index: 100; right: 0px; text-align: right;">
+                <div style="position: fixed; z-index: 1021; right: 10px; text-align: right;">
                     <br>
+                    <!--<div style="border-style:outset; border-radius:6px; background-color: black; color:white; display: block; width: 100px">
+                        <b>123<br></b>
+                        <b>123</b>
+                    </div>-->
                     <div v-for="(me,key) in meno">
-                        <div :class="'mb-1'+' '+'al'+key" style="background-color: #DFFFDF ;display:block">
-                            <span>{{me.title}}</span>
-                            <br>
-                            <span>{{me.show}}</span>
+                        <div :class="'mb-1'+' '+'al'+key" style="border-style: outset; border-radius: 6px; background-color: black; color: white; display: block">
+                            <b>{{me.whose}}，{{me.show}}<br><br></b>
+                            <b>來自: {{me.title}}</b>
+
                         </div>
                     </div>
                 </div>
@@ -138,7 +142,7 @@
                 <div class="d-flex bd-highlight mb-3" style="display:none;">
                     <img style="height: 30px; width: 30px;" :src="item.userphoto" alt="">
                     <div class="p-2 bd-highlight"><a href="#" style="text-decoration: none;">{{item.username}}</a></div>
-                    <div class="p-2 bd-highlight" style="height: 35px; background-color: #ABFFAB ">留言者</div>
+                    <div class="p-1 bd-highlight" style="border: solid #8CEA00; color: #548C00; height: 35px; ">留言人</div>
                     <div class="ms-auto p-2 bd-highlight">
                         <div v-if="item.userid == whouser" class="btn-group dropup">
                             <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
@@ -177,7 +181,7 @@
                     <div class="d-flex bd-highlight mb-3">
                         <div style="height: 30px; width: 30px;"></div>
                         <div class="p-2 bd-highlight"><a href="#" style="text-decoration: none;">{{itemm.username}}</a></div>
-                        <div class="p-2 bd-highlight" style="height:35px; background-color: #B0C4DE">回覆者</div>
+                        <div class="p-1 bd-highlight" style="border: solid #7373B9; color: #7373B9; height: 35px; ">回覆人</div>
                         <div class="ms-auto p-2 bd-highlight">
                             <div v-if="itemm.userid == whouser" class="btn-group dropup">
                                 <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
@@ -222,14 +226,14 @@
                 </div>
                 <div class="mb-3" style="display:flex" v-if="whouser != ''">
                     <textarea v-on:click="move2(key)" id="textinput2" :class="'wang'+key + ' ' + 'form-control'" style="width: 95%;" placeholder="回覆留言..."></textarea>
-                    <button v-on:click="addanswer(item.commentID,key)" class="fas fa-users-class" style="width: 5%;"><i class="fa-regular fa-paper-plane"></i></button>
+                    <button v-on:click="addanswer(item.commentID,key,item.userid)" class="fas fa-users-class" style="width: 5%;"><i class="fa-regular fa-paper-plane"></i></button>
                     <i class="fa-solid fa-paper-plane-top"></i>
                 </div>
             </div>
         </div>
         <div class="container" v-else>
             <br>
-            <h1>還沒有人流言。</h1>
+            <h1>還沒有人留言。</h1>
         </div>
     </div>
 
@@ -304,8 +308,8 @@
                     })
                     .catch((err) => console.error(err.toString()));
 
-                this.connection.on("ReceiveMessage", (producttitle) => {
-                    this.meno.push({ "show": "有新的回應囉", "title": producttitle });
+                this.connection.on("ReceiveMessage", (producttitle,word1) => {
+                    this.meno.push({ "show": "有新的回應囉", "title": producttitle, "whose": word1});
                     setTimeout(function () {
                         setTimeout(function () {
                             dis.style.display = "none"
@@ -344,17 +348,6 @@
             },
             methods: {
                 addcomment: function () {
-                    this.connection
-                        .invoke(
-                            "SendMessageToUser",
-                            this.productuserid,
-                            this.productList[0].producttitle
-                        )
-                        .catch((err) => console.error(err.toString()));
-                 /*   this.meno.push("我要留言");*/
-                    /*  console.log(typeof this.whouser);*/
-                    //this.message = "";
-
                     this.addcommentList["UserID"] = parseInt(this.whouser);
                     this.addcommentList["ProductID"] = parseInt(sessionStorage.getItem("productId"));
                     this.addcommentList["CommentContent"] = document.getElementById('textinput1').value;
@@ -368,6 +361,17 @@
                         .then((value) => {
                             switch (value) {
                                 case "確定":
+                                    this.connection
+                                        .invoke(
+                                            "SendMessageToUser",
+                                            this.productuserid,
+                                            this.productList[0].producttitle,
+                                            '您的專案'
+                                        )
+                                        .catch((err) => console.error(err.toString()));
+                 /*   this.meno.push("我要留言");*/
+                                    /*  console.log(typeof this.whouser);*/
+                    //this.message = "";
                                     $.ajax({
                                         type: 'POST',
                                         url: '/api/SiComments/',
@@ -390,13 +394,23 @@
                             }
                         });
                 },
-                addanswer: function (r, e) {
+                addanswer: function (r, e, w) {//item.commentID,key
+                    this.connection
+                        .invoke(
+                            "SendMessageToCom",
+                            w,
+                            this.productList[0].producttitle,
+                            "您的留言"
+                        )
+                        .catch((err) => console.error(err.toString()));
+                 /*   this.meno.push("我要留言");*/
+                    /*  console.log(typeof this.whouser);*/
+                    //this.message = "";
                     var thisidclear = e;
                     this.addanswerList["UserID"] = parseInt(this.whouser);
                     this.addanswerList["CommentID"] = r;
                     this.addanswerList["AnswerContent"] = document.querySelector(".wang" + e).value;
-                    console.log(document.querySelector(".wang" + e).value)
-                    console.log(e)
+               /*     console.log(document.querySelector(".wang" + e).value)*/
                     $.ajax({
                         type: 'POST',
                         url: '/api/SiAnswers/',

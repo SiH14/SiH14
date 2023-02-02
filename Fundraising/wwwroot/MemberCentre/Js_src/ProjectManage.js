@@ -8,6 +8,8 @@ const app = new Vue({
     showed: "全部贊助",
     changed: [],
     changedData: [],
+    messageContent: "",
+    chatting: "",
   },
   components: {
     Loading: VueLoading,
@@ -35,7 +37,16 @@ const app = new Vue({
         setTimeout(() => loader.hide(), 600);
       });
 
-    // 取消id事件監聽資料帶入
+    // modal觸發事件
+    // 傳送訊息
+    this.$refs.chat.addEventListener("show.bs.modal", (event) => {
+      let button = event.relatedTarget;
+      let thisuser = button.getAttribute("data-bs-whatever");
+      axios.get("/api/UserInfo/name/" + thisuser).then((res) => {
+        this.chatting = res.data;
+      });
+    });
+    // 查看訂單詳細
     this.$refs.box.addEventListener("show.bs.modal", (event) => {
       let button = event.relatedTarget;
       let thisorder = button.getAttribute("data-bs-whatever");
@@ -100,5 +111,7 @@ const app = new Vue({
         }
       });
     },
+
+    send() {},
   },
 });

@@ -77,6 +77,17 @@ namespace Fundraising.Controllers
 
 
 
+        //拿取userName
+        // GET: api/UserInfo/name/5
+        [HttpGet("name/{id}")]
+        public async Task<ActionResult<dynamic>> GetName(int id)
+        {
+            var query = from user in _context.Users
+                        where user.UserId == id
+                        select user.UserName;
+            return await query.FirstOrDefaultAsync();
+        }
+
         [HttpGet("ProductList/{id}")]
         public async Task<ActionResult<dynamic>> GetProduct(int id)
         {

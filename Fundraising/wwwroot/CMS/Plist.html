@@ -81,6 +81,7 @@
                                                             v-model="input.productStateId">
                                                             <option value="全部">全部</option>
                                                             <option value="審核中">審核中</option>
+                                                            <option value="審核不通過">審核不通過</option>
                                                             <option value="募資中">募資中</option>
                                                             <option value="募資失敗">募資失敗</option>
                                                             <option value="募資成功">募資成功</option>
@@ -240,7 +241,7 @@
                 titlechange() {
                     if (this.input.productTitle) {
                         return this.StateIdchange.filter(item => {
-                            return item.p.productTitle.indexOf(this.input.productTitle) !== -1
+                            return item.p.productTitle.toLowerCase().indexOf(this.input.productTitle.toLowerCase()) !== -1
                         })
                     } else {
 
@@ -250,7 +251,7 @@
                 Idchange() {
                     if (this.input.productId) {
                         return this.titlechange.filter(item => {
-                            return item.p.productId == this.input.productId
+                            return item.p.productId== this.input.productId
                         })
                     } else {
 

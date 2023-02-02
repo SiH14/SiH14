@@ -360,6 +360,7 @@
                     // console.log(this.editemployee.employeeId)
                     axios.get(`/api/employees/${this.editemployee.employeeId}`).then(res => {
                         let neweditemployee = res.data
+                        neweditemployee.name = this.editemployee.name
                         neweditemployee.email = this.editemployee.email;
                         neweditemployee.phone = this.editemployee.phone;
                         neweditemployee.password = this.editemployee.password;

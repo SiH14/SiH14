@@ -39,7 +39,7 @@ let header = `<nav class="headernav navbar navbar-expand-lg navbar-light bg-whit
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <h4 class="modal-title">語音偵測</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        <button type="button" class="theX btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
                     <!-- Modal body -->
@@ -114,6 +114,11 @@ let footer = `<footer class="text-dark pt-5 pb-4">
 
     </div>
     <div class="footericon">
+    <div>
+    <a href="../ProductPage/mymainpage.html">
+    <img style="margin-top:-18px" id="brand" src="../img/brand.png" alt="">
+    </a>
+    </div>
     <a href="" style="text-decoration:none;">
             <img src="../img/fbicon.png" alt="">
         </a>
@@ -150,6 +155,7 @@ queryheader2.innerHTML += `<link rel="stylesheet" href="../layout/layout.css"/>`
 
 function gotofilter() {
     sessionStorage.setItem("topage", 0);
+    sessionStorage.setItem("sele", 1);
 }
 
 // searchbar
@@ -165,17 +171,34 @@ icon.onclick = function () {
 clear.onclick = function () {
     document.getElementById('mysearch').value = ''
 }
-
+let mic = 0;
 let voicesearch = document.querySelector(".voicesearch");
+let theX = document.querySelector(".theX");
 voicesearch.onclick = function () {
-    if (document.querySelector(".voicesearchtext").innerText != "請再說一次.") {
-        setTimeout(wangaa, 6500);
-    }
+    //if (document.querySelector(".voicesearchtext").innerText == "請再說一次.") {
+    //    alert("請開麥克風")
+    //}
+    document.querySelector(".voicesearchtext").innerHTML = "請開始說話..."
+    mic = 1
+    setTimeout(wangaa, 6500);
+}
+
+theX.onclick = function () {
+    mic = 1;
 }
 
 function wangaa() {
-    sessionStorage.setItem("filterans", document.getElementById("mysearch").value);
-    window.location = "/productpage/filterans.html";
+    if (mic == 1) {
+    }
+    else {
+        if (document.querySelector(".voicesearchtext").innerHTML == "檢查麥克風 再說一次") {
+        /*    window.location = "/productpage/filter.html";*/
+        }
+        else {
+            sessionStorage.setItem("filterans", document.getElementById("mysearch").value);
+            window.location = "/productpage/filterans.html";
+        }
+    }
 }
 
 let mysearchkeydown = document.getElementById("mysearch");
@@ -187,7 +210,7 @@ mysearchkeydown.onkeydown = function (e) {
 
         //我加入搜尋
         sessionStorage.setItem("filterans", document.getElementById("mysearch").value);
-        window.location = "/productpage/filterans.html";
+        window.location = "../productpage/filterans.html";
         //我加入搜尋
     }
 }
