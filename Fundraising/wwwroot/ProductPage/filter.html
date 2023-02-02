@@ -246,7 +246,6 @@
         var authorizationToken;
         var SpeechSDK;
         var recognizer;
-
         document.addEventListener("DOMContentLoaded", function () {
             startRecognizeOnceAsyncButton = document.querySelector('.voicesearch');
             subscriptionKey = document.getElementById("subscriptionKey");
@@ -282,7 +281,7 @@
                         /*          phraseDiv.innerHTML += result.text;*/
                         window.console.log(result);
                         const textresult = result.text
-                        document.getElementById("mysearch").value = result.text.substring(0, textresult.length - 1);
+                    /*    document.getElementById("mysearch").value = result.text.substring(0, textresult.length - 1);*/
                         document.querySelector(".voicesearchtext").innerHTML = result.text.substring(0, textresult.length - 1);
                         recognizer.close();
                         recognizer = undefined;
@@ -291,8 +290,8 @@
                         startRecognizeOnceAsyncButton.disabled = false;
                         /*    phraseDiv.innerHTML += err;*/
                         window.console.log(err);
-                        document.getElementById("mysearch").value = "請再說一次.";
-                        document.querySelector(".voicesearchtext").innerHTML = "請再說一次.";
+                     /*   document.getElementById("mysearch").value = "請再說一次.";*/
+                        document.querySelector(".voicesearchtext").innerHTML = "檢查麥克風 再說一次";
                         recognizer.close();
                         recognizer = undefined;
                     });
