@@ -24,18 +24,18 @@ namespace Fundraising.Hubs
             await Groups.AddToGroupAsync(Context.ConnectionId, userId);
         }
 
-        public Task SendMessageToUser(int productuserid,string producttitle)
+        public Task SendMessageToUser(int productuserid,string producttitle,string word1)
         {
             // 透過Groups.SendAsync將訊息傳送給特定群組
             string wuser = productuserid.ToString();
-            return Clients.Group(wuser).SendAsync("ReceiveMessage", producttitle);
+            return Clients.Group(wuser).SendAsync("ReceiveMessage", producttitle , word1);
         }
 
-        public Task SendMessageToCom(int comuserid, string producttitle)
+        public Task SendMessageToCom(int comuserid, string producttitle, string word1)
         {
             // 透過Groups.SendAsync將訊息傳送給特定群組
             string wuser = comuserid.ToString();
-            return Clients.Group(wuser).SendAsync("ReceiveMessage", producttitle);
+            return Clients.Group(wuser).SendAsync("ReceiveMessage", producttitle , word1);
         }
 
 

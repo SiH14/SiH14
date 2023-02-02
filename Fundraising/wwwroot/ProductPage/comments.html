@@ -37,15 +37,17 @@
     <div class="thiscomments">
         <div class="container" style="position:relative">
             <div>
-                <div style="position: absolute; z-index: 100; right: 0px; text-align: right;">
+                <div style="position: fixed; z-index: 1021; right: 10px; text-align: right;">
                     <br>
+                    <!--<div style="border-style:outset; border-radius:6px; background-color: black; color:white; display: block; width: 100px">
+                        <b>123<br></b>
+                        <b>123</b>
+                    </div>-->
                     <div v-for="(me,key) in meno">
-                        <div :class="'mb-1'+' '+'al'+key" style="background-color: #DFFFDF ;display:block">
-                            <span>{{me.title}}</span>
-                            <br>
-                            <span>{{me.show}}</span>
-                            <br>
-                            <span>{{me.whose}}</span>
+                        <div :class="'mb-1'+' '+'al'+key" style="border-style: outset; border-radius: 6px; background-color: black; color: white; display: block">
+                            <b>{{me.whose}}，{{me.show}}<br><br></b>
+                            <b>來自: {{me.title}}</b>
+
                         </div>
                     </div>
                 </div>
@@ -306,8 +308,8 @@
                     })
                     .catch((err) => console.error(err.toString()));
 
-                this.connection.on("ReceiveMessage", (producttitle) => {
-                    this.meno.push({ "show": "有新的回應囉", "title": producttitle });
+                this.connection.on("ReceiveMessage", (producttitle,word1) => {
+                    this.meno.push({ "show": "有新的回應囉", "title": producttitle, "whose": word1});
                     setTimeout(function () {
                         setTimeout(function () {
                             dis.style.display = "none"
@@ -363,7 +365,8 @@
                                         .invoke(
                                             "SendMessageToUser",
                                             this.productuserid,
-                                            this.productList[0].producttitle
+                                            this.productList[0].producttitle,
+                                            '您的專案'
                                         )
                                         .catch((err) => console.error(err.toString()));
                  /*   this.meno.push("我要留言");*/
@@ -396,7 +399,8 @@
                         .invoke(
                             "SendMessageToCom",
                             w,
-                            this.productList[0].producttitle
+                            this.productList[0].producttitle,
+                            "您的留言"
                         )
                         .catch((err) => console.error(err.toString()));
                  /*   this.meno.push("我要留言");*/
