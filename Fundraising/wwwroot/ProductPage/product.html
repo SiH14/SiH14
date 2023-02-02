@@ -171,15 +171,20 @@
                 tolfaq:0
 
             },
-            mounted: function () {
+            beforeMount() {
 
+            }
+            ,
+            mounted: function () {
                 /* document.querySelector('.follow').style.width = '10%';*/
+                var inwhouser = 0;
                 $.ajax({
                     type: 'Get',
                     url: '/api/login/getuserid',
                     success: function (e) {
                         console.log(e)
                         app.whouser = e
+                        inwhouser = e
                         /*    console.log(e[0].productcontent)*/
                     }
                 })
@@ -200,19 +205,24 @@
                         /*    console.log(e[0].productcontent)*/
                     }
                 })
+                //$.ajax({
+                //    type: 'Get',
+                //    url: '/api/SiFollowings/' + parseInt(inwhouser) + '/' + sessionStorage.getItem("productId"),
+                //    error: function () {
+                //    },
+                //    success: function (e) {
+                //        console.log(e);
+                //    }
+                //})
                 $.ajax({
                     type: 'Get',
                     url: '/api/Login/followuserid/' + sessionStorage.getItem("productId"),
                     success: function (e) {
                         /* app.followList = e;*/
                         app.followList = parseInt(e)
-                        console.log(e);
-                        console.log(555);
+                        console.log(e)
                     },
                     error: function (e) {
-                        /*     console.log(app.followList);*/
-                        console.log(e);
-                        console.log(444);
                     }
                 })
                 $.ajax({

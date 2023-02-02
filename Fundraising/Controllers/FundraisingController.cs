@@ -196,6 +196,30 @@ namespace Fundraising.Controllers
                 query = query.Skip(topage * 9).Take(9);
                 return await query.ToListAsync();
             }
+            else if (sele == 5)
+            {
+                var query = from o in combine
+                            join product in _context.Products on o.ProductId equals product.ProductId
+                            join user in _context.Users on product.UserId equals user.UserId
+                            where product.ProductStateId == 3 && product.Endtime < DateTime.Now && o.nowmoney > product.TargetAmount
+                            orderby o.nowperson descending
+                            select new
+                            {
+                                ProductId = o.ProductId,
+                                UserName = user.UserName,
+                                ProductTitle = product.ProductTitle,
+                                coverphoto = product.Coverphoto,
+                                CurrentAmount = o.nowmoney,
+                                TargetAmount = product.TargetAmount,
+                                Startime = product.Startime,
+                                Endtime = product.Endtime,
+                                nowperson = o.nowperson,
+                                days = 0,
+                                percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
+                            };
+                query = query.Skip(topage * 9).Take(9);
+                return await query.ToListAsync();
+            }
             queryy = queryy.Skip(topage * 9).Take(9);
             return await queryy.ToListAsync();
         }
@@ -849,6 +873,105 @@ namespace Fundraising.Controllers
             {
                 tolpage = query / 9;
                 return Content(tolpage.ToString());
+            }
+            else
+            {
+                tolpage = (query / 9) + 1;
+                return Content(tolpage.ToString());
+            }
+        }
+
+        [HttpGet("successpage")]//總頁數
+        public IActionResult GetsuccesspageList()
+        {
+            var addprice = from p in _context.Plans
+                           join o in _context.Orders on p.PlanId equals o.PlanId
+                           //group p by new {p.ProductId} into g
+                           where o.OrderStateId != 5 && o.OrderStateId != 4
+                           select new
+                           {
+                               ProductId = p.ProductId,
+                               toll = (p.PlanPrice + o.AddSponsorship)
+                           };
+
+            var sumprice = from add in addprice
+                           group add by new { add.ProductId } into g
+                           //where p.ProductId == 15
+                           select new
+                           {
+                               ProductId = g.Key.ProductId,
+                               toll = g.Sum(ap => ap.toll)
+                           };
+
+            var countplan = from p in _context.Plans
+                            join o in _context.Orders on p.PlanId equals o.PlanId
+                            group p by new { p.ProductId } into g
+                            select new
+                            {
+                                ProductId = g.Key.ProductId,
+                                Coun = g.Count()
+                            };
+
+            var combinesum = from p in _context.Products
+                             join sp in sumprice on p.ProductId equals sp.ProductId into ps
+                             from sp in ps.DefaultIfEmpty()
+                             select new
+                             {
+                                 ProductId = p.ProductId,
+                                 nowmoney = sp.toll == null ? 0 : sp.toll
+                             };
+
+            var combine = from o in combinesum
+                          join c in countplan on o.ProductId equals c.ProductId into ps
+                          from c in ps.DefaultIfEmpty()
+                          select new
+                          {
+                              ProductId = o.ProductId,
+                              nowmoney = o.nowmoney,
+                              nowperson = c.Coun == null ? 0 : c.Coun
+                          };
+
+            var queryy = from o in combine
+                         join product in _context.Products on o.ProductId equals product.ProductId
+                         join user in _context.Users on product.UserId equals user.UserId
+                         where product.ProductStateId == 3
+                         orderby o.nowmoney descending
+                         select new
+                         {
+                             ProductId = o.ProductId,
+                             UserName = user.UserName,
+                             ProductTitle = product.ProductTitle,
+                             coverphoto = product.Coverphoto,
+                             CurrentAmount = o.nowmoney,
+                             TargetAmount = product.TargetAmount,
+                             Startime = product.Startime,
+                             Endtime = product.Endtime,
+                             nowperson = o.nowperson,
+                             days = (product.Endtime - DateTime.Now).Days + 1,
+                             percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
+                         };
+
+            var query = (from o in combine
+                        join product in _context.Products on o.ProductId equals product.ProductId
+                        join user in _context.Users on product.UserId equals user.UserId
+                        where product.ProductStateId == 3 && product.Endtime < DateTime.Now && o.nowmoney > product.TargetAmount
+                        orderby o.nowperson descending
+                        select o).Count();
+
+            //var query = _context.Products.Where(x => x.ProductStateId == 3 && x.Endtime < DateTime.Now).Count();
+            var tolpage = 0;
+            if (query / 9 == 0)
+            {
+                if (query<9)
+                {
+                    tolpage = 1;
+                    return Content(tolpage.ToString());
+                }
+                else
+                {
+                    tolpage = query / 9;
+                    return Content(tolpage.ToString());
+                }
             }
             else
             {

@@ -155,6 +155,7 @@ queryheader2.innerHTML += `<link rel="stylesheet" href="../layout/layout.css"/>`
 
 function gotofilter() {
     sessionStorage.setItem("topage", 0);
+    sessionStorage.setItem("sele", 1);
 }
 
 // searchbar
