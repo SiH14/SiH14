@@ -44,6 +44,8 @@
                             <span>{{me.title}}</span>
                             <br>
                             <span>{{me.show}}</span>
+                            <br>
+                            <span>{{me.whose}}</span>
                         </div>
                     </div>
                 </div>
@@ -222,7 +224,7 @@
                 </div>
                 <div class="mb-3" style="display:flex" v-if="whouser != ''">
                     <textarea v-on:click="move2(key)" id="textinput2" :class="'wang'+key + ' ' + 'form-control'" style="width: 95%;" placeholder="回覆留言..."></textarea>
-                    <button v-on:click="addanswer(item.commentID,key)" class="fas fa-users-class" style="width: 5%;"><i class="fa-regular fa-paper-plane"></i></button>
+                    <button v-on:click="addanswer(item.commentID,key,item.userid)" class="fas fa-users-class" style="width: 5%;"><i class="fa-regular fa-paper-plane"></i></button>
                     <i class="fa-solid fa-paper-plane-top"></i>
                 </div>
             </div>
@@ -344,17 +346,6 @@
             },
             methods: {
                 addcomment: function () {
-                    this.connection
-                        .invoke(
-                            "SendMessageToUser",
-                            this.productuserid,
-                            this.productList[0].producttitle
-                        )
-                        .catch((err) => console.error(err.toString()));
-                 /*   this.meno.push("我要留言");*/
-                    /*  console.log(typeof this.whouser);*/
-                    //this.message = "";
-
                     this.addcommentList["UserID"] = parseInt(this.whouser);
                     this.addcommentList["ProductID"] = parseInt(sessionStorage.getItem("productId"));
                     this.addcommentList["CommentContent"] = document.getElementById('textinput1').value;
@@ -368,6 +359,16 @@
                         .then((value) => {
                             switch (value) {
                                 case "確定":
+                                    this.connection
+                                        .invoke(
+                                            "SendMessageToUser",
+                                            this.productuserid,
+                                            this.productList[0].producttitle
+                                        )
+                                        .catch((err) => console.error(err.toString()));
+                 /*   this.meno.push("我要留言");*/
+                                    /*  console.log(typeof this.whouser);*/
+                    //this.message = "";
                                     $.ajax({
                                         type: 'POST',
                                         url: '/api/SiComments/',
@@ -390,13 +391,22 @@
                             }
                         });
                 },
-                addanswer: function (r, e) {
+                addanswer: function (r, e, w) {//item.commentID,key
+                    this.connection
+                        .invoke(
+                            "SendMessageToCom",
+                            w,
+                            this.productList[0].producttitle
+                        )
+                        .catch((err) => console.error(err.toString()));
+                 /*   this.meno.push("我要留言");*/
+                    /*  console.log(typeof this.whouser);*/
+                    //this.message = "";
                     var thisidclear = e;
                     this.addanswerList["UserID"] = parseInt(this.whouser);
                     this.addanswerList["CommentID"] = r;
                     this.addanswerList["AnswerContent"] = document.querySelector(".wang" + e).value;
-                    console.log(document.querySelector(".wang" + e).value)
-                    console.log(e)
+               /*     console.log(document.querySelector(".wang" + e).value)*/
                     $.ajax({
                         type: 'POST',
                         url: '/api/SiAnswers/',

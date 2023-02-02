@@ -31,6 +31,13 @@ namespace Fundraising.Hubs
             return Clients.Group(wuser).SendAsync("ReceiveMessage", producttitle);
         }
 
+        public Task SendMessageToCom(int comuserid, string producttitle)
+        {
+            // 透過Groups.SendAsync將訊息傳送給特定群組
+            string wuser = comuserid.ToString();
+            return Clients.Group(wuser).SendAsync("ReceiveMessage", producttitle);
+        }
+
 
         public override async Task OnConnectedAsync()
         {
