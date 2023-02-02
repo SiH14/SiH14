@@ -63,7 +63,7 @@ namespace Fundraising.Controllers
                           };
 
 
-            var orderDetail = from order in _context.Orders
+            var orderDetail = (from order in _context.Orders
                               join plan in _context.Plans on order.PlanId equals plan.PlanId
                               join product in _context.Products on plan.ProductId equals product.ProductId
                               join csum in prodsum on product.ProductId equals csum.productId
@@ -88,7 +88,7 @@ namespace Fundraising.Controllers
                                   AddSponsorship = order.AddSponsorship,
                                   puserId = product.UserId
 
-                              };
+                              }).OrderByDescending(x => x.orderId);
             return await orderDetail.ToListAsync();
         }
 
