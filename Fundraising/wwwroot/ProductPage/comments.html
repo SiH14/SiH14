@@ -142,7 +142,7 @@
                 <div class="d-flex bd-highlight mb-3" style="display:none;">
                     <img style="height: 30px; width: 30px;" :src="item.userphoto" alt="">
                     <div class="p-2 bd-highlight"><a href="#" style="text-decoration: none;">{{item.username}}</a></div>
-                    <div class="p-2 bd-highlight" style="height: 35px; background-color: #ABFFAB ">留言者</div>
+                    <div class="p-1 bd-highlight" style="border: solid #8CEA00; color: #548C00; height: 35px; ">留言人</div>
                     <div class="ms-auto p-2 bd-highlight">
                         <div v-if="item.userid == whouser" class="btn-group dropup">
                             <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
@@ -181,7 +181,7 @@
                     <div class="d-flex bd-highlight mb-3">
                         <div style="height: 30px; width: 30px;"></div>
                         <div class="p-2 bd-highlight"><a href="#" style="text-decoration: none;">{{itemm.username}}</a></div>
-                        <div class="p-2 bd-highlight" style="height:35px; background-color: #B0C4DE">回覆者</div>
+                        <div class="p-1 bd-highlight" style="border: solid #7373B9; color: #7373B9; height: 35px; ">回覆人</div>
                         <div class="ms-auto p-2 bd-highlight">
                             <div v-if="itemm.userid == whouser" class="btn-group dropup">
                                 <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
