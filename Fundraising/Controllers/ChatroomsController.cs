@@ -46,29 +46,27 @@ namespace Fundraising.Controllers
         [HttpGet("Chats/{id}")]
         public async Task<ActionResult<dynamic>> GetChats(int id)
         {
-            
-            
+
+
             var chatroom = from chats in _context.Chatrooms
-                        where chats.UserId1 == id || chats.UserId2 == id
-                        select new
-                        {
-                            chatroomId=chats.ChatroomId,
-                            userId=chats.UserId1==id? chats.UserId2:chats.UserId1,
-                            
-                        };
+                           where chats.UserId1 == id || chats.UserId2 == id
+                           select new
+                           {
+                               chatroomId = chats.ChatroomId,
+                               userId = chats.UserId1 == id ? chats.UserId2 : chats.UserId1,
+
+                           };
             var query = from chats in chatroom
-                        join user in _context.Users on chats.userId equals user.UserId 
+                        join user in _context.Users on chats.userId equals user.UserId
+                        orderby _context.Messages.OrderByDescending(x => x.SentTime).Where(x => x.ChatroomId == chats.chatroomId).Select(x => x.MessageId).First() descending
                         select new
                         {
-                            chatroomId= chats.chatroomId,
-                            userId=chats.userId,
-                            userName=user.UserName,
-                            userPhoto=user.UserPhoto,
-lastMsg= _context.Messages.OrderByDescending(x => x.SentTime).Where(x => x.ChatroomId == chats.chatroomId).Select(x => new {
-    ChatroomId = x.ChatroomId,
-    SentTime = x.SentTime,
-    MessageContent = x.MessageContent
-}).First()
+                            chatroomId = chats.chatroomId,
+                            userId = chats.userId,
+                            userName = user.UserName,
+                            userPhoto = user.UserPhoto,
+                            lastMsg = _context.Messages.OrderByDescending(x => x.SentTime).Where(x => x.ChatroomId == chats.chatroomId).Select(x => x.MessageContent).First(),
+                            lastTime = (_context.Messages.OrderByDescending(x => x.SentTime).Where(x => x.ChatroomId == chats.chatroomId).Select(x => x.SentTime.AddHours(8)).First()).ToString("yyyy-MM-dd HH:mm")
                         };
 
             return await query.ToListAsync();
@@ -76,7 +74,7 @@ lastMsg= _context.Messages.OrderByDescending(x => x.SentTime).Where(x => x.Chatr
 
         //拿取特定聊天室
         [HttpGet("Chat/{muid}/{tuid}")]
-        public async Task<ActionResult<dynamic>> GetChat(int muid,int tuid)
+        public async Task<ActionResult<dynamic>> GetChat(int muid, int tuid)
         {
             var query = from chats in _context.Chatrooms
                         where (chats.UserId1 == muid && chats.UserId2 == tuid) || (chats.UserId2 == muid && chats.UserId1 == tuid)
