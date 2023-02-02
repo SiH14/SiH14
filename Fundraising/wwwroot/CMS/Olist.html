@@ -58,36 +58,33 @@
                                     </div>
                                     <div class="row justify-content-center p-3">
                                         <div class="mb-3 col-12">
-                                            <form action="" class="py-4"
-                                                style=" position: relative; border: 1px solid #e3e6f0;">
-                                                <div class="row " style="line-height: 32px;">
-                                                    <p class="bg-white"
-                                                        style="position: absolute; top: -15px; left: 2%; font-size: 24px;">
-                                                        查詢條件
-                                                    </p>
-                                                    <div class="">
-                                                        <label class="px-3" for="">編號:</label>
-                                                        <input type="text" v-model="input.orderId">
-                                                    </div>
-                                                    <div class="">
-                                                        <label class="px-3" for="">提案名稱:</label>
-                                                        <input type="text" v-model="input.productTitle">
-                                                    </div>
-                                                    <div class="">
-                                                        <label class="px-3" for="">提案狀態:</label>
-                                                        <select name="" id="" style="width: 100px; height: 100%;"
-                                                            v-model="input.orderStateId">
-                                                            <option value="全部">全部</option>
-                                                            <option value="募資中">募資中</option>
-                                                            <option value="生產階段">生產階段</option>
-                                                            <option value="寄送階段">寄送階段</option>
-                                                            <option value="募資成功">募資成功</option>
-                                                            <option value="募資失敗">募資失敗</option>
-                                                            <option value="取消申請中">取消申請中</option>
-                                                            <option value="確認取消">確認取消</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                            <form>
+                                                <fieldset>
+                                                    <legend>查詢條件</legend>
+                                                    <div class="d-flex py-3">
+                                                        <div class="">
+                                                            <label class="px-3" for="">提案狀態:</label>
+                                                            <select name="" id="" style="width: 100px; height: 100%;"
+                                                                v-model="input.orderStateId">
+                                                                <option value="全部">全部</option>
+                                                                <option value="募資中">募資中</option>
+                                                                <option value="生產階段">生產階段</option>
+                                                                <option value="寄送階段">寄送階段</option>
+                                                                <option value="募資成功">募資成功</option>
+                                                                <option value="募資失敗">募資失敗</option>
+                                                                <option value="取消申請中">取消申請中</option>
+                                                                <option value="確認取消">確認取消</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="">
+                                                            <label class="px-3" for="">編號:</label>
+                                                            <input type="text" v-model="input.orderId">
+                                                        </div>
+                                                        <div class="">
+                                                            <label class="px-3" for="">提案名稱:</label>
+                                                            <input type="text" v-model="input.productTitle">
+                                                        </div>
+                                                </fieldset>
                                             </form>
                                         </div>
                                         <div class="col-12" id="myTabContent">

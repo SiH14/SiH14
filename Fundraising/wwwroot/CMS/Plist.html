@@ -59,49 +59,50 @@
                                     <div class="row justify-content-center p-3">
 
                                         <div class="mb-3 col-12">
-                                            <form class="py-4" style=" position: relative; border: 1px solid #e3e6f0;">
-                                                <div class="row " style="line-height: 32px;">
-                                                    <p class="bg-white"
-                                                        style="position: absolute; top: -15px; left: 2%; font-size: 24px;">
-                                                        篩選條件</p>
-                                                    <div class="">
-                                                        <label class="px-3" for="">編號:</label>
-                                                        <input type="text" id="productId" name="productId"
-                                                            v-model.trim="input.productId">
+                                            <form>
+                                                <fieldset>
+                                                    <legend>查詢條件</legend>
+                                                    <div class="d-flex py-3">
+                                                        <div class="">
+                                                            <label class="px-3" for="">提案狀態:</label>
+                                                            <select name="productStateId" id="productStateId"
+                                                                style="width: 100px; height: 100%;"
+                                                                v-model="input.productStateId">
+                                                                <option value="全部">全部</option>
+                                                                <option value="審核中">審核中</option>
+                                                                <option value="審核不通過">審核不通過</option>
+                                                                <option value="募資中">募資中</option>
+                                                                <option value="募資失敗">募資失敗</option>
+                                                                <option value="募資成功">募資成功</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="">
+                                                            <label class="px-3" for="">編號:</label>
+                                                            <input type="text" id="productId" name="productId"
+                                                                v-model.trim="input.productId">
+                                                        </div>
+                                                        <div class="">
+                                                            <label class="px-3" for="">提案名稱:</label>
+                                                            <input type="text" id="productTitle" name="productTitle"
+                                                                v-model.trim="input.productTitle">
+                                                        </div>
                                                     </div>
-                                                    <div class="">
-                                                        <label class="px-3" for="">提案名稱:</label>
-                                                        <input type="text" id="productTitle" name="productTitle"
-                                                            v-model.trim="input.productTitle">
-                                                    </div>
-                                                    <div class="">
-                                                        <label class="px-3" for="">提案狀態:</label>
-                                                        <select name="productStateId" id="productStateId"
-                                                            style="width: 100px; height: 100%;"
-                                                            v-model="input.productStateId">
-                                                            <option value="全部">全部</option>
-                                                            <option value="審核中">審核中</option>
-                                                            <option value="審核不通過">審核不通過</option>
-                                                            <option value="募資中">募資中</option>
-                                                            <option value="募資失敗">募資失敗</option>
-                                                            <option value="募資成功">募資成功</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                </fieldset>
                                             </form>
                                         </div>
                                         <div class="col-12">
+                                            <div v-cloak>查詢結果:共{{Idchange.length}}項</div>
                                             <div class="table-responsive">
                                                 <table class="table table-bordered table-hover" id="dataTable"
                                                     width="100%" cellspacing="0">
                                                     <thead>
                                                         <tr>
-                                                            <th class="col-1">編號</th>
+                                                            <th class="col-1">提案編號</th>
                                                             <th class="col-1">負責人</th>
                                                             <th>圖片</th>
                                                             <th>提案名稱</th>
                                                             <th class="col-1">狀態</th>
-                                                            <th  class="col-1">操作</th>
+                                                            <th class="col-1">操作</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -251,7 +252,7 @@
                 Idchange() {
                     if (this.input.productId) {
                         return this.titlechange.filter(item => {
-                            return item.p.productId== this.input.productId
+                            return item.p.productId == this.input.productId
                         })
                     } else {
 
@@ -261,40 +262,39 @@
             },
 
 
-            mounted() {
+            async mounted() {
                 let loader = this.$loading.show({
                     loader: 'dots'
                 });
-                axios.get('/api/back/ProductList')
-                    .then((response) => {
-                        Object.values(response.data)
-                        // console.log(response.data)
-                        response.data.forEach(e => {
-                            // console.log(e)
-                            if (e.p.productStateId == 1) {
-                                e.p.productStateId = "審核中"
-                            } else if (e.p.productStateId == 2) {
-                                e.p.productStateId = "審核不通過"
-                            } else if (e.p.productStateId == 3 && new Date(e.p.startime) < new Date() && new Date(e.p.endtime) > new Date()) {
-                                e.p.productStateId = "募資中"
-                            } else if (e.p.productStateId == 3 && new Date(e.p.endtime) < new Date() && e.sum > e.p.targetAmount) {
-                                e.p.productStateId = "募資成功"
-                            } else if (e.p.productStateId == 3 && new Date(e.p.endtime) < new Date() && e.sum < e.p.targetAmount) {
-                                e.p.productStateId = "募資失敗"
-                            }
-
-                            this.productlist = response.data
-                            setTimeout(() => loader.hide(), 0.5 * 1000);
-                        });
-                        // this.orderlist = response.data
-                        // console.log(response.data.length)
-                    })
                 axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
 
                     this.employeeinfo = res.data
                     console.log(this.employeeinfo)
 
                 })
+               await axios.get('/api/back/ProductList')
+                    .then((response) => {
+                        // Object.values(response.data)
+                        // // console.log(response.data)
+                        // response.data.forEach(e => {
+                        //     // console.log(e)
+                        //     if (e.p.productStateId == 1) {
+                        //         e.p.productStateId = "審核中"
+                        //     } else if (e.p.productStateId == 2) {
+                        //         e.p.productStateId = "審核不通過"
+                        //     } else if (e.p.productStateId == 3 && new Date(e.p.startime) < new Date() && new Date(e.p.endtime) > new Date()) {
+                        //         e.p.productStateId = "募資中"
+                        //     } else if (e.p.productStateId == 3 && new Date(e.p.endtime) < new Date() && e.sum > e.p.targetAmount) {
+                        //         e.p.productStateId = "募資成功"
+                        //     } else if (e.p.productStateId == 3 && new Date(e.p.endtime) < new Date() && e.sum < e.p.targetAmount) {
+                        //         e.p.productStateId = "募資失敗"
+                        //     }
+                        // });
+                        this.productlist = response.data
+                        setTimeout(() => loader.hide(), 0.5 * 1000);
+                        // this.orderlist = response.data
+                        // console.log(response.data.length)
+                    })
             }
         })
     </script>

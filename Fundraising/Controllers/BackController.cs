@@ -48,16 +48,15 @@ namespace 募資.Controllers
 
             return await _context.Orders.ToListAsync();
         }
-        //[HttpPost] api/back/login 登入頁面
         public class Login
         {
             public string employeeAccount { get; set; }
             public string employeePassword { get; set; }
         }
+        //[HttpPost] api/back/login 登入頁面
         [HttpPost("login")]
         public ActionResult Postlogin(Login login)
         {
-            //return login;
             var user = _context.Employees.Where(x => x.Account == login.employeeAccount && x.Password == login.employeePassword).SingleOrDefault();
             if (user == null)
             {
@@ -88,11 +87,10 @@ namespace 募資.Controllers
         [HttpGet("index")]
         public List<MyDtat> GetAction()
         {   //產品目前訂單金額加總
-            var prodsum = from product in _context.Products
-                          join plan in _context.Plans on product.ProductId equals plan.ProductId
+            var prodsum = from plan in _context.Plans
                           join order in _context.Orders on plan.PlanId equals order.PlanId
                           where order.OrderStateId != 5 && order.OrderStateId != 4
-                          group new { plan, order } by product.ProductId into s
+                          group new { plan, order } by plan.ProductId into s
                           select new
                           {
                               productId = s.Key,
@@ -107,7 +105,11 @@ namespace 募資.Controllers
             var pltotal = from pl in _context.Plans
                           join o in _context.Orders on pl.PlanId equals o.PlanId
                           group pl by pl.ProductId into g
-                          select new { ProductId = g.Key, Count = g.Count(), };
+                          select new 
+                          { 
+                            ProductId = g.Key,
+                            Count = g.Count(), 
+                          };
             //產品列表+產品訂單筆數
             var result = from p in _context.Products
                          join pl in pltotal on p.ProductId equals pl.ProductId
@@ -123,7 +125,7 @@ namespace 募資.Controllers
             var newmem = from u in _context.Users
                          where u.CreateDate > DateTime.Now.AddDays(-7)
                          select u;
-            List<MyDtat> myData = new List<MyDtat>() {
+            List<MyDtat> myData = new List<BackController.MyDtat>() {
             new MyDtat()
             {
                 memberTotal = _context.Users.Count(),
@@ -134,7 +136,7 @@ namespace 募資.Controllers
                 hotProduct = result.ToArray()
             }
             };
-            return myData;
+            return  myData;
         }
         // GET: api/back/OrderList    取得所有訂單列表 並加入減去退款後的訂單總額
         [HttpGet("OrderList")]
@@ -177,21 +179,18 @@ namespace 募資.Controllers
                               join pl in _context.Plans on o.PlanId equals pl.PlanId
                               join p in _context.Products on pl.ProductId equals p.ProductId
                               join finsum in finallysum on p.ProductId equals finsum.productid
+                              orderby o.OrderId descending
                               select new
                               {
                                   OrderId = o.OrderId.ToString(),
-                                  //UserId = o.UserId,
                                   ProductTitle = p.ProductTitle,
                                   PlanTitle = pl.PlanTitle,
-                                  //PlanPrice = pl.PlanPrice,
-                                  //PlanContent = pl.PlanContent,
                                   PurchaseTime = o.PurchaseTime.ToString("yyyy-MM-dd HH:mm:ss"),
                                   OrderStateId = o.OrderStateId,
                                   TargetAmount = p.TargetAmount,
                                   Startime = p.Startime,
                                   Endtime = p.Endtime,
                                   currentAmount = finsum.finallysum
-
                               };
             return await queryresult.ToListAsync();
         }
@@ -283,6 +282,7 @@ namespace 募資.Controllers
                          join ps in prodsum on p.ProductId equals ps.productId into s
                          from get in s.DefaultIfEmpty()
                          where p.ProductStateId == 1
+                         orderby p.ProductId descending
                          select new
                          {
                              p,
@@ -532,7 +532,7 @@ namespace 募資.Controllers
                 return NotFound();
             }
 
-            return employee;
+            return  employee;
         }
 
 
