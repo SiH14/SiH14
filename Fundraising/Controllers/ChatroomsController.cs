@@ -38,6 +38,7 @@ namespace Fundraising.Controllers
                 return NotFound();
             }
 
+            //return chatroom;
             return chatroom;
         }
 
@@ -45,12 +46,15 @@ namespace Fundraising.Controllers
         [HttpGet("Chats/{id}")]
         public async Task<ActionResult<dynamic>> GetChats(int id)
         {
+            
+            
             var chatroom = from chats in _context.Chatrooms
                         where chats.UserId1 == id || chats.UserId2 == id
                         select new
                         {
                             chatroomId=chats.ChatroomId,
                             userId=chats.UserId1==id? chats.UserId2:chats.UserId1,
+                            
                         };
             var query = from chats in chatroom
                         join user in _context.Users on chats.userId equals user.UserId 
@@ -59,7 +63,12 @@ namespace Fundraising.Controllers
                             chatroomId= chats.chatroomId,
                             userId=chats.userId,
                             userName=user.UserName,
-                            userPhoto=user.UserPhoto
+                            userPhoto=user.UserPhoto,
+lastMsg= _context.Messages.OrderByDescending(x => x.SentTime).Where(x => x.ChatroomId == chats.chatroomId).Select(x => new {
+    ChatroomId = x.ChatroomId,
+    SentTime = x.SentTime,
+    MessageContent = x.MessageContent
+}).First()
                         };
 
             return await query.ToListAsync();
