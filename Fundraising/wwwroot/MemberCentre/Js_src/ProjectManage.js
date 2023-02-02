@@ -102,7 +102,7 @@ const app = new Vue({
           axios
             .post("/api/chatrooms", {
               userId1: e.userId,
-              userId2: e.puserId,
+              userId2: e.ouserId,
             })
             .then((res) => {
               sessionStorage.setItem("chatuserId", e.puserId);
