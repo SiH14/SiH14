@@ -316,6 +316,12 @@
     <script src="../layout/layout.js"></script>
 
     <script>
+        Vue.filter('money', function (num) {
+            const parts = num.toString().split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return parts.join('.');
+        });
+
         var app = new Vue({
             el: "#app",
             data: {
