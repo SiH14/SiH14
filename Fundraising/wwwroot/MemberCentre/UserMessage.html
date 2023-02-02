@@ -70,7 +70,7 @@
                   <div class="about">
                     <div class="name">{{item.userName}}</div>
                     <div class="status">
-                      <p>1天前</p>
+                      <p>{{item.lastMsg}}</p>
                     </div>
                   </div>
                 </li>
@@ -84,7 +84,9 @@
                 <img :src="chattingPhoto" alt="avatar" />
                 <div class="chat-about">
                   <h6 class="m-b-0">{{chattingname}}</h6>
-                  <small>上次訊息: 2022-12-29 22:38</small>
+                  <small v-if="chattinglasttime"
+                    >上次訊息: {{chattinglasttime}}</small
+                  >
                 </div>
               </div>
 

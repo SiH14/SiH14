@@ -5,6 +5,7 @@ const app = new Vue({
     userid: "",
     chatrooms: [],
     search: "",
+    chattinglasttime: "",
     chatting: "",
     chattingname: "",
     chattingPhoto: "",
@@ -132,6 +133,7 @@ const app = new Vue({
       this.chatting = e.userId;
       this.chattingname = e.userName;
       this.chattingPhoto = e.userPhoto;
+      this.chattinglasttime = e.lastTime;
       this.msg.chatroom = e.chatroomId;
       axios.get("/api/messages/detail/" + e.chatroomId).then((res) => {
         this.messages = res.data;
