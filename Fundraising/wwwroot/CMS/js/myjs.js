@@ -103,7 +103,7 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
     <span>提案列表</span></a>
 <a class="nav-link" href="./Preview.html">
 <i class="fa fa-tags" aria-hidden="true"></i>
-    <span>提案審核</span><span class="btn btn-danger p-0 ml-1" >3</span></a>
+    <span>提案審核</span></a>
 </li>
 <hr class="sidebar-divider">
 <div class="sidebar-heading">
@@ -115,7 +115,7 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
     <span>贊助列表</span></a>
 <a class="nav-link" href="./Orefund.html">
 <i class="fa fa-inbox" aria-hidden="true"></i>
-    <span>贊助退款</span><span class="btn btn-danger p-0 ml-1" >3</span></a>
+    <span>贊助退款</span></a>
 </li>
 
 
