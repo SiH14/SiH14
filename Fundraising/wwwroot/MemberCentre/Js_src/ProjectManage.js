@@ -10,6 +10,8 @@ const app = new Vue({
     changedData: [],
     messageContent: "",
     chatting: "",
+    thisuser: "",
+    connection: null,
   },
   components: {
     Loading: VueLoading,
@@ -41,8 +43,8 @@ const app = new Vue({
     // 傳送訊息
     this.$refs.chat.addEventListener("show.bs.modal", (event) => {
       let button = event.relatedTarget;
-      let thisuser = button.getAttribute("data-bs-whatever");
-      axios.get("/api/UserInfo/name/" + thisuser).then((res) => {
+      this.thisuser = button.getAttribute("data-bs-whatever");
+      axios.get("/api/UserInfo/name/" + this.thisuser).then((res) => {
         this.chatting = res.data;
       });
     });
@@ -93,25 +95,55 @@ const app = new Vue({
         });
       }
     },
-    chat(e) {
-      axios.get(`/api/chatrooms/chat/${e.userId}/${e.ouserId}`).then((res) => {
-        if (res.data) {
-          sessionStorage.setItem("chatuserId", e.puserId);
-          location.href = "./UserMessage.html";
-        } else {
-          axios
-            .post("/api/chatrooms", {
-              userId1: e.userId,
-              userId2: e.ouserId,
-            })
-            .then((res) => {
-              sessionStorage.setItem("chatuserId", e.puserId);
-              location.href = "./UserMessage.html";
-            });
-        }
+    send() {
+      axios.get("/api/login/getuserid").then((res) => {
+        let userId = res.data;
+        axios
+          .get(`/api/chatrooms/chat/${userId}/${this.thisuser}`)
+          .then((res) => {
+            this.connection.invoke("Connect", res.data);
+
+            // 假如已有聊天室
+            // if (res.data) {
+            //   if (this.messageContent != "") {
+            //     this.connection
+            //       .invoke(
+            //         "SendMessageToUser",
+            //         userId,
+            //         this.thisuser,
+            //         this.msg.chatroom,
+            //         this.msg.content,
+            //         currentime
+            //       )
+            //       .then(() => {
+            //         // 寫進資料庫
+            //         axios
+            //           .post("/api/Messages", {
+            //             SenderID: this.userid,
+            //             ReceiverID: this.chatting,
+            //             ChatroomID: this.msg.chatroom,
+            //             MessageContent: this.msg.content,
+            //           })
+            //           .then((res) => {
+            //             console.log(res.data);
+            //           });
+            //         // 清空input
+            //         this.msg.content = "";
+            //       });
+            //   }
+            // }
+            // // 無聊天室，新增聊天室後送出
+            // else {
+            //   console.log("no");
+            //   axios
+            //     .post("/api/chatrooms", {
+            //       userId1: userId,
+            //       userId2: this.thisuser,
+            //     })
+            //     .then((res) => {});
+            // }
+          });
       });
     },
-
-    send() {},
   },
 });
