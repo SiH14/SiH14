@@ -44,11 +44,12 @@
                         <b>123</b>
                     </div>-->
                     <div v-for="(me,key) in meno">
-                        <div :class="'mb-1'+' '+'al'+key" style="border-style: outset; border-radius: 6px; background-color: black; color: white; display: block">
-                            <b>{{me.whose}}，{{me.show}}<br><br></b>
-                            <b>來自: {{me.title}}</b>
-
-                        </div>
+                        <a href="#" v-on:click="noticetopage()" style="text-decoration: none;">
+                            <div :class="'mb-1'+' '+'al'+key" style="border-style: outset; border-radius: 6px; background-color: black; color: white; display: block">
+                                <b>{{me.whose}}，{{me.show}}<br><br></b>
+                                <b>來自: {{me.title}}</b>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -618,6 +619,10 @@
                     else {
                         window.location = "../login/login.html";
                     }
+                }
+                ,
+                noticetopage: function () {
+                    window.location = "./comments.html";
                 }
             }
         })

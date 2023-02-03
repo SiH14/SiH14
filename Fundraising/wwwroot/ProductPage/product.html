@@ -168,7 +168,8 @@
                 addfollowList: {},
                 whouser: '',
                 tolcomment: 0,
-                tolfaq:0
+                tolfaq: 0,
+                puser:""
 
             },
             beforeMount() {
@@ -182,7 +183,6 @@
                     type: 'Get',
                     url: '/api/login/getuserid',
                     success: function (e) {
-                        console.log(e)
                         app.whouser = e
                         inwhouser = e
                         /*    console.log(e[0].productcontent)*/
@@ -194,6 +194,7 @@
                     url: '/api/Fundraising/prduct/' + sessionStorage.getItem("productId"),
                     success: function (e) {
                         app.fliterList = e
+                        app.puser = e[0].productuserid
                         /*    console.log(e[0].productcontent)*/
                     }
                 })
@@ -220,7 +221,6 @@
                     success: function (e) {
                         /* app.followList = e;*/
                         app.followList = parseInt(e)
-                        console.log(e)
                     },
                     error: function (e) {
                     }

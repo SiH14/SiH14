@@ -183,6 +183,17 @@
                     }
                 })
             }
+            ,
+            methods: {
+                gotoplan: function () {
+                    if (parseInt(this.whouser) > 0) {
+                        window.location = "./plan.html";
+                    }
+                    else {
+                        window.location = "../login/login.html";
+                    }
+                }
+            }
         })
     </script>
 
