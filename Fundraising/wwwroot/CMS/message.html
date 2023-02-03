@@ -42,7 +42,8 @@
                 <div class="row justify-content-center">
                     <!-- 側邊欄位 -->
 
-                    <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar">
+                    <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar"
+                        style="overflow-x: auto;max-height: 750px;">
                         <br>
                         <div id="mysider"></div>
                     </ul>
@@ -65,7 +66,8 @@
                                                     <div class="d-flex py-3">
                                                         <div class="pr-3" style="font-size: 24px;">
                                                             選擇題案名稱:</div>
-                                                        <select name="" id="productselect" v-on:change="changegetcomment">
+                                                        <select name="" id="productselect"
+                                                            v-on:change="changegetcomment">
                                                             <option v-cloak
                                                                 v-for="item in productlist.filter(x=>x.productStateId == 3)"
                                                                 :value="item.productId">{{item.productTitle}}</option>
@@ -259,7 +261,7 @@
                 productlist: [],
                 productcomment:
                 {
-                    "productId":"",
+                    "productId": "",
                     "coverphoto": "",
                     "productTitle": "",
                     "comcount": "",
@@ -308,21 +310,25 @@
                 },
             },
 
-            mounted() {
+            async mounted() {
                 let loader = this.$loading.show({
                     loader: 'dots'
                 });
-                
-                axios.get("/api/products").then(res => {
-                    // console.log(res)    
-                    this.productlist = res.data
-                    setTimeout(() => loader.hide(), 0.5 * 1000);
-                })
                 axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
 
                     this.employeeinfo = res.data
                     console.log(this.employeeinfo)
                 })
+                await axios.get("/api/products").then(res => {
+                    this.productlist = res.data
+                    console.log(res)
+                    setTimeout(() => loader.hide(), 300);
+                })
+                axios.get(`/api/back/getcomment/${productselect.value}`).then(res => {
+                    this.productcomment = res.data[0];
+                    console.log(res.data[0])
+                })
+
             }
         })
     </script>

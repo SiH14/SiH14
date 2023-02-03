@@ -41,7 +41,8 @@
                 <div class="row justify-content-center">
                     <!-- 側邊欄位 -->
 
-                    <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar">
+                    <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar"
+                    style="overflow-x: auto;max-height: 750px;">
                         <br>
                         <div id="mysider"></div>
                     </ul>
@@ -274,22 +275,22 @@
                 })
                await axios.get('/api/back/ProductList')
                     .then((response) => {
-                        // Object.values(response.data)
-                        // // console.log(response.data)
-                        // response.data.forEach(e => {
-                        //     // console.log(e)
-                        //     if (e.p.productStateId == 1) {
-                        //         e.p.productStateId = "審核中"
-                        //     } else if (e.p.productStateId == 2) {
-                        //         e.p.productStateId = "審核不通過"
-                        //     } else if (e.p.productStateId == 3 && new Date(e.p.startime) < new Date() && new Date(e.p.endtime) > new Date()) {
-                        //         e.p.productStateId = "募資中"
-                        //     } else if (e.p.productStateId == 3 && new Date(e.p.endtime) < new Date() && e.sum > e.p.targetAmount) {
-                        //         e.p.productStateId = "募資成功"
-                        //     } else if (e.p.productStateId == 3 && new Date(e.p.endtime) < new Date() && e.sum < e.p.targetAmount) {
-                        //         e.p.productStateId = "募資失敗"
-                        //     }
-                        // });
+                        Object.values(response.data)
+                        // console.log(response.data)
+                        response.data.forEach(e => {
+                            // console.log(e)
+                            if (e.p.productStateId == 1) {
+                                e.p.productStateId = "審核中"
+                            } else if (e.p.productStateId == 2) {
+                                e.p.productStateId = "審核不通過"
+                            } else if (e.p.productStateId == 3 && new Date(e.p.startime) < new Date() && new Date(e.p.endtime) > new Date()) {
+                                e.p.productStateId = "募資中"
+                            } else if (e.p.productStateId == 3 && new Date(e.p.endtime) < new Date() && e.sum > e.p.targetAmount) {
+                                e.p.productStateId = "募資成功"
+                            } else if (e.p.productStateId == 3 && new Date(e.p.endtime) < new Date() && e.sum < e.p.targetAmount) {
+                                e.p.productStateId = "募資失敗"
+                            }
+                        });
                         this.productlist = response.data
                         setTimeout(() => loader.hide(), 0.5 * 1000);
                         // this.orderlist = response.data
