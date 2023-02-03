@@ -121,7 +121,7 @@ namespace Fundraising.Controllers
                                 days = (product.Endtime - DateTime.Now).Days + 1,
                                 percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
                             };
-                query = query.Skip(topage * 9).Take(9);
+                query = query.Skip(topage * 6).Take(6);
                 return await query.ToListAsync();
             }
             else if (sele == 2)
@@ -145,7 +145,7 @@ namespace Fundraising.Controllers
                                 days = (product.Endtime - DateTime.Now).Days + 1,
                                 percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
                             };
-                query = query.Skip(topage * 9).Take(9);
+                query = query.Skip(topage * 6).Take(6);
                 return await query.ToListAsync();
             }
             else if (sele == 3)
@@ -169,7 +169,7 @@ namespace Fundraising.Controllers
                                 days = (product.Endtime - DateTime.Now).Days + 1,
                                 percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
                             };
-                query = query.Skip(topage * 9).Take(9);
+                query = query.Skip(topage * 6).Take(6);
                 return await query.ToListAsync();
             }
             else if (sele == 4)
@@ -193,7 +193,7 @@ namespace Fundraising.Controllers
                                 days = (product.Endtime - DateTime.Now).Days + 1,
                                 percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
                             };
-                query = query.Skip(topage * 9).Take(9);
+                query = query.Skip(topage * 6).Take(6);
                 return await query.ToListAsync();
             }
             else if (sele == 5)
@@ -217,10 +217,10 @@ namespace Fundraising.Controllers
                                 days = 0,
                                 percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
                             };
-                query = query.Skip(topage * 9).Take(9);
+                query = query.Skip(topage * 6).Take(6);
                 return await query.ToListAsync();
             }
-            queryy = queryy.Skip(topage * 9).Take(9);
+            queryy = queryy.Skip(topage * 6).Take(6);
             return await queryy.ToListAsync();
         }
         //api/Fundraising
@@ -960,22 +960,22 @@ namespace Fundraising.Controllers
 
             //var query = _context.Products.Where(x => x.ProductStateId == 3 && x.Endtime < DateTime.Now).Count();
             var tolpage = 0;
-            if (query / 9 == 0)
+            if (query / 6 == 0)
             {
-                if (query<9)
+                if (query<6)
                 {
                     tolpage = 1;
                     return Content(tolpage.ToString());
                 }
                 else
                 {
-                    tolpage = query / 9;
+                    tolpage = query / 6;
                     return Content(tolpage.ToString());
                 }
             }
             else
             {
-                tolpage = (query / 9) + 1;
+                tolpage = (query / 6) + 1;
                 return Content(tolpage.ToString());
             }
         }
