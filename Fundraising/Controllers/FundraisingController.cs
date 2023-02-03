@@ -671,7 +671,7 @@ namespace Fundraising.Controllers
             var query = from o in combine
                         join product in _context.Products on o.ProductId equals product.ProductId
                         join user in _context.Users on product.UserId equals user.UserId
-                        where product.ProductTitle.Contains(Selectans) && product.ProductStateId == 3
+                        where product.ProductTitle.Contains(Selectans) /*&& product.ProductStateId == 3*/
                         select new
                         {
                             ProductId = o.ProductId,
@@ -869,14 +869,14 @@ namespace Fundraising.Controllers
         {
             var query = _context.Products.Where(x => x.ProductStateId ==3 && x.Endtime > DateTime.Now).Count();
             var tolpage = 0;
-            if (query / 9 == 0)
+            if (query / 6 == 0)
             {
-                tolpage = query / 9;
+                tolpage = query / 6;
                 return Content(tolpage.ToString());
             }
             else
             {
-                tolpage = (query / 9) + 1;
+                tolpage = (query / 6) + 1;
                 return Content(tolpage.ToString());
             }
         }
