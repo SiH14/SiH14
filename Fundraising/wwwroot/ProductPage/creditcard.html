@@ -101,6 +101,7 @@
 </head>
 
 <body>
+        <button onclick="testinput()">TEST</button>
         <form class="container app" >
             <div class="form login">
                 <div>
@@ -110,13 +111,13 @@
                     <label for="cardnumber">信用卡卡號</label>
                     <img style="width: 80px; padding: 0px 6px;" src="../img/creditcard.png" alt="">
                     <div id="cardnumber" name="cardnumber">
-                        <input type="text" maxlength="4" class="cardnumber1 autotab">
+                        <input type="text" maxlength="4" class="testcard1 cardnumber1 autotab">
                         <span>-</span>
-                        <input type="text" maxlength="4" class="cardnumber2 autotab">
+                        <input type="text" maxlength="4" class="testcard2 cardnumber2 autotab">
                         <span>-</span>
-                        <input type="text" maxlength="4" class="cardnumber3 autotab">
+                        <input type="text" maxlength="4" class="testcard3 cardnumber3 autotab">
                         <span>-</span>
-                        <input type="text" maxlength="4" class="cardnumber4 autotab">
+                        <input type="text" maxlength="4" class="testcard4 cardnumber4 autotab">
                         <p style="font-size: 12px; margin-bottom: 0px !important;">本交易須通過Visa/MasterCard驗證。</p>
                     </div>
                 </div>
@@ -238,6 +239,37 @@
             }
         })
         app.orderpayList = JSON.parse(sessionStorage.getItem("orderpayList"))
+
+        function testinput() {//測試快速輸入
+            //for (var i = 1; i < 5; i++) {
+            //    document.querySelector('.testcard'+i).value = "4050";
+            //}
+            alert(123);
+            document.querySelector('.testcard1').value = "4050"
+            //document.querySelector('.testAddSponsorship').value = parseInt(300);//贊助金額
+            //setTimeout(function () {
+            //    document.querySelector('.testRecipientAddress').value = "台中市南屯區公益路二段51號18樓";//地址
+            //}, 0);
+            //setTimeout(function () {
+            //    document.querySelector('.testPostCode').value = parseInt(408);//郵遞區號
+            //}, 0);
+            //setTimeout(function () {
+            //    document.querySelector('.testRecipientName').value = "王小白";//姓名
+            //}, 0);
+            //setTimeout(function () {
+            //    document.querySelector('.testRecipientPhone').value = parseInt(0);
+            //    document.querySelector('.testRecipientPhone').value += parseInt(973876234);//電話
+            //}, 0);
+            //setTimeout(function () {
+            //    document.querySelector('.testRecipientMail').value = "Freetest23@gmail.com";//信箱
+            //}, 0);//備註
+            //setTimeout(function () {
+            //    document.querySelector('.testNote').value = "謝謝您~";
+            //}, 0);
+            //setTimeout(function () {
+            //    document.querySelector('.testcheckbox').checked = true;//是否同意
+            //}, 0);
+        }
 
     </script>
 </body>
