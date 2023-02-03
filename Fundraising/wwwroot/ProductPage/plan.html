@@ -148,8 +148,10 @@
             <!--v-if="whouser == ''"-->
             <div class="card" style="padding: 10px; background-color: #f4f4f4; " v-for="item in planList">
                 <a href="#" style="text-decoration: none; color: black;" v-on:click="getplanID(item.planid)">
+                    <!--<img :src="item.planphoto" class="card-img-top"
+                         alt="Hollywood Sign on The Hill" />-->
                     <img :src="item.planphoto" class="card-img-top"
-                         alt="Hollywood Sign on The Hill" />
+                         alt="Hollywood Sign on The Hill" style="height:120px; object-fit:cover" />
                     <div class="card-body">
                         <h5 class="mb-3 card-title">{{item.plantitle}}</h5>
                         <div class="mb-4"><h4>NT${{item.planprice | money}}</h4></div>
