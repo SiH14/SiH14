@@ -57,7 +57,7 @@ max-width: 80%;">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="mr-2 d-none d-lg-inline ">{{employeeinfo.name}}</span>
-            <img class="img-profile rounded-circle imgset" :src="employeeinfo.employeephoto">
+            <img class="img-profile rounded-circle imgset" :src="employeeinfo.employeephoto" style="border: 1px solid white;">
         </a>
         <!-- 下拉清單 -->
         <div class="dropdown-menu  shadow animated--grow-in"

@@ -59,27 +59,28 @@
                                     </div>
                                     <div class="row justify-content-center p-3">
                                         <div class="mb-3 col-12">
-                                            <form action="" class="py-4"
-                                                style=" position: relative; border: 1px solid #e3e6f0;">
-                                                <div class="row " style="line-height: 32px;">
-                                                    <p class="bg-white"
-                                                        style="position: absolute; top: -15px; left: 2%; font-size: 24px;">
-                                                        查詢條件</p>
-                                                    <div class="pr-3">
-                                                        <label class="px-3 d-inline" for=""></label>
-                                                        <input type="text" v-model="input.userId"
-                                                            placeholder="搜尋員工姓名 / Email / 電話" style="min-width: 300px;">
+                                            <form>
+                                                <fieldset>
+                                                    <legend>查詢條件</legend>
+                                                    <div class="d-flex py-3">
+                                                        <div class="mx-3">
+                                                            <select name="" id=""
+                                                                style="height: 38px; border-radius: 5px;"
+                                                                v-model="input.employeestatus">
+                                                                <option value="任職狀態">任職狀態</option>
+                                                                <option value="在職">在職</option>
+                                                                <option value="離職">離職</option>
+                                                                <option value="留職停薪">留職停薪</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="pr-3">
+
+                                                            <input type="text" v-model="input.userId"
+                                                                placeholder="搜尋員工姓名 / Email / 電話"
+                                                                style="min-width: 300px; height: 100%;">
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        <select name="" id="" style="height: 38px; border-radius: 5px;"
-                                                            v-model="input.employeestatus">
-                                                            <option value="任職狀態">任職狀態</option>
-                                                            <option value="在職">在職</option>
-                                                            <option value="離職">離職</option>
-                                                            <option value="留職停薪">留職停薪</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                </fieldset>
                                             </form>
                                         </div>
                                         <div class="py-0 col-12 mb-5">
@@ -137,13 +138,6 @@
                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered " style=" max-width: 550px;">
                                     <div class="modal-content" style="border-radius: 5px; border: 0px;">
-                                        <!-- <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">新增員工</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </button>
-                                        </div> -->
                                         <div class="modal-body px-4">
                                             <label for="">帳號*</label> <br>
                                             <input type="text" class="w-100 mb-1" name="account" placeholder="請輸入6位英數字"
@@ -191,13 +185,6 @@
                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered " style=" max-width: 550px;">
                                     <div class="modal-content" style="border-radius: 5px; border: 0px;">
-                                        <!-- <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">新增員工</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </button>
-                                        </div> -->
                                         <div class="modal-body px-4">
                                             <label for="">帳號*</label> <br>
                                             <input type="text" class="w-100 mb-1" name="account" placeholder="請輸入6位英數字"
@@ -366,31 +353,31 @@
                         neweditemployee.password = this.editemployee.password;
                         switch (this.editemployee.status) {
                             case "在職":
-                            neweditemployee.status = 1;
+                                neweditemployee.status = 1;
                                 break;
                             case "離職":
-                            neweditemployee.status = 2;
-                                break; 
-                                case "留職停薪":
+                                neweditemployee.status = 2;
+                                break;
+                            case "留職停薪":
                                 neweditemployee.status = 3;
                                 break;
                         };
                         switch (this.editemployee.position) {
                             case "主管":
-                            neweditemployee.position = 1;
+                                neweditemployee.position = 1;
                                 break;
-                                case "行政人員":
-                            neweditemployee.position = 2;
+                            case "行政人員":
+                                neweditemployee.position = 2;
                                 break;
-                                case "會計人員":
-                            neweditemployee.position = 3;
+                            case "會計人員":
+                                neweditemployee.position = 3;
                                 break;
-                                case "人事HR":
-                            neweditemployee.position = 4;
+                            case "人事HR":
+                                neweditemployee.position = 4;
                                 break;
                         }
                         // console.log(neweditemployee)
-                        axios.put(`/api/employees/${neweditemployee.employeeId}`,neweditemployee).then(res=>{
+                        axios.put(`/api/employees/${neweditemployee.employeeId}`, neweditemployee).then(res => {
                             // console.log(res)
                             swal("修改成功", "", "success", {}).then(x => {
                                 window.location.reload()
@@ -414,16 +401,10 @@
                 }
 
             },
-            mounted() {
+             mounted() {
                 let loader = this.$loading.show({
                     loader: 'dots'
                 });
-                // axios.get('/api/back/users')
-                //     .then((response) => {
-                //         this.userlist = response.data
-                //         setTimeout(() => loader.hide(), 0.5 * 1000);
-                //         // console.log(response.data.length)
-                //     })
                 axios.get(`/api/back/Employees/${getCookie("employeeId")}`).then(res => {
 
                     this.employeeinfo = res.data
