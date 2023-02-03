@@ -671,7 +671,7 @@ namespace Fundraising.Controllers
             var query = from o in combine
                         join product in _context.Products on o.ProductId equals product.ProductId
                         join user in _context.Users on product.UserId equals user.UserId
-                        where product.ProductTitle.Contains(Selectans) /*&& product.ProductStateId == 3*/
+                        where product.ProductTitle.Contains(Selectans) /*&& product.ProductStateId == 3 && product.Endtime > DateTime.Now*/
                         select new
                         {
                             ProductId = o.ProductId,
