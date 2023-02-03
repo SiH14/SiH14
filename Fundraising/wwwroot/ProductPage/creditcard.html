@@ -101,7 +101,9 @@
 </head>
 
 <body>
-        <button onclick="testinput()">TEST</button>
+        <div class="container" style="height:0px;">
+            <button  onclick="testinput()" style="text-align: center;">TEST</button>
+        </div>
         <form class="container app" >
             <div class="form login">
                 <div>
@@ -124,40 +126,40 @@
                 <div class="creditcarddate">
                     <label for="carddate">卡片有效期限</label>
                     <div id="carddate" name="carddate">
-                        <input type="text" maxlength="2" class="autotab" placeholder="MM">
+                        <input type="text" maxlength="2" class="testMM autotab" placeholder="MM">
                         <span>-</span>
-                        <input type="text" maxlength="2" class="autotab" placeholder="YY">
+                        <input type="text" maxlength="2" class="testYY autotab" placeholder="YY">
                     </div>
                 </div>
                 <div class="creditcardsafecode">
                     <label for="carddate">卡片安全碼</label>
                     <div id="cardsafecode" name="cardsafecode">
-                        <input type="text" maxlength="3">
+                        <input class="testCVV" type="text" maxlength="3">
                         <img style="width:48px;" src="../img/safecode.png" alt="">
                     </div>
                 </div>
                 <div class="cardinformation">
                     <label for="ownername">持卡人姓名</label>
                     <div id="ownername" name="ownername">
-                        <input type="text" placeholder="請輸入卡片上的姓名">
+                        <input class="testcardname" type="text" placeholder="請輸入卡片上的姓名">
                     </div>
                 </div>
                 <div class="cardinformation">
                     <label for="ownernumber">手機號碼</label>
                     <div id="ownernumber" name="ownernumber">
-                        <input type="text" maxlength="10">
+                        <input class="testcardphone" type="text" maxlength="10">
                     </div>
                 </div>
                 <div class="cardinformation">
                     <label for="ownermail">電子信箱</label>
                     <div id="ownermail" name="ownermail">
-                        <input type="text" placeholder="選填">
+                        <input class="testcardmail" type="text" placeholder="選填">
                     </div>
                 </div>
                 <div class="cardinformation">
                     <label for="owneraddress">帳單地址</label>
                     <div id="owneraddress" name="owneraddress">
-                        <input style="width: 100%;" type="text" placeholder="選填">
+                        <input class="testcardaddress" style="width: 100%;" type="text" placeholder="選填">
                     </div>
                 </div>
                 <div>
@@ -241,34 +243,29 @@
         app.orderpayList = JSON.parse(sessionStorage.getItem("orderpayList"))
 
         function testinput() {//測試快速輸入
-            //for (var i = 1; i < 5; i++) {
-            //    document.querySelector('.testcard'+i).value = "4050";
-            //}
-            alert(123);
-            document.querySelector('.testcard1').value = "4050"
-            //document.querySelector('.testAddSponsorship').value = parseInt(300);//贊助金額
-            //setTimeout(function () {
-            //    document.querySelector('.testRecipientAddress').value = "台中市南屯區公益路二段51號18樓";//地址
-            //}, 0);
-            //setTimeout(function () {
-            //    document.querySelector('.testPostCode').value = parseInt(408);//郵遞區號
-            //}, 0);
-            //setTimeout(function () {
-            //    document.querySelector('.testRecipientName').value = "王小白";//姓名
-            //}, 0);
-            //setTimeout(function () {
-            //    document.querySelector('.testRecipientPhone').value = parseInt(0);
-            //    document.querySelector('.testRecipientPhone').value += parseInt(973876234);//電話
-            //}, 0);
-            //setTimeout(function () {
-            //    document.querySelector('.testRecipientMail').value = "Freetest23@gmail.com";//信箱
-            //}, 0);//備註
-            //setTimeout(function () {
-            //    document.querySelector('.testNote').value = "謝謝您~";
-            //}, 0);
-            //setTimeout(function () {
-            //    document.querySelector('.testcheckbox').checked = true;//是否同意
-            //}, 0);
+            document.querySelector('.testcard1').value = "4050";
+            document.querySelector('.testcard2').value = "7961";
+            document.querySelector('.testcard3').value = "8864";
+            document.querySelector('.testcard4').value = "3422";//卡號
+            setTimeout(function () {
+                document.querySelector('.testMM').value = 12;
+                document.querySelector('.testYY').value = 26;//日期
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('.testCVV').value = 567;//安全碼
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('.testcardname').value = "王小白";//持卡人姓名
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('.testcardphone').value = "0973876234";//手機號碼
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('.testcardmail').value = "Freetest23@gmail.com";//信箱
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('.testcardaddress').value = "台中市南屯區公益路二段51號18樓";//帳單地址
+            }, 0);
         }
 
     </script>
