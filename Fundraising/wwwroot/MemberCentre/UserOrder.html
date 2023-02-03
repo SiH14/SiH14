@@ -186,8 +186,10 @@
                 </div>
                 <!-- button -->
                 <button
-                  @click="chat(order)"
                   class="col-md-2 btn btn-outline-success me-md-2 mt-1"
+                  data-bs-toggle="modal"
+                  data-bs-target="#chatmodal"
+                  :data-bs-whatever="order.puserId"
                 >
                   聯絡提案人
                 </button>
@@ -271,6 +273,58 @@
           </div>
         </div>
       </div>
+      <!-- 發送訊息 -->
+      <div
+        class="modal fade"
+        id="chatmodal"
+        tabindex="-1"
+        aria-hidden="true"
+        ref="chat"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">
+                傳送訊息給 <strong>{{chatting}}</strong>
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <form>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="message-text" class="col-form-label"
+                    >請輸入傳送的訊息內容 :</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="messageContent"
+                    placeholder="訊息內容"
+                    required
+                    v-model="messageContent"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" @click="send" class="btn btn-success">
+                  傳送
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  關閉
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script
@@ -280,6 +334,7 @@
     ></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../layout/membercentre_layout.js"></script>
+    <script src="../lib/microsoft/signalr/dist/browser/signalr.js"></script>
     <script src="./Js_src/UserOrder.js"></script>
   </body>
 </html>

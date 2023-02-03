@@ -167,8 +167,8 @@
                 <!--右邊欄位-->
                 <div class="col-sm-7">
                     <div>
-                        <div>
-                            <h4>收件人資料</h4>
+                        <div style="display:flex">
+                            <h4>收件人資料</h4><div style="width:50px;"></div><button onclick="testinput()">TEST</button>
                         </div>
                     </div>
 
@@ -179,7 +179,7 @@
                                 <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
                                 <div class="input-group">
                                     <div class="input-group-text" style="background-color:white">NT$</div>
-                                    <input type="number" class="form-control" id="autoSizingInputGroup" min="0" oninput="if(value.length>8)value=value.slice(0,8)" v-model="AddSponsorshipValue" required>
+                                    <input type="number" class="testAddSponsorship form-control" id="autoSizingInputGroup" min="0" oninput="if(value.length>8)value=value.slice(0,8)" v-model="AddSponsorshipValue" required>
                                     <div class="invalid-feedback">
                                         無須贊助請填'0'
                                     </div>
@@ -188,14 +188,14 @@
                             <div class="row mb-3">
                                 <div class="col-9">
                                     <label for="formGroupExampleInput" class="form-label">收件地址</label>
-                                    <input v-model="orderpayList.RecipientAddress" type="text" class="form-control" id="formGroupExampleInput" placeholder="請填寫詳細地址" required>
+                                    <input v-model="orderpayList.RecipientAddress" type="text" class="testRecipientAddress form-control" id="formGroupExampleInput" placeholder="請填寫詳細地址" required>
                                     <div class="invalid-feedback">
                                         必填
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <label for="formGroupExampleInput" class="form-label">郵遞區號</label>
-                                    <input v-model="orderpayList.PostCode" type="number" class="form-control" id="formGroupExampleInput" min="0" oninput="if(value.length>5)value=value.slice(0,5)" placeholder="區號" required>
+                                    <input v-model="orderpayList.PostCode" type="number" class="testPostCode form-control" id="formGroupExampleInput" min="0" oninput="if(value.length>5)value=value.slice(0,5)" placeholder="區號" required>
                                     <div class="invalid-feedback">
                                         必填
                                     </div>
@@ -203,32 +203,32 @@
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput" class="form-label">姓名</label>
-                                <input v-model="orderpayList.RecipientName" type="text" class="form-control" id="formGroupExampleInput" placeholder="請填寫真實姓名" required>
+                                <input v-model="orderpayList.RecipientName" type="text" class="testRecipientName form-control" id="formGroupExampleInput" placeholder="請填寫真實姓名" required>
                                 <div class="invalid-feedback">
                                     必填
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">連絡電話</label>
-                                <input v-model="orderpayList.RecipientPhone" type="tel"pattern="[0-9]{10}" class="form-control" id="formGroupExampleInput2" placeholder="請填寫常用電話，以利提案團隊聯繫" required>
+                                <input v-model="orderpayList.RecipientPhone" type="tel"pattern="[0-9]{10}" class="testRecipientPhone form-control" id="formGroupExampleInput2" placeholder="請填寫常用電話，以利提案團隊聯繫" required>
                                 <div class="invalid-feedback">
                                     請輸入正確格式
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">連絡信箱</label>
-                                <input v-model="orderpayList.RecipientMail" type="email" class="form-control" id="formGroupExampleInput2" placeholder="請填寫常用信箱，以利提案團隊聯繫" required>
+                                <input v-model="orderpayList.RecipientMail" type="email" class="testRecipientMail form-control" id="formGroupExampleInput2" placeholder="請填寫常用信箱，以利提案團隊聯繫" required>
                                 <div class="invalid-feedback">
                                     請輸入正確格式
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">備註</label>
-                                <input v-model="orderpayList.Note" type="text" class="form-control" id="formGroupExampleInput2" placeholder="填寫備註 ( 請參考計畫內容說明，非必填 )">
+                                <input v-model="orderpayList.Note" type="text" class="testNote form-control" id="formGroupExampleInput2" placeholder="填寫備註 ( 請參考計畫內容說明，非必填 )">
                             </div>
                             <div class="col-12">
                                 <div class="mb-2 form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                                    <input class="testcheckbox form-check-input" type="checkbox" id="gridCheck" required>
                                     <label class="form-check-label" for="gridCheck">
                                         我已閱讀並同意咱的服務條款與隱私權政策。
                                     </label>
@@ -348,6 +348,32 @@
                 }
             }
         })
+
+        function testinput() {//測試快速輸入
+            document.querySelector('.testAddSponsorship').value = parseInt(300);//贊助金額
+            setTimeout(function () {
+                document.querySelector('.testRecipientAddress').value = "台中市南屯區公益路二段51號18樓";//地址
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('.testPostCode').value = parseInt(408);//郵遞區號
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('.testRecipientName').value = "王小白";//姓名
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('.testRecipientPhone').value = parseInt(0);
+                document.querySelector('.testRecipientPhone').value += parseInt(973876234);//電話
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('.testRecipientMail').value = "Freetest23@gmail.com";//信箱
+            }, 0);//備註
+            //setTimeout(function () {
+            //    document.querySelector('.testNote').value = "謝謝您~";
+            //}, 0);
+            setTimeout(function () {
+                document.querySelector('.testcheckbox').checked = true;//是否同意
+            }, 0);
+        }
 
             //function okButtonClick() {
             //    var data = {

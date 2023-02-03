@@ -17,6 +17,9 @@ const app = new Vue({
     Loading: VueLoading,
   },
   mounted() {
+    let loader = this.$loading.show({
+      loader: "dots",
+    });
     // 初始化
     axios.get("/api/login/getuserid").then((res) => {
       this.userid = res.data;
@@ -40,10 +43,17 @@ const app = new Vue({
                   content: content,
                   sentTime: time,
                 });
+                // 更新最後訊息時間
+                this.chattinglasttime = time;
                 // 移至底部
                 setTimeout(() => this.gobottom(), 0);
+                axios.get("/api/chatrooms/chats/" + res.data).then((res) => {
+                  console.log(res.data);
+                  this.chatrooms = res.data;
+                });
               } else {
                 axios.get("/api/chatrooms/chats/" + res.data).then((res) => {
+                  console.log(res.data);
                   this.chatrooms = res.data;
                 });
               }
@@ -54,15 +64,8 @@ const app = new Vue({
       // 拿取對話清單
       axios.get("/api/chatrooms/chats/" + res.data).then((res) => {
         this.chatrooms = res.data;
-        if (sessionStorage.getItem("chatuserId")) {
-          console.log("ok");
-        }
         setTimeout(() => loader.hide(), 400);
       });
-    });
-
-    let loader = this.$loading.show({
-      loader: "dots",
     });
   },
   methods: {
@@ -82,39 +85,38 @@ const app = new Vue({
       let currentime = year + "-" + month + "-" + day + " " + hour + ":" + min;
 
       if (this.msg.content != "") {
-        this.connection
-          .invoke(
-            "SendMessageToUser",
-            this.userid,
-            this.chatting,
-            this.msg.chatroom,
-            this.msg.content,
-            currentime
-          )
-          .then(() => {
-            // 寫進資料庫
-            axios
-              .post("/api/Messages", {
-                SenderID: this.userid,
-                ReceiverID: this.chatting,
-                ChatroomID: this.msg.chatroom,
-                MessageContent: this.msg.content,
-              })
-              .then((res) => {
-                console.log(res.data);
+        // 寫進資料庫
+        axios
+          .post("/api/Messages", {
+            SenderID: this.userid,
+            ReceiverID: this.chatting,
+            ChatroomID: this.msg.chatroom,
+            MessageContent: this.msg.content,
+          })
+          .then((res) => {
+            this.connection
+              .invoke(
+                "SendMessageToUser",
+                this.userid,
+                this.chatting,
+                this.msg.chatroom,
+                this.msg.content,
+                currentime
+              )
+              .then(() => {
+                // 對話新增(畫面)
+                this.messages.push({
+                  chatroomId: this.msg.chatroom,
+                  sender: this.userid,
+                  receiver: this.chatting,
+                  content: this.msg.content,
+                  sentTime: currentime,
+                });
+                // 移至底部
+                setTimeout(() => this.gobottom(), 0);
+                // 清空input
+                this.msg.content = "";
               });
-            // 對話新增(畫面)
-            this.messages.push({
-              chatroomId: this.msg.chatroom,
-              sender: this.userid,
-              receiver: this.chatting,
-              content: this.msg.content,
-              sentTime: currentime,
-            });
-            // 移至底部
-            setTimeout(() => this.gobottom(), 0);
-            // 清空input
-            this.msg.content = "";
           });
       }
     },
