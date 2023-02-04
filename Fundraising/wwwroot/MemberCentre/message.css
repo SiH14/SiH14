@@ -252,3 +252,14 @@
 .chat-header {
   visibility: hidden;
 }
+
+.name .unread {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  vertical-align: text-top;
+  color: #fff;
+  background-color: #e03131;
+  font-size: 12px;
+}

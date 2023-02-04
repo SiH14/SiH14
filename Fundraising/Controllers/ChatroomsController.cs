@@ -66,13 +66,14 @@ namespace Fundraising.Controllers
                             userName = user.UserName,
                             userPhoto = user.UserPhoto,
                             lastMsg = _context.Messages.OrderByDescending(x => x.SentTime).Where(x => x.ChatroomId == chats.chatroomId).Select(x => x.MessageContent).First(),
-                            lastTime = (_context.Messages.OrderByDescending(x => x.SentTime).Where(x => x.ChatroomId == chats.chatroomId).Select(x => x.SentTime.AddHours(8)).First()).ToString("yyyy-MM-dd HH:mm")
+                            lastTime = (_context.Messages.OrderByDescending(x => x.SentTime).Where(x => x.ChatroomId == chats.chatroomId).Select(x => x.SentTime.AddHours(8)).First()).ToString("yyyy-MM-dd HH:mm"),
+                            unread = _context.Messages.Where(x => x.ChatroomId == chats.chatroomId).Count(x => x.SenderId != id && x.IsRead == false)
                         };
 
             return await query.ToListAsync();
         }
 
-        //拿取特定聊天室
+        //拿取特定聊天室(雙方userid)
         [HttpGet("Chat/{muid}/{tuid}")]
         public async Task<ActionResult<dynamic>> GetChat(int muid, int tuid)
         {
@@ -82,6 +83,27 @@ namespace Fundraising.Controllers
 
             return await query.FirstOrDefaultAsync();
         }
+
+
+        //拿取未讀的聊天室(senderid,chatroomId)
+        [HttpPut("unread/{receiverId}/{chatroomId}")]
+        public ActionResult PutThisChat(int receiverId, int chatroomId)
+        {
+            var query = from msg in _context.Messages
+                        where msg.ChatroomId == chatroomId && msg.ReceiverId == receiverId && msg.IsRead == false
+                        select msg;
+
+            foreach (var item in query)
+            {
+                item.IsRead = true;
+               
+            }
+
+            _context.Messages.UpdateRange(query);
+            _context.SaveChanges();
+            return NoContent();
+        }
+
 
 
 
