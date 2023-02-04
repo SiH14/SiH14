@@ -216,7 +216,9 @@
         </div>
 
         <!-- 若未曾贊助 -->
-        <h2 v-else class="text-center mt-5">尚未贊助任何專案。</h2>
+        <h2 v-else class="text-center mt-5 card mx-auto py-5">
+          尚未贊助任何專案。
+        </h2>
       </div>
 
       <!-- 彈出式取消表單 -->
@@ -310,7 +312,12 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" @click="send" class="btn btn-success">
+                <button
+                  type="button"
+                  @click="send"
+                  class="btn btn-success"
+                  data-bs-dismiss="modal"
+                >
                   傳送
                 </button>
                 <button

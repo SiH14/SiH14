@@ -112,6 +112,11 @@ const app = new Vue({
                   content: this.msg.content,
                   sentTime: currentime,
                 });
+
+                axios.get("/api/chatrooms/chats/" + this.userid).then((res) => {
+                  console.log(res.data);
+                  this.chatrooms = res.data;
+                });
                 // 移至底部
                 setTimeout(() => this.gobottom(), 0);
                 // 清空input
