@@ -190,7 +190,7 @@
         <div class="form login">
             <div class="form-content">
 
-                <header>會員登入</header>
+                <header>會員登入   <button onclick="testinput()" style="height:20px; font-size:10px">王小白</button></header>
 
                 <form action="#" id="form">
 
@@ -404,6 +404,21 @@
                     break;
             }
         });
+
+        function testinput() {//測試快速輸入
+            setTimeout(function () {
+                document.querySelector('#UserEmail').value = "Freetest23@gmail.com";//信箱
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('#UserPassword').value = "A12121212";//密碼
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('#UserPassword').value = "A12121212";//密碼
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('#confirmPassword').value = "A12121212";//密碼
+            }, 0);
+        }
     </script>
 
 

@@ -199,8 +199,8 @@
     <section class="container forms">
         <div class="form signup">
             <div class="form-content">
-
-                <header>註冊會員</header>
+                
+                <header>註冊會員  <button onclick="testinput()" style="height:20px; font-size:10px">TEST</button></header>
 
                 <form id="form">
 
@@ -470,6 +470,21 @@
                     break;
             }
         });
+
+        function testinput() {//測試快速輸入
+            setTimeout(function () {
+                document.querySelector('#UserEmail').value = "Freetest23@gmail.com";//信箱
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('#UserName').value = "王小白";//姓名
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('#UserPassword').value = "A12121212";//密碼
+            }, 0);
+            setTimeout(function () {
+                document.querySelector('#confirmPassword').value = "A12121212";//密碼
+            }, 0);
+        }
 
 
     </script>
