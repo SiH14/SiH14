@@ -34,5 +34,8 @@ const app = new Vue({
           });
         });
     },
+    getproductID(e) {
+      sessionStorage.setItem("productId", e.productId);
+    },
   },
 });
