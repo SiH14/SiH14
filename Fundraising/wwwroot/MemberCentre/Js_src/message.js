@@ -47,16 +47,22 @@ const app = new Vue({
                 this.chattinglasttime = time;
                 // 移至底部
                 setTimeout(() => this.gobottom(), 0);
-                axios.get("/api/chatrooms/chats/" + res.data).then((res) => {
-                  console.log(res.data);
-                  this.chatrooms = res.data;
-                });
+                //將訊息已讀
+                axios
+                  .put(`/api/chatrooms/unread/${this.userid}/${chatroom}`)
+                  .then((res) => {
+                    axios
+                      .get("/api/chatrooms/chats/" + this.userid)
+                      .then((res) => {
+                        this.chatrooms = res.data;
+                      });
+                  });
               } else {
                 axios.get("/api/chatrooms/chats/" + res.data).then((res) => {
-                  console.log(res.data);
                   this.chatrooms = res.data;
                 });
               }
+              // 更新對話清單
             }
           );
         })
@@ -112,9 +118,10 @@ const app = new Vue({
                   content: this.msg.content,
                   sentTime: currentime,
                 });
-
+                // 更新最後訊息時間
+                this.chattinglasttime = currentime;
+                // 更新對話清單
                 axios.get("/api/chatrooms/chats/" + this.userid).then((res) => {
-                  console.log(res.data);
                   this.chatrooms = res.data;
                 });
                 // 移至底部
@@ -145,10 +152,18 @@ const app = new Vue({
       axios.get("/api/messages/detail/" + e.chatroomId).then((res) => {
         this.messages = res.data;
         setTimeout(() => this.gobottom(), 0);
+        axios
+          .put(`/api/chatrooms/unread/${this.userid}/${e.chatroomId}`)
+          .then((res) => {
+            axios.get("/api/chatrooms/chats/" + this.userid).then((res) => {
+              this.chatrooms = res.data;
+            });
+          });
       });
     },
   },
   computed: {
+    // 搜尋功能
     searchList() {
       if (this.search) {
         return this.chatrooms.filter((item) => {
