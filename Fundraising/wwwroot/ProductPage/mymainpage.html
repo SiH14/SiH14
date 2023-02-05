@@ -213,7 +213,7 @@
                         </div>
 
                         <!--<div class="selectedimgdiv">-->
-                            <!--<img class="selectedimg" :src="item.coverphoto" alt="">
+                        <!--<img class="selectedimg" :src="item.coverphoto" alt="">
                         </div>-->
 
                         <p></p>
@@ -314,6 +314,7 @@
         </div>
     </div>
     <script src="../layout/layout.js"></script>
+    <script src="microsoft.cognitiveservices.speech.sdk.bundle.js"></script>
 
     <script>
         Vue.filter('money', function (num) {
@@ -372,38 +373,38 @@
             }
         })
 
-            //const app = {
-            //    data() {
-            //        return {
-            //            featuredList: [],
-            //            recentList: [],
-            //            message: 'word'
-            //        }
-            //    },
-            //    mounted() {
-            //        axios.get('/api/Fundraising/featured')//精選
-            //            .then((res) => {
-            //                this.featuredList = res.data;
-            //            })
-            //            .catch(function (error) {
-            //                console.log(error);
-            //            });
-            //        axios.get('/api/Fundraising/recent')//近期
-            //            .then((res) => {
-            //                this.recentList = res.data;
-            //            })
-            //            .catch(function (error) {
-            //                console.log(error);
-            //            });
-            //    },
-            //    methods: {
-            //        getproductID(e) {
-            //            /* console.log(e.productId)*/
-            //            sessionStorage.setItem("productId", e.productId);
-            //        }
-            //    },
-            //};
-            //Vue.createApp(app).mount("#app");
+                //const app = {
+                //    data() {
+                //        return {
+                //            featuredList: [],
+                //            recentList: [],
+                //            message: 'word'
+                //        }
+                //    },
+                //    mounted() {
+                //        axios.get('/api/Fundraising/featured')//精選
+                //            .then((res) => {
+                //                this.featuredList = res.data;
+                //            })
+                //            .catch(function (error) {
+                //                console.log(error);
+                //            });
+                //        axios.get('/api/Fundraising/recent')//近期
+                //            .then((res) => {
+                //                this.recentList = res.data;
+                //            })
+                //            .catch(function (error) {
+                //                console.log(error);
+                //            });
+                //    },
+                //    methods: {
+                //        getproductID(e) {
+                //            /* console.log(e.productId)*/
+                //            sessionStorage.setItem("productId", e.productId);
+                //        }
+                //    },
+                //};
+                //Vue.createApp(app).mount("#app");
     </script>
 
 </body>
