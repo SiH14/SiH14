@@ -146,18 +146,18 @@
 
         <div class="container card-group card-group-scroll">
             <!--v-if="whouser == ''"-->
-            <div class="card" style="padding: 10px; background-color: #f4f4f4; " v-for="item in planList">
+            <div class="card" style="background-color: #f4f4f4; position: relative; max-width: 33%" v-for="item in planList">
                 <a href="#" style="text-decoration: none; color: black;" v-on:click="getplanID(item.planid)">
                     <!--<img :src="item.planphoto" class="card-img-top"
                          alt="Hollywood Sign on The Hill" />-->
                     <img :src="item.planphoto" class="card-img-top"
-                         alt="Hollywood Sign on The Hill" style="height:120px; object-fit:cover" />
+                         alt="Hollywood Sign on The Hill" style="height: 120px; object-fit: cover; padding: 10px; " />
                     <div class="card-body">
                         <h5 class="mb-3 card-title">{{item.plantitle}}</h5>
                         <div class="mb-4"><h4>NT${{item.planprice | money}}</h4></div>
-                        <div><p class="card-text" style="white-space: pre-wrap;">{{item.plancontent}}</p></div>
+                        <div><p class="card-text mb-5" style="white-space: pre-wrap;">{{item.plancontent}}</p></div>
                     </div>
-                    <div class="card-footer" style="text-align:center">
+                    <div class="card-footer" style="text-align:center; position:absolute; width:100%; bottom:0;">
                         <small class="text-muted">贊助</small>
                     </div>
                 </a>
