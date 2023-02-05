@@ -141,7 +141,7 @@ Copyright ©2023 NeedU募資平台.
 
 
 </div>
-
+< script src = "microsoft.cognitiveservices.speech.sdk.bundle.js" ></script >
 </footer>`;
 let querybody = document.querySelector("body");
 let queryheader = document.querySelector("head");
@@ -150,8 +150,6 @@ querybody.innerHTML = header + querybody.innerHTML + footer;
 queryheader.innerHTML += `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>`;
 let queryheader2 = document.querySelector("head");
 queryheader2.innerHTML += `<link rel="stylesheet" href="../layout/layout.css"/>`
-//let queryheader3 = document.querySelector("head");
-//queryheader3.innerHTML += `< script src = "microsoft.cognitiveservices.speech.sdk.bundle.js" ></script >`
 
 let mic = 0;
 let voicesearch = document.querySelector(".voicesearch");

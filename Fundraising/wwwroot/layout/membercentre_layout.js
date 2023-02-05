@@ -28,6 +28,28 @@ let header =
 
     <div class="headernav">
         <ul id="headicon" class="navbar-nav me-5 headernav">
+            <button type="button" class="btn voicesearch" data-bs-toggle="modal" data-bs-target="#myModal">
+            <img id="mic" src="../img/microphone.png" alt="">
+            </button>
+
+            <!-- 語音搜尋窗口 -->
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">語音偵測</h4>
+                            <button type="button" class="theX btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <span class = "voicesearchtext">請開始說話...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <li class="headernav" style="padding-right: 10px;">
                 <div class="search headernav">                
                     <a class="icon headernav" href="#" role="button"></a>
@@ -140,13 +162,125 @@ Copyright ©2023 NeedU募資平台.
 
 
 </div>
-
+< script src = "microsoft.cognitiveservices.speech.sdk.bundle.js" ></script >
 </footer>`;
 let querybody = document.querySelector("body");
 let queryheader = document.querySelector("head");
 querybody.innerHTML = header + querybody.innerHTML;
 querybody.innerHTML += footer;
 queryheader.innerHTML += `<link rel="stylesheet" href="../layout/layout.css"/>`;
+
+let mic = 0;
+let voicesearch = document.querySelector(".voicesearch");
+let theX = document.querySelector(".theX");
+voicesearch.onclick = function () {
+    //if (document.querySelector(".voicesearchtext").innerText == "請再說一次.") {
+    //    alert("請開麥克風")
+    //}
+    document.querySelector(".voicesearchtext").innerHTML = "請開始說話..."
+    mic = 0
+    setTimeout(wangaa, 4500);
+}
+
+theX.onclick = function () {
+    mic = 1;
+    window.location.reload();
+}
+
+function wangaa() {
+    if (mic == 1) {
+    }
+    else {
+        if (document.querySelector(".voicesearchtext").innerHTML == "檢查麥克風 再說一次" || document.querySelector(".voicesearchtext").innerHTML == "請開始說話...") {
+            document.querySelector(".voicesearchtext").innerHTML = "檢查麥克風 再說一次"
+            mic = 1;
+        }
+        else {
+            mic = 0;
+            sessionStorage.setItem("filterans", document.querySelector(".voicesearchtext").innerHTML);
+            window.location = "/productpage/filterans.html";
+        }
+    }
+}
+
+/*語音*/
+// status fields and start button in UI
+var phraseDiv;
+var startRecognizeOnceAsyncButton;
+
+// subscription key and region for speech services.
+var subscriptionKey, serviceRegion;
+var authorizationToken;
+var SpeechSDK;
+var recognizer;
+document.addEventListener("DOMContentLoaded", function () {
+    startRecognizeOnceAsyncButton = document.querySelector('.voicesearch');
+    subscriptionKey = document.getElementById("subscriptionKey");
+    serviceRegion = document.getElementById("serviceRegion");
+    phraseDiv = document.getElementById("phraseDiv");
+
+
+    // startRecognizeOnceAsyncButton
+    startRecognizeOnceAsyncButton.addEventListener("click", function () {
+        startRecognizeOnceAsyncButton.disabled = true;
+        /*   phraseDiv.innerHTML = "";*/
+
+        // if we got an authorization token, use the token. Otherwise use the provided subscription key
+        var speechConfig;
+        speechConfig = SpeechSDK.SpeechConfig.fromSubscription("f433aba72ed643f19bd014887e3ad78d", "southeastasia");
+        //if (authorizationToken) {
+        //    speechConfig = SpeechSDK.SpeechConfig.fromAuthorizationToken(authorizationToken, serviceRegion.value);
+        //} else {
+        //    if (subscriptionKey.value === "" || subscriptionKey.value === "subscription") {
+        //        alert("Please enter your Microsoft Cognitive Services Speech subscription key!");
+        //        return;
+        //    }
+        //    speechConfig = SpeechSDK.SpeechConfig.fromSubscription("f433aba72ed643f19bd014887e3ad78d", "southeastasia");
+        //}
+
+        // speechConfig.speechRecognitionLanguage = "en-US";
+        speechConfig.speechRecognitionLanguage = "zh-TW";
+        var audioConfig = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
+        recognizer = new SpeechSDK.SpeechRecognizer(speechConfig, audioConfig);
+
+        recognizer.recognizeOnceAsync(
+            function (result) {
+                startRecognizeOnceAsyncButton.disabled = false;
+                /*          phraseDiv.innerHTML += result.text;*/
+                window.console.log(result);
+                const textresult = result.text
+                /*    document.getElementById("mysearch").value = result.text.substring(0, textresult.length - 1);*/
+                if (mic == 0) {
+                    document.querySelector(".voicesearchtext").innerHTML = result.text.substring(0, textresult.length - 1);
+                }
+                recognizer.close();
+                recognizer = undefined;
+            },
+            function (err) {
+                startRecognizeOnceAsyncButton.disabled = false;
+                /*    phraseDiv.innerHTML += err;*/
+                window.console.log(err);
+                /*   document.getElementById("mysearch").value = "請再說一次.";*/
+                document.querySelector(".voicesearchtext").innerHTML = "檢查麥克風 再說一次";
+                recognizer.close();
+                recognizer = undefined;
+            });
+    });
+
+    if (!!window.SpeechSDK) {
+        SpeechSDK = window.SpeechSDK;
+        startRecognizeOnceAsyncButton.disabled = false;
+
+        document.getElementById('content').style.display = 'block';
+        /* document.getElementById('warning').style.display = 'none';*/
+
+        // in case we have a function for getting an authorization token, call it.
+        if (typeof RequestAuthorizationToken === "function") {
+            RequestAuthorizationToken();
+        }
+    }
+});
+/*語音*/
 
 // searchbar
 const icon = document.querySelector(".icon");
