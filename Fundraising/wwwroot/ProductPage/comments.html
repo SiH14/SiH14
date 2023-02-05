@@ -309,15 +309,23 @@
                     })
                     .catch((err) => console.error(err.toString()));
 
-                this.connection.on("ReceiveMessage", (producttitle,word1) => {
-                    this.meno.push({ "show": "有新的回應囉", "title": producttitle, "whose": word1});
-                    setTimeout(function () {
+                this.connection.on("ReceiveMessage", (producttitle, word1, thisuser) => {
+                    if (parseInt(app.whouser) != parseInt(thisuser)) {
+                        this.meno.push({ "show": "有新的回應囉", "title": producttitle, "whose": word1, "thisuser": thisuser });
+
                         setTimeout(function () {
-                            dis.style.display = "none"
-                        }, 8000)
-                        let dis = document.querySelector('.al' + (app.meno.length - 1))
-                        console.log(1);
-                    }, 1000)
+                            setTimeout(function () {
+                                dis.style.display = "none"
+                            }, 8000)
+                            let dis = document.querySelector('.al' + (app.meno.length - 1))
+                            console.log(1);
+                        }, 1000)
+                    }
+                    
+                    //alert(typeof towho);
+                    //alert(typeof app.whouser);
+
+
                 });
                 $.ajax({
                     type: 'Get',
@@ -367,7 +375,8 @@
                                             "SendMessageToUser",
                                             this.productuserid,
                                             this.productList[0].producttitle,
-                                            '您的專案'
+                                            '您的專案',
+                                            app.whouser
                                         )
                                         .catch((err) => console.error(err.toString()));
                  /*   this.meno.push("我要留言");*/
@@ -401,7 +410,8 @@
                             "SendMessageToCom",
                             w,
                             this.productList[0].producttitle,
-                            "您的留言"
+                            "您的留言",
+                            app.whouser
                         )
                         .catch((err) => console.error(err.toString()));
                  /*   this.meno.push("我要留言");*/
