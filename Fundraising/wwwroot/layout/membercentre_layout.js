@@ -76,13 +76,13 @@ let header =
 >
 </div>`;
 
-let footer = `<footer class="text-dark pt-5 pb-4">
+let footer = `<footer class="pt-5">
 
-<div class="footer-container text-center text-md-left">
+<div class=" text-center text-md-left">
 
-    <div class="row text-center text-md-left" id="footer-text">
+    <div class="row text-center text-md-left container m-auto justify-content-center" id="">
 
-        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 footer-item">
+        <div class="col-md-2 mx-auto footer-item">
             <h4 class=" mb-4 font-weight-bold">關於</h4>
             <p>關於我們</p>
             <p>人才招募</p>
@@ -90,34 +90,33 @@ let footer = `<footer class="text-dark pt-5 pb-4">
 
         </div>
 
-        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 footer-item">
+        <div class="col-md-2 mx-auto  footer-item">
             <h4 class=" mb-4 font-weight-bold">條款</h4>
             <p>使用條款</p>
             <p>提案者合約</p>
 
         </div>
 
-        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 footer-item"> 
+        <div class="col-md-2 mx-auto footer-item"> 
             <h4 class=" mb-4 font-weight-bold">協助</h4>
             <p>常見問題</p>
             <p>使用手冊</p>
             <p>提案百科</p>
         </div>
 
-        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 footer-item">
+        <div class="col-md-2 mx-auto footer-item">
             <h4 class=" mb-4 font-weight-bold">更多</h4>
             <p>品牌資源</p>
             <p>群眾觀點</p>
 
         </div>      
-
-    </div>
-    <div class="footericon">
+<div class="col-md-3 mx-auto footer-item">
     <div>
     <a href="../ProductPage/mymainpage.html">
     <img style="margin-top:-18px" id="brand" src="../img/brand.png" alt="">
     </a>
     </div>
+<div>
     <a href="" style="text-decoration:none;">
             <img src="../img/fbicon.png" alt="">
         </a>
@@ -129,17 +128,16 @@ let footer = `<footer class="text-dark pt-5 pb-4">
         <a href="" style="text-decoration:none;">
             <img src="../img/yticon.png" alt="">
         </a>
+</div>
    </div>
+    </div>
 
-    <hr class="mb-4" style="color: black;">
 
-    <div class="row align-items-center footertext">
-
-        <div class="justify-content-center">
-            <p style="color: black; font-size: 0.975rem;">Copyright ©2022 Backer-Founder All rights reserved.</p>
+        <div class="p-2" style="border-top: 1px #afaeae solid;">
+Copyright ©2023 NeedU募資平台.
         </div>
 
-    </div>
+
 
 </div>
 
