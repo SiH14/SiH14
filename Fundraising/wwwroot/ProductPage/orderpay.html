@@ -153,7 +153,7 @@
                         <span>專案金額</span><span style="text-align: right;" class='text-end'>NT$ {{fliterList[0].planPrice | money}}</span>
                     </div>
                     <div class="d-flex justify-content-between" style="display:none">
-                        <span>加碼贊助</span><span style="text-align: right;" class='text-end'>NT$ {{AddSponsorshipValue | money}}</span>
+                        <span>加碼贊助</span><span style="text-align: right;" class='rightAddSponsorship text-end'>NT$ {{AddSponsorshipValue | money}}</span>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between">
@@ -357,8 +357,9 @@
             }
         })
 
-        function testinput() {//測試快速輸入
-            document.querySelector('.testAddSponsorship').value = parseInt(300);//贊助金額
+        function testinput() {//測試快速輸入rightAddSponsorship
+            //document.querySelector('.testAddSponsorship').value = parseInt(300);//贊助金額
+            //document.querySelector('.rightAddSponsorship').innerText = parseInt(300);//贊助金額
             setTimeout(function () {
                 document.querySelector('.testRecipientAddress').value = "台中市南屯區公益路二段51號18樓";//地址
             }, 0);

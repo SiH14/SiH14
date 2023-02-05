@@ -67,8 +67,10 @@ const app = new Vue({
           axios
             .put("/api/userorder/" + cancelput.orderId, cancelput)
             .then(() => {
-              swal("已送出取消申請!", "待人員確認後會進行退款", {
-                button: "Click Me!",
+              swal("已送出取消申請", "待人員確認後會進行退款", "success", {
+                button: "確定",
+              }).then((x) => {
+                history.go(0);
               });
             });
         });
