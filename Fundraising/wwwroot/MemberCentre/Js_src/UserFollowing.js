@@ -30,6 +30,7 @@ const app = new Vue({
             // 拿取追蹤中的專案
             axios.get("/api/UserFollowing/my/" + res.data).then((res) => {
               this.myfollow = res.data;
+              swal("已取消追蹤", e.ptitle, "success", { button: "確定" });
             });
           });
         });
