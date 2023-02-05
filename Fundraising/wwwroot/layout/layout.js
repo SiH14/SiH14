@@ -179,7 +179,7 @@ voicesearch.onclick = function () {
     //    alert("請開麥克風")
     //}
     document.querySelector(".voicesearchtext").innerHTML = "請開始說話..."
-    mic = 1
+    mic = 0
     setTimeout(wangaa, 6500);
 }
 
@@ -195,7 +195,7 @@ function wangaa() {
         /*    window.location = "/productpage/filter.html";*/
         }
         else {
-            sessionStorage.setItem("filterans", document.getElementById("mysearch").value);
+            sessionStorage.setItem("filterans", document.querySelector(".voicesearchtext").innerHTML);
             window.location = "/productpage/filterans.html";
         }
     }

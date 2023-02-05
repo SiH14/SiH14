@@ -130,7 +130,7 @@ namespace Fundraising.Controllers
                             join product in _context.Products on o.ProductId equals product.ProductId
                             join user in _context.Users on product.UserId equals user.UserId
                             where product.ProductStateId == 3 && product.Endtime > DateTime.Now
-                            orderby product.Startime
+                            orderby product.Startime descending
                             select new
                             {
                                 ProductId = o.ProductId,
@@ -440,7 +440,7 @@ namespace Fundraising.Controllers
                         join product in _context.Products on o.ProductId equals product.ProductId
                         join user in _context.Users on product.UserId equals user.UserId
                         where product.ProductStateId == 3 && product.Endtime > DateTime.Now
-                        orderby o.nowmoney descending
+                        orderby product.Startime descending
                         select new
                         {
                             ProductId = o.ProductId,
@@ -456,7 +456,7 @@ namespace Fundraising.Controllers
                             percent = (int)(((float)o.nowmoney / (float)product.TargetAmount) * 100)
                         };
 
-            query = query.OrderBy(x => x.Startime).Take(3);
+            query = query.Take(3);
 
             //var query = (from p in _context.Products
             //             join u in _context.Users on p.UserId equals u.UserId
