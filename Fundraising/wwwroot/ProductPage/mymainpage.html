@@ -322,7 +322,6 @@
             parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             return parts.join('.');
         });
-
         var app = new Vue({
             el: "#app",
             data: {
@@ -331,13 +330,6 @@
                 message: 'word'
             },
             beforeMount() {
-                //$.ajax({
-                //    type: 'Get',
-                //    url: '/api/Fundraising/featured',
-                //    success: function (e) {
-                //        app.featuredList = e
-                //    }
-                //})
                 axios.get('/api/Fundraising/featured')//精選
                     .then((res) => {
                         this.featuredList = res.data;
@@ -345,16 +337,7 @@
                     .catch(function (error) {
                         console.log(error);
                     });
-                //var apitopage = (sessionStorage.getItem("topage") == null) ? 0 : sessionStorage.getItem("topage")
-                //$.ajax({
-                //    type: 'Get',
-                //    url: '/api/Fundraising/topage/' + parseInt(apitopage),
-                //    success: function (e) {
-                //        app.fliterList = e
-                //    }
-                //})
-            }
-            ,
+            },
             mounted: function () {
                 axios.get('/api/Fundraising/recent')//近期
                     .then((res) => {
@@ -363,8 +346,7 @@
                     .catch(function (error) {
                         console.log(error);
                     });
-            }
-            ,
+            },
             methods: {
                 getproductID: function (e) {
                     /* console.log(e.productId)*/

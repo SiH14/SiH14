@@ -81,7 +81,12 @@ max-width: 80%;">
 </div>
 </div>
 </nav>`;
-
+// <a class="nav-link" href="./Preview.html">
+// <i class="fa fa-tags" aria-hidden="true"></i>
+//     <span>提案審核</span></a>
+// <a class="nav-link" href="./Orefund.html">
+// <i class="fa fa-inbox" aria-hidden="true"></i>
+//     <span>贊助退款</span></a>
 // 側邊
 document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
 控制面板
@@ -101,10 +106,8 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
 <li class="nav-item ">
 <a class="nav-link" href="./Plist.html">
 <i class="fa fa-list" aria-hidden="true"></i>
-    <span>提案列表</span></a>
-<a class="nav-link" href="./Preview.html">
-<i class="fa fa-tags" aria-hidden="true"></i>
-    <span>提案審核</span></a>
+    <span>提案管理</span></a>
+
 </li>
 <hr class="sidebar-divider">
 <div class="sidebar-heading">
@@ -113,27 +116,23 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
 <li class="nav-item ">
 <a class="nav-link" href="./Olist.html">
 <i class="fa fa-list-alt" aria-hidden="true"></i>
-    <span>贊助列表</span></a>
-<a class="nav-link" href="./Orefund.html">
-<i class="fa fa-inbox" aria-hidden="true"></i>
-    <span>贊助退款</span></a>
+    <span>贊助管理</span></a>
 </li>
-
 
 <hr class="sidebar-divider">
 <div class="sidebar-heading">
 會員相關
 </div>
+<li class="nav-item ">
+<a class="nav-link" href="./message.html">
+<i class="fa fa-comments" aria-hidden="true"></i>
+    <span>留言管理</span></a>
+</li>
 <li class="nav-item">
 <a class="nav-link collapsed w-100" href="./member.html" >
     <i class="fas fa-fw fa-folder"></i>
     <span>會員列表</span>
 </a>
-</li>
-<li class="nav-item ">
-<a class="nav-link" href="./message.html">
-<i class="fa fa-comments" aria-hidden="true"></i>
-    <span>留言管理</span></a>
 </li>
 <hr class="sidebar-divider">
 <div class="sidebar-heading">
@@ -150,15 +149,6 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
     <span>個人資料</span></a>
     </li>
     `;
-    // <div class="sidebar-heading">
-    // 前台管理
-    // </div>
-    // <li class="nav-item ">
-    // <a class="nav-link" href="./editHome.html">
-    // <i class="fa fa-user" aria-hidden="true"></i>
-    //     <span>編輯首頁</span></a>
-    
-    // </li>
 
 // 頁尾
 document.getElementById("myfooter").innerHTML = ` <footer class="p-4">

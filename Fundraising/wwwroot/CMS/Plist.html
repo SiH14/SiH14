@@ -117,7 +117,14 @@
                                                                     alt="" style=" width: 100%;"></td>
                                                             <td v-cloak>{{item.p.productTitle}}</td>
                                                             <td v-cloak>{{item.p.productStateId}}</td>
-                                                            <td v-cloak>
+                                                            <td v-cloak v-if="item.p.productStateId == '審核中'">
+                                                                <div>
+                                                                    <a href="./PdetailsEdit.html"
+                                                                        class="btn btn-success"
+                                                                        v-on:click="checkmenber(item.p.productId)">編輯</a>
+                                                                </div>
+                                                            </td>
+                                                            <td v-cloak v-else>
                                                                 <div>
                                                                     <a href="./PdetailsView.html"
                                                                         class="btn btn-outline-success"

@@ -101,7 +101,10 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="6">取消原因:</td>
+                                                        <td colspan="">取消原因:</td>
+                                                        <td colspan="5" v-cloak>
+                                                            {{odetailsinfo.refundResult}}
+                                                        </td>
                                                     </tr>
 
                                                 </tbody>
@@ -235,7 +238,7 @@
                         axios.put(`/api/refunds/${refund.refundId}`, refund).then(res => {
                             console.log(res)
                             swal("確認退款成功", "", "success", {}).then(x => {
-                                window.location = "/cms/Orefund.html"
+                                window.location = "/cms/Olist.html"
                             })
                         })
                     });

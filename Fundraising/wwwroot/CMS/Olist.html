@@ -113,7 +113,11 @@
                                                             <td v-cloak>{{item.planTitle}}</td>
                                                             <td v-cloak>{{item.purchaseTime}}</td>
                                                             <td v-cloak>{{item.orderStateId}}</td>
-                                                            <td v-cloak><a class="btn btn-outline-success"
+                                                            <td v-cloak v-if="item.orderStateId == '取消申請中'"><a class="btn btn-outline-success"
+                                                                href='./checkrefund.html'
+                                                                v-on:click="checkOlist(item.orderId)">編輯</a>
+                                                        </td>
+                                                            <td v-cloak v-else><a class="btn btn-outline-success"
                                                                     href='./Odetails.html'
                                                                     v-on:click="checkOlist(item.orderId)">查看</a>
                                                             </td>
