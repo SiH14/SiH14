@@ -62,7 +62,7 @@
                                         <div class="mb-3 col-12">
                                             <form>
                                                 <fieldset>
-                                                    <legend>查詢條件</legend>
+                                                    <legend onclick=app.enterText()>查詢條件</legend>
                                                     <div class="d-flex py-3">
                                                         <div class="">
                                                             <label class="px-3" for="">提案狀態:</label>
@@ -80,12 +80,15 @@
                                                         <div class="">
                                                             <label class="px-3" for="">編號:</label>
                                                             <input type="text" id="productId" name="productId"
-                                                                v-model.trim="input.productId">
+                                                                v-model.trim="input.productId" style="padding: 5px;">
                                                         </div>
                                                         <div class="">
                                                             <label class="px-3" for="">提案名稱:</label>
                                                             <input type="text" id="productTitle" name="productTitle"
-                                                                v-model.trim="input.productTitle">
+                                                                v-model.trim="input.productTitle" style="padding: 5px;">
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <a class="btn btn-success" v-on:click="inputRest">清除</a>
                                                         </div>
                                                     </div>
                                                 </fieldset>
@@ -116,23 +119,12 @@
                                                             <td v-cloak>{{item.p.productStateId}}</td>
                                                             <td v-cloak>
                                                                 <div>
-                                                                    <!-- <a href="./PdetailsEdit.html"
-                                                                    class="btn btn-outline-success mr-3"
-                                                                    v-on:click="checkmenber(item.p.productId)">編輯 </a> -->
                                                                     <a href="./PdetailsView.html"
                                                                         class="btn btn-outline-success"
                                                                         v-on:click="checkmenber(item.p.productId)">查看</a>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <!-- <tr>
-                                                        <td>P1231001</td>
-                                                        <td><img src="" alt="" style="height: 50px; width: 100px;"></td>
-                                                        <td>London</td>
-                                                        <td>已成功</td>
-                                                        <td><a href="./PdetailsView.html"
-                                                                class="btn btn-outline-success">詳細內容</a></td>
-                                                    </tr> -->
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -207,30 +199,23 @@
                     setTimeout(() => loader.hide(), 3 * 1000);
                 },
                 logout: function () {
-                    // alert("1523 ")
                     axios.get("/api/back/logout").then(res => { if (res.data == "已登出") { window.location.reload() } })
                 },
                 checkmenber: function (a) {
                     sessionStorage.setItem("productId", a);
                 },
-                // fliterlist: function () {
-                //     var id = document.getElementById("productId").value
-                //     var Title = document.getElementById("productTitle").value
-                //     var StateId = document.getElementById("productStateId").value
-                //     alert(id + Title + StateId)
-                //     var list = Array.from(this.productlist)
-                //     var newlist = list.filter(function (value) {
-                //         return value.p.productStateId == StateId
-                //     })
-                //     this.productlist = newlist
-                //     console.log(newlist)
-
-                // }
+                enterText:function(){
+                    app.input.productId = "123";
+                    app.input.productTitle= "123";
+                    
+                },
+                inputRest:function(){
+                    app.input.productId = "";
+                    app.input.productTitle= "";
+                    app.input.productStateId ="全部"
+                }
             },
             computed: {
-                myfliter() {
-
-                },
                 StateIdchange() {
                     if (this.input.productStateId !== "全部") {
                         return this.productlist.filter(item => {
@@ -261,8 +246,6 @@
                     }
                 }
             },
-
-
             async mounted() {
                 let loader = this.$loading.show({
                     loader: 'dots'
@@ -276,9 +259,8 @@
                await axios.get('/api/back/ProductList')
                     .then((response) => {
                         Object.values(response.data)
-                        // console.log(response.data)
                         response.data.forEach(e => {
-                            // console.log(e)
+
                             if (e.p.productStateId == 1) {
                                 e.p.productStateId = "審核中"
                             } else if (e.p.productStateId == 2) {
@@ -292,9 +274,7 @@
                             }
                         });
                         this.productlist = response.data
-                        setTimeout(() => loader.hide(), 0.5 * 1000);
-                        // this.orderlist = response.data
-                        // console.log(response.data.length)
+                        setTimeout(() => loader.hide(), 200);
                     })
             }
         })
