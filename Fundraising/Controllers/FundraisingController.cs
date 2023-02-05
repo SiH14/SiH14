@@ -36,7 +36,7 @@ namespace Fundraising.Controllers
             var addprice = from p in _context.Plans
                            join o in _context.Orders on p.PlanId equals o.PlanId
                            //group p by new {p.ProductId} into g
-                           where o.OrderStateId != 5 && o.OrderStateId != 4
+                           where o.OrderStateId != 4 && o.OrderStateId != 5 && o.OrderStateId != 6
                            select new
                            {
                                ProductId = p.ProductId,
@@ -54,6 +54,7 @@ namespace Fundraising.Controllers
 
             var countplan = from p in _context.Plans
                             join o in _context.Orders on p.PlanId equals o.PlanId
+                            where o.OrderStateId != 4 && o.OrderStateId != 5 && o.OrderStateId != 6
                             group p by new { p.ProductId } into g
                             select new
                             {
@@ -301,7 +302,7 @@ namespace Fundraising.Controllers
             var addprice = from p in _context.Plans
                            join o in _context.Orders on p.PlanId equals o.PlanId
                            //group p by new {p.ProductId} into g
-                           where o.OrderStateId != 5 && o.OrderStateId != 4
+                           where o.OrderStateId != 4 && o.OrderStateId != 5 && o.OrderStateId != 6
                            select new
                            {
                                ProductId = p.ProductId,
@@ -319,6 +320,7 @@ namespace Fundraising.Controllers
 
             var countplan = from p in _context.Plans
                             join o in _context.Orders on p.PlanId equals o.PlanId
+                            where o.OrderStateId != 4 && o.OrderStateId != 5 && o.OrderStateId != 6
                             group p by new { p.ProductId } into g
                             select new
                             {
@@ -392,7 +394,7 @@ namespace Fundraising.Controllers
             var addprice = from p in _context.Plans
                            join o in _context.Orders on p.PlanId equals o.PlanId
                            //group p by new {p.ProductId} into g
-                           where o.OrderStateId != 5 && o.OrderStateId != 4
+                           where o.OrderStateId != 4 && o.OrderStateId != 5 && o.OrderStateId != 6
                            select new
                            {
                                ProductId = p.ProductId,
@@ -410,6 +412,7 @@ namespace Fundraising.Controllers
 
             var countplan = from p in _context.Plans
                             join o in _context.Orders on p.PlanId equals o.PlanId
+                            where o.OrderStateId != 4 && o.OrderStateId != 5 && o.OrderStateId != 6
                             group p by new { p.ProductId } into g
                             select new
                             {
@@ -624,7 +627,7 @@ namespace Fundraising.Controllers
             var addprice = from p in _context.Plans
                            join o in _context.Orders on p.PlanId equals o.PlanId
                            //group p by new {p.ProductId} into g
-                           //where p.ProductId == 15
+                           where o.OrderStateId != 4 && o.OrderStateId != 5 && o.OrderStateId != 6
                            select new
                            {
                                ProductId = p.ProductId,
@@ -642,6 +645,7 @@ namespace Fundraising.Controllers
 
             var countplan = from p in _context.Plans
                             join o in _context.Orders on p.PlanId equals o.PlanId
+                            where o.OrderStateId != 4 && o.OrderStateId != 5 && o.OrderStateId != 6
                             group p by new { p.ProductId } into g
                             select new
                             {
