@@ -1,15 +1,26 @@
-body,p,a,table,th,td,span,div,button{
+body,
+p,
+a,
+table,
+th,
+td,
+span,
+div,
+button {
     color: black;
 }
-a{
+
+a {
     color: #495057;
     text-decoration: none;
 }
-a:hover{
+
+a:hover {
     text-decoration: underline;
     color: #047c51;
-    
+
 }
+
 .item-style {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgb(0 0 0 / 30%);
@@ -20,7 +31,9 @@ a:hover{
 .bg-white {
     background-color: #ffffff;
 }
-
+.color-theme{
+    color: #047c51;
+}
 .bg-theme {
     /* background-color: #eff3f8; */
     background-color: #f4f4f4;
@@ -39,30 +52,44 @@ a:hover{
 }
 
 
-@media (min-width: 576px){
-.modal-dialog {
-    max-width: 600px    ;
-    margin: auto;}}
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 600px;
+        margin: auto;
+    }
+}
 
-footer{
-    background-image: url("../../img/footerbackgroud.png");
+header {
+    background-image: url("../img/headerbackgroud.png");
+    background-size: cover;
+}
+
+footer {
+    background-image: url("../img/footerbackgroud.png");
     background-size: cover;
     background-position: center;
-}    
-.navbar-nav{
+    font-size: 24px;
+}
+
+.navbar-nav {
     padding: 0px;
 }
-#mysider a{
+
+#mysider a {
     width: 100%;
 }
-#mysider a:hover{
-    background-color: #57c29c;
+
+#mysider a:hover {
+    background-color: rgba(102, 252, 159,0.2);
+    
+    /* background-color: rgba(131, 252, 120, 0.2); */
 }
 
 [v-cloak] {
     display: none;
 }
-.imgset{
+
+.imgset {
     width: 50px;
     height: 50px;
     object-fit: cover;

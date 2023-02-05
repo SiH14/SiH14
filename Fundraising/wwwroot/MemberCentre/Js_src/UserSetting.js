@@ -36,8 +36,9 @@ const app = new Vue({
       axios
         .put("/api/userinfo/setting/" + this.userinfo.userId, this.userinfo)
         .then(() => {
-          alert("儲存成功!");
-          history.go(0);
+          swal("儲存成功！", "", "success", { button: "確定" }).then(() => {
+            history.go(0);
+          });
         });
     },
   },

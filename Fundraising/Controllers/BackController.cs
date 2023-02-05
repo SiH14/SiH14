@@ -310,6 +310,7 @@ namespace 募資.Controllers
             var result = from p in _context.Products
                          join ps in prodsum on p.ProductId equals ps.productId into s
                          from get in s.DefaultIfEmpty()
+                         orderby p.ProductId descending
                          select new
                          {
                              p,

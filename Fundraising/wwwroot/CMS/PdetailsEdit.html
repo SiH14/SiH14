@@ -181,7 +181,7 @@
                                                         <h5 class="card-header">{{item.planTitle}}</h5>
                                                         <div class="card-body row p-1">
                                                             <div class="col-4">
-                                                                <img :src="item.planPhoto" alt="" class="img-fuild">
+                                                                <img :src="item.planPhoto" alt="" class="img-fuild w-100">
                                                             </div>
                                                             <div class="col-7">
                                                                 <div class="d-flex justify-content-between">
@@ -379,7 +379,7 @@
                     .then((response) => {
                         response.data[0].endtime = ''
                         this.productinfo = response.data[0]
-                        setTimeout(() => loader.hide(), 0.5 * 1000);
+                        setTimeout(() => loader.hide(), 200);
                     })
                 axios.get(`/api/back/Pplans/${sessionStorage.getItem('productId')}`)
                     .then((response) => { this.plan = response.data })

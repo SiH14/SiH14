@@ -61,10 +61,10 @@
                                         <div class="mb-3 col-12">
                                             <form>
                                                 <fieldset>
-                                                    <legend>查詢條件</legend>
+                                                    <legend onclick=app.enterText()>查詢條件</legend>
                                                     <div class="d-flex py-3">
                                                         <div class="">
-                                                            <label class="px-3" for="">提案狀態:</label>
+                                                            <label class="px-3" for="" >提案狀態:</label>
                                                             <select name="" id="" style="width: 100px; height: 100%;"
                                                                 v-model="input.orderStateId">
                                                                 <option value="全部">全部</option>
@@ -79,16 +79,20 @@
                                                         </div>
                                                         <div class="">
                                                             <label class="px-3" for="">編號:</label>
-                                                            <input type="text" v-model="input.orderId">
+                                                            <input type="text" v-model="input.orderId" style="padding: 5px;">
                                                         </div>
                                                         <div class="">
                                                             <label class="px-3" for="">提案名稱:</label>
-                                                            <input type="text" v-model="input.productTitle">
+                                                            <input type="text" v-model="input.productTitle" style="padding: 5px;">
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <a class="btn btn-success" v-on:click="inputRest">重製</a>
                                                         </div>
                                                 </fieldset>
                                             </form>
                                         </div>
                                         <div class="col-12" id="myTabContent">
+                                            <div v-cloak>查詢結果:共{{orderIdChange.length}}項</div>
                                             <div class="tab-pane fade show active" id="home" role="tabpanel"
                                                 aria-labelledby="home-tab">
                                                 <table class="table table-hover">
@@ -205,6 +209,16 @@
                 },
                 checkOlist: function (index) {
                     sessionStorage.setItem('orderId', index)
+                },
+                enterText:function(){
+                    app.input.orderId = "123";
+                    app.input.productTitle= "123";
+                    
+                },
+                inputRest:function(){
+                    app.input.orderId = "";
+                    app.input.productTitle= "";
+                    app.input.orderStateId ="全部"
                 }
             },
             computed: {
