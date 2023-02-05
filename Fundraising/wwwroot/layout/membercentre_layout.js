@@ -76,7 +76,7 @@ let header =
 >
 </div>`;
 
-let footer = `<footer class="pt-5">
+let footer = `<footer class="pt-5 " style="margin-top:50px">
 
 <div class=" text-center text-md-left">
 

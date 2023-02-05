@@ -363,4 +363,8 @@ function logout() {
             console.log(error.response);
         });
 }
+//document.querySelector("body").style.backgroundImage = "url('../img/mbbg.png')";
+//document.querySelector("body").style.backgroundRepeat = "no-repeat";
+//document.querySelector("body").style.backgroundAttachment = "fixed";
+//document.querySelector("body").style.backgroundSize = "100%";
 
