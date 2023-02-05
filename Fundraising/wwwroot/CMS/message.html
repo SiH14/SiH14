@@ -109,13 +109,13 @@
                                                 <div class="col-11">
                                                     <div>
                                                         <a class="" href="#" data-toggle="collapse"
-                                                            :data-target="'#'+comitem.commentContent"
+                                                            :data-target=`#ci${comitem.commentId}`
                                                             aria-expanded="true" aria-controls="collapseTwo">
                                                             <span v-cloak>{{comitem.anscount}}則回覆</span>
                                                         </a>
                                                     </div>
                                                     <div v-for=" ansitem in comitem.answers">
-                                                        <div :id="comitem.commentContent" class="collapse"
+                                                        <div :id=`ci${comitem.commentId}` class="collapse"
                                                             aria-labelledby="headingTwo"
                                                             data-parent="#accordionSidebar">
                                                             <div class="bg-white py-2 row">

@@ -22,8 +22,9 @@
 document.getElementById("myheader").innerHTML = `
 <nav class="navbar navbar-expand navbar-light  static-top " style="margin: auto;
 max-width: 80%;">
-<div class="px-5 mr-auto">
-<h1><a href="./index.html">募資平台</a></h1>
+<div class="px-5 mr-auto d-flex">
+<a href="./index.html" style="text-decoration: none;display:block;"><img src="./img/brand.png" style="width:200px"></a>
+<span class="mt-auto color-theme">後臺管理系統</span >
 </div>
 <!-- 導覽列右邊 -->
 <!-- 導覽收尋欄-->
@@ -87,7 +88,7 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
 </div>
 
 <li class="nav-item ">
-<a class="nav-link active" href="index.html">
+<a class="nav-link" href="index.html">
     <i class="fas fa-fw fa-tachometer-alt"></i>
     <span>後台總覽</span></a>
 </li>
@@ -140,8 +141,8 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
 </div>
 <li class="nav-item ">
 <a class="nav-link" href="./Employee.html">
-<i class="fa fa-user" aria-hidden="true"></i>
-    <span>員工</span></a>
+<i class="fa fa-solid fa-file"></i>
+    <span>員工管理</span></a>
     </li>
     <li class="nav-item ">
 <a class="nav-link" href="./profile.html">
@@ -160,10 +161,10 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
     // </li>
 
 // 頁尾
-document.getElementById("myfooter").innerHTML = ` <footer class="p-5">
+document.getElementById("myfooter").innerHTML = ` <footer class="p-4">
 <div class="container my-auto">
     <div class="copyright text-center my-auto">
-        <span>Copyright &copy;咱的募資平台 2023</span>
+        <span class="color-theme fs-b">Copyright &copy;needU募資平台 2023</span>
     </div>
 </div>
 </footer>`;

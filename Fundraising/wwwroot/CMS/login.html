@@ -50,10 +50,10 @@
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" placeholder="請輸入密碼" name="password"
-                                    v-model="login.employeePassword">
+                                    v-model="login.employeePassword" v-on:keyup.enter="startlogin()">
                             </div>
                             <hr>
-                            <a class="btn  btn-block" value="登入" v-on:click="startlogin()">
+                            <a class="btn  btn-block" value="登入" v-on:click="startlogin()" >
                                 登入
                             </a>
                         </form>
@@ -104,11 +104,6 @@
             },
 
             mounted() {
-                // sessionStorage.clear();
-                // axios.get('/api/back/index').then((response) => {
-                //     // console.log(response.data[0])
-                //     this.mydata = response.data[0]
-                // })
 
             },
         }).mount('#app')

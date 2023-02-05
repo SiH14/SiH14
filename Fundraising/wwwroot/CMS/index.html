@@ -33,9 +33,7 @@
         <loading :can-cancel="true"></loading>
         <div class="container-fluid p-0 bg-theme">
             <!-- 導覽列 -->
-            <div id="myheader" class="bg-white"
-                style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
-            </div>
+            <header id="myheader"></header>
             <!-- 結束 導覽列 -->
             <div class=" container-fluid px-5 pt-4 pb-0">
                 <div class="row justify-content-center">
@@ -137,7 +135,7 @@
                             <div class="row">
 
                                 <!-- 圖表內容 -->
-                                <div class="col-8 px-2" style="overflow-y: auto;">
+                                <div class="col-9 px-2" style="overflow-y: auto;">
                                     <div class="card shadow mb-4">
 
                                         <div
@@ -145,8 +143,9 @@
                                             <h1 class="m-0 font-weight-bold text-success">熱門提案</h1>
 
                                         </div>
-                                        <div style="overflow-y: auto; max-width: 100%; overflow-x: auto; max-height: 480px;">
-                                            <table class="table table-hover" style="width: 1000px;">
+                                        <div
+                                            style="overflow-y: auto; max-width: 100%; overflow-x: auto; max-height: 480px; min-height: 480px;">
+                                            <table class="table table-hover" style="width: 1200px;">
                                                 <thead>
                                                     <tr class="">
                                                         <th class="col-1">排名</th>
@@ -158,7 +157,7 @@
                                                     </tr>
                                                 </thead>
                                                 <div>
-                                                    <tbody >
+                                                    <tbody>
                                                         <tr v-for="(item, index ) in mydata.hotProduct">
                                                             <td v-cloak>{{index+1}}</td>
                                                             <td v-cloak>{{item.p.productTitle}}</td>
@@ -193,7 +192,7 @@
                                 </div>
 
 
-                                <div class=" col-4">
+                                <div class=" col-3">
                                     <div class="card shadow mb-4">
 
                                         <div
@@ -219,7 +218,6 @@
                                                         <td v-cloak><img :src="item.userPhoto" alt=""
                                                                 class="imgset rounded-circle border-secondar"></td>
                                                         <td v-cloak>{{item.userName}}</td>
-                                                        <!-- <td v-cloak>{{item.userIntro}}</td> -->
                                                         <td v-cloak><a class="btn btn-outline-success"
                                                                 data-toggle="modal" data-target="#exampleModal"
                                                                 v-on:click="getuserinfo(item.userId)">查看<i
@@ -256,51 +254,58 @@
                         </button>
                     </div>
                     <div class="modal-body px-3">
-                        <div class="row  justify-content-center mb-3">
-                            <div class="col-5 "><img :src="userinfo.userPhoto" style="width: 200px;height: 200px;object-fit: cover;" alt=""></div>
-                            <div class="col-6 ">
-                                <div class="">
-                                    <label for="">會員編號:</label><br>
-                                    <p>{{userinfo.userId}}</p>
-                                </div>
-                                <div>
-                                    <label for="">會員姓名:</label><br>
-                                    <p>{{userinfo.userName}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-5">
-                                <div class="">
-                                    <label for="">性別:</label><br>
-                                    <p v-if="userinfo.userGender">男</p>
-                                    <p v-else>女</p>
-                                </div>
-                                <div class="">
-                                    <label for="">生日:</label><br>
-                                    <p>{{(userinfo.userBirthday)}}</p>
-                                </div>
-                            </div>
-                            <div class="col-6 ">
-                                <div class="">
-                                    <label for="">會員信箱:</label><br>
-                                    <p>{{userinfo.userEmail}}</p>
-                                </div>
-                                <div>
-                                    <label for="">會員電話:</label><br>
-                                    <p>{{userinfo.userPhone}}</p>
-                                </div>
-                            </div>
-                            <div class="col-11">
-                                <div class="">
+                        <div class="row  justify-content-center mb-3 px-5">
+                            <div class="col-4 p-0"><img :src="userinfo.userPhoto"
+                                    style="width: 150px;height: 150px;object-fit: cover;border-radius: 50%;" alt="">
+                                <div class="h-100">
                                     <label for="">簡介:</label><br>
-                                    <p>{{userinfo.userIntro}}</p>
+                                    <p style="border: 1px #80808057 solid;
+                                    border-radius: 5px;
+                                    padding: 5px; min-height: 180px;" >{{userinfo.userIntro}}</p>
+                                </div>
+                            </div>
+                            <div class="col-8 ">
+                                <div class="">
+                                    <label for="" class="mb-0">會員編號:</label><br>
+                                    <p style="border: 1px #80808057 solid;
+                                    border-radius: 5px;
+                                    padding: 5px;" class="mb-0">{{userinfo.userId}}</p>
+                                </div>
+                                <div>
+                                    <label for="" class="mb-0">會員姓名:</label><br>
+                                    <p style="border: 1px #80808057 solid;
+                                    border-radius: 5px;
+                                    padding: 5px;" class="mb-0">{{userinfo.userName}}</p>
+                                </div>
+                                <div class="">
+                                    <label for="" class="mb-0">性別:</label><br>
+                                    <p style="border: 1px #80808057 solid;
+                                    border-radius: 5px;
+                                    padding: 5px;" class="mb-0" v-if="userinfo.userGender">男</p>
+                                    <p style="border: 1px #80808057 solid;
+                                    border-radius: 5px;
+                                    padding: 5px;" class="mb-0" v-else>女</p>
+                                </div>
+                                <div class="">
+                                    <label for="" class="mb-0">生日:</label><br>
+                                    <p style="border: 1px #80808057 solid;
+                                    border-radius: 5px;
+                                    padding: 5px;" class="mb-0">{{(userinfo.userBirthday)}}</p>
+                                </div>
+                                <div class="">
+                                    <label for="" class="mb-0">會員信箱:</label><br>
+                                    <p style="border: 1px #80808057 solid;
+                                    border-radius: 5px;
+                                    padding: 5px;" class="mb-0">{{userinfo.userEmail}}</p>
+                                </div>
+                                <div>
+                                    <label for="" class="mb-0">會員電話:</label><br>
+                                    <p style="border: 1px #80808057 solid;
+                                    border-radius: 5px;
+                                    padding: 5px;" class="mb-0">{{userinfo.userPhone}}</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -342,7 +347,6 @@
                     setTimeout(() => loader.hide(), 3 * 1000);
                 },
                 logout: function () {
-                    // alert("1523 ")
                     axios.get("/api/back/logout").then(res => { if (res.data == "已登出") { window.location.reload() } })
                 },
                 setsessionStorage: function (e) {
@@ -350,7 +354,6 @@
                     sessionStorage.setItem("productId", e);
                 },
                 getuserinfo: function (index) {
-                    // console.log(index)
                     axios.get(`/api/users/${index}`)
                         .then((response) => {
                             this.userinfo = response.data
@@ -364,9 +367,8 @@
                 });
                 sessionStorage.clear();
                 axios.get('/api/back/index').then((response) => {
-                    // console.log(response.data[0])
                     this.mydata = response.data[0]
-                    setTimeout(() => loader.hide(), 0.5 * 1000);
+                    setTimeout(() => loader.hide(), 200);
                 })
                 axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
 
