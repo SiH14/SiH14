@@ -135,7 +135,7 @@ let footer = `<footer class="pt-5">
 
 
         <div class="p-2" style="border-top: 1px #afaeae solid;">
-Copyright ©2023 NeedU .
+Copyright ©2023 NeedU募資平台.
         </div>
 
 
