@@ -65,10 +65,17 @@
                   @click="getMsg(item)"
                   v-on:click="nowchatting"
                   v-for="item in searchList"
+                  :key="item.chatroomId"
                 >
                   <img :src="item.userPhoto" alt="avatar" />
                   <div class="about">
-                    <div class="name">{{item.userName}}</div>
+                    <div class="name">
+                      {{item.userName}}<span
+                        v-if="item.unread>0"
+                        class="unread rounded-circle ms-1"
+                        >{{item.unread}}</span
+                      >
+                    </div>
                     <div class="status">
                       <p>{{item.lastMsg}}</p>
                     </div>

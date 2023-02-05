@@ -318,6 +318,14 @@
                                     app.orderpayList["PlanID"] = app.fliterList[0].planId;
                                     app.orderpayList["UserID"] = parseInt(app.whouser);
                                     app.orderpayList["AddSponsorship"] = document.getElementById("autoSizingInputGroup").value;
+                                    /*    測試專用*/
+                                    app.orderpayList["RecipientAddress"] = document.querySelector('.testRecipientAddress').value;
+                                    app.orderpayList["PostCode"] = document.querySelector('.testPostCode').value;
+                                    app.orderpayList["RecipientName"] = document.querySelector('.testRecipientName').value;
+                                    app.orderpayList["RecipientPhone"] = document.querySelector('.testRecipientPhone').value;
+                                    app.orderpayList["RecipientMail"] = document.querySelector('.testRecipientMail').value;
+                                    app.orderpayList["Note"] = document.querySelector('.testNote').value;
+                                    /*    測試專用*/
                                     sessionStorage.setItem("orderpayList", JSON.stringify(app.orderpayList));
                                     console.log(app.orderpayList)
                                     window.location = "./creditcard.html";
@@ -367,9 +375,9 @@
             setTimeout(function () {
                 document.querySelector('.testRecipientMail').value = "Freetest23@gmail.com";//信箱
             }, 0);//備註
-            //setTimeout(function () {
-            //    document.querySelector('.testNote').value = "謝謝您~";
-            //}, 0);
+            setTimeout(function () {
+                document.querySelector('.testNote').value = "謝謝您~";
+            }, 0);
             setTimeout(function () {
                 document.querySelector('.testcheckbox').checked = true;//是否同意
             }, 0);
@@ -420,10 +428,11 @@
     </script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

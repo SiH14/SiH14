@@ -1,5 +1,5 @@
 let header =
-    `<nav class="headernav navbar navbar-expand-lg navbar-light bg-white border-bottom" id="header">
+  `<nav class="headernav navbar navbar-expand-lg navbar-light bg-white border-bottom" id="header">
 
 <div class="container-fluid headernav" id="header-container">
     <!--LOGO -->
@@ -157,66 +157,62 @@ const clear = document.querySelector(".clear");
 const dropdowntoggle = document.querySelector(".dropdowntoggle");
 const dropdownmenu = document.querySelector(".dropdownmenu");
 icon.onclick = function () {
-    search.classList.toggle("active");
-    icon.classList.toggle("active");
+  search.classList.toggle("active");
+  icon.classList.toggle("active");
 };
 
 clear.onclick = function () {
-    document.getElementById("mysearch").value = "";
+  document.getElementById("mysearch").value = "";
 };
 
 let mysearchkeydown = document.getElementById("mysearch");
 
 mysearchkeydown.onkeydown = function (e) {
-    if (e.keyCode == 13) {
-        //触发键盘事件enter
-        window.location = "https://www.youtube.com/?themeRefresh=1";
-    }
+  if (e.keyCode == 13) {
+    //触发键盘事件enter
+    window.location = "https://www.youtube.com/?themeRefresh=1";
+  }
 };
 
 document.addEventListener("mousedown", (e) => {
-    var apple = e.target.classList.value;
-    var bee = String(apple);
-    if (bee.indexOf("headernav") == -1) {
-        document.getElementById("mysearch").value = "";
-        search.classList.remove("active");
-    }
+  var apple = e.target.classList.value;
+  var bee = String(apple);
+  if (bee.indexOf("headernav") == -1) {
+    document.getElementById("mysearch").value = "";
+    search.classList.remove("active");
+  }
 });
 
 // get登入的userid，設置頭像
 var userid = "";
 window.onload = function getuserID() {
-
-    axios.get("/api/Login/getusername")
-        .then(res => {
-            console.log(res.data);
-            if (res.data == "未登入") {
-                window.location = "../Login/login.html"
-            } else {
-                getid = function (callback) {
-                    axios
-                        .get("/api/Login/getuserid")
-                        .then((res) => {
-                            callback(res.data);
-                            console.log(res.data);
-                            // if (res.data != "") {
-                            //     alert("login OK")
-                            // }
-                            axios
-                                .get("/api/Login/getuserphoto/" + res.data)
-                                .then((res) => {
-                                    //console.log(res.data[0].userPhoto)
-                                    var headnav = document.getElementById("headicon");
-                                    headnav.style.marginTop = "4px";
-                                    var setimg = document.getElementById("iconimg");
-                                    setimg.setAttribute("src", res.data[0].userPhoto);
-                                    setimg.style.width = "30px";
-                                    setimg.style.height = "30px";
-                                    setimg.style.borderRadius = "15px";
-                                    setimg.style.objectFit = "cover";
-                                    document.querySelector(
-                                        ".dropdown-menu"
-                                    ).innerHTML = ` <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
+  axios
+    .get("/api/Login/getusername")
+    .then((res) => {
+      if (res.data == "未登入") {
+        window.location = "../Login/login.html";
+      } else {
+        getid = function (callback) {
+          axios
+            .get("/api/Login/getuserid")
+            .then((res) => {
+              callback(res.data);
+              // if (res.data != "") {
+              //     alert("login OK")
+              // }
+              axios.get("/api/Login/getuserphoto/" + res.data).then((res) => {
+                //console.log(res.data[0].userPhoto)
+                var headnav = document.getElementById("headicon");
+                headnav.style.marginTop = "4px";
+                var setimg = document.getElementById("iconimg");
+                setimg.setAttribute("src", res.data[0].userPhoto);
+                setimg.style.width = "30px";
+                setimg.style.height = "30px";
+                setimg.style.borderRadius = "15px";
+                setimg.style.objectFit = "cover";
+                document.querySelector(
+                  ".dropdown-menu"
+                ).innerHTML = ` <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
                                     href="../MemberCentre/UserInfo.html">個人頁面</a></li>
                             <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
                                     href="../MemberCentre/UserFollowing.html">追蹤專案</a></li>
@@ -229,34 +225,34 @@ window.onload = function getuserID() {
                                     <li style="border-bottom: 1px rgb(190, 186, 186) solid;"><a class="dropdown-item"
                                     href="../MemberCentre/UserSetting.html">帳戶設定</a></li>
                             <li style="text-align: center;"><a class="dropdown-item" href="../ProductPage/mymainpage.html" onclick="logout()">登出</a></li>`;
-                                });
-                        })
-                        .catch((error) => {
-                            console.log(error.response);
-                            var nologinsetimg = document.getElementById("iconimg");
-                            nologinsetimg.setAttribute("src", "../img/loginicon.png")
-                        });
-                };
-                getid(function (myuser) {
-                    // console.log(myuser);
-                    userid = myuser;
-                });
-            }
-        })
-        .catch(error => {
-            console.log(error.response);
-        })
+              });
+            })
+            .catch((error) => {
+              console.log(error.response);
+              var nologinsetimg = document.getElementById("iconimg");
+              nologinsetimg.setAttribute("src", "../img/loginicon.png");
+            });
+        };
+        getid(function (myuser) {
+          // console.log(myuser);
+          userid = myuser;
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
 };
 
 function logout() {
-    axios
-        .delete("/api/Login")
-        .then((res) => {
-            console.log(res);
-        })
-        .catch((error) => {
-            console.log(error.response);
-        });
+  axios
+    .delete("/api/Login")
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
 }
 // 背景圖片
 document.querySelector("body").style.backgroundImage = "url('../img/mbbg.png')";
