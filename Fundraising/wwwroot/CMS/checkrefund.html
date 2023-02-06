@@ -51,7 +51,7 @@
 
                     <!-- 結束 側邊欄位 -->
                     <!--主要內容-->
-                    <div class="col-10">
+                    <div class="col-10" style="margin-bottom:50px;">
                         <div class="px-3">
                             <div class="bg-white item-style">
                                 <!-- ===============================================================================================================  -->
@@ -237,7 +237,7 @@
                         refund.refundStateId = 2;
                         axios.put(`/api/refunds/${refund.refundId}`, refund).then(res => {
                             console.log(res)
-                            swal("確認退款成功", "", "success", {}).then(x => {
+                            swal("確認取消成功", "", "success", {}).then(x => {
                                 window.location = "/cms/Olist.html"
                             })
                         })
