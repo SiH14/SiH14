@@ -141,7 +141,7 @@ Copyright ©2023 NeedU募資平台.
 
 
 </div>
-< script src = "microsoft.cognitiveservices.speech.sdk.bundle.js" ></script >
+<div style="display:none;">< script src = "microsoft.cognitiveservices.speech.sdk.bundle.js" ></script ></div>
 </footer>`;
 let querybody = document.querySelector("body");
 let queryheader = document.querySelector("head");
