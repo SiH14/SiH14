@@ -480,7 +480,7 @@ namespace 募資.Controllers
                 //UserFblink = x.UserFblink,
                 //UserPhoto = x.UserPhoto
             });
-            return await result.ToListAsync();
+            return await result.OrderByDescending(x=>x.UserId).ToListAsync();
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<dynamic>>> GetEmpolyee()
@@ -519,7 +519,7 @@ namespace 募資.Controllers
                 position = x.PositionNavigation.PositionName,
                 status = x.StatusNavigation.StatusName
             });
-            return await result.ToListAsync();
+            return await result.OrderByDescending(x=>x.employeeId).ToListAsync();
         }
 
         // GET: api/back/Employees/5
