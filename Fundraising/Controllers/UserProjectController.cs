@@ -75,7 +75,7 @@ namespace Fundraising.Controllers
                            productStateId=prod.ProductStateId,
                        };
 
-            return await query.ToListAsync();
+            return await query.OrderByDescending(x=>x.productId).ToListAsync();
         }
 
         // PUT: api/UserProject/5

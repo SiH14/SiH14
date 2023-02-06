@@ -53,7 +53,7 @@ namespace Fundraising.Controllers
                             sender = msg.SenderId,
                             receiver = msg.ReceiverId,
                             content = msg.MessageContent,
-                            sentTime = msg.SentTime.AddHours(8).ToString("yyyy-MM-dd HH:mm")
+                            sentTime = msg.SentTime.ToString("yyyy-MM-dd HH:mm")
                         };
 
 

@@ -100,7 +100,7 @@ namespace Fundraising.Controllers
                                   user.UserName,
                                   prod
                               };
-            return await productlist.ToListAsync();
+            return await productlist.OrderByDescending(x=>x.prod.ProductId).ToListAsync();
         }
 
         [HttpGet("OrderList/{id}")]
@@ -115,10 +115,11 @@ namespace Fundraising.Controllers
                               select new
                               {
                                   prod,
-                                  pu.UserName
+                                  pu.UserName,
+                                  order.OrderId
 
                               };
-            return await orderlist.ToListAsync();
+            return await orderlist.OrderByDescending(x=>x.OrderId).ToListAsync();
         }
 
 
