@@ -136,13 +136,13 @@
                     <div style="border-radius:5px ; border: solid #A9A9A9; ">
                         <div style="width: 90%; margin: auto;">
                             <!--<a href="#" style="text-decoration:none; color: black;">-->
-                                <div class="mb-1" style="text-align: center;">
-                                    <img :src="fliterList[0].planphoto" style="width: 100%;">
-                                </div>
-                                <div class="mb-3"><h5>{{fliterList[0].projectTitle}}</h5></div>
-                                <div class="mb-4"><h4>NT${{fliterList[0].planPrice | money}}</h4></div>
-                                <div><p style="white-space: pre-wrap;">{{fliterList[0].plancontent}}</p></div>
-                                <hr>
+                            <div class="mb-1" style="text-align: center;">
+                                <img :src="fliterList[0].planphoto" style="width: 100%;">
+                            </div>
+                            <div class="mb-3"><h5>{{fliterList[0].projectTitle}}</h5></div>
+                            <div class="mb-4"><h4>NT${{fliterList[0].planPrice | money}}</h4></div>
+                            <div><p style="white-space: pre-wrap;">{{fliterList[0].plancontent}}</p></div>
+                            <hr>
                             <!--</a>-->
 
                         </div>
@@ -210,7 +210,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">連絡電話</label>
-                                <input v-model="orderpayList.RecipientPhone" type="tel"pattern="[0-9]{10}" class="testRecipientPhone form-control" id="formGroupExampleInput2" placeholder="請填寫常用電話，以利提案團隊聯繫" required>
+                                <input v-model="orderpayList.RecipientPhone" type="tel" pattern="[0-9]{10}" class="testRecipientPhone form-control" id="formGroupExampleInput2" placeholder="請填寫常用電話，以利提案團隊聯繫" required>
                                 <div class="invalid-feedback">
                                     請輸入正確格式
                                 </div>
@@ -243,7 +243,7 @@
             </div>
         </div>
     </div>
-
+    <br><br><br>
     <script src="../layout/layout.js"></script>
     <script>
         //function test() {
@@ -312,8 +312,8 @@
                             .forEach(function (form) {
                                 if (!form.checkValidity()) {
                                     swal("", "尚有必填欄位未輸入", "error")
-                                        event.preventDefault()
-                                        event.stopPropagation()
+                                    event.preventDefault()
+                                    event.stopPropagation()
                                 } else if (form.checkValidity()) {
                                     app.orderpayList["PlanID"] = app.fliterList[0].planId;
                                     app.orderpayList["UserID"] = parseInt(app.whouser);
@@ -329,17 +329,17 @@
                                     sessionStorage.setItem("orderpayList", JSON.stringify(app.orderpayList));
                                     console.log(app.orderpayList)
                                     window.location = "./creditcard.html";
-                                    }
-                             
-                                    form.classList.add('was-validated')
-      
+                                }
+
+                                form.classList.add('was-validated')
+
                             })
                     })()
 
-            /*        window.location = "./creditcard.html";*/
+                    /*        window.location = "./creditcard.html";*/
 
-                  /*  console.log(this.orderpayList);*/
-                /*    window.location = "./creditcard.html";*/
+                    /*  console.log(this.orderpayList);*/
+                    /*    window.location = "./creditcard.html";*/
                     //$.ajax({
                     //    type: 'POST',
                     //    url: '/api/Orders/',
@@ -384,48 +384,48 @@
             }, 0);
         }
 
-            //function okButtonClick() {
-            //    var data = {
-            //        PlanID:9,
-            //        UserID:5
-            //    };
+                    //function okButtonClick() {
+                    //    var data = {
+                    //        PlanID:9,
+                    //        UserID:5
+                    //    };
 
-            //    axios.post("https://localhost:44358/api/Orders", data)
-            //        .then(res => {
-            //            console.log(1);
-            //        })
-            //        .catch(error => {
-            //            console.log(data);
-            //        });
-            //}
+                    //    axios.post("https://localhost:44358/api/Orders", data)
+                    //        .then(res => {
+                    //            console.log(1);
+                    //        })
+                    //        .catch(error => {
+                    //            console.log(data);
+                    //        });
+                    //}
 
 
-            //var appo = new Vue({
-            //    el: ".appo",
-            //    data: {
-            //        fliterList: {
-            //            "PlanID":9,
-            //            "UserID":5
-            //        }
-            //    },
-            //    methods: {
-            //        okButtonClick: function () {
-            //            $.ajax({
-            //                type: 'POST',
-            //                url: '/api/Orders/',
-            //                contentType: "application/json",
-            //                data: JSON.stringify(this.fliterList),
-            //                error: function () {
-            //                    console.log('錯誤回傳');
-            //                    console.log(this.data);
-            //                },
-            //                success: function () {
-            //                    alert("成功");
-            //                }
-            //            })
-            //        }
-            //    }
-            //})
+                    //var appo = new Vue({
+                    //    el: ".appo",
+                    //    data: {
+                    //        fliterList: {
+                    //            "PlanID":9,
+                    //            "UserID":5
+                    //        }
+                    //    },
+                    //    methods: {
+                    //        okButtonClick: function () {
+                    //            $.ajax({
+                    //                type: 'POST',
+                    //                url: '/api/Orders/',
+                    //                contentType: "application/json",
+                    //                data: JSON.stringify(this.fliterList),
+                    //                error: function () {
+                    //                    console.log('錯誤回傳');
+                    //                    console.log(this.data);
+                    //                },
+                    //                success: function () {
+                    //                    alert("成功");
+                    //                }
+                    //            })
+                    //        }
+                    //    }
+                    //})
     </script>
 
 
