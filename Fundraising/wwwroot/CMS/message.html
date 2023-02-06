@@ -319,7 +319,7 @@
                     this.employeeinfo = res.data
                     console.log(this.employeeinfo)
                 })
-                await axios.get("/api/products").then(res => {
+                await axios.get("/api/back/Products").then(res => {
                     this.productlist = res.data
                     console.log(res)
                     setTimeout(() => loader.hide(), 300);

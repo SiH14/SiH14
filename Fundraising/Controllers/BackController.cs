@@ -185,7 +185,7 @@ namespace 募資.Controllers
                                   OrderId = o.OrderId.ToString(),
                                   ProductTitle = p.ProductTitle,
                                   PlanTitle = pl.PlanTitle,
-                                  PurchaseTime = o.PurchaseTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                                  PurchaseTime = o.PurchaseTime.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"),
                                   OrderStateId = o.OrderStateId,
                                   TargetAmount = p.TargetAmount,
                                   Startime = p.Startime,
@@ -535,7 +535,13 @@ namespace 募資.Controllers
 
             return  employee;
         }
+        //GET: api/back/Products
+        [HttpGet("Products")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetComProductsList()
+        {
 
+            return await _context.Products.OrderByDescending(x=>x.ProductId).ToListAsync();
+        }
 
 
     }
