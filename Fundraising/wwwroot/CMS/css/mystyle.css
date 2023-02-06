@@ -41,8 +41,6 @@ a:hover {
 
 .sidebar a {
     color: #495057;
-
-
 }
 
 .sidebar a.active {
@@ -79,11 +77,10 @@ footer {
     width: 100%;
 }
 
-#mysider a:hover {
-    background-color: rgba(102, 252, 159,0.2);
-    
-    /* background-color: rgba(131, 252, 120, 0.2); */
-}
+    #mysider a:hover {
+        color: #3b965d;
+        background-color: rgba(131, 252, 120, 0.075);
+    }
 
 [v-cloak] {
     display: none;
@@ -93,4 +90,8 @@ footer {
     width: 50px;
     height: 50px;
     object-fit: cover;
+}
+.table-hover tbody tr:hover {
+    color: #3b965d;
+    background-color: rgba(131, 252, 120, 0.075);
 }
