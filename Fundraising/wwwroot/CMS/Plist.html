@@ -77,7 +77,7 @@
                                                                 <option value="募資成功">募資成功</option>
                                                             </select>
                                                         </div>
-                                                        <div class="">
+                                                        <div class="" v-show="false">
                                                             <label class="px-3" for="">編號:</label>
                                                             <input type="text" id="productId" name="productId"
                                                                 v-model.trim="input.productId" style="padding: 5px;">
@@ -212,8 +212,8 @@
                     sessionStorage.setItem("productId", a);
                 },
                 enterText:function(){
-                    app.input.productId = "123";
-                    app.input.productTitle= "123";
+                    app.input.productId = "";
+                    app.input.productTitle= "貓空漫步";
                     
                 },
                 inputRest:function(){
