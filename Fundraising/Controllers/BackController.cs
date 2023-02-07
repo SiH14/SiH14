@@ -480,7 +480,7 @@ namespace 募資.Controllers
                 //UserFblink = x.UserFblink,
                 //UserPhoto = x.UserPhoto
             });
-            return await result.OrderByDescending(x=>x.UserId).ToListAsync();
+            return await result.ToListAsync();
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<dynamic>>> GetEmpolyee()
