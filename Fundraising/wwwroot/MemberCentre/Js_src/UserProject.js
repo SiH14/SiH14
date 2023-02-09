@@ -44,5 +44,9 @@ const app = new Vue({
     manage(e) {
       sessionStorage.setItem("pmId", e.productId);
     },
+    getproductID(e) {
+      // console.log(e);
+      sessionStorage.setItem("pmId", e.productId);
+    },
   },
 });

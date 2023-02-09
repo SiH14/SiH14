@@ -56,48 +56,63 @@
             </tr>
           </thead>
           <tbody>
-              <tr v-for="prod in prodlist">
-                  <!-- 圖片 -->
-                  <td class="my-auto">
-                      <a href="#">
-                          <img :src="prod.coverphoto"
-                               class="img-fluid rounded-start"
-                               alt="..."
-                               style="
+            <tr v-for="prod in prodlist">
+              <!-- 圖片 -->
+              <td class="my-auto">
+                <a
+                  href="../ProductPage/product.html"
+                  @click="getproductID(prod)"
+                >
+                  <img
+                    :src="prod.coverphoto"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                    style="
                       max-width: 125px;
                       max-height: 100px;
                       object-fit: contain;
-                    " />
-                      </a>
-                  </td>
-                  <!-- 專案名稱 -->
-                  <th class="text-start" style="max-width: 200px">
-                      <a href="#" style="text-decoration: none; color: #212529">
-                          {{prod.productTitle}}
-                      </a>
-                  </th>
-                  <!-- 目前金額 -->
-                  <td>{{prod.currentAmount}}</td>
-                  <!-- 目標金額 -->
-                  <td>{{prod.targetAmount}}</td>
-                  <!-- 起始日期 -->
-                  <td v-if="prod.startime.indexOf('1900') == -1">{{prod.startime}}</td>
-                  <td v-else>無</td>
-                  <!-- 結束日期 -->
-                  <td v-if="prod.endtime.indexOf('1900') == -1">{{prod.endtime}}</td>
-                  <td v-else>無</td>
-                  <!-- 目前狀態 -->
-                  <td>{{prod.productStateId}}</td>
-                  <!-- 查看 -->
-                  <td>
-                      <a v-if="prod.productStateId=='募資成功'"
-                         href="./ProjectManage.html"
-                         @click="manage(prod)"
-                         class="btn btn-success">
-                          管理
-                      </a>
-                  </td>
-              </tr>
+                    "
+                  />
+                </a>
+              </td>
+              <!-- 專案名稱 -->
+              <th class="text-start" style="max-width: 200px">
+                <a
+                  href="../ProductPage/product.html"
+                  @click="getproductID(prod)"
+                  style="text-decoration: none; color: #212529"
+                >
+                  {{prod.productTitle}}
+                </a>
+              </th>
+              <!-- 目前金額 -->
+              <td>{{prod.currentAmount}}</td>
+              <!-- 目標金額 -->
+              <td>{{prod.targetAmount}}</td>
+              <!-- 起始日期 -->
+              <td v-if="prod.startime.indexOf('1900') == -1">
+                {{prod.startime}}
+              </td>
+              <td v-else>無</td>
+              <!-- 結束日期 -->
+              <td v-if="prod.endtime.indexOf('1900') == -1">
+                {{prod.endtime}}
+              </td>
+              <td v-else>無</td>
+              <!-- 目前狀態 -->
+              <td>{{prod.productStateId}}</td>
+              <!-- 查看 -->
+              <td>
+                <a
+                  v-if="prod.productStateId=='募資成功'"
+                  href="./ProjectManage.html"
+                  @click="manage(prod)"
+                  class="btn btn-success"
+                >
+                  管理
+                </a>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

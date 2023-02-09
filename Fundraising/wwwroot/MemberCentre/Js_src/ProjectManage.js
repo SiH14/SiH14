@@ -12,6 +12,7 @@ const app = new Vue({
     chatting: "",
     thisuser: "",
     connection: null,
+    search: "",
   },
   components: {
     Loading: VueLoading,
@@ -102,9 +103,9 @@ const app = new Vue({
           axios
             .put("/api/UserOrder/" + element.orderId, element)
             .then((res) => {
-                swal("儲存成功！", "", "success", { button: "確定" }).then(() => {
-                    history.go(0);
-                });
+              swal("儲存成功！", "", "success", { button: "確定" }).then(() => {
+                history.go(0);
+              });
             });
         });
       }
@@ -196,6 +197,18 @@ const app = new Vue({
               }
             });
         });
+      }
+    },
+  },
+  computed: {
+    // 搜尋功能
+    searchList() {
+      if (this.search) {
+        return this.pjorderlist.filter((item) => {
+          return item.recipientName.indexOf(this.search) !== -1;
+        });
+      } else {
+        return this.pjorderlist;
       }
     },
   },

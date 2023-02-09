@@ -23,6 +23,10 @@ const app = new Vue({
       document.querySelector(".selectedbtn").classList.remove("selectedbtn");
       document.querySelector("#productbtn").classList.add("selectedbtn");
     },
+    getproductID(e) {
+      // console.log(e);
+      sessionStorage.setItem("productId", e.productId);
+    },
   },
   mounted() {
     let loader = this.$loading.show({
