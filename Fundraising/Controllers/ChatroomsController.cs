@@ -66,7 +66,7 @@ namespace Fundraising.Controllers
                             userName = user.UserName,
                             userPhoto = user.UserPhoto,
                             lastMsg = _context.Messages.OrderByDescending(x => x.SentTime).Where(x => x.ChatroomId == chats.chatroomId).Select(x => x.MessageContent).First(),
-                            lastTime = (_context.Messages.OrderByDescending(x => x.SentTime).Where(x => x.ChatroomId == chats.chatroomId).Select(x => x.SentTime).First()).ToString("yyyy-MM-dd HH:mm"),
+                            lastTime = (_context.Messages.OrderByDescending(x => x.SentTime).Where(x => x.ChatroomId == chats.chatroomId).Select(x => x.SentTime.AddHours(8)).First()).ToString("yyyy-MM-dd HH:mm"),
                             unread = _context.Messages.Where(x => x.ChatroomId == chats.chatroomId).Count(x => x.SenderId != id && x.IsRead == false)
                         };
 

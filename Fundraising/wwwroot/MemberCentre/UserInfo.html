@@ -110,8 +110,7 @@
         <div class="row" id="OrdersRow">
           <div class="col-8 mx-auto" v-if="userdata.orderCNT!=0">
             <a
-              href="../ProductPage/product.html"
-              @click="getproductID(item.prod)"
+              href="#"
               class="bg-light rounded btn btn-default shadow-sm p-2 mb-3"
               v-for="item in OrdersList"
             >
@@ -140,10 +139,9 @@
         <div class="row" id="ProductsRow" style="display: none">
           <div class="col-8 mx-auto" v-if="userdata.productCNT!=0">
             <a
-              href="../ProductPage/product.html"
+              href="#"
               class="bg-light rounded btn btn-default shadow-sm p-2 mb-3"
               v-for="item in ProductsList"
-              @click="getproductID(item.prod)"
             >
               <div class="row pe-3">
                 <div class="col-md-3">
