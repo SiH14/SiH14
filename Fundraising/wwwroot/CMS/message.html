@@ -266,7 +266,8 @@
                     "productTitle": "",
                     "comcount": "",
                     "comments": []
-                }
+                },
+                gettodoitem: {}
             },
             components: {
                 Loading: VueLoading
@@ -327,6 +328,10 @@
                 axios.get(`/api/back/getcomment/${productselect.value}`).then(res => {
                     this.productcomment = res.data[0];
                     console.log(res.data[0])
+                })
+                axios.get('/api/back/gettodoitem').then(res => {
+                    this.gettodoitem = res.data
+                    
                 })
 
             }

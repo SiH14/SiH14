@@ -319,7 +319,8 @@
                         "product": null
                     }
                 ],
-                employeeinfo: []
+                employeeinfo: [],
+                gettodoitem: {}
             },
             components: {
                 Loading: VueLoading
@@ -364,7 +365,7 @@
                             axios.put(`/api/back/Products/${this.productinfo.productId}`, putproduct)
                                 .then(response => {
                                     swal("提案審核已確認", "", "success", {}).then(x => {
-                                        window.location = "./Preview.html"
+                                        window.location = "./Plist.html"
                                     })
                                     console.log(response)
                                 });
@@ -375,12 +376,10 @@
                 let loader = this.$loading.show({
                     loader: 'dots'
                 });
-                axios.get(`/api/back/Pdetails/${sessionStorage.getItem('productId')}`)
-                    .then((response) => {
-                        response.data[0].endtime = ''
-                        this.productinfo = response.data[0]
-                        setTimeout(() => loader.hide(), 200);
-                    })
+                axios.get('/api/back/gettodoitem').then(res => {
+                    this.gettodoitem = res.data
+                    
+                })
                 axios.get(`/api/back/Pplans/${sessionStorage.getItem('productId')}`)
                     .then((response) => { this.plan = response.data })
                 axios.get(`/api/back/Pquestion/${sessionStorage.getItem('productId')}`)
@@ -389,6 +388,12 @@
                     this.employeeinfo = res.data
                     console.log(this.employeeinfo)
                 })
+                axios.get(`/api/back/Pdetails/${sessionStorage.getItem('productId')}`)
+                    .then((response) => {
+                        response.data[0].endtime = ''
+                        this.productinfo = response.data[0]
+                        setTimeout(() => loader.hide(), 200);
+                    })
             }
         })
     </script>

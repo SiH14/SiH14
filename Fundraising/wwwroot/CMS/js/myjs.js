@@ -106,7 +106,7 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
 <li class="nav-item ">
 <a class="nav-link" href="./Plist.html">
 <i class="fa fa-list" aria-hidden="true"></i>
-    <span>提案管理</span></a>
+    <span >提案管理<span   v-if="gettodoitem.productcount > 0" style="height: 16px;width: 16px;font-size: 8px; border: 1px solid;" class="rounded-circle d-inline-block text-center bg-danger text-white" v-cloak>{{gettodoitem.productcount}}</span></span></a>
 
 </li>
 <hr class="sidebar-divider">
@@ -116,7 +116,7 @@ document.getElementById("mysider").innerHTML = `<div class="sidebar-heading">
 <li class="nav-item ">
 <a class="nav-link" href="./Olist.html">
 <i class="fa fa-list-alt" aria-hidden="true"></i>
-    <span>贊助管理</span></a>
+    <span>贊助管理<span  v-if="gettodoitem.ordercount > 0" style="height: 16px;width: 16px;font-size: 8px; border: 1px solid;" class="rounded-circle d-inline-block text-center bg-danger text-white" v-cloak>{{gettodoitem.ordercount}}</span></span></a>
 </li>
 
 <hr class="sidebar-divider">

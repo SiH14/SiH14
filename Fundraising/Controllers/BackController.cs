@@ -542,7 +542,17 @@ namespace 募資.Controllers
 
             return await _context.Products.OrderByDescending(x=>x.ProductId).ToListAsync();
         }
+        [HttpGet("gettodoitem")]
+        public async Task<TodoItem> GetTodoItem()
+        {
+            TodoItem result = new TodoItem()
+            {
+                productcount = _context.Products.Where(x => x.ProductStateId == 1).Count().ToString(),
+                ordercount = _context.Orders.Where(x=>x.OrderStateId == 4).Count().ToString()
+            };
 
+            return  result;
+    }
 
     }
 }
