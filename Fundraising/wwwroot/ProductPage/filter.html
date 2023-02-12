@@ -16,7 +16,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!--<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>-->
-    <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
     <style>
@@ -370,9 +370,13 @@
             beforeMount() {
                 var apitopage = (sessionStorage.getItem("topage") == null) ? 0 : sessionStorage.getItem("topage")
                 var apisele = (sessionStorage.getItem("sele") == null) ? 1 : sessionStorage.getItem("sele")
+                /*alert(apitopage)//第一頁是0*/
+                var hrefnum = location.href.indexOf('page=');
+                var hrefpage = location.href.slice(hrefnum)
+                var querytogape = hrefpage.slice(5);
                 $.ajax({
                     type: 'Get',
-                    url: '/api/Fundraising/topage/' + parseInt(apitopage) + '/' + parseInt(apisele),
+                    url: '/api/Fundraising/topage/' + (hrefnum == -1 ? 0 : parseInt(querytogape)) + '/' + parseInt(apisele),
                     success: function (e) {
                         app.sele = apisele
                         app.fliterList = e
@@ -401,7 +405,11 @@
                 }
 
                 var apitopage = (sessionStorage.getItem("topage") == null) ? 0 : sessionStorage.getItem("topage")
-                this.topage = parseInt(apitopage) + 1
+             /*   this.topage = parseInt(apitopage) + 1;*/
+                var hrefnum = location.href.indexOf('page=');
+                var hrefpage = location.href.slice(hrefnum)
+                var querytogape = hrefpage.slice(5);
+                this.topage = (hrefnum == -1 ? 1 : parseInt(querytogape)+1)
                 var apisele = (sessionStorage.getItem("sele") == null) ? 1 : sessionStorage.getItem("sele");
                 document.querySelector('#op' + apisele).selected = true;
             }
@@ -413,9 +421,10 @@
                 }
                 ,
                 whatpage: function (e,n) {
-                    sessionStorage.setItem("topage", e);
+                 /*   sessionStorage.setItem("topage", e);*/
                     app.topage = n
-                    window.location = "./filter.html"
+                    /*window.location = "./filter.html"*/
+                    window.location = `./filter.html?page=${e}`
                 }
             }
         })

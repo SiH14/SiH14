@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // if we got an authorization token, use the token. Otherwise use the provided subscription key
         var speechConfig;
-        speechConfig = SpeechSDK.SpeechConfig.fromSubscription("f433aba72ed643f19bd014887e3ad78d", "southeastasia");
+        speechConfig = SpeechSDK.SpeechConfig.fromSubscription("6a800c415d8d429fac0d71970af14783", "southeastasia");
         //if (authorizationToken) {
         //    speechConfig = SpeechSDK.SpeechConfig.fromAuthorizationToken(authorizationToken, serviceRegion.value);
         //} else {
