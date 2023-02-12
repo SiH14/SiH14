@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./stepper.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
+      integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css"
+      rel="stylesheet"
+    />
+    <style>
+      .card {
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+        width: 80%;
+        transition: 0.5s;
+        border: 0;
+        border-radius: 0.55rem;
+        position: relative;
+      }
+    </style>
+    <title>訂單紀錄</title>
+  </head>
+  <body>
+      <div class="container" id="app">
+          <loading :can-cancel="true"></loading>
+          <!-- 標題˙ -->
+          <div class="mx-auto ps-4 pt-3" style="width: 80%">
+              <h5>贊助紀錄</h5>
+              <p style="font-size: 0.9rem">
+                  在專案募資完成之前，您都可修改你的回饋寄送資訊。
+              </p>
+          </div>
+
+          <!-- card -->
+          <div id="OrderCard">
+              <!-- 每筆訂單 -->
+              <div v-if="ordercard.length!=0">
+                  <div class="card mx-auto mt-3 shadow-sm px-2"
+                       v-for="order in ordercard">
+                      <div class="row g-0">
+                          <!-- 照片 -->
+                          <div class="col-md-3">
+                              <a href="#">
+                                  <img :src="order.productPhoto"
+                                       class="img-fluid rounded-start p-2 pt-3"
+                                       alt="..."
+                                       style="height: 200px; object-fit: cover" />
+                              </a>
+                          </div>
+
+                          <!-- 資訊 -->
+                          <div class="pb-0 pt-2 col-md-9">
+                              <div class="d-flex justify-content-between me-2">
+                                  <p class="text-muted mb-0">
+                                      贊助日期: {{order.purchaseTime}}
+                                  </p>
+                                  <p class="text-muted mb-0">
+                                      募資期間: {{order.startTime}} ~ {{order.endTime}}
+                                  </p>
+                              </div>
+                              <!-- 標題 -->
+                              <a href="#"
+                                 class="card-title h4"
+                                 style="text-decoration: none; color: #212529">
+                                  {{order.productTitle}}
+                              </a>
+                              <hr class="m-1" />
+                              <div class="mt-2">
+                                  <!-- 選擇的方案 -->
+                                  <h5 class="mb-1">{{order.planTitle}}</h5>
+                                  <div class="d-flex justify-content-between me-2">
+                                      <p class="mb-1 my-auto" style="max-width: 75%">
+                                          內含 : {{order.planContent}}
+                                      </p>
+                                      <p class="mb-1 my-auto" style="max-width: 25%">
+                                          $ {{order.planPrice | money}}
+                                      </p>
+                                  </div>
+                                  <div class="d-flex justify-content-between me-2">
+                                      <p class="mb-1 my-auto">---額外贊助</p>
+                                      <p class="mb-1 my-auto border-bottom">
+                                          $ {{order.addSponsorship | money}}
+                                      </p>
+                                  </div>
+                                  <h5 class="text-end me-2 mt-1" style="font-weight:600;">
+                                      贊助金額: $ {{order.planPrice + order.addSponsorship | money}}
+                                  </h5>
+                              </div>
+                          </div>
+
+                          <div class="col-md-12 row g-0 pb-2 justify-content-end">
+                              <!-- stepper success-->
+                              <div class="stepper mb-md-3"
+                                   v-if="order.orderStateId<4 && !(new Date(order.endTime) < new Date() && order.targetAmount > order.currentAmount )">
+                                  <div class="step"
+                                       :class="{active:order.orderStateId==1 && new Date(order.endTime) > new Date(),completed:order.orderStateId>1 || new Date(order.endTime) < new Date()}">
+                                      <div class="step-label"></div>
+                                      <div class="step-description">募資中</div>
+                                  </div>
+                                  <div class="step"
+                                       :class="{active:order.orderStateId==1 && new Date(order.endTime) < new Date(),completed:order.orderStateId > 1}">
+                                      <div class="step-label"></div>
+                                      <div class="step-description">募資成功</div>
+                                  </div>
+                                  <div class="step"
+                                       :class="{active:order.orderStateId==2,completed:order.orderStateId>2}">
+                                      <div class="step-label"></div>
+                                      <div class="step-description">生產階段</div>
+                                  </div>
+                                  <div class="step" :class="{active:order.orderStateId==3}">
+                                      <div class="step-label"></div>
+                                      <div class="step-description">寄送產品</div>
+                                  </div>
+                              </div>
+
+                              <!-- stepper fail-->
+                              <div class="stepper mb-md-3"
+                                   v-else-if="order.orderStateId==6 || (new Date(order.endTime) < new Date() && order.targetAmount > order.currentAmount &&order.orderStateId==1)">
+                                  <div class="step completed">
+                                      <div class="step-label"></div>
+                                      <div class="step-description">募資中</div>
+                                  </div>
+                                  <div class="step"
+                                       :class="{active:order.orderStateId==1 && new Date(order.endTime) < new Date(),completed:order.orderStateId > 1}">
+                                      <div class="step-label"></div>
+                                      <div class="step-description">募資未達標</div>
+                                  </div>
+                                  <div class="step" :class="{active:order.orderStateId==6}">
+                                      <div class="step-label"></div>
+                                      <div class="step-description">退款完成</div>
+                                  </div>
+                              </div>
+
+                              <!-- stepper cancel-->
+                              <div class="stepper mb-md-3"
+                                   v-else-if="order.orderStateId==4 || order.orderStateId==5">
+                                  <div class="step completed">
+                                      <div class="step-label"></div>
+                                      <div class="step-description">募資中</div>
+                                  </div>
+                                  <div class="step"
+                                       :class="{active:order.orderStateId==4,completed:order.orderStateId==5}">
+                                      <div class="step-label"></div>
+                                      <div class="step-description">申請取消贊助</div>
+                                  </div>
+                                  <div class="step" :class="{active:order.orderStateId==5}">
+                                      <div class="step-label"></div>
+                                      <div class="step-description">退款完成</div>
+                                  </div>
+                              </div>
+                              <!-- button -->
+                              <button class="col-md-2 btn btn-outline-success me-md-2 mt-1"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#chatmodal"
+                                      :data-bs-whatever="order.puserId">
+                                  聯絡提案人
+                              </button>
+                              <a href="./UserOrderDetail.html"
+                                 @click="ordersession(order.orderId)"
+                                 class="col-md-2 btn btn-success me-md-2 mt-1"
+                                 v-if="order.orderStateId==1 && new Date(order.endTime) > new Date()">
+                                  修改寄送資訊
+                              </a>
+                              <button class="col-md-1 btn btn-default me-md-2 mt-1"
+                                      v-if="order.orderStateId==1 && new Date(order.endTime) > new Date()"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#cancelform"
+                                      :data-bs-whatever="order.orderId">
+                                  取消
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- 若未曾贊助 -->
+              <h2 v-else class="text-center mt-5 card mx-auto py-5">
+                  尚未贊助任何專案。
+              </h2>
+          </div>
+
+          <!-- 彈出式取消表單 -->
+          <div class="modal fade"
+               id="cancelform"
+               tabindex="-1"
+               aria-hidden="true"
+               ref="box">
+              <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title">取消贊助申請</h5>
+                          <button type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"></button>
+                      </div>
+                      <form>
+                          <div class="modal-body">
+                              <div class="mb-3">
+                                  <label for="message-text" class="col-form-label">取消原因:</label>
+                                  <textarea class="form-control"
+                                            id="cancelresult"
+                                            placeholder="請輸入取消原因"
+                                            required
+                                            v-model="cancelform.RefundResult"></textarea>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button"
+                                      @click="confirmCancel"
+                                      class="btn btn-success">
+                                  確認送出
+                              </button>
+                              <button type="button"
+                                      class="btn btn-secondary"
+                                      data-bs-dismiss="modal">
+                                  關閉
+                              </button>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          <!-- 發送訊息 -->
+          <div class="modal fade"
+               id="chatmodal"
+               tabindex="-1"
+               aria-hidden="true"
+               ref="chat">
+              <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title">
+                              傳送訊息給 <strong>{{chatting}}</strong>
+                          </h5>
+                          <button type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"></button>
+                      </div>
+                      <form>
+                          <div class="modal-body">
+                              <div class="mb-3">
+                                  <label for="message-text" class="col-form-label">請輸入傳送的訊息內容 :</label>
+                                  <textarea class="form-control"
+                                            id="messageContent"
+                                            placeholder="訊息內容"
+                                            required
+                                            v-model="messageContent"></textarea>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button"
+                                      @click="send"
+                                      class="btn btn-success"
+                                      data-bs-dismiss="modal">
+                                  傳送
+                              </button>
+                              <button type="button"
+                                      class="btn btn-secondary"
+                                      data-bs-dismiss="modal">
+                                  關閉
+                              </button>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+              integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+              crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="../layout/membercentre_layout.js"></script>
+      <script src="../lib/microsoft/signalr/dist/browser/signalr.js"></script>
+      <script src="./Js_src/UserOrder.js"></script>
+
+  </body>
+</html>

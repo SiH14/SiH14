@@ -1,0 +1,218 @@
+* {
+    box-sizing: border-box
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0px;
+    font-family: sans-serif;
+}
+
+body ul,
+body li {
+    background-color: transparent !important;
+}
+
+form span,
+form p {
+    color: black;
+}
+
+#pencil {
+    position: absolute;
+    left: -150px;
+    z-index: -1;
+}
+
+.container {
+    padding: 0px 200px;
+}
+
+.card {
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+    transition: 0.5s;
+    border: 0;
+    border-radius: 0.55rem;
+    position: relative;
+    padding: 50px 190px 80px 190px !important;
+    /* border: solid 2px #047c51; */
+}
+
+.lidivborder {
+    padding: 40px 30%;
+    text-align: center;
+}
+
+.nav-link:hover {
+    background-color: transparent;
+    border-color: #047c51 #047c51 #047c51 #047c51 !important;
+}
+
+.nav-item .active:hover {
+    border-color: #047c51 !important;
+}
+
+.dot {
+    color: #047c51;
+    font-size: 22px;
+}
+
+.list-group-item {
+    border: none;
+}
+
+.boldfont {
+    font-weight: bold;
+    color: black;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.file {
+    position: relative;
+    display: inline-block;
+    border: 1px solid black;
+    padding: 10px 12px;
+    overflow: hidden;
+    color: black;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    width: 550px;
+    border-radius: 5px;
+}
+
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.file:hover {
+    background: #047c51;
+    border-color: #047c51;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.file2 {
+    position: relative;
+    display: inline-block;
+    border: 1px solid black;
+    padding: 5px 5px;
+    overflow: hidden;
+    color: black;
+    text-decoration: none;
+    text-indent: 0;
+    border-radius: 5px;
+    left: 26px;
+}
+
+.file2 input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.file2:hover {
+    background: #047c51;
+    border-color: #047c51;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.dateline {
+    width: 275px;
+    height: 40px;
+    text-align: center;
+}
+
+.pagebtndiv {
+    position: relative;
+    float: right;
+}
+
+.pagebtn {
+    background-color: transparent;
+    border-radius: 5px;
+    border: none;
+    color: black;
+    width: 12vh;
+}
+
+.pagebtn:active {
+    background-color: #047c51 !important;
+    color: white !important;
+}
+
+.pagebtn:hover {
+    background-color: #047c51;
+    color: white;
+}
+
+/* 文字編輯器 */
+#container {
+    width: 100%;
+}
+
+.ck-editor__editable[role="textbox"] {
+    /* editing area */
+    min-height: 300px;
+    background-color: white !important;
+}
+
+.ck-editor__editable[role="toolbox"] {
+    background-color: black !important;
+}
+
+.ck-content .image {
+    /* block images */
+    max-width: 50%;
+    margin: 20px auto;
+}
+
+.QAtext {
+    width: 100%;
+    resize: none;
+    border-radius: 5px;
+}
+
+.QAaddbtn,
+.QAdelbtn {
+    border-radius: 0;
+    border: #047c51 solid 2px;
+    background-color: transparent;
+    color: black;
+    border-radius: 5px;
+}
+
+.QAaddbtn:active,
+.QAdelbtn:active {
+    background-color: #047c51 !important;
+    color: white !important;
+}
+
+.QAaddbtn:hover,
+.QAdelbtn:hover {
+    background-color: #047c51;
+    border: #047c51 solid 2px;
+    color: white;
+}
+
+.bankcode:hover {
+    cursor: pointer;
+}

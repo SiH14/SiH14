@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/d978d0ee9c.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  </head>
+
+  <style>
+    textarea {
+      height: 40px;
+      overflow-y: hidden;
+    }
+
+    .coverphoto {
+      height: 200px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50%;
+      background-position: center;
+      padding-bottom: 56.25%;
+      position: relative;
+    }
+  </style>
+
+  <body>
+      <div class="thiscomments">
+          <div class="container" style="position: relative">
+              <div>
+                  <div style="
+              position: fixed;
+              z-index: 1021;
+              right: 10px;
+              text-align: right;
+            ">
+                      <br />
+                      <!--<div style="border-style:outset; border-radius:6px; background-color: black; color:white; display: block; width: 100px">
+                                <b>123<br></b>
+                                <b>123</b>
+                            </div>-->
+                      <div v-for="(me,key) in meno">
+                          <a href="#"
+                             v-on:click="noticetopage()"
+                             style="text-decoration: none">
+                              <div :class="'mb-1'+' '+'al'+key"
+                                   style="
+                    border-style: outset;
+                    border-radius: 6px;
+                    background-color: black;
+                    color: white;
+                    display: block;
+                  ">
+                                  <b>{{me.whose}}，{{me.show}}<br /><br /></b>
+                                  <b>來自: {{me.title}}</b>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+              <!-- 標題 -->
+              <div class="row">
+                  <!--左邊欄位-->
+                  <div class="col-sm-5">
+                      <div class="coverphoto"
+                           :style="{'background-image':'url(' + productList[0].coverphoto + ')'}"></div>
+                  </div>
+
+                  <!--右邊欄位-->
+                  <div class="col-sm-7">
+                      <div>
+                          <br />
+                          <a style="color: black; text-decoration: none"
+                             href="./product.html"><h4>{{productList[0].producttitle}}</h4></a>
+                      </div>
+                      <div>
+                          <span>提案人 </span><span>
+                              <a style="text-decoration: none" href="#">{{productList[0].username}}</a>
+                          </span>
+                      </div>
+                      <br />
+                      <div>
+                          <span style="font-weight: bold; font-size: 20px">NT${{productList[0].currentamount | money}}</span><span> / 目標 NT${{productList[0].targetamount | money}}</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- 商品分頁導覽列 -->
+          <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+              <div class="container">
+                  <!--<a class="navbar-brand" href="./product.html">專案內容</a>-->
+                  <button class="navbar-toggler"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#navbarText"
+                          aria-controls="navbarText"
+                          aria-expanded="false"
+                          aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarText">
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                          <li class="nav-item">
+                              <a class="nav-link" href="./product.html"><span style="font-size: 18px">專案內容</span></a>
+                          </li>
+                          <li class="nav-item" style="padding-left: 80px">
+                              <a class="nav-link" href="./faq.html"><span style="font-size: 18px">常見問題 {{tolfaq}}</span></a>
+                          </li>
+                          <li class="nav-item" style="padding-left: 80px">
+                              <a class="nav-link" href="./comments.html">
+                                  <span style="font-size: 18px; font-weight: 900">留言 {{fliterList.length}}</span>
+                              </a>
+                          </li>
+                      </ul>
+                      <div class="col-sm-4">
+                          <a class="btn btn-danger"
+                             style="width: 300px"
+                             href="#"
+                             v-on:click="gotoplan()">贊助專案</a>
+                          <div style="width: 145px"></div>
+                      </div>
+                      <div style="width: 20px"></div>
+                      <!-- <div class="col-sm-1"> </div> -->
+                  </div>
+              </div>
+          </nav>
+          <!-- 商品分頁導覽列 -->
+
+          <br />
+
+          <!--<div class="container">
+          <div class="row">
+              <div style="background-color: whitesmoke;">
+                  <span>贊助人才能留言。如有專案相關提問，請聯絡<a href="#" style="color: black; text-decoration: none; font-weight: bold;">提案人</a></span>
+                  <span>。</span>
+                </div>
+          </div>
+        </div>-->
+          <br />
+          <div>
+              <div class="container">
+                  <div style="background-color: whitesmoke" v-if="whouser == ''">
+                      <span>
+                          成為
+                          <a href="../Registration/registration.html"
+                             style="color: black; text-decoration: none; font-weight: bold">needU</a>
+                          會員才能留言。如有專案相關提問，請登入<a href="../Login/login.html"
+                                                style="color: black; text-decoration: none; font-weight: bold">
+                              會員
+                          </a>
+                      </span>
+                      <span>。</span>
+                  </div>
+                  <div class="" style="display: flex" v-else>
+                      <textarea v-on:click="move1()"
+                                id="textinput1"
+                                class="form-control"
+                                style="width: 95%"
+                                s
+                                placeholder="請輸入留言內容..."></textarea>
+                      <button v-on:click="addcomment()"
+                              class="fas fa-users-class btn btn-secondary"
+                              style="width: 65px">
+                          <i class="fa-regular fa-paper-plane"></i>
+                      </button>
+                      <i class="fa-solid fa-paper-plane-top"></i>
+                  </div>
+              </div>
+          </div>
+
+          <div class="container mt-3" v-if="fliterList.length > 0">
+              <div class="row card mb-3" v-for="(item,key) in fliterList">
+                  <!-- 這則留言 -->
+                  <div class="d-flex bd-highlight p-2" style="display: none">
+                      <img style="
+                height: 30px;
+                width: 30px;
+                border-radius: 15px;
+                object-fit: cover;
+              "
+                           :src="item.userphoto"
+                           alt=""
+                           class="my-auto" />
+                      <div class="p-2 bd-highlight my-auto">
+                          <a href="#" style="text-decoration: none">{{item.username}}</a>
+                      </div>
+                      <div class="p-1 bd-highlight my-auto"
+                           style="
+                display: inline-block;
+                height: 24px;
+                text-align: center;
+                vertical-align: text-top;
+                border-radius: 15%;
+                color: #fff;
+                background-color: #82c91e;
+                font-size: 12px;
+              ">
+                          留言人
+                      </div>
+                      <div class="ms-auto p-2 bd-highlight">
+                          <div v-if="item.userid == whouser" class="btn-group dropup">
+                              <button type="button"
+                                      class="btn"
+                                      data-bs-toggle="dropdown"
+                                      aria-expanded="false">
+                                  <i class="fa-solid fa-pen-to-square"></i>
+                              </button>
+                              <ul class="dropdown-menu">
+                                  <li>
+                                      <button style="width: 60px"
+                                              type="button"
+                                              v-on:click="delcomment(item.commentID)"
+                                              class="btn"
+                                              data-bs-toggle="dropdown"
+                                              aria-expanded="false">
+                                          刪除
+                                      </button>
+                                  </li>
+                                  <li>
+                                      <button style="width: 60px"
+                                              v-on:click="editcomment(item.commentID,item.commentContent)"
+                                              type="button"
+                                              class="btn"
+                                              data-bs-toggle="dropdown"
+                                              aria-expanded="false">
+                                          編輯
+                                      </button>
+                                  </li>
+                              </ul>
+                          </div>
+                          {{item.commenttime}}
+                      </div>
+                  </div>
+                  <div :class="'bd-highlight'+' '+'origcomment'+item.commentID"
+                       style="display: flex">
+                      <div style="height: 30px; width: 40px"></div>
+                      <p style="white-space: pre-wrap">{{item.commentContent}}</p>
+                  </div>
+                  <div v-if="item.userid == whouser"
+                       :class="'bd-highlight mb-1'+' '+'commentinpudiv'+item.commentID"
+                       style="display: none">
+                      <div style="height: 30px; width: 40px"></div>
+                      <textarea id="textinput3"
+                                :class="'form-control'+' '+'editcommentinpu'+item.commentID"
+                                style="width: 95%"></textarea>
+                  </div>
+                  <div v-if="item.userid == whouser"
+                       :class="'btncdis bd-highlight'+' '+'commentbtndiv'+item.commentID"
+                       style="display: none">
+                      <div style="height: 0px; width: 40px"></div>
+                      <button v-on:click="okeditcomment(item.commentID)"
+                              class="btn btn-success">
+                          確定
+                      </button><button v-on:click="canceleditcomment(item.commentID)"
+                                       class="btn btn-danger">
+                          取消
+                      </button>
+                  </div>
+
+                  <div v-for="itemm in answerList"
+                       v-if="item.commentID == itemm.commentid"
+                       class="ps-4">
+                      <div class="d-flex bd-highlight">
+                          <div style="height: 30px; width: 30px"></div>
+                          <div class="p-2 bd-highlight my-auto">
+                              <a href="#" style="text-decoration: none">{{itemm.username}}</a>
+                          </div>
+                          <div class="p-1 bd-highlight my-auto"
+                               style="
+                  display: inline-block;
+                  height: 24px;
+                  text-align: center;
+                  vertical-align: text-top;
+                  border-radius: 15%;
+                  color: #fff;
+                  background-color: #7373b9;
+                  font-size: 12px;
+                ">
+                              回覆人
+                          </div>
+                          <div class="ms-auto p-1 bd-highlight">
+                              <div v-if="itemm.userid == whouser" class="btn-group dropup">
+                                  <button type="button"
+                                          class="btn"
+                                          data-bs-toggle="dropdown"
+                                          aria-expanded="false">
+                                      <i class="fa-solid fa-pen-to-square"></i>
+                                  </button>
+                                  <ul class="dropdown-menu">
+                                      <li>
+                                          <button style="width: 60px"
+                                                  type="button"
+                                                  v-on:click="delanswer(itemm.answerid)"
+                                                  class="btn"
+                                                  data-bs-toggle="dropdown"
+                                                  aria-expanded="false">
+                                              刪除
+                                          </button>
+                                      </li>
+                                      <li>
+                                          <button style="width: 60px"
+                                                  type="button"
+                                                  v-on:click="editanswer(itemm.answerid,itemm.answercontent)"
+                                                  class="btn"
+                                                  data-bs-toggle="dropdown"
+                                                  aria-expanded="false">
+                                              編輯
+                                          </button>
+                                      </li>
+                                  </ul>
+                              </div>
+                              {{itemm.answertime}}
+                          </div>
+                      </div>
+                      <div :class="'oricdis'+itemm.answerid+' '+'bd-highlight'"
+                           style="display: flex">
+                          <div style="height: 30px; width: 40px"></div>
+                          <p style="white-space: pre-wrap">{{itemm.answercontent}}</p>
+                      </div>
+                      <div v-if="itemm.userid == whouser"
+                           :class="'cdis'+itemm.answerid+' '+'bd-highlight'+' '+'mb-1'"
+                           style="display: none">
+                          <div style="height: 30px; width: 40px"></div>
+                          <textarea id="textinput2"
+                                    :class="'editinpu'+itemm.answerid+' '+'form-control'"
+                                    style="width: 95%"></textarea>
+                      </div>
+                      <div v-if="itemm.userid == whouser"
+                           :class="'btncdis'+itemm.answerid+' '+'bd-highlight'"
+                           style="display: none">
+                          <div style="height: 0px; width: 40px"></div>
+                          <button v-on:click="okeditanswer(itemm.answerid)"
+                                  class="btn btn-success">
+                              確定
+                          </button><button v-on:click="canceleditanswer(itemm.answerid)"
+                                           class="btn btn-danger">
+                              取消
+                          </button>
+                      </div>
+                      <!--<div v-if="itemm.userid == whouser" class="bd-highlight mb-1" style="display:flex">
+                            <div style="height: 30px; width: 40px;"></div>
+                            <textarea v-on:click="move2(key)" id="textinput2" :class="'wang'+key + ' ' + 'form-control'" style="width: 95%;" v-model="editanswerList.answercontent" :value="editanswerList.answercontent"></textarea>
+                        </div>-->
+                      <!--<div v-if="itemm.userid == whouser" class="bd-highlight mb-3" style="display:flex">
+                            <div style="height: 0px; width: 40px;"></div>
+                            <button v-on:click="okeditanswer(editanswerList.answerid)" class="btn btn-success">確定</button><button class="btn btn-danger">取消</button>
+                        </div>-->
+                  </div>
+                  <div class="mb-3" style="display: flex" v-if="whouser != ''">
+                      <textarea v-on:click="move2(key)"
+                                id="textinput2"
+                                :class="'wang'+key + ' ' + 'form-control'"
+                                style="width: 95%"
+                                placeholder="回覆留言..."></textarea>
+                      <button v-on:click="addanswer(item.commentID,key,item.userid)"
+                              class="fas fa-users-class btn btn-secondary"
+                              style="width: 65px">
+                          <i class="fa-regular fa-paper-plane"></i>
+                      </button>
+                      <i class="fa-solid fa-paper-plane-top"></i>
+                  </div>
+              </div>
+          </div>
+          <div class="container" v-else>
+              <br />
+              <h1>還沒有人留言。</h1>
+          </div>
+      </div>
+
+      <script src="../layout/layout.js"></script>
+
+      <!--引入signalr-->
+      <script src="../lib/microsoft/signalr/dist/browser/signalr.js"></script>
+      <!--引入signalr-->
+
+      <script>
+          //var textinput1 = document.getElementById('textinput1');
+          //textinput1.addEventListener('input', (e) => {
+          //    textinput1.style.height = '40px';
+          //    textinput1.style.height = e.target.scrollHeight + 'px';
+          //});
+          //var textinput2 = document.getElementById('textinput2');
+          //textinput2.addEventListener('input', (e) => {
+          //    textinput2.style.height = '40px';
+          //    textinput2.style.height = e.target.scrollHeight + 'px';
+          //});
+
+          Vue.filter('money', function (num) {
+              const parts = num.toString().split('.');
+              parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+              return parts.join('.');
+          });
+
+          var app = new Vue({
+              el: ".thiscomments",
+              data: {
+                  productList: [],
+                  fliterList: [],
+                  answerList: [],
+                  addcommentList: {},
+                  addanswerList: {},
+                  editcommentList: {},
+                  editanswerList: {},
+                  whouser: '',
+                  productuserid: '',
+                  meno: [],
+                  connection: null,
+                  tolfaq: 0
+              },
+              beforeMount() {
+                  $.ajax({
+                      type: 'Get',
+                      url: '/api/SiComments/comment/' + sessionStorage.getItem("productId"),
+                      success: function (e) {
+                          app.fliterList = e
+                      }
+                  })
+              }
+              ,
+              mounted: function () {
+                  $.ajax({
+                      type: 'Get',
+                      url: '/api/login/getuserid',
+                      success: function (e) {
+                          /*  console.log(e)*/
+                          app.whouser = e
+                          /*    console.log(e[0].productcontent)*/
+                      }
+                  })
+                  this.connection = new signalR.HubConnectionBuilder()
+                      .withUrl("/commentHub")
+                      .build();
+
+                  this.connection
+                      .start()
+                      .then(() => {
+                          this.connection.invoke("Connect", parseInt(this.whouser));
+                      })
+                      .catch((err) => console.error(err.toString()));
+
+                  this.connection.on("ReceiveMessage", (producttitle, word1, thisuser) => {
+                      if (parseInt(app.whouser) != parseInt(thisuser)) {
+                          this.meno.push({ "show": "有新的回應囉", "title": producttitle, "whose": word1, "thisuser": thisuser });
+
+                          setTimeout(function () {
+                              setTimeout(function () {
+                                  dis.style.display = "none"
+                              }, 8000)
+                              let dis = document.querySelector('.al' + (app.meno.length - 1))
+                              console.log(1);
+                          }, 1000)
+                      }
+
+                      //alert(typeof towho);
+                      //alert(typeof app.whouser);
+
+
+                  });
+                  $.ajax({
+                      type: 'Get',
+                      url: '/api/Fundraising/prduct/' + sessionStorage.getItem("productId"),
+                      success: function (e) {
+                          app.productList = e
+                          app.productuserid = e[0].productuserid
+                      }
+                  })
+                  $.ajax({
+                      type: 'Get',
+                      url: '/api/SiComments/Answer',
+                      success: function (e) {
+                          app.answerList = e
+                      }
+                  })
+                  $.ajax({
+                      type: 'Get',
+                      url: '/api/SiFollowings/tolfaq/' + sessionStorage.getItem("productId"),
+                      success: function (e) {
+                          app.tolfaq = parseInt(e);
+                      },
+                      error: function (e) {
+                          /*     console.log(app.followList);*/
+                          console.log(e);
+                          console.log(444);
+                      }
+                  })
+              },
+              methods: {
+                  addcomment: function () {
+                      this.addcommentList["UserID"] = parseInt(this.whouser);
+                      this.addcommentList["ProductID"] = parseInt(sessionStorage.getItem("productId"));
+                      this.addcommentList["CommentContent"] = document.getElementById('textinput1').value;
+                      /*        console.log(parseInt(sessionStorage.getItem("productId")))*/
+                      swal("", "確定留言?", "info", {
+                          buttons: {
+                              確定: true,
+                              取消: true
+                          },
+                      })
+                          .then((value) => {
+                              switch (value) {
+                                  case "確定":
+                                      this.connection
+                                          .invoke(
+                                              "SendMessageToUser",
+                                              this.productuserid,
+                                              this.productList[0].producttitle,
+                                              '您的專案',
+                                              app.whouser
+                                          )
+                                          .catch((err) => console.error(err.toString()));
+                                      /*   this.meno.push("我要留言");*/
+                                      /*  console.log(typeof this.whouser);*/
+                                      //this.message = "";
+                                      $.ajax({
+                                          type: 'POST',
+                                          url: '/api/SiComments/',
+                                          contentType: "application/json",
+                                          data: JSON.stringify(app.addcommentList),
+                                          error: function () {
+                                              console.log('錯誤回傳');
+                                              console.log(this.data);
+                                          },
+                                          success: function () {
+                                              window.location = "./comments.html";
+                                              //setTimeout(function () {
+                                              //    window.location.href = "#top";
+                                              //}, 5000)
+                                          }
+                                      })
+                                      break;
+                                  case "取消":
+                                      break;
+                              }
+                          });
+                  },
+                  addanswer: function (r, e, w) {//item.commentID,key
+                      this.connection
+                          .invoke(
+                              "SendMessageToCom",
+                              w,
+                              this.productList[0].producttitle,
+                              "您的留言",
+                              app.whouser
+                          )
+                          .catch((err) => console.error(err.toString()));
+                      /*   this.meno.push("我要留言");*/
+                      /*  console.log(typeof this.whouser);*/
+                      //this.message = "";
+                      var thisidclear = e;
+                      this.addanswerList["UserID"] = parseInt(this.whouser);
+                      this.addanswerList["CommentID"] = r;
+                      this.addanswerList["AnswerContent"] = document.querySelector(".wang" + e).value;
+                      /*     console.log(document.querySelector(".wang" + e).value)*/
+                      $.ajax({
+                          type: 'POST',
+                          url: '/api/SiAnswers/',
+                          contentType: "application/json",
+                          data: JSON.stringify(this.addanswerList),
+                          error: function () {
+                              console.log('錯誤回傳');
+                              console.log(this.data);
+                          },
+                          success: function () {
+                              /*  alert("成功");*/
+                              $.ajax({
+                                  type: 'Get',
+                                  url: '/api/SiComments/Answer',
+                                  success: function (e) {
+                                      app.answerList = e
+                                      document.querySelector(".wang" + thisidclear).value = '';
+                                  }
+                              })
+                              /*  window.location = "./comments.html";*/
+                          }
+                      })
+                  },
+                  editanswer: function (e, answercontent) {
+                      var oridisnone = document.querySelector('.oricdis' + e);
+                      oridisnone.style.display = "none";
+                      var disnone = document.querySelector('.cdis' + e);
+                      disnone.style.display = "flex";
+                      var btndisnone = document.querySelector('.btncdis' + e);
+                      btndisnone.style.display = "flex";
+                      document.querySelector('.editinpu' + e).value = answercontent;
+                      /*       console.log(e);*/
+                      //$.ajax({
+                      //    type: 'Get',
+                      //    url: '/api/SiAnswers/editans/' + e,
+                      //    success: function (e) {
+                      //        app.editanswerList = e
+                      //        console.log(e)
+                      //    }
+                      //})
+                  },
+                  okeditanswer: function (e) {
+                      console.log(this.editanswerList.answercontent)
+                      var oridisflex = document.querySelector('.oricdis' + e);
+                      oridisflex.style.display = "flex";
+                      var disnone = document.querySelector('.cdis' + e);
+                      disnone.style.display = "none";
+                      var btndisnone = document.querySelector('.btncdis' + e);
+                      btndisnone.style.display = "none";
+                      var okeditid = e;
+                      $.ajax({
+                          type: 'Get',
+                          url: '/api/SiAnswers/editans/' + e,
+                          success: function (e) {
+                              app.editanswerList = e
+                              app.editanswerList.answercontent = document.querySelector('.editinpu' + okeditid).value
+                              $.ajax({
+                                  type: 'put',
+                                  url: '/api/SiAnswers/' + okeditid,
+                                  contentType: "application/json",
+                                  data: JSON.stringify(app.editanswerList),
+                                  success: function () {
+                                      $.ajax({
+                                          type: 'Get',
+                                          url: '/api/SiComments/Answer',
+                                          success: function (e) {
+                                              app.answerList = e
+                                          }
+                                      })
+                                  }
+                              })
+                          }
+                      })
+                  },
+                  canceleditanswer: function (e) {
+                      var oridisflex = document.querySelector('.oricdis' + e);
+                      oridisflex.style.display = "flex";
+                      var disnone = document.querySelector('.cdis' + e);
+                      disnone.style.display = "none";
+                      var btndisnone = document.querySelector('.btncdis' + e);
+                      btndisnone.style.display = "none";
+                  },
+                  delanswer: function (e) {
+                      swal("", "確定要刪除?", "warning", {
+                          buttons: {
+                              確定: true,
+                              取消: true
+                          },
+                      })
+                          .then((value) => {
+                              switch (value) {
+                                  case "確定":
+                                      $.ajax({
+                                          type: 'DELETE',
+                                          url: '/api/SiAnswers/' + e,
+                                          success: function (e) {
+                                              $.ajax({
+                                                  type: 'Get',
+                                                  url: '/api/SiComments/Answer',
+                                                  success: function (e) {
+                                                      app.answerList = e
+                                                  }
+                                              })
+                                          }
+                                      })
+                                      break;
+                                  case "取消":
+                                      break;
+                              }
+                          });
+                  }
+                  ,
+                  okeditcomment(e) {
+                      document.querySelector('.origcomment' + e).style.display = "flex";
+                      document.querySelector('.commentinpudiv' + e).style.display = "none";
+                      document.querySelector('.commentbtndiv' + e).style.display = "none";
+                      var okeditcommentid = e;
+                      $.ajax({
+                          type: 'Get',
+                          url: '/api/SiComments/editcomment/' + e,
+                          success: function (e) {
+                              app.editcommentList = e
+                              app.editcommentList.commentcontent = document.querySelector('.editcommentinpu' + okeditcommentid).value
+                              $.ajax({
+                                  type: 'put',
+                                  url: '/api/SiComments/' + okeditcommentid,
+                                  contentType: "application/json",
+                                  data: JSON.stringify(app.editcommentList),
+                                  success: function () {
+                                      $.ajax({
+                                          type: 'Get',
+                                          url: '/api/SiComments/comment/' + sessionStorage.getItem("productId"),
+                                          success: function (e) {
+                                              app.fliterList = e
+                                          }
+                                      })
+                                  }
+                              })
+                          }
+                      })
+                  }
+                  ,
+                  canceleditcomment(e) {
+                      document.querySelector('.origcomment' + e).style.display = "flex";
+                      document.querySelector('.commentinpudiv' + e).style.display = "none";
+                      document.querySelector('.commentbtndiv' + e).style.display = "none";
+                  }
+                  ,
+                  editcomment(e, r) {
+                      document.querySelector('.origcomment' + e).style.display = "none";
+                      document.querySelector('.commentinpudiv' + e).style.display = "flex";
+                      document.querySelector('.commentbtndiv' + e).style.display = "flex";
+                      document.querySelector('.editcommentinpu' + e).value = r;
+                  }
+                  ,
+                  delcomment: function (e) {
+                      swal("", "確定要刪除?", "warning", {
+                          buttons: {
+                              確定: true,
+                              取消: true
+                          },
+                      })
+                          .then((value) => {
+                              switch (value) {
+                                  case "確定":
+                                      $.ajax({
+                                          type: 'DELETE',
+                                          url: '/api/SiComments/' + e,
+                                          success: function (e) {
+                                              $.ajax({
+                                                  type: 'Get',
+                                                  url: '/api/SiComments/comment/' + sessionStorage.getItem("productId"),
+                                                  success: function (e) {
+                                                      app.fliterList = e
+                                                  }
+                                              })
+                                          }
+                                      })
+                                      break;
+                                  case "取消":
+                                      break;
+                              }
+                          });
+                  }
+                  ,
+                  move1: function () {
+                      var textinput1 = document.getElementById('textinput1');
+                      textinput1.addEventListener('input', (e) => {
+                          textinput1.style.height = '40px';
+                          textinput1.style.height = e.target.scrollHeight + 'px';
+                      });
+                  },
+                  move2: function (e) {
+                      /*               console.log(e)*/
+                      var textinput2 = document.querySelector('.wang' + e);
+                      textinput2.addEventListener('input', (e) => {
+                          textinput2.style.height = '40px';
+                          textinput2.style.height = e.target.scrollHeight + 'px';
+                      });
+                  },
+                  gotoplan: function () {
+                      if (parseInt(this.whouser) > 0) {
+                          window.location = "./plan.html";
+                      }
+                      else {
+                          window.location = "../login/login.html";
+                      }
+                  }
+                  ,
+                  noticetopage: function () {
+                      window.location = "./comments.html";
+                  }
+              }
+          })
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+              integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+              crossorigin="anonymous"></script>
+  </body>
+</html>

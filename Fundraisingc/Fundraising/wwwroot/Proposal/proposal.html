@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提案</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.20.1/standard-all/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./proposal.css">
+
+
+</head>
+
+<body>
+    <img id="pencil" src="../img/pencil.png" alt="">
+    <form name="proposalfrom" class="needs-validation" novalidate>
+        <div>
+            <!-- 頁籤 -->
+            <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist"
+                style="position: relative; padding: 30px 0px 0px 0px; margin: 0px 400px; ">
+                <li style="padding: 0px;" class="nav-item" role="presentation">
+                    <button class="nav-link active boldfont" id="outline-tab" data-bs-toggle="tab"
+                        data-bs-target="#outline" type="button" role="tab" aria-controls="outline"
+                        aria-selected="true">專案大綱</button>
+                </li>
+                <li style="padding: 0px;" class="nav-item" role="presentation">
+                    <button class="nav-link boldfont" id="content-tab" data-bs-toggle="tab" data-bs-target="#content"
+                        type="button" role="tab" aria-controls="content" aria-selected="false">專案內容</button>
+                </li>
+                <li style="padding: 0px;" class="nav-item" role="presentation">
+                    <button class="nav-link boldfont" id="setting-tab" data-bs-toggle="tab" data-bs-target="#setting"
+                        type="button" role="tab" aria-controls="setting" aria-selected="false">方案設定</button>
+                </li>
+                <li style="padding: 0px;" class="nav-item" role="presentation">
+                    <button class="nav-link boldfont" id="infor-tab" data-bs-toggle="tab" data-bs-target="#infor"
+                        type="button" role="tab" aria-controls="infor" aria-selected="false">提案資料</button>
+                </li>
+            </ul>
+
+            <!-- <input type="button" value="test" onclick="test()"> -->
+
+            <div class="tab-content container mb-5">
+                <!-- 專案大綱 -->
+                <div style="width: 105%; position: relative; right: 30px;"
+                    class="card tab-pane fade show active lidivborder" id="outline" role="tabpanel"
+                    aria-labelledby="outline-tab">
+                    <div class="boldfont">讓人輕鬆了解你的專案</div>
+                    <div>
+                        <ul class="list-group list-group-horizontal" style="padding-top: 20px; ">
+                            <li class="list-group-item">
+                                <div style="text-align: left;">
+                                    <span class="dot">●</span>
+                                    <label class="boldfont" for="ProductTitle">專案標題</label>
+                                    <br>
+                                    <textarea style="border: black 1px solid; border-radius: 5px; resize: none;"
+                                        placeholder="✎ 40個字以內的專案標題" maxlength="40" name="ProductTitle" id="ProductTitle"
+                                        cols="60" rows="4" class="form-control" required></textarea>
+                                    <span id="textlimit"
+                                        style="position: relative; float: right; bottom: 4vh; right: 4vh; color: gray;">40</span>
+                                    <div class="invalid-feedback">
+                                        請輸入專案標題！
+                                    </div>
+                                    <p style="width: 100%; font-size: 14px; padding-top: 5px;">撰寫清晰、簡短的標題，幫助人們迅速了解你的專案。
+                                    </p>
+                                </div>
+                                <div style="text-align: left;">
+                                    <span class="dot">●</span>
+                                    <label class="boldfont" for="TargetAmount">募款目標</label>
+                                    <br>
+                                    <input type="number" min="5000" style="border: black 1px solid;border-radius: 5px;"
+                                        name="TargetAmount" id="TargetAmount" class="form-control" value="5000" placeholder="✎ 請輸入募款目標金額"
+                                        required>
+                                    <span style="position: relative; float: right; bottom: 4vh; right: 4vh;">元</span>
+                                    <div class="invalid-feedback">
+                                        請輸入至少5000元的目標金額！
+                                    </div>
+                                    <p style="width: 100%; font-size: 14px; padding-top: 5px;">募資目標金額最低為 $ 5,000元。</p>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item" style="text-align: center;">
+                                <div style="text-align: left;">
+                                    <span class="dot">●</span>
+                                    <span class="boldfont">專案卡預覽</span>
+                                </div>
+                                <div
+                                    style="border: black 1px solid; background-color: white !important; width: 252px; height: 279px;">
+                                    <!-- 專案卡預覽 -->
+                                    <img id="preview_progressbarTW_img" style="width: 250px; height: 150px;"
+                                        class="selectedimg" src="../img/coverphoto.png" alt="">
+                                    <textarea disabled style="border: none; background-color: white; resize: none;"
+                                        name="cardtitle" id="cardtitle" cols="26" rows="3"
+                                        placeholder="例：40個字以內的專案標題"></textarea>    
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ul class="list-group list-group-horizontal" style="text-align: left; padding-top: 20px; ">
+                            <li class="list-group-item " style="padding-right: 50px;">
+                                <div>
+                                    <span class="dot">●</span>
+                                    <label class="boldfont" for="Featured">專案封面</label>
+                                    <br>
+                                    <div style="text-align: center;">
+                                        <a href="javascript:;" class="file">上傳封面圖片
+                                            <input style="cursor: pointer;" type="file" onchange="readURL(this)"
+                                                targetID="preview_progressbarTW_img" accept="image/jpeg, image/png"
+                                                name="Featured" id="Featured">
+                                        </a>
+                                        <p style="font-size: 14px; text-align: left;">請提供 JPEG、PNG 檔，圖片尺寸
+                                            5:3； 2MB 以內。</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ul class="list-group list-group-horizontal" style="text-align: left; padding-top: 20px; ">
+                            <li class="list-group-item " style="padding-right: 50px;">
+                                <div>
+                                    <span class="dot">●</span>
+                                    <label class="boldfont" for="ProductVedio">專案影片</label>
+                                    <br>
+                                    <div style="text-align: left;">
+                                        <input placeholder="✎ 請輸入影片網址"
+                                            style="border: black 1px solid; width: 550px; height: 40px; border-radius: 5px;"
+                                            type="text" id="ProductVedio" name="ProductVedio" class="form-control"
+                                            required>
+                                        <div class="invalid-feedback">
+                                            請輸入影片網址！
+                                        </div>
+                                        <p style="font-size: 14px; text-align: left; padding-top: 5px;">
+                                            生動影音更能抓住目光，在短時間傳達訊息。 用
+                                            2
+                                            分鐘左右的影片，試著說明你計劃中的強項：計劃目標、計劃或產品的特色、如何達成計劃、團隊介紹、過往事跡、產品使用展示…等。讓一定要被看到的、贊助者會想看到的部分儘量放在前段。
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <br>
+                        <div class="pagebtndiv">
+                            <input id="nextpage1" class="pagebtn btn btn-primary" type="button" value="下一頁&nbsp►">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 專案內容 -->
+                <div style="width: 130%; position: relative; right: 140px;" class="card tab-pane fade lidivborder"
+                    id="content" role="tabpanel" aria-labelledby="content-tab">
+                    <div class="boldfont">介紹你的專案，告訴人們為什麼他們應該對你的專案感到興奮。</div>
+
+                    <div style="text-align: left; padding-top: 20px;" id="container">
+                        <span class="dot">●</span>
+                        <label class="boldfont" for="ProductContent">專案內容</label>
+                        <textarea id="ProductContent" name="ProductContent"></textarea>
+                    </div>
+                    <br>
+                    <div id="QAdiv" style="text-align: left;">
+                        <span class="dot">●</span>
+                        <label class="boldfont" for="questiontext">常見問題</label>
+                        <br>
+                    </div>
+                    <div style="text-align: left;">
+                        <input onclick="add()" class="QAaddbtn btn btn-primary" type="button" value="+ 增加常見問題">
+                    </div>
+
+                    <div class="pagebtndiv">
+                        <input id="prepage1" class="pagebtn btn btn-primary" type="button" value="◀&nbsp上一頁">
+                        <input id="nextpage2" class="pagebtn btn btn-primary" type="button" value="下一頁&nbsp►">
+                    </div>
+                </div>
+
+                <!-- 方案設定 -->
+                <div class="tab-pane fade lidivborder card" id="setting" role="tabpanel" aria-labelledby="setting-tab">
+                    <!-- 標題 -->
+                    <div class="boldfont">在這個區塊您將制定本次募資專案提供的方案項目</div>
+                    <br><br>
+                    <!-- 敘述 -->
+                    <div class="boldfont" style="width: 600px;">
+                        <div style="text-align: left;">
+                            <p>開始制定方案前你應該知道的事：</p>
+                        </div>
+                        <div>
+                            <ul style="text-align: left;">
+                                <li>
+                                    <p>我們應該站在贊助者的角度設定方案項目：<br>
+                                        清楚列出贊助者會得到什麼，需花費的金額、運費，以及完成方案所需花的時間。若專案性質並非完成一件商品，可考慮另外設計方案方式（實體或非實體）。請務必考量到方案的可行性以及所需時間。
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>好的方案項目可以讓贊助人感受到：<br>
+                                        (1)參與感&nbsp&nbsp&nbsp&nbsp(2)情感或精神上的方案&nbsp&nbsp&nbsp&nbsp(3)價格上的優惠&nbsp&nbsp&nbsp&nbsp(4)自己是獨一無二。
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>好的方案會讓贊助者在收到方案項目後很開心，並且分享給更多人。而設計方案時，除了實體的物品之外，也可以透過舉辦活動或善加利用數位製品，不僅可以降低成本，更可能帶來意想不到的正面效果。
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- 新增方案 -->
+                    <div style="width: 100%;">
+                        <div>
+                            <div style="text-align: left;">
+                                <span class="dot">●</span>
+                                <span class="boldfont">方案內容</span>
+                            </div>
+
+                            <!-- 方案 -->
+                            <div id="plandiv" style="width: 110%;">
+                                <div>
+                                    <div class="planinputdiv"
+                                        style="display: flex; width:100%; border:solid gray 1px; background-color: white;">
+                                        <div>
+                                            <div>
+                                                <img id="preview_plan_img"
+                                                    style=" width: 270px; height: 90px; padding-left: 5px; padding-top: 5px;"
+                                                    class="selectedimg" src="../img/coverimg.png" alt="">
+                                                <div
+                                                    style="position: relative; display: flex; text-align: left; left: 5px; padding: 5px; width: 100%;">
+                                                    <div style="height: 30px;">
+                                                        <span style="color: #047c51; font-size: 20px;">$</span>
+                                                        <span>
+                                                            <input
+                                                                style="width:120px; color: #047c51; font-size: 20px; border: none;"
+                                                                name="PlanPrice" id="PlanPrice" type="number"
+                                                                class="inputplan" placeholder="✎ 方案金額">
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        style="text-align: left; height: 30px; position: relative; left: 31px;">
+                                                        <a style="text-align: center; font-size: 14px;"
+                                                            href="javascript:;" class="file2">上傳圖片
+                                                            <input style="cursor: pointer;" type="file"
+                                                                onchange="readPlanURL(this)" targetID="preview_plan_img"
+                                                                accept="image/gif, image/jpeg, image/png"
+                                                                name="PlanPhoto" id="PlanPhoto">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div style="text-align: left; padding-left: 5px; padding: 5px;">
+                                                    <textarea style="text-align: left; border: none; resize: none;"
+                                                        cols="30" rows="2" name="PlanTitle" id="PlanTitle"
+                                                        class="form-control inputplan" required
+                                                        placeholder="✎ 請輸入方案標題"></textarea>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div style="padding: 5px 10px;">
+
+                                            <div style="padding: 5px;">
+                                                <textarea style="border: none; resize: none;" name="plantext"
+                                                    id="plantext" cols="48" rows="7" placeholder='✎ 請在此簡單介紹您的方案內容'
+                                                    class="form-control inputplan" required></textarea>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                            <!-- 按鈕 -->
+                            <div style="position: relative; text-align: left;">
+                                <input id="addplan" class="QAaddbtn btn btn-primary" type="button" value="+ 新增方案">
+                            </div>
+                            <br>
+                            <div class="pagebtndiv" style="position: relative; left: 60px;">
+                                <input id="prepage2" class="pagebtn btn btn-primary" type="button" value="◀&nbsp上一頁">
+                                <input id="nextpage3" class="pagebtn btn btn-primary" type="button" value="下一頁&nbsp►">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 提案資料 -->
+                <div style="padding: 50px 350px; width: 105%; position: relative; right: 30px;"
+                    class="tab-pane fade lidivborder card" id="infor" role="tabpanel" aria-labelledby="infor-tab">
+                    <div class="boldfont">在這個區塊您將撰寫提案者需要提供的個人資料及身份驗證。</div>
+                    <div style="text-align: left; padding-top: 50px;">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item" style="width: 100%;">
+                                <div>
+                                    <span class="dot">●</span>
+                                    <label class="boldfont" for="PrincipalName">提案負責人姓名</label>
+                                    <br>
+                                    <input style="border-radius: 5px;border: black 1px solid" name="PrincipalName"
+                                        id="PrincipalName" class="form-control" placeholder="✎ 請輸入真實姓名" required>
+                                    <div class="invalid-feedback">
+                                        請輸入您的真實姓名！
+                                    </div>
+                                    <p style="font-size: 14px;padding-top: 5px;">此名稱為核實及平台提案資料留存用，請填寫真實姓名。</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item" style="width: 100%;">
+                                <div>
+                                    <span class="dot">●</span>
+                                    <label class="boldfont" for="PrincipalId">提案人身分證</label>
+                                    <br>
+                                    <input minlength="10" maxlength="10" type="text"
+                                        style="border-radius: 5px;border: black 1px solid" name="PrincipalId"
+                                        id="PrincipalId" class="form-control" required placeholder="✎ 請輸入身分證字號">
+                                    <div class="invalid-feedback">
+                                        請輸入正確的身分證字號！
+                                    </div>
+                                    <p style="font-size: 14px;padding-top: 5px;">
+                                        提案者必須是具備完全行為能力的自然人、合法登記的法人或團體。若提案者為未成年人，應由其法定代理人閱讀、暸解，才可進行提案流程。</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="text-align: left;">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item" style="width: 100%;">
+                                <div>
+                                    <span class="dot">●</span>
+                                    <label class="boldfont" for="PrincipalEmail">電子郵件</label>
+                                    <br>
+                                    <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3,4}$"
+                                        style="border-radius: 5px;border: black 1px solid" name="PrincipalEmail"
+                                        id="PrincipalEmail" class="form-control" required placeholder="✎ 請輸入電子郵件信箱">
+                                    <div class="invalid-feedback">
+                                        請輸入正確格式的電子郵件信箱！
+                                    </div>
+                                    <p style="font-size: 14px;padding-top: 5px;">請填寫聯絡信箱。</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item" style="width: 100%;">
+                                <div>
+                                    <span class="dot">●</span>
+                                    <label class="boldfont" for="PrincipalPhone">行動電話</label>
+                                    <br>
+                                    <input minlength="10" maxlength="10" type="tel"
+                                        style="border-radius: 5px;border: black 1px solid" name="PrincipalPhone"
+                                        id="PrincipalPhone" class="form-control" placeholder="✎ 請輸入行動電話" required>
+                                    <div class="invalid-feedback">
+                                        請輸入正確格式的行動電話！
+                                    </div>
+                                    <p style="font-size: 14px;padding-top: 5px;">為了確保能聯絡到您，請填寫行動電話。</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="text-align: left; padding: 20px 15px;">
+                        <span class="dot">●</span>
+                        <label class="boldfont" for="PrincipalBankAccount">銀行帳號</label>
+                        <div style="display: flex;">
+                            <div>
+                                <input id="bankcode"
+                                    style="border: black 1px solid; width: 180px; height: 36px; border-radius: 5px;"
+                                    list="area" placeholder="✎ 請輸入銀行代碼" type="text" class="form-control" required />
+                                <div class="invalid-feedback">
+                                    請輸入銀行代碼！
+                                </div>
+                                <datalist id="area">
+                                    <option value="(001)中央信託"></option>
+                                    <option value="(003)交通銀行"></option>
+                                    <option value="(004)台灣銀行"></option>
+                                    <option value="(005)土地銀行"></option>
+                                    <option value="(006)合庫商銀"></option>
+                                    <option value="(007)第一銀行"></option>
+                                </datalist>
+                            </div>
+                            <span>&nbsp&nbsp</span>
+                            <div>
+                                <input placeholder="✎ 請輸入10~16位數的銀行帳戶" maxlength="16" minlength="10"
+                                    style="width: 365px; border: black 1px solid" type="text" id="PrincipalBankAccount"
+                                    name="PrincipalBankAccount" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    請輸入銀行帳號！
+                                </div>
+                            </div>
+                        </div>
+                        <p style="font-size: 14px;padding-top: 5px;">用於接收募資款項的帳戶，此帳戶必須位於在台灣。</p>
+                    </div>
+
+                    <div class="pagebtndiv">
+                        <input id="prepage3" class="pagebtn btn btn-primary" type="button" value="◀&nbsp上一頁">
+                        <span>&nbsp</span>
+                        <input class="QAaddbtn btn btn-primary" type="button" id="proposalsubmit" value="提交專案">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+</body>
+</form>
+
+
+
+<!-- 頁籤切換 -->
+<script>
+    var firstTabEl = document.querySelector('#myTab li:last-child a')
+    var firstTab = new bootstrap.Tab(firstTabEl)
+    firstTab.show()
+</script>
+
+<!-- 導入Layout -->
+<script src="../layout/layout.js"></script>
+<!-- 導入js -->
+<script src="./proposal.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
+      integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css"
+      rel="stylesheet"
+    />
+    <style>
+      .card {
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+        width: 80%;
+        transition: 0.5s;
+        border: 0;
+        border-radius: 0.55rem;
+        position: relative;
+      }
+    </style>
+    <title>帳戶設定</title>
+  </head>
+  <body>
+    <div class="container" id="app">
+      <loading :can-cancel="true"></loading>
+      <div class="mx-auto" style="width: 80%">
+        <h5 class="ms-4 mt-3">帳戶設定</h5>
+      </div>
+      <div class="card mt-3 mx-auto">
+        <!-- 修改表單 -->
+        <form class="row g-3 m-4">
+          <!-- 使用者頭像 -->
+          <div class="mb-3 col-md-12">
+            <img
+              id="output"
+              class="img-thumbnail"
+              :src="userinfo.userPhoto"
+              style="width: 200px; height: 200px; object-fit: cover"
+            />
+            <input
+              type="file"
+              name="imageUploader"
+              id="imageUploader"
+              @change="readURL"
+            />
+          </div>
+          <!-- 信箱 -->
+          <div class="mb-3 col-md-6">
+            <label for="Email" class="form-label">註冊信箱(帳號)</label>
+            <input
+              type="Text"
+              class="form-control"
+              id="Email"
+              name="Email"
+              :value="userinfo.userEmail"
+              disabled
+            />
+          </div>
+          <!-- 名稱 -->
+          <div class="mb-3 col-md-6">
+            <label for="Name" class="form-label">名稱</label>
+            <input
+              type="Text"
+              class="form-control"
+              id="Name"
+              name="Name"
+              v-model="userinfo.userName"
+            />
+          </div>
+          <!-- 電話 -->
+          <div class="mb-3 col-md-6">
+            <label for="Phone" class="form-label">聯絡電話</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="Phone"
+              name="Phone"
+              v-model="userinfo.userPhone"
+            />
+          </div>
+
+          <!-- 生日 -->
+          <div class="mb-3 col-md-4">
+            <label for="Birthday" class="form-label">出生日期</label>
+            <input
+              type="date"
+              class="form-control"
+              id="Birthday"
+              name="Birthday"
+              v-model="userinfo.userBirthday"
+            />
+          </div>
+          <!-- 性別 -->
+          <div class="mb-3 col-md-2">
+            <label class="form-label">性別</label>
+            <br />
+            <div class="btn-group" role="group">
+              <input
+                type="radio"
+                class="btn-check"
+                name="btnSex"
+                id="Male"
+                autocomplete="off"
+                :value="true"
+                v-model="userinfo.userGender"
+              />
+              <label class="btn btn-outline-secondary" for="Male">男</label>
+              <input
+                type="radio"
+                class="btn-check"
+                name="btnSex"
+                id="Female"
+                :value="false"
+                autocomplete="off"
+                v-model="userinfo.userGender"
+              />
+              <label class="btn btn-outline-secondary" for="Female">女</label>
+            </div>
+          </div>
+
+          <!-- 自我介紹 -->
+          <div class="mb-3 col-md-12">
+            <label for="Intro">關於我</label>
+            <textarea
+              class="form-control"
+              rows="2"
+              id="Intro"
+              name="Intro"
+              v-model="userinfo.userIntro"
+            ></textarea>
+          </div>
+          <div class="text-end">
+            <button
+              type="button"
+              @click="submitSetting"
+              class="btn btn-success"
+            >
+              儲存
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../layout/membercentre_layout.js"></script>
+    <script src="./Js_src/UserSetting.js"></script>
+  </body>
+</html>

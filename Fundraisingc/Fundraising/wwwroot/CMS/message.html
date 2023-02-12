@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Back-Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+    <script src="./js/logincheck.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <loading :can-cancel="true"></loading>
+        <div class="container-fluid p-0 bg-theme" id="page-top">
+            <!-- 導覽列 -->
+            <div id="myheader" class="bg-white"
+                style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
+
+            </div>
+            <!-- 結束 導覽列 -->
+            <div class=" container-fluid px-5 p-4">
+                <div class="row justify-content-center">
+                    <!-- 側邊欄位 -->
+
+                    <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar"
+                        style="overflow-x: auto;max-height: 750px;">
+                        <br>
+                        <div id="mysider"></div>
+                    </ul>
+
+                    <!-- 結束 側邊欄位 -->
+                    <!--主要內容-->
+                    <div class="col-10">
+                        <div class="px-3">
+                            <div class="bg-white item-style mb-5">
+                                <!-- ===============================================================================================================  -->
+                                <div class="">
+                                    <div class="card-header py-3 mb-3">
+                                        <h3 class="m-0">留言管理</h6>
+                                    </div>
+                                    <div class="row justify-content-center p-3">
+                                        <div class="mb-3  col-12">
+                                            <form>
+                                                <fieldset>
+                                                    <legend>查詢條件</legend>
+                                                    <div class="d-flex py-3">
+                                                        <div class="pr-3" style="font-size: 24px;">
+                                                            選擇題案名稱:</div>
+                                                        <select name="" id="productselect"
+                                                            v-on:change="changegetcomment">
+                                                            <option v-cloak
+                                                                v-for="item in productlist.filter(x=>x.productStateId == 3)"
+                                                                :value="item.productId">{{item.productTitle}}</option>
+                                                        </select>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                        <div class=" col-10">
+                                            <div class="row mb-2 py-3" style="border-bottom: 1px black solid;">
+                                                <div v-cloak class="col-4"><img :src="productcomment.coverphoto" alt=""
+                                                        class="img-fluid"></div>
+                                                <div class="col-8">
+                                                    <h3>提案標題:<span v-cloak>{{productcomment.productTitle}}</span></h3>
+                                                    <p v-cloak>提案人:{{productcomment.principalName}}</p>
+                                                    <p v-cloak>{{productcomment.comcount}}則留言</p>
+                                                </div>
+                                            </div>
+                                            <div v-if="productcomment.comments == 0">暫時沒有留言</div>
+                                            <div class="row mb-3" style="border-bottom: 1px solid black;"
+                                                v-for="comitem in productcomment.comments">
+                                                <div class="col-12">
+                                                    <div class="row">
+
+                                                        <div v-cloak class="col-1"><img :src="comitem.comuser.userPhoto"
+                                                                alt="" class="rounded-circle border imgset"></div>
+                                                        <div class="col-9">
+                                                            <div class="d-flex justify-content-between">
+                                                                <h4 v-cloak>{{comitem.comuser.userName}}</h4>
+                                                                <p v-cloak>{{comitem.commenttime}}</p>
+                                                            </div>
+                                                            <div v-cloak class="mb-2">{{comitem.commentContent}}</div>
+                                                        </div>
+                                                        <div v-cloak class="col-2 text-right"><a class="btn btn-danger"
+                                                                v-on:click="setdeletecom(comitem)" data-toggle="modal"
+                                                                data-target="#deletecomment">刪除留言</a> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1"></div>
+                                                <div class="col-11">
+                                                    <div>
+                                                        <a class="" href="#" data-toggle="collapse"
+                                                            :data-target=`#ci${comitem.commentId}`
+                                                            aria-expanded="true" aria-controls="collapseTwo">
+                                                            <span v-cloak>{{comitem.anscount}}則回覆</span>
+                                                        </a>
+                                                    </div>
+                                                    <div v-for=" ansitem in comitem.answers">
+                                                        <div :id=`ci${comitem.commentId}` class="collapse"
+                                                            aria-labelledby="headingTwo"
+                                                            data-parent="#accordionSidebar">
+                                                            <div class="bg-white py-2 row">
+                                                                <div class="col-1"><img :src="ansitem.ansUser.userPhoto"
+                                                                        alt="" class="rounded-circle border imgset">
+                                                                </div>
+                                                                <div class="col-9">
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <h5 v-cloak>{{ansitem.ansUser.userName}}</h5>
+                                                                        <p v-cloak>{{ansitem.answerTime}}</p>
+                                                                    </div>
+                                                                    <div v-cloak>{{ansitem.answerContent}}</div>
+                                                                </div>
+                                                                <div v-cloak class="col-2 text-right"><a
+                                                                        data-toggle="modal" data-target="#deleteanswer"
+                                                                        class="btn btn-danger"
+                                                                        v-on:click="setdeleteans(ansitem)">刪除回覆</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ===============================================================================================================  -->
+
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade " id="deletecomment" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">您即將刪除留言</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body d-flex">
+                                            <div v-cloak>{{deletecom.commentContent}}</div>
+                                            <div v-cloak>{{deletecom.commenttime}}</div>
+
+                                        </div>
+                                        <div class="text-right">注意!此留言的回覆會一併刪除</div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">返回</button>
+                                            <button type="button" class="btn btn-danger"
+                                                v-on:click="deletecomapi(deletecom.commentId)"
+                                                data-dismiss="modal">刪除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="modal fade " id="deleteanswer" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">您即將刪除回覆</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body d-flex">
+                                            <div v-cloak>{{deleteans.answerContent}}</div>
+                                            <div v-cloak>{{deleteans.answerTime}}</div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">返回</button>
+                                            <button type="button" class="btn btn-danger"
+                                                v-on:click="deleteansapi(deleteans.answerId)"
+                                                data-dismiss="modal">刪除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 結束 主要內容 -->
+                </div>
+            </div>
+        </div>
+        <!-- 頁尾 -->
+        <div id="myfooter"></div>
+        <!-- 結束 頁尾r -->
+        <!-- 回上方按鈕-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- 登出彈跳視窗-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/myjs.js"></script>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Chart.js 套件引入 -->
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script> -->
+    <!-- Chart.js 套件引入 -->
+
+
+
+    <script>
+        Vue.use(VueLoading);
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                LoaderVisiable: false,
+                employeeinfo: [],
+                deletecom: {},
+                deleteans: {},
+                productlist: [],
+                productcomment:
+                {
+                    "productId": "",
+                    "coverphoto": "",
+                    "productTitle": "",
+                    "comcount": "",
+                    "comments": []
+                },
+                gettodoitem: {}
+            },
+            components: {
+                Loading: VueLoading
+            },
+            methods: {
+                open: function () {
+                    console.log('open');
+                    let loader = this.$loading.show({
+                        loader: 'dots'
+                    });
+                    // setTimeout(() => loader.hide(), 0.5 * 1000);
+                },
+                logout: function () {
+                    // alert("1523 ")
+                    axios.get("/api/back/logout").then(res => { if (res.data == "已登出") { window.location.reload() } })
+                },
+                changegetcomment: function () {
+                    let loader = this.$loading.show({
+                        loader: 'dots'
+                    });
+                    axios.get(`/api/back/getcomment/${productselect.value}`).then(res => {
+                        this.productcomment = res.data[0];
+                        console.log(res.data[0])
+                        setTimeout(() => loader.hide(), 0.5 * 1000);
+                    })
+
+                },
+                setdeletecom: function (item) {
+                    this.deletecom = item;
+
+                },
+                setdeleteans: function (item) {
+                    this.deleteans = item;
+                    console.log(this.deleteans)
+                },
+                deletecomapi: function (index) {
+                    axios.delete(`/api/Comments/${index}`).then(res => this.changegetcomment())
+                },
+                deleteansapi: function (index) {
+                    axios.delete(`/api/Answers/${index}`).then(res => this.changegetcomment())
+                },
+            },
+
+            async mounted() {
+                let loader = this.$loading.show({
+                    loader: 'dots'
+                });
+                axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
+
+                    this.employeeinfo = res.data
+                    console.log(this.employeeinfo)
+                })
+                await axios.get("/api/back/Products").then(res => {
+                    this.productlist = res.data
+                    console.log(res)
+                    setTimeout(() => loader.hide(), 300);
+                })
+                axios.get(`/api/back/getcomment/${productselect.value}`).then(res => {
+                    this.productcomment = res.data[0];
+                    console.log(res.data[0])
+                })
+                axios.get('/api/back/gettodoitem').then(res => {
+                    this.gettodoitem = res.data
+                    
+                })
+
+            }
+        })
+    </script>
+</body>
+
+</html>

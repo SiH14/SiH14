@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Back-Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="./js/logincheck.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <loading :can-cancel="true"></loading>
+        <div class="container-fluid p-0 bg-theme" id="page-top">
+            <!-- 導覽列 -->
+            <div id="myheader" class="bg-white"
+                 style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
+
+            </div>
+            <!-- 結束 導覽列 -->
+            <div class=" container-fluid px-5 p-4">
+                <div class="row justify-content-center">
+                    <!-- 側邊欄位 -->
+
+                    <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar"
+                        style="overflow-x: auto;max-height: 750px;">
+                        <br>
+                        <div id="mysider"></div>
+                    </ul>
+
+                    <!-- 結束 側邊欄位 -->
+                    <!--主要內容-->
+                    <div class="col-10">
+                        <div class="px-3">
+                            <div class="bg-white item-style mb-5">
+                                <!-- ===============================================================================================================  -->
+                                <div class="">
+                                    <div class="card-header py-3 mb-3">
+                                        <h3 class="m-0">員工查詢</h6>
+                                    </div>
+                                    <div class="row justify-content-center p-3">
+                                        <div class="mb-3 col-12">
+                                            <form>
+                                                <fieldset>
+                                                    <legend onclick=app.enterText()>查詢條件</legend>
+                                                    <div class="d-flex py-3">
+                                                        <div class="mx-3">
+                                                            <select name="" id=""
+                                                                    style="height: 38px; border-radius: 5px;"
+                                                                    v-model="input.employeestatus">
+                                                                <option value="任職狀態">任職狀態</option>
+                                                                <option value="在職">在職</option>
+                                                                <option value="離職">離職</option>
+                                                                <option value="留職停薪">留職停薪</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="pr-3">
+
+                                                            <input type="text" v-model="input.employeeinfo"
+                                                                   placeholder="搜尋員工姓名 / Email / 電話"
+                                                                   style="min-width: 300px; height: 100%;">
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <a class="btn btn-success" v-on:click="inputRest">清除</a>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                        <div class="py-0 col-12 mb-5">
+                                            <div class="text-right pr-3">
+                                                <button type="button" class="btn btn-success px-4 mb-3"
+                                                        data-toggle="modal" data-target="#staticBackdrop">
+                                                    新增
+                                                </button>
+                                            </div>
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-2">姓名</th>
+                                                        <th class="col-2">Email</th>
+                                                        <th class="col-2">電話</th>
+                                                        <th class="col-2">性別</th>
+                                                        <th class="col-2">職位</th>
+                                                        <th class="col-1">任職狀態</th>
+                                                        <th class="col-1"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="">
+                                                    <tr v-for="item in userNameChange">
+                                                        <td v-cloak>{{item.name}}</td>
+                                                        <td v-cloak>{{item.email}}</td>
+                                                        <td v-cloak>{{item.phone}}</td>
+                                                        <td v-cloak>{{item.sexy}}</td>
+                                                        <td v-cloak>{{item.position}}</td>
+                                                        <td v-cloak>{{item.status}}</td>
+                                                        <td>
+                                                            <a class="btn btn-primary" data-toggle="modal"
+                                                               data-target="#editmodal" v-on:click="edit(item)">編輯</a>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- <tr>
+                                                        <td>Mark</td>
+                                                        <td>Mark005@gmail.com</td>
+                                                        <td>0999887766</td>
+                                                        <td>男</td>
+                                                        <td>主管</td>
+                                                        <td>在職</td>
+                                                    </tr> -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- <button id="demo7">Demo 7</button> -->
+                                    <!-- ===============================================================================================================  -->
+                                </div>
+                            </div>
+                            <!-- Button trigger modal -->
+                            <!-- Modal -->
+                            <!-- 新增 -->
+                            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
+                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered " style=" max-width: 550px;">
+                                    <div class="modal-content" style="border-radius: 5px; border: 0px;">
+                                        <div class="modal-body px-4">
+                                            <label for="" onclick=app.addemployeeText()>帳號*</label> <br>
+                                            <input type="text" class="w-100 mb-1" name="account" placeholder="請輸入6位英數字"
+                                                   v-model="addemployee.account">
+                                            <label for="">密碼*</label> <br>
+                                            <input type="password" class="w-100 mb-1" name="password"
+                                                   placeholder="請輸入6位數字碼" v-model="addemployee.password">
+                                            <label for="">姓名*</label> <br>
+                                            <input type="text" class="w-100 mb-1" name="name" placeholder="輸入姓名"
+                                                   required v-model="addemployee.name">
+                                            <label for="">Email</label> <br>
+                                            <input type="text" class="w-100 mb-1" name="Email" placeholder="輸入電子信箱"
+                                                   v-model="addemployee.email">
+                                            <label for="">電話</label> <br>
+                                            <input type="text" class="w-100 mb-1" name="phone" placeholder="輸入電話"
+                                                   v-model="addemployee.phone">
+                                            <label for="">性別</label> <br>
+                                            <input type="radio" value=1 id="man" name="sexy" checked
+                                                   v-model="addemployee.sexy">
+                                            <label for="man" class="mr-3">男</label>
+                                            <input type="radio" value=0 id="woman" name="sexy"
+                                                   v-model="addemployee.sexy">
+                                            <label for="woman">女</label><br>
+                                            <label for="">職位</label> <br>
+                                            <select name="positions" id="" class="mb-1 w-100"
+                                                    v-model="addemployee.position">
+                                                <option value="" selected disabled>請選擇</option>
+                                                <option value="1">主管</option>
+                                                <option value="2">行政人員</option>
+                                                <option value="3">會計人員</option>
+                                                <option value="4">人事HR</option>
+                                            </select><br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-success" data-dismiss="modal"
+                                                    v-on:click="opensweet">
+                                                儲存
+                                            </button>
+                                            <button type="button" class="btn btn-outline-danger"
+                                                    data-dismiss="modal">
+                                                取消
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 編輯 -->
+                            <div class="modal fade" id="editmodal" data-backdrop="static" data-keyboard="false"
+                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered " style=" max-width: 550px;">
+                                    <div class="modal-content" style="border-radius: 5px; border: 0px;">
+                                        <div class="modal-body px-4">
+                                            <label for="">帳號*</label> <br>
+                                            <input type="text" class="w-100 mb-1" name="account" placeholder="請輸入6位英數字"
+                                                   v-model="editemployee.account" disabled>
+                                            <label for="">密碼*</label> <br>
+                                            <input type="password" class="w-100 mb-1" name="password"
+                                                   placeholder="請輸入6位數字碼" v-model="editemployee.password">
+                                            <label for="">姓名*</label> <br>
+                                            <input type="text" class="w-100 mb-1" name="name" placeholder="輸入姓名"
+                                                   required v-model="editemployee.name">
+                                            <label for="">Email</label> <br>
+                                            <input type="text" class="w-100 mb-1" name="Email" placeholder="輸入電子信箱"
+                                                   v-model="editemployee.email">
+                                            <label for="">電話</label> <br>
+                                            <input type="text" class="w-100 mb-1" name="phone" placeholder="輸入電話"
+                                                   v-model="editemployee.phone">
+                                            <label for="">性別</label> <br>
+                                            <input type="radio" value="男" id="man" name="sexy" checked
+                                                   v-model="editemployee.sexy" disabled>
+                                            <label for="man" class="mr-3">男</label>
+                                            <input type="radio" value="女" id="woman" name="sexy"
+                                                   v-model="editemployee.sexy" disabled>
+                                            <label for="woman">女</label><br>
+                                            <label for="">職位</label> <br>
+                                            <select name="positions" id="" class="mb-1 w-100"
+                                                    v-model="editemployee.position">
+                                                <option value="" selected disabled>請選擇</option>
+                                                <option value="主管">主管</option>
+                                                <option value="行政人員">行政人員</option>
+                                                <option value="會計人員">會計人員</option>
+                                                <option value="人事HR">人事HR</option>
+                                            </select><br>
+                                            <label for="">任職狀態</label> <br>
+                                            <select name="positions" id="" class="mb-1 w-100"
+                                                    v-model="editemployee.status">
+                                                <option value="" selected disabled>請選擇</option>
+                                                <option value="在職">在職</option>
+                                                <option value="離職">離職</option>
+                                                <option value="留職停薪">留職停薪</option>
+
+                                            </select><br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-success" data-dismiss="modal"
+                                                    v-on:click="sendEdit">
+                                                修改
+                                            </button>
+                                            <button type="button" class="btn btn-outline-danger"
+                                                    data-dismiss="modal">
+                                                取消
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- 結束 主要內容 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 頁尾 -->
+        <div id="myfooter"></div>
+        <!-- 結束 頁尾r -->
+        <!-- 回上方按鈕-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    </div>
+    <script src="./js/myjs.js"></script>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Chart.js 套件引入 -->
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script> -->
+    <!-- Chart.js 套件引入 -->
+    <script>
+        Vue.use(VueLoading);
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                LoaderVisiable: false,
+                employeeList: [],
+                employeeinfo: [],
+                input: {
+                    employeestatus: "任職狀態",
+                    employeeinfo: "",
+                },
+                addemployee: {
+                    account: "",
+                    password: "",
+                    name: "",
+                    email: '',
+                    phone: "",
+                    position: "",
+                    sexy: "",
+                    status: 1,
+                },
+                editemployee: {
+
+                },
+                gettodoitem: {}
+            },
+            components: {
+                Loading: VueLoading
+            },
+            methods: {
+                open: function () {
+                    console.log('open');
+                    let loader = this.$loading.show({
+                        loader: 'dots'
+                    });
+                    setTimeout(() => loader.hide(), 3 * 1000);
+                },
+                logout: function () {
+                    // alert("1523 ")
+                    axios.get("/api/back/logout").then(res => { if (res.data == "已登出") { window.location.reload() } })
+                },
+                getuserinfo: function (index) {
+                    console.log(index)
+                    axios.get(`/api/users/${index}`)
+                        .then((response) => {
+                            this.userinfo = response.data
+                            console.log(response.data)
+                        })
+                },
+                opensweet: function () {
+                    // var test ={
+                    //     name : this.addemployee.name,
+                    //     account: this.addemployee.account,
+                    // password: this.addemployee.password,
+                    // name: this.addemployee.name,
+                    // email: this.addemployee.email,
+                    // phone: this.addemployee.phone,
+                    // position: parseInt(this.addemployee.position),
+                    // sexy:(this.addemployee.sexy == 1 )? true:false,
+                    // status: 1,
+                    // }
+                    // console.log(test)
+                    this.addemployee.position = parseInt(this.addemployee.position);
+                    this.addemployee.sexy = (this.addemployee.sexy == 1) ? true : false
+                    console.log(this.addemployee)
+                    axios.post("/api/Employees/", this.addemployee).then(
+                        (response) => {
+                            swal("新增成功", "", "success", {}).then(x => {
+                                window.location.reload()
+                            })
+                        }
+                    )
+
+                    // setTimeout(()=>{ },2000);
+
+                },
+                edit(e) {
+                    this.editemployee = e
+                },
+                sendEdit() {
+                    // console.log(this.editemployee.employeeId)
+                    axios.get(`/api/employees/${this.editemployee.employeeId}`).then(res => {
+                        let neweditemployee = res.data
+                        neweditemployee.name = this.editemployee.name
+                        neweditemployee.email = this.editemployee.email;
+                        neweditemployee.phone = this.editemployee.phone;
+                        neweditemployee.password = this.editemployee.password;
+                        switch (this.editemployee.status) {
+                            case "在職":
+                                neweditemployee.status = 1;
+                                break;
+                            case "離職":
+                                neweditemployee.status = 2;
+                                break;
+                            case "留職停薪":
+                                neweditemployee.status = 3;
+                                break;
+                        };
+                        switch (this.editemployee.position) {
+                            case "主管":
+                                neweditemployee.position = 1;
+                                break;
+                            case "行政人員":
+                                neweditemployee.position = 2;
+                                break;
+                            case "會計人員":
+                                neweditemployee.position = 3;
+                                break;
+                            case "人事HR":
+                                neweditemployee.position = 4;
+                                break;
+                        }
+                        // console.log(neweditemployee)
+                        axios.put(`/api/employees/${neweditemployee.employeeId}`, neweditemployee).then(res => {
+                            // console.log(res)
+                            swal("修改成功", "", "success", {}).then(x => {
+                                window.location.reload()
+                            })
+                        })
+
+                    })
+                },
+                addemployeeText: function () {
+                    app.addemployee = {
+                        account: "mashow",
+                        password: "mashow",
+                        name: "馬修",
+                        email: 'mashow@gmail.com',
+                        phone: "0987654321",
+                        position: "2",
+                        sexy: "1",
+                        status: 1,
+                    }
+
+                },
+                enterText: function () {
+                    app.input.employeeinfo = "馬修";
+
+                },
+                inputRest: function () {
+                    app.input.employeestatus = "任職狀態";
+                    app.input.employeeinfo = "";
+                }
+            },
+            computed: {
+                statuschange() {
+                    // console.log(this.input.employeestatus)
+                    if (this.input.employeestatus !== "任職狀態") {
+                        return this.employeeList.filter(item => {
+                            return item.status == this.input.employeestatus
+                        })
+                    }
+                    else {
+                        return this.employeeList
+                    }
+                },
+                userNameChange() {
+                    if (this.input.employeeinfo) {
+                        return this.statuschange.filter(item => {
+                            if (item.name.toLowerCase().indexOf(this.input.employeeinfo.toLowerCase()) !== -1) {
+                                return item.name.toLowerCase().indexOf(this.input.employeeinfo.toLowerCase()) !== -1
+                            } else if (item.email.toLowerCase().indexOf(this.input.employeeinfo.toLowerCase()) !== -1) {
+                                return item.email.toLowerCase().indexOf(this.input.employeeinfo.toLowerCase()) !== -1
+                            } else if (item.phone.toLowerCase().indexOf(this.input.employeeinfo.toLowerCase()) !== -1) {
+                                return item.phone.toLowerCase().indexOf(this.input.employeeinfo.toLowerCase()) !== -1
+                            }
+                        })
+                    } else {
+                        return this.statuschange
+                    }
+                }
+
+            },
+            async mounted() {
+                let loader = this.$loading.show({
+                    loader: 'dots'
+                });
+                axios.get(`/api/back/Employees/${getCookie("employeeId")}`).then(res => {
+
+                    this.employeeinfo = res.data
+                    // console.log(this.employeeinfo)
+                })
+                axios.get('/api/back/gettodoitem').then(res => {
+                    this.gettodoitem = res.data
+
+                })
+                await axios.get("/api/back/Employees/").then(res => {
+
+                    this.employeeList = res.data
+                    setTimeout(() => loader.hide(), 300)
+                    // console.log(this.employeeList)
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

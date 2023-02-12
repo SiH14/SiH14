@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <label for="UserEmail">帳號</label>
+    <input type="text" name="UserEmail" id="UserEmail">
+    <br>
+    <label for="UserPassword">密碼</label>
+    <input type="text" name="UserPassword" id="UserPassword">
+
+    <button onclick="login()">登入</button>
+
+    <script>
+        function login() {
+            alert("OK");
+            axios.post("https://localhost:44358/api/Login",{
+                UserEmail:document.getElementById("UserEmail").value,
+                UserPassword:document.getElementById("UserPassword").value
+            })
+            .then(res => {
+                    console.log(res);
+                })
+                .catch(error => {
+                    console.log("有axios")
+                    console.log(error.response);
+                });
+        }
+    </script>
+
+</body>
+
+</html>

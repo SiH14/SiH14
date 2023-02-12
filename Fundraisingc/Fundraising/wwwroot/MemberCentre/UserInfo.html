@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
+      integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css"
+      rel="stylesheet"
+    />
+    <style>
+      #ProfileImg {
+        object-fit: cover;
+        width: 150px;
+        height: 150px;
+      }
+      .donebtn {
+        border-bottom: 4px solid #dee2e6;
+        border-radius: 3px;
+      }
+      .donebtn:focus {
+        box-shadow: none;
+      }
+
+      .donebtn:hover {
+        border-bottom: 4px solid #047c51;
+      }
+
+      .selectedbtn {
+        border-bottom: 4px solid #047c51;
+      }
+      .card {
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+        width: 80%;
+        transition: 0.5s;
+        border: 0;
+        border-radius: 0.55rem;
+        position: relative;
+      }
+
+      .text-muted {
+        margin-bottom: 0;
+      }
+    </style>
+    <title>個人頁面</title>
+  </head>
+  <body>
+    <div class="container" id="app">
+      <loading :can-cancel="true"></loading>
+      <!-- 標題 -->
+      <div class="mx-auto ps-4 pt-3" style="width: 80%">
+        <h5 class="ms-4 mt-3">個人頁面</h5>
+      </div>
+
+      <div class="card mx-auto mt-3">
+        <!-- 個人資料 -->
+        <div class="mx-auto mt-4 d-flex" style="width: 65%">
+          <img
+            :src="userdata.userPhoto"
+            class="rounded-circle"
+            id="ProfileImg"
+          />
+          <div class="ms-4">
+            <h4 style="font-weight:600">{{userdata.userName}}</h4>
+            <p>
+              已贊助計畫：{{userdata.orderCNT}} /
+              已發起計畫：{{userdata.productCNT}}
+            </p>
+            <p>{{userdata.userIntro}}</p>
+          </div>
+        </div>
+
+        <!-- 切換已贊助/已發起 -->
+        <div class="row justify-content-center">
+          <button
+            id="orderbtn"
+            type="button"
+            class="btn col-6 me-3 mb-3 donebtn selectedbtn"
+            style="width: 15%"
+            @click="ShowMyOrders"
+          >
+            已贊助計畫
+          </button>
+          <button
+            id="productbtn"
+            type="button"
+            class="btn col-6 ms-3 mb-3 donebtn"
+            style="width: 15%"
+            @click="ShowMyProducts"
+          >
+            已發起計畫
+          </button>
+        </div>
+
+        <!-- 贊助/發起項目 -->
+        <div class="row" id="OrdersRow">
+          <div class="col-8 mx-auto" v-if="userdata.orderCNT!=0">
+            <a
+              href="#"
+              class="bg-light rounded btn btn-default shadow-sm p-2 mb-3"
+              v-for="item in OrdersList"
+            >
+              <div class="row pe-3">
+                <div class="col-md-3">
+                  <img
+                    :src="item.prod.coverphoto"
+                    alt=".."
+                    class="img-thumbnail"
+                  />
+                </div>
+                <div class="col-md-9 my-auto">
+                  <h5 class="text-md-start">{{item.prod.productTitle}}</h5>
+                  <!-- <p class="text-md-start">{{item.prod.startime}}~{{item.prod.endtime}}</p> -->
+                  <p class="text-muted fs-6 text-md-end">
+                    提案者 {{item.userName}}
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-8 mx-auto text-center my-4" v-else>
+            <h5>尚未贊助任何專案。</h5>
+          </div>
+        </div>
+        <div class="row" id="ProductsRow" style="display: none">
+          <div class="col-8 mx-auto" v-if="userdata.productCNT!=0">
+            <a
+              href="#"
+              class="bg-light rounded btn btn-default shadow-sm p-2 mb-3"
+              v-for="item in ProductsList"
+            >
+              <div class="row pe-3">
+                <div class="col-md-3">
+                  <img
+                    :src="item.prod.coverphoto"
+                    alt=".."
+                    class="img-thumbnail"
+                  />
+                </div>
+                <div class="col-md-9 my-auto">
+                  <h5 class="text-md-start">{{item.prod.productTitle}}</h5>
+                  <!-- <p class="text-md-start">{{item.prod.startime}}~{{item.prod.endtime}}</p> -->
+                  <p class="text-muted fs-6 text-md-end">
+                    提案者 {{item.userName}}
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-8 mx-auto text-center my-4" v-else>
+            <h5>尚未發起任何專案。</ㄘ>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../layout/membercentre_layout.js"></script>
+    <script src="./Js_src/UserInfo.js"></script>
+  </body>
+</html>

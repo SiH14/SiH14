@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Back-Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/logincheck.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <loading :can-cancel="true"></loading>
+        <div class="container-fluid p-0 bg-theme" id="page-top">
+            <!-- 導覽列 -->
+            <div id="myheader" class="bg-white"
+                 style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
+
+            </div>
+            <!-- 結束 導覽列 -->
+            <div class=" container-fluid px-5 p-4">
+                <div class="row justify-content-center">
+                    <!-- 側邊欄位 -->
+
+                    <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar"
+                        style="overflow-x: auto;max-height: 750px;">
+                        <br>
+                        <div id="mysider"></div>
+                    </ul>
+
+                    <!-- 結束 側邊欄位 -->
+                    <!--主要內容-->
+                    <div class="col-10">
+                        <div class="px-3">
+                            <div class="item-style bg-white ">
+                                <!-- ===============================================================================================================  -->
+                                <div class="min-vh-100">
+                                    <div class="card-header py-3 mb-3">
+                                        <h3 class="m-0">贊助查詢</h6>
+                                    </div>
+                                    <div class="row justify-content-center p-3">
+                                        <div class="mb-3 col-12">
+                                            <form>
+                                                <fieldset>
+                                                    <legend onclick=app.enterText()>查詢條件</legend>
+                                                    <div class="d-flex py-3">
+                                                        <div class="">
+                                                            <label class="px-3" for="">提案狀態:</label>
+                                                            <select name="" id="" style="width: 100px; height: 100%;"
+                                                                    v-model="input.orderStateId">
+                                                                <option value="全部">全部</option>
+                                                                <option value="募資中">募資中</option>
+                                                                <option value="生產階段">生產階段</option>
+                                                                <option value="寄送階段">寄送階段</option>
+                                                                <option value="募資成功">募資成功</option>
+                                                                <option value="募資失敗">募資失敗</option>
+                                                                <option value="取消申請中">取消申請中</option>
+                                                                <option value="確認取消">確認取消</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="">
+                                                            <label class="px-3" for="">編號:</label>
+                                                            <input type="text" v-model="input.orderId" style="padding: 5px;">
+                                                        </div>
+                                                        <div class="">
+                                                            <label class="px-3" for="">提案名稱:</label>
+                                                            <input type="text" v-model="input.productTitle" style="padding: 5px;">
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <a class="btn btn-success" v-on:click="inputRest">清除</a>
+                                                        </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                        <div class="col-12" id="myTabContent">
+                                            <div v-cloak>查詢結果:共{{orderIdChange.length}}項</div>
+                                            <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                                 aria-labelledby="home-tab">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-1">編號</th>
+                                                            <th>提案名稱</th>
+                                                            <th>方案內容</th>
+                                                            <th>訂單時間</th>
+                                                            <th class="col-2">訂單狀態</th>
+                                                            <th class="col-1">操作</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="">
+                                                        <tr v-for="item in orderIdChange">
+                                                            <th v-cloak>{{item.orderId}}</th>
+                                                            <td v-cloak>{{item.productTitle}}</td>
+                                                            <td v-cloak>{{item.planTitle}}</td>
+                                                            <td v-cloak>{{item.purchaseTime}}</td>
+                                                            <td v-cloak>{{item.orderStateId}}</td>
+                                                            <td v-cloak v-if="item.orderStateId == '取消申請中'">
+                                                                <a class="btn btn-danger"
+                                                                   href='./checkrefund.html'
+                                                                   v-on:click="checkOlist(item.orderId)">編輯</a>
+                                                            </td>
+                                                            <td v-cloak v-else>
+                                                                <a class="btn btn-outline-success"
+                                                                   href='./Odetails.html'
+                                                                   v-on:click="checkOlist(item.orderId)">查看</a>
+                                                            </td>
+
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ===============================================================================================================  -->
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- 結束 主要內容 -->
+                </div>
+            </div>
+
+
+            <!-- 頁尾 -->
+            <div id="myfooter"></div>
+            <!-- 結束 頁尾r -->
+            <!-- 回上方按鈕-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+            <!-- 登出彈跳視窗-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Select "Logout" below if you are ready to end your current session.
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" href="login.html">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/myjs.js"></script>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Chart.js 套件引入 -->
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script> -->
+    <!-- Chart.js 套件引入 -->
+    <script>
+        Vue.use(VueLoading);
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                LoaderVisiable: false,
+                orderlist: [],
+                employeeinfo: [],
+                input: {
+                    orderId: "",
+                    productTitle: "",
+                    orderStateId: "全部"
+                },
+                gettodoitem: {}
+            },
+            components: {
+                Loading: VueLoading
+            },
+            methods: {
+                open: function () {
+                    console.log('open');
+                    let loader = this.$loading.show({
+                        loader: 'dots'
+                    });
+                    // setTimeout(() => loader.hide(), 3 * 1000);
+                },
+                logout: function () {
+                    // alert("1523 ")
+                    axios.get("/api/back/logout").then(res => { if (res.data == "已登出") { window.location.reload() } })
+                },
+                checkOlist: function (index) {
+                    sessionStorage.setItem('orderId', index)
+                },
+                enterText: function () {
+                    app.input.orderId = "69";
+                    app.input.productTitle = "小木屋貓咪樂園";
+
+                },
+                inputRest: function () {
+                    app.input.orderId = "";
+                    app.input.productTitle = "";
+                    app.input.orderStateId = "全部"
+                }
+            },
+            computed: {
+                orderStateIdChange() {
+                    if (this.input.orderStateId == "全部") {
+                        return this.orderlist
+                    } else {
+                        return this.orderlist.filter(item => {
+                            return item.orderStateId == this.input.orderStateId
+                        })
+                    }
+                },
+                productTitleChange() {
+                    if (this.input.productTitle) {
+                        return this.orderStateIdChange.filter(item => {
+                            return item.productTitle.toLowerCase().indexOf(this.input.productTitle.toLowerCase()) !== -1
+                        })
+                    } else {
+                        return this.orderStateIdChange
+                    }
+                },
+                orderIdChange() {
+                    if (this.input.orderId) {
+                        return this.productTitleChange.filter(item => {
+                            return item.orderId.indexOf(this.input.orderId) !== -1
+                        })
+                    } else {
+                        return this.productTitleChange
+                    }
+                }
+            },
+            mounted() {
+                let loader = this.$loading.show({
+                    loader: 'dots'
+                });
+                axios.get('/api/back/gettodoitem').then(res => {
+                    this.gettodoitem = res.data
+                })
+                axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
+                    this.employeeinfo = res.data
+                    console.log(this.employeeinfo)
+                })
+                axios.get('/api/back/OrderList')
+                    .then((response) => {
+                        Object.values(response.data)
+                        response.data.forEach(e => {
+                            if (e.orderStateId == 1 && new Date(e.startime) < new Date() && new Date(e.endtime) > new Date()) {
+                                e.orderStateId = "募資中"
+                            } else if (e.orderStateId == 1 && new Date(e.endtime) <= new Date() && e.currentAmount > e.targetAmount) {
+                                e.orderStateId = "募資成功"
+                            } else if (e.orderStateId == 1 && new Date(e.endtime) <= new Date() && e.currentAmount < e.targetAmount) {
+                                e.orderStateId = "募資失敗"
+                            } else if (e.orderStateId == 2) {
+                                e.orderStateId = "生產階段"
+                            } else if (e.orderStateId == 3) {
+                                e.orderStateId = "寄送階段"
+                            } else if (e.orderStateId == 4) {
+                                e.orderStateId = "取消申請中"
+                            } else if (e.orderStateId == 5 || e.orderStateId == 6) {
+                                e.orderStateId = "確認取消"
+                            }
+                            console.log(response.data)
+                            this.orderlist = response.data
+                            setTimeout(() => loader.hide(), 500);
+                        });
+                        // this.orderlist = response.data
+                        // console.log(response.data.length)
+                    })
+            }
+        })
+    </script>
+</body>
+
+</html>

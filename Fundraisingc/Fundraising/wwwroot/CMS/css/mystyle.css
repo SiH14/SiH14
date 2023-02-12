@@ -1,0 +1,97 @@
+body,
+p,
+a,
+table,
+th,
+td,
+span,
+div,
+button {
+    color: black;
+}
+
+a {
+    color: #495057;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #047c51;
+
+}
+
+.item-style {
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 30%);
+    /* box-shadow: 0 3px 5px #00000005, 0 0 2px #0000000d, 0 1px 4px #00000014; */
+    border: 1px solid #dfe7ef;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+.color-theme{
+    color: #047c51;
+}
+.bg-theme {
+    /* background-color: #eff3f8; */
+    background-color: #f4f4f4;
+}
+
+.sidebar a {
+    color: #495057;
+}
+
+.sidebar a.active {
+    color: #047c51;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 600px;
+        margin: auto;
+    }
+}
+
+header {
+    background-image: url("../img/headerbackgroud.png");
+    background-size: cover;
+}
+
+footer {
+    background-image: url("../img/footerbackgroud.png");
+    background-size: cover;
+    background-position: center;
+    font-size: 24px;
+}
+
+.navbar-nav {
+    padding: 0px;
+}
+
+#mysider a {
+    width: 100%;
+}
+
+    #mysider a:hover {
+        color: #3b965d;
+        background-color: rgba(131, 252, 120, 0.075);
+    }
+
+[v-cloak] {
+    display: none !important;
+}
+
+.imgset {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+.table-hover tbody tr:hover {
+    color: #3b965d;
+    background-color: rgba(131, 252, 120, 0.075);
+}

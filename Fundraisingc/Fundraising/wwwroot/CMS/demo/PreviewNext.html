@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Back-Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body id="app">
+    <div class="container-fluid p-0" style="background-color: #f8f4ea;">
+        <!-- 導覽列 -->
+        <div id="myheader" class="bg-white">
+
+        </div>
+        <!-- 結束 導覽列 -->
+        <div class=" container-fluid px-5">
+            <div class="row justify-content-center">
+                <!-- 側邊欄位 -->
+
+                <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar">
+                    <br>
+                    <div id="mysider"></div>
+                </ul>
+
+                <!-- 結束 側邊欄位 -->
+                <!--主要內容-->
+                <div class="col-10">
+                    <div class="px-3">
+                        <!-- 內容標頭-->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h2 mb-0 text-gray-800 font-weight-bold"><a href="./productorder.html">提案審核</a>/
+                            </h1>
+                        </div>
+                        <div class="item-style bg-white  mb-5">
+                            <!-- ===============================================================================================================  -->
+
+                            <div class="card-header py-3">
+                                <h3 class="m-0">提案名稱:{{productlist.productTitle}}</h3>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-8" style="height: 100px;"></div>
+                                <div class="col-8">
+                                    <h1>POIEMA Evo 空氣淨化器｜大口呼吸．淨化革命0</h1>
+                                    <div class="row mb-3">
+                                        <div class="col-7"><img src="#" alt="" class="w-100 h-100"></div>
+                                        <div class="col-5 ">
+                                            <p>目標 NTD$100,000</p>
+                                            <h2>0</h2>
+                                            <div class="progress"></div>
+                                            <p>贊助人數: 0</p>
+                                            <p>募資倒數 0 天</p>
+                                            <p>募資期間 2022/12/22 21:30 – 2023/01/19 03:00</p>
+                                            <h3>提案人:<span><a href="#">Hunter</a></span></h3>
+                                            <div>
+                                                <button class="btn btn-success px-5 mr-3">傳送訊息</button>
+                                                <button class="btn btn-outline-success px-5">追蹤專案</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="height: 500px;">
+                                        <div class="col-8">
+                                            <nav>
+                                                <div class="nav" id="nav-tab" role="tablist">
+                                                    <button class="nav-link bg-white border-0" id="nav-home-tab"
+                                                        data-toggle="tab" data-target="#nav-home" type="button"
+                                                        role="tab" aria-controls="nav-home"
+                                                        aria-selected="true">專案內容</button>
+                                                    <button class="nav-link bg-white border-0" id="nav-profile-tab"
+                                                        data-toggle="tab" data-target="#nav-profile" type="button"
+                                                        role="tab" aria-controls="nav-profile"
+                                                        aria-selected="false">專案NEWS</button>
+                                                    <button class="nav-link bg-white border-0" id="nav-contact-tab"
+                                                        data-toggle="tab" data-target="#nav-contact" type="button"
+                                                        role="tab" aria-controls="nav-contact"
+                                                        aria-selected="false">常見問題</button>
+                                                </div>
+                                            </nav>
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                                    aria-labelledby="nav-home-tab">專案內容</div>
+                                                <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                                    aria-labelledby="nav-profile-tab">專案NEWS</div>
+                                                <div class="tab-pane fade" id="nav-contact" role="tabpanel"
+                                                    aria-labelledby="nav-contact-tab">常見問題</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 ">
+                                            <button class="btn btn-danger w-50">贊助專案</button>
+                                            <div>
+                                                <img src="#" alt="" style="height:100px; width: 100%;">
+                                                <h3>標題</h3>
+                                                <p>內容</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center p-3">
+                                        <button class="btn ">返回</button>
+                                        <button class="btn">通過審核</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <!-- ===============================================================================================================  -->
+
+                        </div>
+                        <!-- 頁尾 -->
+                        <div id="myfooter"></div>
+                        <!-- 結束 頁尾r -->
+                    </div>
+
+                </div>
+                <!-- 結束 主要內容 -->
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- 回上方按鈕-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- 登出彈跳視窗-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/myjs.js"></script>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Chart.js 套件引入 -->
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script> -->
+    <!-- Chart.js 套件引入 -->
+    <script>
+        const { createApp } = Vue
+
+        createApp({
+            data() {
+                return {
+                    productlist: []
+
+                }
+            },
+            methods: {
+                checkmenber: function (a) {
+                    document.cookie = `productId=${a}`;
+
+                }
+            },
+            mounted() {
+                axios.get(`https://localhost:44332/api/products/${sessionStorage.getItem('productId')}`)
+                    .then((response) => {
+                        this.productlist = response.data
+                        // console.log(response.data.length)
+                    })
+            },
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

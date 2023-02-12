@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+</head>
+
+<style>
+    .coverphoto {
+        height: 200px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-position: center;
+        padding-bottom: 56.25%;
+        position: relative;
+    }
+
+
+    /* 進度條 */
+    .myprogress {
+        width: 98%;
+        text-align: center;
+    }
+
+    .progress2 {
+        border-radius: 5px;
+        background: rgba(0, 0, 0, 0.25);
+    }
+
+    .progress-bar2 {
+        height: 20px;
+        border-radius: 30px;
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+        transition: 0.9s linear;
+        transition-property: width, background-color;
+        text-align: left;
+    }
+
+    .progress-moved .progress-bar2 {
+        width: 85%;
+        background-color: #EF476F;
+        animation: progressAnimation 1s;
+    }
+
+    @keyframes progressAnimation {
+        0% {
+            width: 5%;
+            background-color: #F9BCCA;
+        }
+
+        100% {
+            width: 85%;
+            background-color: #EF476F;
+        }
+    }
+
+    /* 進度條 */
+
+
+    /* 發光字 */
+    .glow {
+        /* font-size: 80px; */
+        color: #ff4da6;
+        text-align: center;
+        /* text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 10px #ff4da6, 0 0 10px #ff4da6, 0 0 10px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6; */
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 10px #ff4da6, 0 0 10px #ff4da6, 0 0 10px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+        /* animation: glow 10s ease-in-out infinite alternate; */
+    }
+
+    /* @-webkit-keyframes glow {
+        from {
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+        }
+
+        to {
+            text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 10px #ff4da6, 0 0 10px #ff4da6, 0 0 10px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+        }
+    } */
+    /* 發光字 */
+
+    /* 滾動贊助 */
+    /* body {
+        padding-top: 2rem;
+    } */
+
+    @media (min-width: 576px) {
+        .card-group.card-group-scroll {
+            overflow-x: auto;
+            flex-wrap: nowrap;
+        }
+    }
+
+    .card-group.card-group-scroll>.card {
+        flex-basis: 35%;
+    }
+
+/*    .card-group-scroll{
+        display:flex;
+    }*/
+    /* 滾動贊助 */
+</style>
+
+<body>
+    <div class="getplan">
+        <div class="container">
+            <!-- 標題 -->
+            <div class="row">
+
+                <!--左邊欄位-->
+                <div class="col-sm-5">
+                    <div class="coverphoto"
+                         :style="{'background-image':'url(' + productList[0].coverphoto + ')'}"></div>
+                </div>
+                <!--右邊欄位-->
+                <div class="col-sm-7">
+                    <div>
+                        <br>
+                        <a style="color: black; text-decoration:none;" href="./product.html">
+                            <h4>{{productList[0].producttitle}}</h4>
+                        </a>
+                    </div>
+                    <div>
+                        <span>提案人 </span><span><a style="text-decoration:none;" href="#">{{productList[0].username}}</a></span>
+                    </div>
+                    <br>
+                    <div>
+                        <span style="font-weight: bold; font-size: 20px;">NT${{productList[0].currentamount | money}}</span><span> / 目標 NT${{productList[0].targetamount | money}}</span>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+
+        <br>
+
+        <div class="container card-group card-group-scroll">
+            <!--v-if="whouser == ''"-->
+            <div class="card" style="background-color: #f4f4f4; position: relative; max-width: 33%" v-for="item in planList">
+                <a href="#" style="text-decoration: none; color: black;" v-on:click="getplanID(item.planid)">
+                    <!--<img :src="item.planphoto" class="card-img-top"
+                         alt="Hollywood Sign on The Hill" />-->
+                    <img :src="item.planphoto" class="card-img-top"
+                         alt="Hollywood Sign on The Hill" style="height: 120px; object-fit: cover; padding: 10px; " />
+                    <div class="card-body">
+                        <h5 class="mb-3 card-title">{{item.plantitle}}</h5>
+                        <div class="mb-4"><h4>NT${{item.planprice | money}}</h4></div>
+                        <div><p class="card-text mb-5" style="white-space: pre-wrap;">{{item.plancontent}}</p></div>
+                    </div>
+                    <div class="card-footer" style="text-align:center; position:absolute; width:100%; bottom:0;">
+                        <small class="text-muted">贊助</small>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+        <!--<div class="container card-group card-group-scroll" v-else>
+            <div class="card" style="padding:10px" v-for="item in planList">
+                <a href="/ProductPage/orderpay.html" style="text-decoration: none; color: black;" v-on:click="getplanID(item.planId)">
+                    <img :src="item.planphoto" class="card-img-top"
+                         alt="Hollywood Sign on The Hill" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.projectTitle}}</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional content. This
+                            content is a little bit longer.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </a>
+            </div>
+        </div>-->
+    </div>
+    <br>
+    <br>
+    <!--<div v-for="item in planList" class="" style="padding:10px">
+        <div class="">
+            <div class="col-sm-12 mb-2">
+                <a href="./orderpay.html" style="text-decoration:none; color: black;">
+                    <div style="border: solid #D0D0D0; ">
+                        <div style="width: 90%; margin: auto;">
+                            <div class="mb-1 p-2" style="text-align: center;">
+                                <img :src="item.planphoto" style="width: 100%;">
+                            </div>
+                            <div class="mb-3"><h5>{{item.projectTitle}}</h5></div>
+                            <div class="mb-4"><h4>123</h4></div>
+                            <div><p style="white-space: pre-wrap;">123</p></div>
+                            <hr>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>-->
+    <!--<div class="card" style="padding:10px" v-for="item in planList">
+        <a href="/ProductPage/orderpay.html" style="text-decoration: none; color: black;" v-on:click="getplanID(item.planId)">
+            <img :src="item.planphoto" class="card-img-top"
+                 alt="Hollywood Sign on The Hill" />
+            <div class="card-body">
+                <h5 class="card-title">{{item.projectTitle}}</h5>
+                <p class="card-text">
+                    This is a wider card with supporting text below as a natural lead-in to additional content. This
+                    content is a little bit longer.
+                </p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+        </a>
+    </div>-->
+    <!--姓名：<input type="text" id="name"><br>
+    訊息：<input type="text" id="msg"><br>
+    <Button type="Button" id="submitBtn">送出</Button><br>
+    <div id="msgDiv"></div>-->
+    <!--<script src="../lib/signalr/dist/browser/signalr.js"></script>
+    <script>
+        // 建立SignalR連接
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+        // 傳送訊息事件
+        connection.on("ReceiveMessage", function (user, message) {
+            var msg = message;
+            var encodedMsg = user + " says " + msg;
+            var li = document.createElement("li");
+            li.textContent = encodedMsg;
+            document.getElementById("msgDiv").appendChild(li);
+        });
+        // 連接事件
+        connection.start().catch(function (err) {
+            return console.error(err.toString());
+        });
+        // Button事件
+        document.getElementById("submitBtn").addEventListener("click", function (event) {
+            var user = document.getElementById("name").value;
+            var message = document.getElementById("msg").value;
+            connection.invoke("SendMessage", user, message).catch(function (err) {
+                return console.error(err.toString());
+            });
+            event.preventDefault();
+        });
+    </script>-->
+
+    <script src="../layout/layout.js"></script>
+
+    <script>
+        Vue.filter('money', function (num) {
+            const parts = num.toString().split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return parts.join('.');
+        });
+
+        var app = new Vue({
+            el: ".getplan",
+            data: {
+                productList: [],
+                planList: [],
+                whouser: ''
+            },
+            mounted: function () {
+                //alert(123)
+                //document.querySelector('.wid').style.width = '10%'
+
+                $.ajax({
+                    type: 'Get',
+                    url: '/api/login/getuserid',
+                    success: function (e) {
+                        console.log(e)
+                        app.whouser = e
+                        /*    console.log(e[0].productcontent)*/
+                    }
+                })
+
+                $.ajax({
+                    type: 'Get',
+                    url: '/api/Fundraising/prduct/' + sessionStorage.getItem("productId"),
+                    success: function (e) {
+                        app.productList = e
+                        console.log(e[0].coverphoto)
+                    }
+                })
+                $.ajax({
+                    type: 'Get',
+                    url: '/api/Fundraising/prductplan/' + sessionStorage.getItem("productId"),
+                    success: function (e) {
+                        app.planList = e
+                    }
+                })
+            }
+            ,
+            methods: {
+                getplanID: function (e) {
+                    sessionStorage.setItem("planId", e);
+                    if (parseInt(this.whouser) > 0) {
+                        window.location = "./orderpay.html";
+                    }
+                    else {
+                        window.location = "../login/login.html";
+                    }
+                }
+            }
+        })
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

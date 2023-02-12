@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/features/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <style>
+        /* external css: flickity.css */
+
+        /*        * {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0px;
+            font-family: sans-serif;
+        }*/
+
+        .gallery {
+            background: #EEE;
+        }
+
+        .gallery-cell {
+            width: 55%;
+            height: 500px;
+            margin-right: 10px;
+            background: #8C8;
+            counter-increment: gallery-cell;
+        }
+
+            .gallery-cell img {
+                max-width: 100%;
+                height: 500px;
+            }
+
+        .selectedimg {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .feature span {
+            font-size: 14px;
+        }
+
+        .moneymoney {
+            float: right;
+            padding-right: 10px;
+        }
+
+        .selectedimgdiv {
+            width: 100%;
+            height: 214px;
+        }
+
+        .selectphotodiv {
+            height: 200px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            background-position: center;
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container px-4 py-5" id="mySelected">
+        <h2 class="pb-2 border-bottom">
+            找到「<span id="keyword"></span>」有關的 {{fliterList.length}} 個方案
+        </h2>
+
+
+        <!--篩選-->
+        <!--<div style="width: 300px;">
+            <select onchange="filterchiose(this)" style="box-shadow: none;" class="form-select" aria-label="Default select example">
+                <option value="1" selected>熱門</option>
+                <option value="2">最新</option>
+                <option value="3">募資金額</option>
+                <option value="4">募資人數</option>
+            </select>
+        </div>-->
+        <!--篩選-->
+        <!--v-for="item in fliterList"-->
+        <div class="row g-4 py-8 row-cols-1 row-cols-lg-3">
+            <a href="./product.html" style="text-decoration: none; color: black;" v-on:click="getproductID(item)" v-for="item in fliterList">
+                <div class="feature col">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                        <svg class="bi" width="1em" height="1em">
+                            <use xlink:href="#collection" />
+                        </svg>
+                    </div>
+
+                    <!-- 資訊卡 -->
+                    <div class="selectphotodiv" :style="{'background-image':'url(' + item.coverphoto + ')'}">
+                    </div>
+                    <!--<div class="selectedimgdiv">
+                        <img class="selectedimg" :src="item.coverphoto" alt="">
+                    </div>-->
+                    <p></p>
+                    <h3 class="fs-5" style="height: 70px">{{item.productTitle}}</h3>
+
+                    <div class="d-flex justify-content-between">
+                        <p style="font-weight:bold">$ {{item.currentAmount}}</p>
+                        <span>{{item.nowperson}} 人支持</span>
+                    </div>
+
+                    <!-- 進度條 -->
+                    <div class="progress" style="height: 10px;">
+                        <div class="wid progress-bar bg-success" role="progressbar" :style="{width: item.percent+'%'}" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="pb-2"></div>
+                    <div class="d-flex justify-content-between">
+                        <span>剩下{{item.days}} 天</span>
+                        <span class="money" style="color:green">{{item.percent}} %</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script src="../layout/layout.js"></script>
+    <script src="microsoft.cognitiveservices.speech.sdk.bundle.js"></script>
+    <script>
+
+        /*篩選*/
+        function filterchiose(e) {
+            console.log(e.value)
+            $.ajax({
+                type: 'Get',
+                url: '/api/Fundraising/' + e.value,
+                success: function (e) {
+                    app.fliterList = e
+                }
+            })
+        }
+        /*篩選*/
+        var app = new Vue({
+            el: ".container",
+            data: {
+                fliterList: []
+            },
+            mounted: function () {
+                document.getElementById("keyword").innerText = sessionStorage.getItem("filterans");
+                if (true) {
+                    $.ajax({
+                        type: 'Get',
+                        url: '/api/Fundraising/filterans/' + sessionStorage.getItem("filterans"),
+                        success: function (e) {
+                            app.fliterList = e
+                        }
+                    })
+                }
+            }
+            ,
+            methods: {
+                getproductID: function (e) {
+                    /* console.log(e.productId)*/
+                    sessionStorage.setItem("productId", e.productId);
+                }
+            }
+        })
+
+
+
+
+                    //Vue.createApp({
+                    //    data() {
+                    //        return {
+                    //            fliterList: [
+                    //                { "todoItemId": 1, "name": "Job A", "isComplete": true },
+                    //                { "todoItemId": 2, "name": "Job B", "isComplete": false }
+                    //            ]
+                    //        }
+                    //    },
+                    //    mounted() {
+                    //        axios.get('/api/Fundraising')
+                    //            .then(response => (this.fliterList = response.data))
+                    //    }, updated() {
+                    //        this.$nextTick(function () {
+                    //            //document.querySelector('.wid').style.width = "50%"
+                    //        });
+
+                    //    }
+                    //}).mount('.container')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./stepper.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
+      integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css"
+      rel="stylesheet"
+    />
+    <style>
+      .card {
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+        width: 80%;
+        transition: 0.5s;
+        border: 0;
+        border-radius: 0.55rem;
+        position: relative;
+      }
+
+      #app img {
+        width: 100%;
+        height: 50%;
+        object-fit: cover;
+      }
+
+      #app button {
+        width: 93%;
+      }
+
+      .following {
+        height: 340px;
+        position: relative;
+      }
+
+      .cancelbtn {
+        position: absolute;
+        bottom: 0;
+      }
+    </style>
+    <title>追蹤專案</title>
+  </head>
+  <style>
+    .following a {
+      color: rgb(33, 37, 41);
+      text-decoration: none;
+    }
+  </style>
+  <body>
+    <div class="container" id="app">
+      <loading :can-cancel="true"></loading>
+      <!-- 標題˙ -->
+      <div class="mx-auto ps-4 pt-3" style="width: 80%">
+        <h5>追蹤專案</h5>
+      </div>
+      <div class="card mx-auto mt-3">
+        <div class="row m-3" v-if="myfollow.length>0">
+          <div class="following col-4 my-3" v-for="item in myfollow">
+            <a href="../ProductPage/product.html" @click="getproductID(item)">
+              <img :src="item.photo" alt="product" />
+              <h5 class="px-0 mt-2">{{item.ptitle}}</h5>
+            </a>
+            <p class="text-muted">提案人 {{item.puser}}</p>
+            <button
+              class="btn btn-outline-success d-block mx-auto cancelbtn"
+              @click="cancel(item)"
+            >
+              取消追蹤
+            </button>
+          </div>
+        </div>
+        <h4 v-else class="text-center my-5">
+          目前沒有專案，立即去<a href="../productpage/filter.html">探索</a>！
+        </h4>
+      </div>
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../layout/membercentre_layout.js"></script>
+    <script src="./Js_src/UserFollowing.js"></script>
+  </body>
+</html>

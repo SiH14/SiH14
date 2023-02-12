@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Back-Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/logincheck.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <loading :can-cancel="true"></loading>
+        <div class="container-fluid p-0 bg-theme" id="page-top">
+            <!-- 導覽列 -->
+            <div id="myheader" class="bg-white"
+                 style="background-image: url(../img/headerbackgroud.png); background-size: cover;"
+                 style="overflow-x: auto;max-height: 750px;">
+
+            </div>
+            <!-- 結束 導覽列 -->
+            <div class=" container-fluid px-5 p-4">
+                <div class="row justify-content-center">
+                    <!-- 側邊欄位 -->
+
+                    <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar"
+                        style="overflow-x: auto;max-height: 750px;">
+                        <br>
+                        <div id="mysider"></div>
+                    </ul>
+
+                    <!-- 結束 側邊欄位 -->
+                    <!--主要內容-->
+                    <div class="col-10">
+                        <div class="px-3">
+                            <div class="bg-white item-style mb-5">
+                                <!-- ===============================================================================================================  -->
+                                <div class="">
+                                    <div class="card-header py-3 mb-3">
+                                        <h3 class="m-0">會員查詢</h6>
+                                    </div>
+                                    <div class="row justify-content-center p-3">
+                                        <div class="mb-3 col-12">
+                                            <form>
+                                                <fieldset>
+                                                    <legend onclick=app.enterText()>查詢條件</legend>
+                                                    <div class="d-flex py-3">
+                                                        <div class="">
+                                                            <label class="px-3" for="">會員編號:</label>
+                                                            <input type="text" v-model="input.userId" style="padding: 5px;">
+                                                        </div>
+                                                        <div class="">
+                                                            <label class="px-3" for="">會員資訊:</label>
+                                                            <input type="text" v-model="input.userinfo" style="padding: 5px;" placeholder="輸入姓名 / Email / 電話">
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <a class="btn btn-success" v-on:click="inputRest">清除</a>
+                                                        </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                        <div class="py-0 col-12 mb-5">
+
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-1">編號</th>
+                                                        <th class="col-2">會員姓名</th>
+                                                        <th class="col-3">Email</th>
+                                                        <th class="col-2">電話</th>
+                                                        <th class="col-2">加入時間</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="">
+                                                    <tr v-for="item in userinfoChange">
+                                                        <td v-cloak>{{item.userId}}</td>
+                                                        <td v-cloak>{{item.userName}}</td>
+                                                        <td v-cloak>{{item.userEmail}}</td>
+                                                        <td v-cloak>{{item.userPhone}}</td>
+                                                        <td v-cloak>{{item.createDate.substring(0,10)}}</td>
+                                                        <td v-cloak>
+                                                            <a class="btn btn-outline-success" data-toggle="modal"
+                                                               data-target="#exampleModal"
+                                                               v-on:click="getuserinfo(item.userId)">詳細內容 </a>
+                                                        </td>
+
+                                                    </tr>
+                                                    <!-- <tr>
+                                                        <td>005</td>
+                                                        <td>Mark</td>
+                                                        <td>馬克杯</td>
+                                                        <td>2022-12-29</td>
+                                                        <td><a class="btn btn-outline-success" data-toggle="modal"
+                                                                data-target="#exampleModal">詳細內容 </a></td>
+
+                                                    </tr> -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- ===============================================================================================================  -->
+                                </div>
+                            </div>
+                            <!-- Button trigger modal -->
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered  ">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">會員資訊</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body px-3">
+                                            <div class="row  justify-content-center mb-3 px-5">
+                                                <div class="col-4 p-0">
+                                                    <img :src="userinfo.userPhoto"
+                                                         style="width: 150px;height: 150px;object-fit: cover;border-radius: 50%;" alt="">
+                                                    <div class="h-100">
+                                                        <label for="">簡介:</label><br>
+                                                        <p style="border: 1px #80808057 solid;
+                                                        border-radius: 5px;
+                                                        padding: 5px; min-height: 180px;">{{userinfo.userIntro}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8 ">
+                                                    <div class="">
+                                                        <label for="" class="mb-0">會員編號:</label><br>
+                                                        <p style="border: 1px #80808057 solid;
+                                                        border-radius: 5px;
+                                                        padding: 5px;" class="mb-0">{{userinfo.userId}}</p>
+                                                    </div>
+                                                    <div>
+                                                        <label for="" class="mb-0">會員姓名:</label><br>
+                                                        <p style="border: 1px #80808057 solid;
+                                                        border-radius: 5px;
+                                                        padding: 5px;" class="mb-0">{{userinfo.userName}}</p>
+                                                    </div>
+                                                    <div class="">
+                                                        <label for="" class="mb-0">性別:</label><br>
+                                                        <p style="border: 1px #80808057 solid;
+                                                        border-radius: 5px;
+                                                        padding: 5px;" class="mb-0" v-if="userinfo.userGender">男</p>
+                                                        <p style="border: 1px #80808057 solid;
+                                                        border-radius: 5px;
+                                                        padding: 5px;" class="mb-0" v-else>女</p>
+                                                    </div>
+                                                    <div class="">
+                                                        <label for="" class="mb-0">生日:</label><br>
+                                                        <p style="border: 1px #80808057 solid;
+                                                        border-radius: 5px;
+                                                        padding: 5px;" class="mb-0">{{userinfo.userBirthday}}</p>
+                                                    </div>
+                                                    <div class="">
+                                                        <label for="" class="mb-0">會員信箱:</label><br>
+                                                        <p style="border: 1px #80808057 solid;
+                                                        border-radius: 5px;
+                                                        padding: 5px;" class="mb-0">{{userinfo.userEmail}}</p>
+                                                    </div>
+                                                    <div>
+                                                        <label for="" class="mb-0">會員電話:</label><br>
+                                                        <p style="border: 1px #80808057 solid;
+                                                        border-radius: 5px;
+                                                        padding: 5px;" class="mb-0">{{userinfo.userPhone}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 結束 主要內容 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 頁尾 -->
+        <div id="myfooter"></div>
+        <!-- 結束 頁尾r -->
+        <!-- 回上方按鈕-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- 登出彈跳視窗-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/myjs.js"></script>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+    <script>
+        Vue.use(VueLoading);
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                LoaderVisiable: false,
+                userlist: [],
+                userinfo: [],
+                employeeinfo: [],
+                input: {
+                    userId: "",
+                    userinfo: ""
+                },
+                gettodoitem: {}
+            },
+            components: {
+                Loading: VueLoading
+            },
+            methods: {
+                open: function () {
+                    console.log('open');
+                    let loader = this.$loading.show({
+                        loader: 'dots'
+                    });
+                    setTimeout(() => loader.hide(), 3 * 1000);
+                },
+                logout: function () {
+                    // alert("1523 ")
+                    axios.get("/api/back/logout").then(res => { if (res.data == "已登出") { window.location.reload() } })
+                },
+                getuserinfo: function (index) {
+                    console.log(index)
+                    axios.get(`/api/users/${index}`)
+                        .then((response) => {
+                            this.userinfo = response.data
+                            this.userinfo.userBirthday = this.userinfo.userBirthday.substr(0, 10)
+                            console.log(response.data)
+                        })
+                },
+                enterText: function () {
+                    app.input.userId = "49";
+                    app.input.userinfo = "陳小黑";
+
+                },
+                inputRest: function () {
+                    app.input.userId = "";
+                    app.input.userinfo = "";
+                }
+            },
+            computed: {
+                userIdChange() {
+                    if (this.input.userId) {
+                        return this.userlist.filter(item => {
+                            return item.userId.indexOf(this.input.userId) !== -1
+                        })
+                    } else {
+                        return this.userlist
+                    }
+                },
+                userinfoChange() {
+                    if (this.input.userinfo) {
+                        return this.userIdChange.filter(item => {
+                            if (item.userName.toLowerCase().indexOf(this.input.userinfo.toLowerCase()) !== -1) {
+                                return item.userName.toLowerCase().indexOf(this.input.userinfo.toLowerCase()) !== -1
+                            } else if (item.userEmail.toLowerCase().indexOf(this.input.userinfo.toLowerCase()) !== -1) {
+                                return item.userEmail.toLowerCase().indexOf(this.input.userinfo.toLowerCase()) !== -1
+                            } else if (item.userPhone.toLowerCase().indexOf(this.input.userinfo.toLowerCase()) !== -1) {
+                                return item.userPhone.toLowerCase().indexOf(this.input.userinfo.toLowerCase()) !== -1
+                            }
+                        })
+                    } else {
+                        return this.userIdChange
+                    }
+                }
+            },
+            async mounted() {
+                let loader = this.$loading.show({
+                    loader: 'dots'
+                });
+                axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
+
+                    this.employeeinfo = res.data
+                    console.log(this.employeeinfo)
+                })
+                axios.get('/api/back/gettodoitem').then(res => {
+                    this.gettodoitem = res.data
+
+                })
+                await axios.get('/api/back/users')
+                    .then((response) => {
+                        this.userlist = response.data
+                        setTimeout(() => loader.hide(), 500);
+                        // console.log(response.data.length)
+                    })
+            }
+        })
+    </script>
+</body>
+
+</html>

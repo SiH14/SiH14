@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./stepper.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
+      integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css"
+      rel="stylesheet"
+    />
+    <style>
+      .card {
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+        width: 80%;
+        transition: 0.5s;
+        border: 0;
+        border-radius: 0.55rem;
+        position: relative;
+      }
+    </style>
+    <title>回饋寄送資訊修改</title>
+  </head>
+  <body>
+    <div class="container" id="app">
+      <loading :can-cancel="true"></loading>
+      <div class="mx-auto" style="width: 80%">
+        <h5 class="ms-4 mt-3">
+          <a href="./UserOrder.html" class="text-dark text-decoration-none h5"
+            >贊助紀錄</a
+          >
+          / <span class="text-decoration-underline">修改寄送資訊</span>
+        </h5>
+      </div>
+      <div class="card mt-3 mx-auto">
+        <div class="row">
+          <!-- 照片 -->
+          <div class="col-md-3">
+            <a href="#"
+              ><img
+                :src="myorder.productPhoto"
+                class="img-fluid rounded-start"
+                alt="..."
+            /></a>
+          </div>
+
+          <!-- 資訊 -->
+          <div class="card-body pb-0 pt-2 col-md-9">
+            <div class="d-flex justify-content-between me-2">
+              <p class="text-muted mb-0">贊助日期: {{myorder.purchaseTime}}</p>
+              <p class="text-muted mb-0">
+                募資期間: {{myorder.startTime}} ~ {{myorder.endTime}}
+              </p>
+            </div>
+            <!-- 標題 -->
+            <a
+              href="#"
+              class="card-title h4"
+              style="text-decoration: none; color: #212529"
+            >
+              {{myorder.productTitle}}
+            </a>
+            <hr class="m-1" />
+            <div class="mt-2">
+              <!-- 選擇的方案 -->
+              <h5 class="mb-0">{{myorder.planTitle}}</h5>
+              <div class="my-1">
+                <div class="d-flex justify-content-between me-2">
+                  <p class="mb-1 my-auto" style="max-width: 75%">
+                    內含 : {{myorder.planContent}}
+                  </p>
+                  <p class="mb-1 my-auto" style="max-width: 25%">
+                    $ {{myorder.planPrice}}
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between me-2">
+                  <p class="mb-1 my-auto">---額外贊助</p>
+                  <p class="mb-1 my-auto border-bottom">
+                    $ {{myorder.addSponsorship}}
+                  </p>
+                </div>
+              </div>
+              <h5 class="text-end me-2 text-decoration-underline">
+                贊助金額: $ {{myorder.planPrice + myorder.addSponsorship}}
+              </h5>
+            </div>
+          </div>
+        </div>
+        <!-- stepper -->
+        <div class="stepper mb-md-3">
+          <div class="step active">
+            <div class="step-label"></div>
+            <div class="step-description">募資中</div>
+          </div>
+          <div class="step">
+            <div class="step-label"></div>
+            <div class="step-description">募資成功</div>
+          </div>
+          <div class="step">
+            <div class="step-label"></div>
+            <div class="step-description">生產階段</div>
+          </div>
+          <div class="step">
+            <div class="step-label"></div>
+            <div class="step-description">寄送產品</div>
+          </div>
+        </div>
+
+        <!-- 資料修改 -->
+        <div class="m-3 mx-auto" style="width: 60%">
+            <h4 class="h3" style="font-weight:600">回饋寄送資訊修改</h4>
+          <!-- 修改表單 -->
+          <form class="row">
+            <!-- 姓名 -->
+            <div class="my-2 col-md-6">
+              <label for="Name" class="form-label">收件人姓名：</label>
+              <input
+                type="Text"
+                class="form-control"
+                placeholder="請輸入收件人姓名"
+                id="Name"
+                name="Name"
+                required
+                v-model="myorder.recipientName"
+              />
+            </div>
+            <!-- 電話 -->
+            <div class="my-2 col-md-6">
+              <label for="Phone" class="form-label">收件人電話：</label>
+              <input
+                type="tel"
+                class="form-control"
+                placeholder="請輸入收件人電話"
+                id="Phone"
+                name="Phone"
+                required
+                v-model="myorder.recipientPhone"
+              />
+            </div>
+            <!-- 信箱 -->
+            <div class="my-2 col-md-12">
+              <label for="Email" class="form-label">收件人信箱：</label>
+              <input
+                type="Text"
+                class="form-control"
+                placeholder="請輸入收件人信箱"
+                id="Email"
+                name="Email"
+                required
+                v-model="myorder.recipientMail"
+              />
+            </div>
+            <!-- 住址 -->
+            <div class="my-2 col-md-12">
+              <label for="Address" class="form-label">收件人住址：</label>
+              <input
+                type="Text"
+                class="form-control"
+                placeholder="請輸入收件人住址"
+                id="Address"
+                name="Address"
+                required
+                v-model="myorder.recipientAddress"
+              />
+            </div>
+            <!-- 備注 -->
+            <div class="my-2 col-md-12">
+              <label for="Note">備註：</label>
+              <textarea
+                class="form-control"
+                rows="2"
+                id="Note"
+                name="Note"
+                v-model="myorder.note"
+              ></textarea>
+            </div>
+            <div class="text-end">
+              <button type="button" class="btn btn-success" @click="reciSubmit">
+                儲存
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../layout/membercentre_layout.js"></script>
+    <script src="./Js_src/UserOrderDetail.js"></script>
+  </body>
+</html>
