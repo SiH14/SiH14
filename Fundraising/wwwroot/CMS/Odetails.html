@@ -204,8 +204,8 @@
             data: {
                 LoaderVisiable: false,
                 odetailsinfo: [],
-                employeeinfo: []
-
+                employeeinfo: [],
+                gettodoitem: {}
             },
             components: {
                 Loading: VueLoading
@@ -254,6 +254,10 @@
                 axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
                     this.employeeinfo = res.data
                     console.log(this.employeeinfo)
+                })
+                axios.get('/api/back/gettodoitem').then(res => {
+                    this.gettodoitem = res.data
+                    
                 })
 
             }

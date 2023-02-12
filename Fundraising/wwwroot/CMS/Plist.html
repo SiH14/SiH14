@@ -192,7 +192,8 @@
                     productId: "",
                     productTitle: "",
                     productStateId: "全部"
-                }
+                },
+                gettodoitem: {}
             },
             components: {
                 Loading: VueLoading
@@ -214,7 +215,7 @@
                 enterText:function(){
                     app.input.productId = "";
                     app.input.productTitle = "喵空漫步";
-                    app.input.productStateId = "全部"
+                    app.input.productStateId = "審核中"
                     
                 },
                 inputRest:function(){
@@ -284,6 +285,10 @@
                         this.productlist = response.data
                         setTimeout(() => loader.hide(), 200);
                     })
+                axios.get('/api/back/gettodoitem').then(res => {
+                    this.gettodoitem = res.data
+                    
+                })
             }
         })
     </script>

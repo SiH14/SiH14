@@ -13,9 +13,8 @@
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -33,7 +32,7 @@
         <div class="container-fluid p-0 bg-theme" id="page-top">
             <!-- 導覽列 -->
             <div id="myheader" class="bg-white"
-                style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
+                 style="background-image: url(../img/headerbackgroud.png); background-size: cover;">
 
             </div>
             <!-- 結束 導覽列 -->
@@ -42,7 +41,7 @@
                     <!-- 側邊欄位 -->
 
                     <ul class="navbar-nav bg-white col-2 item-style sidebar" id="accordionSidebar"
-                    style="overflow-x: auto;max-height: 750px;">
+                        style="overflow-x: auto;max-height: 750px;">
                         <br>
                         <div id="mysider"></div>
                     </ul>
@@ -64,9 +63,9 @@
                                                     <legend onclick=app.enterText()>查詢條件</legend>
                                                     <div class="d-flex py-3">
                                                         <div class="">
-                                                            <label class="px-3" for="" >提案狀態:</label>
+                                                            <label class="px-3" for="">提案狀態:</label>
                                                             <select name="" id="" style="width: 100px; height: 100%;"
-                                                                v-model="input.orderStateId">
+                                                                    v-model="input.orderStateId">
                                                                 <option value="全部">全部</option>
                                                                 <option value="募資中">募資中</option>
                                                                 <option value="生產階段">生產階段</option>
@@ -94,7 +93,7 @@
                                         <div class="col-12" id="myTabContent">
                                             <div v-cloak>查詢結果:共{{orderIdChange.length}}項</div>
                                             <div class="tab-pane fade show active" id="home" role="tabpanel"
-                                                aria-labelledby="home-tab">
+                                                 aria-labelledby="home-tab">
                                                 <table class="table table-hover">
                                                     <thead>
                                                         <tr>
@@ -113,13 +112,15 @@
                                                             <td v-cloak>{{item.planTitle}}</td>
                                                             <td v-cloak>{{item.purchaseTime}}</td>
                                                             <td v-cloak>{{item.orderStateId}}</td>
-                                                            <td v-cloak v-if="item.orderStateId == '取消申請中'"><a class="btn btn-danger"
-                                                                href='./checkrefund.html'
-                                                                v-on:click="checkOlist(item.orderId)">編輯</a>
-                                                        </td>
-                                                            <td v-cloak v-else><a class="btn btn-outline-success"
-                                                                    href='./Odetails.html'
-                                                                    v-on:click="checkOlist(item.orderId)">查看</a>
+                                                            <td v-cloak v-if="item.orderStateId == '取消申請中'">
+                                                                <a class="btn btn-danger"
+                                                                   href='./checkrefund.html'
+                                                                   v-on:click="checkOlist(item.orderId)">編輯</a>
+                                                            </td>
+                                                            <td v-cloak v-else>
+                                                                <a class="btn btn-outline-success"
+                                                                   href='./Odetails.html'
+                                                                   v-on:click="checkOlist(item.orderId)">查看</a>
                                                             </td>
 
                                                         </tr>
@@ -149,7 +150,7 @@
             </a>
             <!-- 登出彈跳視窗-->
             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -158,7 +159,8 @@
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.
+                        <div class="modal-body">
+                            Select "Logout" below if you are ready to end your current session.
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -194,7 +196,8 @@
                     orderId: "",
                     productTitle: "",
                     orderStateId: "全部"
-                }
+                },
+                gettodoitem: {}
             },
             components: {
                 Loading: VueLoading
@@ -214,15 +217,15 @@
                 checkOlist: function (index) {
                     sessionStorage.setItem('orderId', index)
                 },
-                enterText:function(){
+                enterText: function () {
                     app.input.orderId = "69";
-                    app.input.productTitle= "小木屋貓咪樂園";
-                    
+                    app.input.productTitle = "小木屋貓咪樂園";
+
                 },
-                inputRest:function(){
+                inputRest: function () {
                     app.input.orderId = "";
-                    app.input.productTitle= "";
-                    app.input.orderStateId ="全部"
+                    app.input.productTitle = "";
+                    app.input.orderStateId = "全部"
                 }
             },
             computed: {
@@ -258,6 +261,13 @@
                 let loader = this.$loading.show({
                     loader: 'dots'
                 });
+                axios.get('/api/back/gettodoitem').then(res => {
+                    this.gettodoitem = res.data
+                })
+                axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
+                    this.employeeinfo = res.data
+                    console.log(this.employeeinfo)
+                })
                 axios.get('/api/back/OrderList')
                     .then((response) => {
                         Object.values(response.data)
@@ -279,15 +289,11 @@
                             }
                             console.log(response.data)
                             this.orderlist = response.data
-                            setTimeout(() => loader.hide(), 0.5 * 1000);
+                            setTimeout(() => loader.hide(), 500);
                         });
                         // this.orderlist = response.data
                         // console.log(response.data.length)
                     })
-                axios.get(`/api/Employees/${getCookie("employeeId")}`).then(res => {
-                    this.employeeinfo = res.data
-                    console.log(this.employeeinfo)
-                })
             }
         })
     </script>
